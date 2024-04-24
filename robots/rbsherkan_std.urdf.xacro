@@ -31,10 +31,10 @@
       <xacro:rbsherkan_base prefix="${prefix}" hq="${hq}"/>
 
       <!-- Rocker -->
-      <xacro:rocker_front prefix="${prefix}left_" parent="${prefix}base_link" hq="true" reflect="true">
+      <xacro:rocker_front prefix="${prefix}left" parent="${prefix}base_link" hq="true" reflect="true">
         <origin xyz="0.095 0.16975 -0.0125" rpy="0 0 0"/>
       </xacro:rocker_front>
-      <xacro:rocker_front prefix="${prefix}right_" parent="${prefix}base_link" hq="true" reflect="false">
+      <xacro:rocker_front prefix="${prefix}right" parent="${prefix}base_link" hq="true" reflect="false">
         <origin xyz="0.095 -0.16975 -0.0125" rpy="0 0 0"/>
       </xacro:rocker_front>
 

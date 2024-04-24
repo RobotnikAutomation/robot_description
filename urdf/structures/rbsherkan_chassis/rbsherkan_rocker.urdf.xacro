@@ -46,7 +46,7 @@
       </inertial>
     </link>
     
-    <xacro:rubber_wheel prefix="${prefix}wheel_" parent="${prefix}rocker_link" hq="${hq}">
+    <xacro:rubber_wheel prefix="${prefix}" parent="${prefix}rocker_link" hq="${hq}">
       <xacro:if value="${reflect}">
         <origin xyz="-0.095 0.0579 0.0125" rpy="0 0 0" />
       </xacro:if>
