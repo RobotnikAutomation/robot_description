@@ -58,17 +58,17 @@
 		</xacro:summit_hm_structure>
 
     	<!-- IMU -->
-    	<xacro:sensor_imu prefix="$(arg prefix)imu" parent="$(arg prefix)base_link" topic="imu/data">
+    	<xacro:sensor_imu prefix="${prefix}imu" parent="${prefix}base_link" topic="imu/data">
     	  <origin xyz="0.0 0.0 0.10398" rpy="0 0 0"/>
     	</xacro:sensor_imu>
 
     	
     	<!-- RGBD -->
-    	<xacro:sensor_intel_d435 prefix="$(arg prefix)front_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="front_rgbd_camera">
+    	<xacro:sensor_intel_d435 prefix="${prefix}front_rgbd_camera" parent="${prefix}base_link" prefix_topic="front_rgbd_camera">
 		<origin xyz="0.30995 0.0 0.16097" rpy="0 0 0"/>
     	</xacro:sensor_intel_d435>
 
-		<!--xacro:sensor_intel_d435 prefix="$(arg prefix)rear_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="rear_rgbd_camera">
+		<!--xacro:sensor_intel_d435 prefix="${prefix}rear_rgbd_camera" parent="${prefix}base_link" prefix_topic="rear_rgbd_camera">
 		<origin xyz="-0.308 0.0 0.18308" rpy="0 ${-PI} 0"/>
     	</xacro:sensor_intel_d435-->
 
@@ -78,12 +78,12 @@
         </xacro:sensor_ublox>
 
     	<!-- LIDAR -->
-    	<xacro:sensor_rs_helios_16p prefix="$(arg prefix)top_3d_laser" prefix_topic="top_3d_laser" parent="$(arg prefix)base_link" gpu="$(arg gpu)">
+    	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
     	  <origin xyz="0.0 0.0 0.38998" rpy="0 0 0"/>
     	</xacro:sensor_rs_helios_16p>
 
 		<!-- Antenna -->
-		<xacro:sensor_antena_combo_5G_teltonika prefix="$(arg prefix)antenna" parent="$(arg prefix)base_link" gps_latitude="$(arg gps_latitude)" gps_longitude="$(arg gps_longitude)">
+		<xacro:sensor_antena_combo_5G_teltonika prefix="${prefix}antenna" parent="${prefix}base_link" gps_latitude="$(arg gps_latitude)" gps_longitude="$(arg gps_longitude)">
 			<origin xyz="-0.26135 -0.249 0.597" rpy="0 0 0"/>
 		</xacro:sensor_antena_combo_5G_teltonika>
 
