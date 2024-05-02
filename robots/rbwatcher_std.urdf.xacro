@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+	<!-- ***************** -->
+	<!-- Imported elements -->
+	<!-- ***************** -->
+
+	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+	<!-- Import summit XL base elements -->
+	<xacro:include filename="$(find robot_description)/urdf/bases/rbwatcher_base.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/summit_hm/summit_hm_structure.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/antena_std.urdf.xacro" />
+
+
+	<!-- Import all available sensors -->
+	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+
+	<!-- Flag to select the high or low quality model -->
+	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="ros_planar_move_plugin" default="false"/>
+    <xacro:arg name="ros_planar_move_plugin_force_based" default="false"/>
+	<xacro:arg name="kinematics" default="skid"/>
+	<xacro:arg name="gpu" default="false"/>
+	<xacro:arg name="gps_latitude" default="0"/>
+	<xacro:arg name="gps_longitude" default="0"/>
+	<xacro:arg name="sim_control_period" default="0.004"/>
+
+
+    <xacro:macro name="rbwatcher" params="prefix publish_bf hq kinematics:=skid leika:=false">
+		<xacro:property name="top_structure_mesh" value="robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure" />
+		<xacro:property name="top_structure_x" value="-0.17024"/>
+		<xacro:property name="top_structure_y" value="0"/>
+		<xacro:property name="top_structure_z" value="0.27609"/>
+		<xacro:property name="PI" value="3.1415926535897931"/>
+		<xacro:property name="antenna_mesh" value="robot_description/meshes/others/antena_wifi_2J7A747Bc" />
+
+
+		<!-- *************** -->
+		<!-- Robots Elements -->
+		<!-- *************** -->
+
+		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+		<!-- Summit XL base -->
+		<xacro:rbwatcher_base prefix="${prefix}" publish_bf="true" hq="${hq}" />
+		
+		<xacro:summit_hm_structure prefix="${prefix}top_structure" parent="${prefix}base_link" mesh_file="${top_structure_mesh}" >
+			<origin xyz="${top_structure_x} ${top_structure_y} ${top_structure_z}" rpy="0 0 0"/>
+		</xacro:summit_hm_structure>
+
+    	<!-- IMU -->
+    	<xacro:sensor_imu prefix="${prefix}imu" parent="${prefix}base_link" topic="imu/data">
+    	  	<origin xyz="-0.03534 0.132 0.16109" rpy="0 0 0"/>
+    	</xacro:sensor_imu>
+    	
+    	<!-- RGBD -->
+    	<xacro:sensor_intel_d435 prefix="${prefix}front_rgbd_camera" parent="${prefix}base_link" prefix_topic="front_rgbd_camera">
+			<origin xyz="0.29881 0.0 0.15243" rpy="0 0 0"/>
+    	</xacro:sensor_intel_d435>
+
+		<!--xacro:sensor_intel_d435 prefix="${prefix}rear_rgbd_camera" parent="${prefix}base_link" prefix_topic="rear_rgbd_camera">
+		<origin xyz="-0.308 0.0 0.18308" rpy="0 ${-PI} 0"/>
+    	</xacro:sensor_intel_d435-->
+
+        <!-- GPS -->
+        <xacro:sensor_ublox prefix="${prefix}gps" parent="${prefix}base_link" use_mast="false">
+            <origin xyz="-0.24824 0.095 0.76359" rpy="0 0 0"/>
+        </xacro:sensor_ublox>
+
+    	<!-- LIDAR -->
+    	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+    	  	<origin xyz="-0.11924 0.0 0.38609" rpy="0 0 0"/>
+    	</xacro:sensor_rs_helios_16p>
+
+		<!-- Antenna -->
+		<xacro:sensor_antena_std prefix="${prefix}antenna" parent="${prefix}base_link" mesh_file="${antenna_mesh}">
+			<origin xyz="-0.24124 0.0 0.31109" rpy="0 0 0"/>
+		</xacro:sensor_antena_std>
+
+		<!-- PTZ camera -->
+		<xacro:unless value="${leika}">
+			<xacro:sensor_axis_m5525 prefix="${prefix}ptz_camera" parent="${prefix}base_link" fps="15.0">
+				<origin xyz="-0.11808 0 0.55429" rpy="0 0 0"/>
+			</xacro:sensor_axis_m5525>
+		</xacro:unless>
+		
+		<!-- Leika Laser -->
+		<xacro:if value="${leika}">
+			<xacro:sensor_blk_arc prefix="${prefix}ptz_camera" parent="${prefix}base_link">
+				<origin xyz="-0.11808 0 0.65" rpy="0 0 0"/>
+			</xacro:sensor_blk_arc>
+		</xacro:if>
+
+		<!-- Gazebo ros control pluggins -->
+		<xacro:ros_control control_period="$(arg sim_control_period)"/>
+
+		<xacro:if value="$(arg ros_planar_move_plugin)">
+
+			<xacro:skid_steering prefix="${prefix}" publish_tf="true" force_based="$(arg ros_planar_move_plugin_force_based)"/>
+
+		</xacro:if>
+
+   </xacro:macro>
+
+   <xacro:rbwatcher prefix="$(arg prefix)" publish_bf="true" hq="true" kinematics="$(arg kinematics)"/>
+
+
+</robot>

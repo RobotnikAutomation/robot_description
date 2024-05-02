@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+	<xacro:include filename="$(find robot_description)/urdf/bases/gazebo/robot_base.gazebo.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/wheels/omni_wheel/omni_wheel.urdf.xacro" />
+
+	<xacro:macro name="rbwatcher_base" params="prefix publish_bf hq kinematics:=skid_4w">
+
+		<!-- Robot mechanical and motor parameters -->
+		<xacro:property name="PI" value="3.1415926535897931"/>
+		<!-- Wheel parameters -->
+		<xacro:property name="wheel_offset_x" value="0.22795" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
+		<xacro:property name="wheel_offset_y" value="0.155" />
+		<xacro:property name="wheel_offset_z" value="0.0" />
+		<xacro:property name="docking_contact_offset_x" value="0.29378" />
+		<xacro:property name="docking_contact_offset_y" value="0.0" />
+		<xacro:property name="docking_contact_offset_z" value="0.07321" />
+		<xacro:property name="rubber_wheel_radius" value="0.1175" />
+		<xacro:property name="rubber_wheel_width" value="0.142" />
+		<xacro:property name="rubber_wheel_mass" value="4" />
+		<xacro:property name="mesh_file_left" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left" />
+		<xacro:property name="mesh_file_right" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right" />
+
+		<!-- BASE FOOTPRINT -->
+		<xacro:if value="${publish_bf}">
+		<link name="${prefix}base_footprint">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="0.001 0.001 0.001" />
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name="${prefix}base_footprint_joint" type="fixed">
+			<origin xyz="0 0 ${rubber_wheel_radius}" rpy="0 0 0" /> <!-- ${wheel_radius} property must be defined inside wheel description -->
+			<parent link="${prefix}base_footprint"/>
+			<child link="${prefix}base_link" />
+		</joint>
+		</xacro:if>
+
+		<!-- BASE_LINK -->
+		<link name="${prefix}base_link">
+		<inertial>
+			<mass value="50.0" />
+			<origin xyz="0 0 0" />
+			<inertia  ixx="1.391" ixy="0.004"  ixz="0.0"  iyy="6.853"  iyz="0.0"  izz="6.125" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<xacro:if value="${hq}">
+			<geometry>
+				<mesh filename="package://robot_description/meshes/bases/rbwatcher_body.dae"/>
+			</geometry>
+			</xacro:if>
+			<xacro:unless value="${hq}">
+			<geometry>
+				<mesh filename="package://robot_description/meshes/bases/rbwatcher_body.dae"/>
+			</geometry>
+			</xacro:unless>
+			<material name="darkgrey">
+				<color rgba="0.1 0.1 0.1 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0 " />
+			<geometry>
+				<mesh filename="package://robot_description/meshes/bases/rbwatcher_body.stl"/>
+			</geometry>
+		</collision>
+		</link>
+		<gazebo reference="${prefix}base_link">
+			<material>Gazebo/Gray</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<!-- DOCKING CONTACTS -->
+		<joint name="${prefix}base_docking_joint" type="fixed">
+			<origin xyz="${docking_contact_offset_x} ${docking_contact_offset_y} ${docking_contact_offset_z}" rpy="0 0 0 " />
+			<parent link="${prefix}base_link"/>
+			<child link="${prefix}base_docking_contact_link" />
+		</joint>
+
+		<!-- DOCKING LINK -->
+		<link name="${prefix}base_docking_contact_link" />
+
+		<xacro:if value="${kinematics == 'skid' or kinematics == 'skid_4w'}">
+			<xacro:rubber_wheel prefix="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}" rubber_wheel_radius="${rubber_wheel_radius}"
+								rubber_wheel_width="${rubber_wheel_width}" rubber_wheel_mass="${rubber_wheel_mass}" 
+								mesh_file="${mesh_file_right}">
+				<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:rubber_wheel>
+
+			<xacro:rubber_wheel prefix="${prefix}front_left" parent="${prefix}base_link" reflect="false" hq="${hq}" rubber_wheel_radius="${rubber_wheel_radius}"
+								rubber_wheel_width="${rubber_wheel_width}" rubber_wheel_mass="${rubber_wheel_mass}" 
+								mesh_file="${mesh_file_left}">
+				<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:rubber_wheel>
+
+			<xacro:rubber_wheel prefix="${prefix}back_left" parent="${prefix}base_link" reflect="false" hq="${hq}" rubber_wheel_radius="${rubber_wheel_radius}"
+								rubber_wheel_width="${rubber_wheel_width}" rubber_wheel_mass="${rubber_wheel_mass}" 
+								mesh_file="${mesh_file_left}">
+				<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:rubber_wheel>
+
+			<xacro:rubber_wheel prefix="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}" rubber_wheel_radius="${rubber_wheel_radius}"
+								rubber_wheel_width="${rubber_wheel_width}" rubber_wheel_mass="${rubber_wheel_mass}" 
+								mesh_file="${mesh_file_right}">
+				<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:rubber_wheel>
+		</xacro:if>
+
+		<xacro:if value="${kinematics == 'omni' or kinematics == 'omni_4w'}">
+			<xacro:omni_wheel prefix="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+				<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:omni_wheel>
+
+			<xacro:omni_wheel prefix="${prefix}front_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+				<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:omni_wheel>
+
+			<xacro:omni_wheel prefix="${prefix}back_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+				<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:omni_wheel>
+
+			<xacro:omni_wheel prefix="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+				<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+			</xacro:omni_wheel>
+    	</xacro:if>
+
+	</xacro:macro>
+
+</robot>
