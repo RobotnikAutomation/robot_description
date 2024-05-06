@@ -1,22 +1,20 @@
 <?xml version="1.0"?>
-<robot name="structure" xmlns:xacro="http://wiki.ros.org/xacro">
+<robot name="sensor_antena_std" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="summit_hm_structure" params="prefix parent *origin mesh_file:=robot_description/meshes/structures/summit_hm/summit_hm_top_structure
+  <!-- if no latitude/longitud is specified, then use Fuente del Jarro as default -->
+  <xacro:macro name="sensor_antena_std" params="prefix parent *origin mesh_file:=robot_description/meshes/others/antena_wifi_antena_wifi_2J7A747Bc
   												gazebo_color:=Gazebo/Gray">
 
+	  <!-- ANTENNA GPS -->
 	  <joint name="${prefix}_joint" type="fixed">
-	    <axis xyz="0 0 1"/>
+	    <axis xyz="0 1 0"/>
 	    <xacro:insert_block name="origin"/>
 	    <parent link="${parent}"/>
-	    <child link="${prefix}_link"/>
+	    <child link="${prefix}_base_link"/>
 	  </joint>
-
-	  <link name="${prefix}_link">
+	  <link name="${prefix}_base_link">
 	    <visual>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
-	      <material name="alu_color">
-           <color rgba="0.5 0.5 0.5 1"/>
-        </material>
 	      <geometry>
 	        <mesh filename="package://${mesh_file}.dae"/>
 	      </geometry>
