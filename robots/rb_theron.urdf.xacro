@@ -85,7 +85,7 @@
 
   <!-- SENSORS -->
   <!-- TODO: Moved 0.01 in x, otherwise the camera is still inside the robot -->
-	<!--xacro:sensor_orbbec_astra prefix="$(arg prefix)front_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="front_rgbd_camera">
+	<!--xacro:sensor_orbbec_astra prefix="$(arg prefix)front_rgbd_camera" parent="$(arg prefix)base_link" topic_prefix="front_rgbd_camera">
 		<origin xyz="0.3305 0.0 0.1748" rpy="0 0 0"/>
 	</xacro:sensor_orbbec_astra-->
 
@@ -97,26 +97,25 @@
 		<origin xyz="-0.3045 0.0 0.1898" rpy="0 0 3.1416"/>
 	</xacro:sensor_intel_realsense_d435>
 
-	<!-- TODO determine correct imu position-->
 	<xacro:sensor_vectornav frame_prefix="$(arg prefix)imu_" parent="$(arg prefix)base_link">
 		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
 	</xacro:sensor_vectornav>
 
-	<!-- <xacro:sensor_hokuyo_ust20lx prefix="$(arg prefix)front_laser" parent="$(arg prefix)base_link" prefix_topic="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
+	<xacro:sensor_hokuyo_ust20lx frame_prefix="$(arg prefix)front_laser_" parent="$(arg prefix)base_link" topic_prefix="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
 		<origin xyz="0.2675 -0.215 0.1613" rpy="0 -3.1416 2.3562"/>
 	</xacro:sensor_hokuyo_ust20lx>
-	<xacro:sensor_hokuyo_ust20lx prefix="$(arg prefix)rear_laser" parent="$(arg prefix)base_link" prefix_topic="rear_laser" min_angle="-2.0507619" max_angle="2.0507619">
+	<xacro:sensor_hokuyo_ust20lx frame_prefix="$(arg prefix)rear_laser_" parent="$(arg prefix)base_link" topic_prefix="rear_laser" min_angle="-2.0507619" max_angle="2.0507619">
 		<origin xyz="-0.2675 0.215 0.1613" rpy="0 -3.1416 -0.7854"/>
-	</xacro:sensor_hokuyo_ust20lx> -->
+	</xacro:sensor_hokuyo_ust20lx>
 
-	<xacro:sensor_sick_nanoscan3 frame_prefix="$(arg prefix)front_laser_" parent="$(arg prefix)base_link" topic_prefix="front_laser">
+	<!--xacro:sensor_sick_nanoscan3 frame_prefix="$(arg prefix)front_laser_" parent="$(arg prefix)base_link" topic_prefix="front_laser">
 		<origin xyz="0.250 0.0 0.1643" rpy="0 3.1416 3.1416"/>
-	</xacro:sensor_sick_nanoscan3>
+	</xacro:sensor_sick_nanoscan3-->
 
-	<!--xacro:sensor_sick_tim571 prefix="$(arg prefix)front_laser" parent="$(arg prefix)base_link" prefix_topic="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
+	<!--xacro:sensor_sick_tim571 frame_prefix="$(arg prefix)front_laser_" parent="$(arg prefix)base_link" topic_prefix="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
 		<origin xyz="0.2675 -0.215 0.1613" rpy="0 -3.1416 2.3562"/>
 	</xacro:sensor_sick_tim571-->
-	<!--xacro:sensor_sick_tim571 prefix="$(arg prefix)rear_laser" parent="$(arg prefix)base_link" prefix_topic="rear_laser" min_angle="-2.0507619" max_angle="2.0507619">
+	<!--xacro:sensor_sick_tim571 frame_prefix="$(arg prefix)rear_laser_" parent="$(arg prefix)base_link" topic_prefix="rear_laser" min_angle="-2.0507619" max_angle="2.0507619">
 		<origin xyz="-0.2675 0.215 0.1613" rpy="0 -3.1416 -0.7854"/>
 	</xacro:sensor_sick_tim571-->
 
