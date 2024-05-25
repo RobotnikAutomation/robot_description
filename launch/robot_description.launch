@@ -20,7 +20,8 @@
   <arg name="ros_planar_move_plugin_force_based" default="false"/>
   <arg name="use_gpu_for_simulation" default="true"/>
   <arg name="has_elevator" default="$(optenv ROBOT_HAS_ELEVATOR false)"/>
-  <arg name="run_joint_state_publisher" default="false"/>
+  <arg name="run_joint_state_publisher" default="true"/>
+  <arg name="run_rviz" default="true"/>
 
   <param name="robot_description" command="$(find xacro)/xacro '$(arg robot_xacro_path)'
           prefix:=$(arg prefix)
@@ -41,6 +42,6 @@
       
   </node>
 
-
+  <node if="$(arg run_rviz)" name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find robot_description)/rviz/robot_description.rviz"/>
 
 </launch>
