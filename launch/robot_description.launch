@@ -2,8 +2,8 @@
 <launch>
 
 
-  <arg name="id_robot" default="$(optenv ROBOT_ID robot)"/>
-  <arg name="prefix" default="$(arg id_robot)_"/>
+  <arg name="robot_id" default="$(optenv ROBOT_ID robot)"/>
+  <arg name="prefix" default="$(arg robot_id)_"/>
   <arg name="robot_model" default="$(optenv ROBOT_MODEL summit_xl)"/>
   <arg name="kinematics" default="$(optenv ROBOT_KINEMATICS skid)"/>
 
