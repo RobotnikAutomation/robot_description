@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot name="structure" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="structure_robocomp_cajon" params="prefix parent *origin">
+
+	  <link name="${prefix}_link">
+	    <visual>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <material name="alu_color">
+           <color rgba="0.5 0.5 0.5 1"/>
+        </material>
+	      <geometry>
+	        <mesh filename="package://robot_description/meshes/robocomp/cajon.stl"/>
+	      </geometry>
+	    </visual>
+	    <collision>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+	        <mesh filename="package://robot_description/meshes/robocomp/cajon.stl"/>
+	      </geometry>
+	    </collision>
+	  </link>
+
+	  <joint name="${prefix}_joint" type="fixed">
+	    <axis xyz="0 1 0"/>
+	    <xacro:insert_block name="origin"/>
+	    <parent link="${parent}"/>
+	    <child link="${prefix}_link"/>
+	  </joint>
+
+	  <gazebo reference="${prefix}_link">
+	    <material>Gazebo/White</material>
+	    <gravity>true</gravity>
+	  </gazebo>
+
+  </xacro:macro>
+
+</robot>

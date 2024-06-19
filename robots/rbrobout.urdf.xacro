@@ -17,6 +17,14 @@
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
+	<!-- Import robocomp structures -->
+	<xacro:include filename="$(find robot_description)/urdf/robocomp/cajon.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/robocomp/telescopico.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/robocomp/tool_changer.urdf.xacro" />
+	
+	<!-- UR-20 arm -->
+	<xacro:include filename="$(find ur_description)/urdf/inc/ur20_macro.xacro" />
+
 	<xacro:property name="PI" value="3.1415926535897931"/>
 
 	<!-- Wheel parameters -->
@@ -81,21 +89,35 @@
     	</xacro:sensor_intel_d435>
     	
     		<xacro:sensor_intel_d435 prefix="$(arg prefix)rear_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="rear_rgbd_camera">
-      		<origin xyz="-0.835 0  0.1555" rpy="0 ${PI} 0"/>
+      		<origin xyz="-0.835 0  0.1555" rpy="0 0 ${PI}"/>
     	</xacro:sensor_intel_d435>
 
-		<!-- magnetic sensors  -->
-		<!--xacro:sick_mls prefix="$(arg prefix)left_mls" parent="$(arg prefix)base_link">
-			<origin xyz="0.1085 -0.3045 -0.09137" rpy="0 0 ${1/2*PI}"/>
-		</xacro:sick_mls>
+		<xacro:sensor_rs_helios_16p prefix="$(arg prefix)3d_laser" parent="$(arg prefix)base_link" prefix_topic="top_3d_laser">
+      		<origin xyz="0.4015 -0.44544 1.45476" rpy="0 0 ${PI}"/>
+    	</xacro:sensor_rs_helios_16p>
 
-		<xacro:sick_mls prefix="$(arg prefix)right_mls" parent="$(arg prefix)base_link">
-			<origin xyz="-0.1085 0.3045 -0.09137" rpy="0 0 ${-1/2*PI}"/>
-		</xacro:sick_mls>
+		<!-- Robocomp structures -->
+		<xacro:structure_robocomp_cajon prefix="$(arg prefix)cajon" parent="$(arg prefix)base_link">
+      		<origin xyz="0 0 0" rpy="0 0 0"/>
+    	</xacro:structure_robocomp_cajon>
 
-		<xacro:sick_mls prefix="$(arg prefix)front_mls" parent="$(arg prefix)base_link">
-			<origin xyz="0.7725 -0.1085 -0.09137" rpy="0 0 0"/>
-		</xacro:sick_mls!-->
+		<xacro:structure_robocomp_telescopico prefix="$(arg prefix)telescopico" parent="$(arg prefix)cajon_link">
+      		<origin xyz="-0.7605 0 1.05" rpy="0 0 0"/>
+    	</xacro:structure_robocomp_telescopico>
+
+		<xacro:structure_robocomp_tool_changer prefix="$(arg prefix)tool_changer" parent="$(arg prefix)arm_tool0">
+      		<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+    	</xacro:structure_robocomp_tool_changer>
+
+		<!-- UR-20 ARM -->
+		<xacro:ur20_robot prefix="$(arg prefix)arm_">
+		</xacro:ur20_robot>
+
+		<joint name="$(arg prefix)arm_base_joint" type="fixed">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="$(arg prefix)telescopico_link" />
+			<child link="$(arg prefix)arm_base_link" />
+		</joint>
 
    </xacro:macro>
 
