@@ -96,32 +96,13 @@
       		<origin xyz="0.4015 -0.44544 1.45476" rpy="0 0 ${PI}"/>
     	</xacro:sensor_rs_helios_16p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<!-- Robocomp structures -->
 		<xacro:structure_robocomp_cajon prefix="$(arg prefix)cajon" parent="$(arg prefix)base_link">
       		<origin xyz="0 0 0" rpy="0 0 0"/>
     	</xacro:structure_robocomp_cajon>
 
 		<xacro:linak_lc3_lift prefix="$(arg prefix)elevator" parent="$(arg prefix)cajon_link">
+      		<!-- <origin xyz="0 0 1.05" rpy="0 0 0"/> -->
       		<origin xyz="-0.7605 0 1.05" rpy="0 0 0"/>
     	</xacro:linak_lc3_lift>
 
@@ -136,7 +117,8 @@
 		</joint>
 
 		<xacro:structure_robocomp_tool_changer prefix="$(arg prefix)tool_changer" parent="$(arg prefix)arm_tool0">
-      		<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+      		<origin xyz="0 0 0" rpy="0 0 0"/>
+      		<!-- <origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/> -->
     	</xacro:structure_robocomp_tool_changer>
 
    </xacro:macro>

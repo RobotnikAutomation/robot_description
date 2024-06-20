@@ -17,13 +17,13 @@
            <color rgba="0.5 0.5 0.5 1"/>
         </material>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/robocomp/Linak_LC3_lift.stl"/>
+	        <!-- <mesh filename="package://robot_description/meshes/robocomp/Linak_LC3_lift.stl"/> -->
 	      </geometry>
 	    </visual>
 	    <collision>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/robocomp/Linak_LC3_lift.stl"/>
+	        <!-- <mesh filename="package://robot_description/meshes/robocomp/Linak_LC3_lift.stl"/> -->
 	      </geometry>
 	    </collision>
 	  </link>
@@ -65,9 +65,7 @@
 	  <!-- We need to update limits and dynamics to reality -->
       <joint name="${prefix}_linak_lc3_top_joint" type="prismatic">
 	    <axis xyz="0 0 1"/>
-	    <xacro:insert_block name="origin"/>
-	    <!-- <parent link="${prefix}_linak_lc3_base_link"/> -->
-		<parent link="${parent}"/>
+	    <parent link="${prefix}_linak_lc3_base_link"/>
 	    <child link="${prefix}_linak_lc3_top_link"/>
         <limit lower="0" upper="0.9" effort="100.0" velocity="0.5" />
 	  </joint>
@@ -87,14 +85,14 @@
 
     </transmission>
 
-	  <gazebo reference="${prefix}_linak_lc3_base_link">
+	  <!-- <gazebo reference="${prefix}_linak_lc3_base_link">
 	    <material>Gazebo/Gray</material>
-	    <!-- <gravity>true</gravity> -->
-	  </gazebo>
+	    <gravity>true</gravity>
+	  </gazebo> -->
 
 	  <gazebo reference="${prefix}_linak_lc3_top_link">
 	    <material>Gazebo/Gray</material>
-	    <!-- <gravity>true</gravity> -->
+	    <gravity>true</gravity>
 	  </gazebo>
 
   </xacro:macro>

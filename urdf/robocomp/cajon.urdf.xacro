@@ -33,6 +33,31 @@
 	    <gravity>true</gravity>
 	  </gazebo>
 
+	  <!-- Could be an option to always provide link for any elevator in there -->
+ 	  <!-- <link name="${prefix}_elevator_mount_link">
+	    <visual>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <material name="alu_color">
+           <color rgba="0.5 0.5 0.5 1"/>
+        </material>
+	      <geometry>
+	      </geometry>
+	    </visual>
+	    <collision>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+	      </geometry>
+	    </collision>
+	  </link>
+
+	  <joint name="${prefix}_elevator_mount_joint" type="fixed">
+	    <axis xyz="0 1 0"/>
+      	<origin xyz="-0.7605 0 0" rpy="0 0 0"/>
+	    <parent link="${prefix}_link"/>
+	    <child link="${prefix}_elevator_mount_link"/>
+	  </joint> -->
+
+
   </xacro:macro>
 
 </robot>
