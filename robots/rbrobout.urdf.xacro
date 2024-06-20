@@ -19,7 +19,7 @@
 
 	<!-- Import robocomp structures -->
 	<xacro:include filename="$(find robot_description)/urdf/robocomp/cajon.urdf.xacro" />
-	<xacro:include filename="$(find robot_description)/urdf/robocomp/telescopico.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/robocomp/Linak_LC3_lift.urdf.xacro" />
 	<xacro:include filename="$(find robot_description)/urdf/robocomp/tool_changer.urdf.xacro" />
 	
 	<!-- UR-20 arm -->
@@ -87,8 +87,8 @@
 		<xacro:sensor_intel_d435 prefix="$(arg prefix)front_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="front_rgbd_camera">
       		<origin xyz="0.835 0  0.1555" rpy="0 0 0"/>
     	</xacro:sensor_intel_d435>
-    	
-    		<xacro:sensor_intel_d435 prefix="$(arg prefix)rear_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="rear_rgbd_camera">
+
+    	<xacro:sensor_intel_d435 prefix="$(arg prefix)rear_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="rear_rgbd_camera">
       		<origin xyz="-0.835 0  0.1555" rpy="0 0 ${PI}"/>
     	</xacro:sensor_intel_d435>
 
@@ -96,18 +96,34 @@
       		<origin xyz="0.4015 -0.44544 1.45476" rpy="0 0 ${PI}"/>
     	</xacro:sensor_rs_helios_16p>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- Robocomp structures -->
 		<xacro:structure_robocomp_cajon prefix="$(arg prefix)cajon" parent="$(arg prefix)base_link">
       		<origin xyz="0 0 0" rpy="0 0 0"/>
     	</xacro:structure_robocomp_cajon>
 
-		<xacro:structure_robocomp_telescopico prefix="$(arg prefix)telescopico" parent="$(arg prefix)cajon_link">
+		<xacro:linak_lc3_lift prefix="$(arg prefix)elevator" parent="$(arg prefix)cajon_link">
       		<origin xyz="-0.7605 0 1.05" rpy="0 0 0"/>
-    	</xacro:structure_robocomp_telescopico>
-
-		<xacro:structure_robocomp_tool_changer prefix="$(arg prefix)tool_changer" parent="$(arg prefix)arm_tool0">
-      		<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
-    	</xacro:structure_robocomp_tool_changer>
+    	</xacro:linak_lc3_lift>
 
 		<!-- UR-20 ARM -->
 		<xacro:ur20_robot prefix="$(arg prefix)arm_">
@@ -115,9 +131,13 @@
 
 		<joint name="$(arg prefix)arm_base_joint" type="fixed">
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<parent link="$(arg prefix)telescopico_link" />
+			<parent link="$(arg prefix)elevator_linak_lc3_top_link" />
 			<child link="$(arg prefix)arm_base_link" />
 		</joint>
+
+		<xacro:structure_robocomp_tool_changer prefix="$(arg prefix)tool_changer" parent="$(arg prefix)arm_tool0">
+      		<origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+    	</xacro:structure_robocomp_tool_changer>
 
    </xacro:macro>
 
