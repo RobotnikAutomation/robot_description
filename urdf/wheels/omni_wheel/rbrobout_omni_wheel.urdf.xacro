@@ -4,8 +4,8 @@
   <xacro:property name="M_PI" value="3.1415926535897931" />
   <!-- Wheels -->
   <xacro:property name="omni_wheel_radius" value="0.127" />
-  <xacro:property name="omni_wheel_height" value="0.087" />
-  <xacro:property name="omni_wheel_mass" value="6.5" /> <!-- in kg-->
+  <xacro:property name="omni_wheel_height" value="0.128" />
+  <xacro:property name="omni_wheel_mass" value="15" /> <!-- in kg-->
 
 
   <xacro:macro name="cylinder_inertia" params="m r h">
@@ -47,7 +47,7 @@
       </visual>
 
       <collision>
-				<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+				<origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
 					<cylinder length="${omni_wheel_height}" radius="${omni_wheel_radius}" />
         </geometry>
