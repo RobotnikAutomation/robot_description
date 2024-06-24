@@ -93,7 +93,7 @@
     	</xacro:sensor_intel_d435>
 
 		<xacro:sensor_rs_helios_16p prefix="$(arg prefix)3d_laser" parent="$(arg prefix)base_link" prefix_topic="top_3d_laser">
-      		<origin xyz="0.4015 -0.44544 1.45476" rpy="0 0 ${PI}"/>
+      		<origin xyz="0.4015 -0.451 1.45475" rpy="0 0 ${PI}"/>
     	</xacro:sensor_rs_helios_16p>
 
 		<!-- Robocomp structures -->

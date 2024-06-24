@@ -10,13 +10,13 @@
            <color rgba="0.5 0.5 0.5 1"/>
         </material>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/robocomp/cajon.stl"/>
+	        <mesh filename="package://robot_description/meshes/robocomp/cajonv2.stl"/>
 	      </geometry>
 	    </visual>
 	    <collision>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/robocomp/cajon.stl"/>
+	        <mesh filename="package://robot_description/meshes/robocomp/cajonv2.stl"/>
 	      </geometry>
 	    </collision>
 	  </link>
