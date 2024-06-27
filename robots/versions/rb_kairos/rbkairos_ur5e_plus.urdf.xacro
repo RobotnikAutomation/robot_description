@@ -82,7 +82,7 @@
     <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
     <!-- Summit XL base -->
-    <xacro:summit_xl_steel_base prefix="$(arg prefix)" publish_bf="true" hq="${hq}" laser_support="true"/>
+    <xacro:rbkairos_base prefix="$(arg prefix)" publish_bf="true" hq="${hq}" laser_support="true"/>
 
     <xacro:omni_wheel prefix="$(arg prefix)front_right" parent="$(arg prefix)base_link" reflect="false" hq="${hq}">
       <origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
