@@ -63,6 +63,7 @@
   <xacro:arg name="ros_planar_move_plugin" default="false"/>
   <xacro:arg name="load_kinematics_file" default="false"/> <!-- Necesarry for ur_description compatible with official ur drivers--> 
   <xacro:arg name="use_gpu_for_simulation" default="false"/>
+  <xacro:arg name="load_arm" default="true"/>
 
   <xacro:property name="arm_position_x" value="0.0"/>
   <xacro:property name="arm_position_y" value="0"/>
@@ -71,7 +72,7 @@
   <xacro:property name="arm_orientation_p" value="0"/>
   <xacro:property name="arm_orientation_y" value="0"/>
 
-  <xacro:macro name="rbkairos" params="prefix publish_bf hq load_kinematics_file gpu:=false">
+  <xacro:macro name="rbkairos" params="prefix publish_bf hq load_kinematics_file gpu:=false load_arm:=true">
 
     <!-- *************** -->
     <!-- Robots Elements -->
@@ -99,14 +100,16 @@
     </xacro:omni_wheel>
 
     <!-- UR-10e ARM -->
-    <xacro:ur10e_robot prefix="$(arg prefix)arm_">
-    </xacro:ur10e_robot>
+    <xacro:if value="$(arg load_arm)">
+      <xacro:ur10e_robot prefix="$(arg prefix)arm_">
+      </xacro:ur10e_robot>
 
-    <joint name="$(arg prefix)arm_base_joint" type="fixed">
-        <origin xyz="${arm_position_x} ${arm_position_y} ${arm_position_z}" rpy="${arm_orientation_r} ${arm_orientation_p} ${arm_orientation_y}"/>
-        <parent link="$(arg prefix)base_link" />
-        <child link="$(arg prefix)arm_base_link" />
-    </joint>
+      <joint name="$(arg prefix)arm_base_joint" type="fixed">
+          <origin xyz="${arm_position_x} ${arm_position_y} ${arm_position_z}" rpy="${arm_orientation_r} ${arm_orientation_p} ${arm_orientation_y}"/>
+          <parent link="$(arg prefix)base_link" />
+          <child link="$(arg prefix)arm_base_link" />
+      </joint>
+    </xacro:if>
 
     <!-- IMU -->
     <xacro:sensor_imu_hector prefix="$(arg prefix)imu" parent="$(arg prefix)base_link">
