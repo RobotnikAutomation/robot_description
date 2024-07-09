@@ -78,11 +78,11 @@
 	<xacro:gazebo_colors prefix="$(arg prefix)"/>
 
 	<!-- WHEELS -->
-	<xacro:rubber_wheel prefix="$(arg prefix)right" parent="$(arg prefix)base_link" hq="${hq}">
+	<xacro:rubber_wheel prefix="$(arg prefix)right_" parent="$(arg prefix)base_link" hq="${hq}">
 		<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 	</xacro:rubber_wheel>
 
-	<xacro:rubber_wheel prefix="$(arg prefix)left" parent="$(arg prefix)base_link" hq="${hq}">
+	<xacro:rubber_wheel prefix="$(arg prefix)left_" parent="$(arg prefix)base_link" hq="${hq}">
 		<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 	</xacro:rubber_wheel>
 

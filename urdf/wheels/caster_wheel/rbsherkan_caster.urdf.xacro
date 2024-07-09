@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="caster" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="caster" params="prefix parent *origin hq">
+  <xacro:macro name="caster" params="prefix parent *origin hq use_sim:=^|false">
     <!-- Caster support parameters -->
     <xacro:property name="caster_support_mass" value="1.5" /> <!-- in kg-->
 
@@ -22,13 +22,25 @@
     </xacro:macro>
 
     <!--CASTER SUPPORT -->
-    <joint name="${prefix}support_joint" type="continuous">
-      <xacro:insert_block name="origin" />
-      <parent link="${parent}"/>
-      <child link="${prefix}base_link"/>
-      <axis xyz="0 0 1" />
-      <dynamics damping="0.01" friction="0.1"/>
-    </joint>
+    <xacro:if value="${use_sim}">
+      <joint name="${prefix}support_joint" type="continuous">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}base_link"/>
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.01" friction="0.1"/>
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_sim}">
+      <joint name="${prefix}support_joint" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}base_link"/>
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.01" friction="0.1"/>
+      </joint>
+    </xacro:unless>
+
     <link name="${prefix}base_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -45,14 +57,24 @@
         <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
       </inertial>
     </link>
-
-    <joint name="${prefix}joint" type="continuous">
-      <origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}" rpy="0 0 0" />
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}link"/>
-      <axis xyz="0 1 0"/>
-      <dynamics damping="0.01" friction="0.1"/>
-    </joint>
+    <xacro:if value="${use_sim}">
+      <joint name="${prefix}joint" type="continuous">
+        <origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}" rpy="0 0 0" />
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}link"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.01" friction="0.1"/>
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${use_sim}">
+      <joint name="${prefix}joint" type="fixed">
+        <origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}" rpy="0 0 0" />
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}link"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.01" friction="0.1"/>
+      </joint>
+    </xacro:unless>
     <link name="${prefix}link">
       <!--visual>
         <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
@@ -72,6 +94,31 @@
         <xacro:cylinder_inertia m="${caster_mass}" r="${caster_radius}" h="${caster_width}" />
       </inertial>
     </link>
+
+  <!-- Transmission is important to link the joints and the controller-->
+  <xacro:if value="${use_sim}">
+    <transmission name="${prefix}_support_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}support_joint">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_support_joint_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+        <motorTorqueConstant>1</motorTorqueConstant>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}_wheel_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}joint">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_wheel_joint_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+		<motorTorqueConstant>1</motorTorqueConstant>
+      </actuator>
+    </transmission>
+  </xacro:if>
 
     <gazebo reference="${prefix}support">
       <mu1>0.45</mu1>

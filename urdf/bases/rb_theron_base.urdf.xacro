@@ -35,29 +35,29 @@
 	<!-- *************** -->
 	<!-- Robots Elements -->
 	<!-- *************** -->
-  <xacro:macro name="rb_theron_base" params="prefix hq use_sim">
+  <xacro:macro name="rb_theron_base" params="prefix hq use_sim:=^|false">
     <!-- rb_theron base -->
   	<xacro:rb_theron_base_v4 prefix="${prefix}" publish_bf="true" hq="${hq}" />
     <xacro:gazebo_colors prefix="${prefix}"/>
 
   	<!-- WHEELS -->
-  	<xacro:rubber_wheel prefix="${prefix}right" parent="${prefix}base_link" hq="${hq}">
+	<xacro:rubber_wheel prefix="${prefix}right_" parent="${prefix}base_link" hq="${hq}">
   		<origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   	</xacro:rubber_wheel>
-  	<xacro:rubber_wheel prefix="${prefix}left" parent="${prefix}base_link" hq="${hq}">
+	<xacro:rubber_wheel prefix="${prefix}left_" parent="${prefix}base_link" hq="${hq}">
   		<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   	</xacro:rubber_wheel>
 <!-- Castor wheels-->
-	<xacro:caster prefix="${prefix}front_left" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
+	<xacro:caster prefix="${prefix}front_left_" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
 		<origin xyz="0.235 0.1825 0.0448" rpy="0 0 0"/>
 	</xacro:caster>
-	<xacro:caster prefix="${prefix}front_right" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
+	<xacro:caster prefix="${prefix}front_right_" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
 		<origin xyz="0.235 -0.1825 0.0448" rpy="0 0 0"/>
 	</xacro:caster>
-	<xacro:caster prefix="${prefix}rear_left" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
+	<xacro:caster prefix="${prefix}rear_left_" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
 		<origin xyz="-0.235 0.1825 0.0448" rpy="0 0 0"/>
 	</xacro:caster>
-	<xacro:caster prefix="${prefix}rear_right" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
+	<xacro:caster prefix="${prefix}rear_right_" parent="${prefix}base_link" hq="${hq}" use_sim="$(arg use_sim)">
 		<origin xyz="-0.235 -0.1825 0.0448" rpy="0 0 0"/>
 	</xacro:caster>
   </xacro:macro>

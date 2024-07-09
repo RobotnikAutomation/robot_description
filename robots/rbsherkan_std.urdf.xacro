@@ -25,24 +25,34 @@
     <!-- Base configuration -->
     <xacro:arg name="prefix" default="robot_" />
     <xacro:property name="hq" value="true" />
+    <xacro:arg name="use_sim" default="false"/>
+    <xacro:arg name="ros_planar_move_plugin" default="false"/>
 
     <xacro:macro name="rbsherkan" params="prefix hq">
 
       <xacro:rbsherkan_base prefix="${prefix}" hq="${hq}"/>
+  <!-- Gazebo ros control pluggins -->
+	<!--xacro:ros_control namespace="$(arg namespace)"/-->
+	<xacro:ros_control/>
+	<xacro:if value="$(arg ros_planar_move_plugin)">
+    <xacro:omni_steering prefix="$(arg prefix)" publish_tf="true"/>
+  </xacro:if>
+
+    <xacro:gazebo_colors prefix="$(arg prefix)"/>
 
       <!-- Rocker -->
-      <xacro:rocker_front prefix="${prefix}left" parent="${prefix}base_link" hq="true" reflect="true">
+      <xacro:rocker_front prefix="${prefix}left_" parent="${prefix}base_link" hq="true" reflect="true" use_sim="$(arg use_sim)" >
         <origin xyz="0.095 0.16975 -0.0125" rpy="0 0 0"/>
       </xacro:rocker_front>
-      <xacro:rocker_front prefix="${prefix}right" parent="${prefix}base_link" hq="true" reflect="false">
+      <xacro:rocker_front prefix="${prefix}right_" parent="${prefix}base_link" hq="true" reflect="false" use_sim="$(arg use_sim)">
         <origin xyz="0.095 -0.16975 -0.0125" rpy="0 0 0"/>
       </xacro:rocker_front>
 
       <!-- Casters -->
-      <xacro:caster prefix="${prefix}rear_left_caster_" parent="${prefix}base_link" hq="true">
+      <xacro:caster prefix="${prefix}rear_left_caster_" parent="${prefix}base_link" hq="true" use_sim="$(arg use_sim)">
         <origin xyz="-0.185 0.16975 0.0302" rpy="0 0 0"/>
       </xacro:caster>
-      <xacro:caster prefix="${prefix}rear_right_caster_" parent="${prefix}base_link" hq="true">
+      <xacro:caster prefix="${prefix}rear_right_caster_" parent="${prefix}base_link" hq="true" use_sim="$(arg use_sim)">
         <origin xyz="-0.185 -0.16975 0.0302" rpy="0 0 0"/>
       </xacro:caster>
 
@@ -62,19 +72,6 @@
       </xacro:sensor_sick_nanoscan3>
 
     </xacro:macro>
-
-  <!-- Gazebo ros control pluggins -->
-  <!-- ros control plugin -->
-  <xacro:macro name="ros_control">
-    <gazebo>
-      <plugin name="ros_control" filename="libgazebo_ros_control.so">
-		    <robotParam>robot_description</robotParam>
-        <controlPeriod>0.001</controlPeriod>
-	      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-		    <legacyModeNS>true</legacyModeNS>
-      </plugin>
-    </gazebo>
-	</xacro:macro>
 
   <xacro:rbsherkan prefix="$(arg prefix)" hq="${hq}" />
 

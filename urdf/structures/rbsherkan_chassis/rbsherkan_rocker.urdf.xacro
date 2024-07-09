@@ -1,18 +1,44 @@
 <?xml version="1.0"?>
 <robot name="caster_wheel" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="rocker_front" params="prefix parent *origin hq reflect">
+  <xacro:macro name="rocker_front" params="prefix parent *origin hq reflect use_sim:=^|false">
 
     <xacro:include filename="$(find robot_description)/urdf/wheels/caster_wheel/rbsherkan_caster.urdf.xacro" />
     <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
 
     <!-- Base link -->
+    <xacro:if value="${use_sim}">
+    <joint name="${prefix}rocker_joint" type="revolute">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${prefix}rocker_link"/>
+      <axis xyz="0 1 0" />
+      <limit effort="7000.0" lower="-1.0" upper="1.0" velocity="10.0"/>
+      <dynamics damping="0.01" friction="0.1"/>
+    </joint>
+    <transmission name="${prefix}rocker_joint_trans">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${prefix}rocker_joint">
+				<!-- for the gazebo plugin -->
+				<!--hardwareInterface>EffortJointInterface</hardwareInterface-->
+				<!-- for ros control controller -->
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+			</joint>
+
+			<actuator name="${prefix}rocker_joint_motor">
+				<mechanicalReduction>1</mechanicalReduction>
+				<motorTorqueConstant>20</motorTorqueConstant>
+			</actuator>
+		</transmission>
+  </xacro:if>
+  <xacro:unless value="${use_sim}">
     <joint name="${prefix}rocker_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
       <child link="${prefix}rocker_link"/>
       <axis xyz="0 1 0" />
     </joint>
+  </xacro:unless>
     <link name="${prefix}rocker_link">
       <visual>
         <xacro:if value="${reflect}">
@@ -55,7 +81,7 @@
       </xacro:unless>
     </xacro:rubber_wheel>
 
-    <xacro:caster prefix="${prefix}caster_" parent="${prefix}rocker_link" hq="${hq}">
+    <xacro:caster prefix="${prefix}caster_" parent="${prefix}rocker_link" hq="${hq}" use_sim="$(arg use_sim)">
       <origin xyz="0.090 0 0.0427" rpy="0 0 0" />
     </xacro:caster>
  </xacro:macro>
