@@ -71,7 +71,7 @@
         </xacro:sensor_ublox>
 
     	<!-- LIDAR -->
-    	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+    	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)" suffix_topic="_raw">
     	  	<origin xyz="-0.11924 0.0 0.38609" rpy="0 0 0"/>
     	</xacro:sensor_rs_helios_16p>
 
