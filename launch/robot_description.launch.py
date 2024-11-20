@@ -98,7 +98,7 @@ def generate_launch_description():
             FindExecutable(name="xacro"),
             " ",
             params['robot_xacro_path'],
-            " prefix:=''",
+            " prefix:='robot_'",
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
@@ -113,7 +113,7 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
-              'frame_prefix': [params['robot_id'], '/'],
+              # 'frame_prefix': [params['robot_id'], '/'],
             }
         ],
     ))

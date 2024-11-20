@@ -20,7 +20,12 @@
       <parent link="${parent}"/>
       <child link="${prefix}_wheel_link"/>
       <xacro:insert_block name="origin" />
-      <axis xyz="0 1 0" rpy="0 0 0" />
+      <xacro:if value="${reflect}">
+        <axis xyz="0 1 0" rpy="0 0 0" />
+       </xacro:if>
+       <xacro:unless value="${reflect}">
+            <axis xyz="0 -1 0" rpy="0 0 0" />
+       </xacro:unless>
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.0" friction="0.0"/>
     </joint>
