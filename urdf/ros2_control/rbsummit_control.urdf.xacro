@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-    <xacro:macro name="rbvogui_gz_control" params="controllers">
-
+    <xacro:macro name="rbsummit_gz_control" params="controllers">
         <gazebo>
           <plugin name="ros_control" filename="libgazebo_ros2_control.so">
             <robot_param>robot_description</robot_param>
@@ -27,17 +26,11 @@
               <plugin>gazebo_ros2_control/GazeboSystem</plugin>
           </hardware>
 
-          <xacro:ros2_joint interface="position" jmin="-2" jmax="2" name="rbvogui_front_left_steering_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-2" jmax="2" name="rbvogui_front_right_steering_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-2" jmax="2" name="rbvogui_back_left_steering_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-2" jmax="2" name="rbvogui_back_right_steering_joint"/>
-
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="rbvogui_front_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="rbvogui_front_right_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="rbvogui_back_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="rbvogui_back_right_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-30" jmax="30" name="rbsummit_front_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-30" jmax="30" name="rbsummit_front_right_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-30" jmax="30" name="rbsummit_back_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-30" jmax="30" name="rbsummit_back_right_wheel_joint"/>
 
         </ros2_control>
-
     </xacro:macro>
 </robot>

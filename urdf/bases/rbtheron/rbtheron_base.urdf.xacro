@@ -1,66 +1,152 @@
 <?xml version="1.0"?>
-<robot name="rb_theron"
-	xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="rb_theron_v4" xmlns:xacro="http://wiki.ros.org/xacro">
 
 
-	<!-- ***************** -->
-	<!-- Imported elements -->
-	<!-- ***************** -->
+  <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbtheron_base.gazebo.xacro" />
 
-	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <xacro:macro name="rbtheron_base" params="hq">
 
-	<!-- Import differential base elements -->
-	<xacro:include filename="$(find robot_description)/urdf/bases/rbtheron_base_v4.urdf.xacro" />
+  <!-- Robot mechanical and motor parameters -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="wheel_radius" default="0.0762" />
 
-	<!-- Import wheels -->
-	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
+	<!-- BASE FOOTPRINT -->
+	<link name="rbtheron_base_footprint">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+	</link>
 
-	<!-- Import casters -->
-	<xacro:include filename="$(find robot_description)/urdf/wheels/caster_wheel/rb_theron_caster.urdf.xacro" />
+	<joint name="rbtheron_base_footprint_joint" type="fixed">
+		<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" /> <!-- ${wheel_radius} property must be defined inside wheel description -->
+		<parent link="rbtheron_base_footprint"/>
+		<child link="rbtheron_base_link" />
+	</joint>
 
-	<!-- Import Gazebo Stuff -->
-	<xacro:include filename="$(find robot_description)/urdf/structures/common.gazebo.xacro" />
+  <!-- BASE_LINK -->
+  <link name="rbtheron_base_link">
+    <inertial>
+      <mass value="45.0" />
+      <origin xyz="0 0 0" />
+      <inertia  ixx="1.391" ixy="0.004"  ixz="0.0"  iyy="6.853"  iyz="0.0"  izz="6.125" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <xacro:if value="${hq}">
+      <geometry>
+      <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+      </geometry>
+      </xacro:if>
+      <xacro:unless value="${hq}">
+      <geometry>
+        <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+      </geometry>
+      </xacro:unless>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1"/>
+      </material>
+    </visual>
+    <collision>
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+        <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+       </geometry>
+    </collision>
+  </link>
 
+  <gazebo reference="rbtheron_base_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
 
-	<!-- ***************** -->
-	<!-- Global parameters -->
-	<!-- ***************** -->
-	<xacro:property name="PI" value="3.1415926535897931"/>
+  <!-- LOGO ROBOTNIK IZQUIERDO -->
+  <link name="rbtheron_base_logo_left">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
+    </geometry>
+    <material name="darkgrey">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+    </visual>
+  </link>
 
-	<!-- Wheel parameters -->
-	<xacro:property name="wheel_offset_x" value="0" />
-	<xacro:property name="wheel_offset_y" value="0.2516" />
-	<xacro:property name="wheel_offset_z" value="0.0" />
+  <joint name="rbtheron_base_logo_left_joint" type="fixed">
+    <origin xyz="0.0 0.28931 0.29062" rpy="0 0 0" />
+    <parent link="rbtheron_base_link"/>
+    <child link="rbtheron_base_logo_left" />
+  </joint>
 
-	<!-- *************** -->
-	<!-- Robots Elements -->
-	<!-- *************** -->
-  <xacro:macro name="rbtheron_base" params="robot_id hq use_sim">
-    <!-- rb_theron base -->
-  	<xacro:rb_theron_base_v4 robot_id="${robot_id}" publish_bf="true" hq="${hq}" />
-    <xacro:gazebo_colors robot_id="${robot_id}"/>
+  <!-- LOGO ROBOTNIK DERECHO -->
+  <link name="rbtheron_base_logo_right">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
+    </geometry>
+    <material name="darkgrey">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+    </visual>
+  </link>
 
-  	<!-- WHEELS -->
-  	<xacro:rubber_wheel robot_id="${robot_id}_right" parent="${robot_id}_base_link" hq="${hq}">
-  		<origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-  	</xacro:rubber_wheel>
-  	<xacro:rubber_wheel robot_id="${robot_id}_left" parent="${robot_id}_base_link" hq="${hq}">
-  		<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-  	</xacro:rubber_wheel>
-<!-- Castor wheels-->
-	<xacro:caster robot_id="${robot_id}_front_left" parent="${robot_id}_base_link" hq="${hq}" use_sim="$(arg use_sim)">
-		<origin xyz="0.235 0.1825 0.0448" rpy="0 0 0"/>
-	</xacro:caster>
-	<xacro:caster robot_id="${robot_id}_front_right" parent="${robot_id}_base_link" hq="${hq}" use_sim="$(arg use_sim)">
-		<origin xyz="0.235 -0.1825 0.0448" rpy="0 0 0"/>
-	</xacro:caster>
-	<xacro:caster robot_id="${robot_id}_rear_left" parent="${robot_id}_base_link" hq="${hq}" use_sim="$(arg use_sim)">
-		<origin xyz="-0.235 0.1825 0.0448" rpy="0 0 0"/>
-	</xacro:caster>
-	<xacro:caster robot_id="${robot_id}_rear_right" parent="${robot_id}_base_link" hq="${hq}" use_sim="$(arg use_sim)">
-		<origin xyz="-0.235 -0.1825 0.0448" rpy="0 0 0"/>
-	</xacro:caster>
+  <joint name="rbtheron_base_logo_right_joint" type="fixed">
+    <origin xyz="0.0 -0.28931 0.29062" rpy="0 0 ${PI}" />
+    <parent link="rbtheron_base_link"/>
+    <child link="rbtheron_base_logo_right" />
+  </joint>
+
+  <!-- LOGO ROBOTNIK FRONTAL -->
+  <link name="rbtheron_base_logo_front">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
+    </geometry>
+    <material name="darkgrey">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+    </visual>
+  </link>
+
+  <joint name="rbtheron_base_logo_front_joint" type="fixed">
+    <origin xyz="0.345 0.0 0.0" rpy="0 0 ${-PI/2}" />
+    <parent link="rbtheron_base_link"/>
+    <child link="rbtheron_base_logo_front" />
+  </joint>
+
+  <!-- LOGO ROBOTNIK TRASERO -->
+  <link name="rbtheron_base_logo_rear">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+    <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
+    </geometry>
+    <material name="darkgrey">
+      <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+    </visual>
+  </link>
+
+  <joint name="rbtheron_base_logo_rear_joint" type="fixed">
+    <origin xyz="-0.345 0.0 0.0" rpy="0 0 ${PI/2}" />
+    <parent link="rbtheron_base_link"/>
+    <child link="rbtheron_base_logo_rear" />
+  </joint>
+
+   <!-- DOCKING CONTACT -->
+
+    <link name="rbtheron_base_docking_contact">
+    </link>
+
+    <joint name="rbtheron_base_docking_joint" type="fixed">
+      <origin xyz="0.35 0 0.09" rpy="0 0 0" />
+      <parent link="rbtheron_base_link"/>
+      <child link="rbtheron_base_docking_contact" />
+    </joint>
+
   </xacro:macro>
-
-
 </robot>

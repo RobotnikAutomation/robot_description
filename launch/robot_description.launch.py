@@ -86,7 +86,7 @@ def generate_launch_description():
     arg = ExtendedArgument(
         name='controllers',
         description='controllers parameters yaml file',
-        default_value=[FindPackageShare('robotnik_controller'), '/config/controller_example_params.yaml'],
+        default_value=[FindPackageShare('robotnik_controller'), '/config/', robot, '_controller_example_params.yaml'],
         use_env=True,
         environment='ROBOT',
     )
@@ -115,7 +115,7 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
-            #   'frame_prefix': [params['robot_id'], '_'],
+            #   'frame_prefix': [params['robot_id'], '/'],
             }
         ],
     ))

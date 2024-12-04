@@ -21,6 +21,8 @@
 	<!-- Import Elevator -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
 
+    <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbtheron_control.urdf.xacro"/>
+
 	<!-- ***************** -->
 	<!-- Global parameters -->
 	<!-- ***************** -->
@@ -37,75 +39,29 @@
 	<xacro:property name="elevator_y" value="0.0" />
 	<xacro:property name="elevator_z" value="0.2238" />
 
-	<xacro:arg name="robot_id" default="rbtheron"/>
-	<xacro:arg name="ros_planar_move_plugin" default="false"/>
-    <xacro:arg name="ros_planar_move_plugin_force_based" default="false"/>
-	<xacro:arg name="kinematics" default="omni"/>
-	<xacro:arg name="gpu" default="false"/>
-	<xacro:arg name="gps_latitude" default="0"/>
-	<xacro:arg name="gps_longitude" default="0"/>
-	<xacro:arg name="has_elevator" default="false"/>
-	<xacro:arg name="use_sim" default="false"/>
-
-	<!-- Wheel parameters -->
-	<xacro:property name="wheel_offset_x" value="0" />
-	<xacro:property name="wheel_offset_y" value="0.2516" />
-	<xacro:property name="wheel_offset_z" value="0.0" />
-	<!-- castor -->
-	<xacro:property name="castor_offset_x" value="0.235" />
-	<xacro:property name="castor_offset_y" value="0.1825" />
-	<xacro:property name="castor_offset_z" value="0.0448" />
-	<!-- omni -->
-	<xacro:property name="omni_wheel_offset_x" value="0.2175" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
-	<xacro:property name="omni_wheel_offset_y" value="0.204" />
-	<xacro:property name="omni_wheel_offset_z" value="0.0" />
-
+    <xacro:arg name="use_gazebo" default="true" />
+    <xacro:arg name="has_elevator" default="false" />
+    <xacro:arg name="controllers" default="" />
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 
-	<xacro:rbtheron robot_id="$(arg robot_id)" publish_bf="true" hq="true" kinematics="$(arg kinematics)"/>
+	<xacro:rbtheron hq="${hq}"/>
 
 	<!-- ELEVATOR_PLATFORM -->
 	<xacro:if value="$(arg has_elevator)">
-		<xacro:elevator_platform robot_id="$(arg robot_id)_elevator" parent="$(arg robot_id)_base_link" hq="${hq}">
+		<xacro:elevator_platform robot_id="rbtheron_elevator" parent="rbtheron_base_link" hq="${hq}">
 			<origin xyz="${elevator_x} -${elevator_y} ${elevator_z}" rpy="1.5708 0 1.5708"/>
 		</xacro:elevator_platform>
 	</xacro:if>
 
 	<!-- SENSORS -->
-  <!-- TODO: Moved 0.01 in x, otherwise the camera is still inside the robot -->
-	<!-- <xacro:sensor_orbbec_astra robot_id="$(arg prefix)front_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="front_rgbd_camera">
-		<origin xyz="0.3305 0.0 0.1748" rpy="0 0 0"/>
-	</xacro:sensor_orbbec_astra> -->
 
-	<!-- <xacro:sensor_intel_realsense_d435 frame_robot_id="$(arg prefix)front_rgbd_camera_" parent="$(arg prefix)base_link" topic_robot_id="front_rgbd_camera">
-		<origin xyz="0.3045 0.0 0.1898" rpy="0 0 0"/>
-	</xacro:sensor_intel_realsense_d435> -->
-
-	<!-- xacro:sensor_intel_d435 robot_id="$(arg prefix)rear_rgbd_camera" parent="$(arg prefix)base_link" prefix_topic="rear_rgbd_camera">
-		<origin xyz="-0.3045 0.0 0.1158" rpy="0 0 3.1416"/>
-	</xacro:sensor_intel_d435>
-
-	<xacro:sensor_imu_hector robot_id="$(arg prefix)imu" parent="$(arg prefix)base_link">
+	<xacro:sensor_vectornav prefix="rbtheron_" parent="rbtheron_base_link" topic="imu/data">
 		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
-	</xacro:sensor_imu_hector -->
+    </xacro:sensor_vectornav>
 
-	<!-- <xacro:sensor_sick_nanoscan3 frame_robot_id="$(arg prefix)front_laser_" parent="$(arg prefix)base_link" topic_robot_id="front_laser">
-		<origin xyz="0.2675 -0.215 0.1613" rpy="0 -3.1416 2.3562"/>
-	</xacro:sensor_sick_nanoscan3>
-	<xacro:sensor_sick_nanoscan3 frame_robot_id="$(arg prefix)rear_laser_" parent="$(arg prefix)base_link" topic_robot_id="rear_laser">
-		<origin xyz="-0.2675 0.215 0.1613" rpy="0 -3.1416 -0.7854"/>
-	</xacro:sensor_sick_nanoscan3> -->
-
-	<!--xacro:sensor_sick_nanoscan3 robot_id="$(arg prefix)front_laser" parent="$(arg prefix)base_link" prefix_topic="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
-		<origin xyz="0.250 0.0 0.1643" rpy="0 3.1416 3.1416"/>
-	</xacro:sensor_sick_nanoscan3-->
-
-	<!--xacro:sensor_sick_tim571 robot_id="$(arg prefix)front_laser" parent="$(arg prefix)base_link" prefix_topic="front_laser" min_angle="-2.0507619" max_angle="2.0507619">
-		<origin xyz="0.2675 -0.215 0.1613" rpy="0 -3.1416 2.3562"/>
-	</xacro:sensor_sick_tim571-->
-	<!--xacro:sensor_sick_tim571 robot_id="$(arg prefix)rear_laser" parent="$(arg prefix)base_link" prefix_topic="rear_laser" min_angle="-2.0507619" max_angle="2.0507619">
-		<origin xyz="-0.2675 0.215 0.1613" rpy="0 -3.1416 -0.7854"/>
-	</xacro:sensor_sick_tim571-->
+    <xacro:if value="$(arg use_gazebo)">
+        <xacro:rbtheron_gz_control controllers="$(arg controllers)"/>
+    </xacro:if>
 
 </robot>

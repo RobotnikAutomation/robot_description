@@ -4,35 +4,33 @@
 
   <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbvogui_base.gazebo.xacro" />
 
-  <xacro:macro name="rbvogui_base" params="robot_id publish_bf hq">
+  <xacro:macro name="rbvogui_base" params="hq">
 
     <!-- Robot mechanical and motor parameters -->
     <xacro:property name="PI" value="3.1415926535897931"/>
 
     <!-- BASE FOOTPRINT -->
-    <xacro:if value="${publish_bf}">
-      <link name="${robot_id}_base_footprint" />
+    <link name="rbvogui_base_footprint" />
 
-      <joint name="${robot_id}_base_footprint_joint" type="fixed">
-        <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
-        <!-- ${wheel_radius} property must be defined inside wheel description -->
-        <parent link="${robot_id}_base_footprint"/>
-        <child link="${robot_id}_base_link" />
-      </joint>
-    </xacro:if>
+    <joint name="rbvogui_base_footprint_joint" type="fixed">
+      <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="rbvogui_base_footprint"/>
+      <child link="rbvogui_base_link" />
+    </joint>
 
     <!-- BASE_LINK -->
-    <link name="${robot_id}_base_link"/>
+    <link name="rbvogui_base_link"/>
 
     <!-- Chassis -->
-    <joint name="${robot_id}_chassis_joint" type="fixed">
+    <joint name="rbvogui_chassis_joint" type="fixed">
       <origin xyz="-0.012 0 0.1775" rpy="0 0 0" /> <!-- Modificar para cada vogui -->
-      <parent link="${robot_id}_base_link"/>
-      <child link="${robot_id}_chassis_link" />
+      <parent link="rbvogui_base_link"/>
+      <child link="rbvogui_chassis_link" />
     </joint>
 
     <!-- Chassis -->
-    <link name="${robot_id}_chassis_link">
+    <link name="rbvogui_chassis_link">
       <inertial>
         <mass value="25.0" />
         <origin xyz="0 0 0.10" />
@@ -60,14 +58,14 @@
     </link>
 
     <!-- Battery -->
-    <joint name="${robot_id}_battery_joint" type="fixed">
+    <joint name="rbvogui_battery_joint" type="fixed">
       <origin xyz="0.02952 0 0" rpy="0 0 0 " />
-      <parent link="${robot_id}_chassis_link"/>
-      <child link="${robot_id}_battery_link" />
+      <parent link="rbvogui_chassis_link"/>
+      <child link="rbvogui_battery_link" />
     </joint>
 
     <!-- Battery -->
-    <link name="${robot_id}_battery_link">
+    <link name="rbvogui_battery_link">
       <inertial>
         <mass value="45.0" />
         <origin xyz="0 0 -0.05" />
@@ -100,14 +98,14 @@
     </link>
 
     <!-- Contactors -->
-    <joint name="${robot_id}_contactors_joint" type="fixed">
+    <joint name="rbvogui_contactors_joint" type="fixed">
       <origin xyz="0.5235 0 0.09265" rpy="0 0 0 " />
-      <parent link="${robot_id}_chassis_link"/>
-      <child link="${robot_id}_contactors_link" />
+      <parent link="rbvogui_chassis_link"/>
+      <child link="rbvogui_contactors_link" />
     </joint>
 
     <!-- Contactors -->
-    <link name="${robot_id}_contactors_link">
+    <link name="rbvogui_contactors_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <xacro:if value="${hq}">
@@ -128,14 +126,14 @@
 
 
     <!-- Logos -->
-    <joint name="${robot_id}_base_logos_joint" type="fixed">
+    <joint name="rbvogui_base_logos_joint" type="fixed">
       <origin xyz="0 0 -0.1775" rpy="0 0 0" />
-      <parent link="${robot_id}_chassis_link"/>
-      <child link="${robot_id}_base_logos_link" />
+      <parent link="rbvogui_chassis_link"/>
+      <child link="rbvogui_base_logos_link" />
     </joint>
 
     <!-- Logos -->
-    <link name="${robot_id}_base_logos_link">
+    <link name="rbvogui_base_logos_link">
       <visual>
         <origin xyz="-0.015 0 0" rpy="0 0 0 " />
         <xacro:if value="${hq}">
@@ -156,13 +154,13 @@
 
 
     <!-- Leds -->
-    <joint name="${robot_id}_leds_joint" type="fixed">
+    <joint name="rbvogui_leds_joint" type="fixed">
       <origin xyz="0 0 0.1025" rpy="0 0 0 " />
-      <parent link="${robot_id}_chassis_link"/>
-      <child link="${robot_id}_leds_link" />
+      <parent link="rbvogui_chassis_link"/>
+      <child link="rbvogui_leds_link" />
     </joint>
 
-    <link name="${robot_id}_leds_link">
+    <link name="rbvogui_leds_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0.0" />
           <geometry>
@@ -174,12 +172,12 @@
       </visual>
     </link>
 
-    <xacro:gazebo_color_base_link robot_id="${robot_id}"/>
-    <!--xacro:gazebo_color_chassis_link robot_id="${robot_id}_"/-->
-    <xacro:gazebo_color_battery_link robot_id="${robot_id}"/>
-    <xacro:gazebo_color_contactors_link robot_id="${robot_id}"/>
-    <xacro:gazebo_color_logo_link robot_id="${robot_id}"/>
-    <xacro:gazebo_color_leds_link robot_id="${robot_id}"/>
+    <xacro:gazebo_color_base_link robot_id="rbvogui"/>
+    <!--xacro:gazebo_color_chassis_link robot_id="rbvogui_"/-->
+    <xacro:gazebo_color_battery_link robot_id="rbvogui"/>
+    <xacro:gazebo_color_contactors_link robot_id="rbvogui"/>
+    <xacro:gazebo_color_logo_link robot_id="rbvogui"/>
+    <xacro:gazebo_color_leds_link robot_id="rbvogui"/>
 
   </xacro:macro>
 </robot>

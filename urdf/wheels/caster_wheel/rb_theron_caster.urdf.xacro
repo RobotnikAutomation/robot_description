@@ -13,9 +13,10 @@
 
   <!-- Caster wheel offset-->
   <xacro:property name="caster_wheel_offset_x" value="-0.033" />
-  <!-- x,y,z in translation from caster_support to the center of the caster wheel-->
   <xacro:property name="caster_wheel_offset_y" value="0.0" />
-  <xacro:property name="caster_wheel_offset_z" value="-0.071" />
+  <xacro:property name="caster_wheel_offset_z" value="-0.08" />
+
+  <xacro:arg name="use_sim" default="true" />
 
   <xacro:macro name="cylinder_inertia" params="m r h">
     <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
@@ -25,108 +26,83 @@
 
   <xacro:macro name="caster" params="robot_id parent *origin hq use_sim">
 
-  <!--CASTER SUPPORT -->
-  <xacro:if value="${use_sim}">
-    <joint name="${robot_id}_joint_support" type="continuous">
-      <parent link="${parent}"/>
-      <child link="${robot_id}_support"/>
-      <xacro:insert_block name="origin" />
-      <axis xyz="0 0 1" rpy="0 ${M_PI} 0" />
-      <limit effort="100" velocity="100"/>
-      <!-- joint_properties damping="1.5" friction="1.5"/ -->
-      <dynamics damping="0" friction="0.01"/>
-    </joint>
-  </xacro:if>
-  <xacro:unless value="${use_sim}">
-    <joint name="${robot_id}_joint_support" type="fixed">
+    <!--CASTER SUPPORT -->
+    <xacro:if value="${use_sim}">
+      <joint name="${robot_id}_joint_support" type="continuous">
         <parent link="${parent}"/>
         <child link="${robot_id}_support"/>
         <xacro:insert_block name="origin" />
         <axis xyz="0 0 1" rpy="0 ${M_PI} 0" />
-        <!-- <limit effort="100" velocity="100"/> -->
-        <!-- joint_properties damping="1.5" friction="1.5"/ -->
-        <dynamics damping="0" friction="0.01"/>
+        <limit effort="100" velocity="100"/>
+        <dynamics damping="0.8" friction="0.01"/>
       </joint>
-  </xacro:unless>
-    <link name="${robot_id}_support">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-	       <mesh filename="package://robot_description/meshes/wheels/caster_wheel/caster_wheel.stl" />
-          </geometry>
-      </visual>
+    </xacro:if>
+    <xacro:unless value="${use_sim}">
+      <joint name="${robot_id}_joint_support" type="fixed">
+          <parent link="${parent}"/>
+          <child link="${robot_id}_support"/>
+          <xacro:insert_block name="origin" />
+          <axis xyz="0 0 1" rpy="0 ${M_PI} 0" />
+          <dynamics damping="0" friction="0.01"/>
+        </joint>
+    </xacro:unless>
+      <link name="${robot_id}_support">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+          <mesh filename="package://robot_description/meshes/wheels/caster_wheel/caster_wheel.stl" />
+            </geometry>
+        </visual>
 
-      <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-	       <mesh filename="package://robot_description/meshes/wheels/caster_wheel/caster_wheel.dae" />
-          </geometry>
-      </collision>
-      <inertial>
-        <mass value="${caster_support_mass}" />
-        <origin xyz="0 0 0" />
-        <xacro:cylinder_inertia  m="${caster_support_mass}" r="0.010" h="0.010" />  <!--Check these values -->
-      </inertial>
-    </link>
+        <inertial>
+          <mass value="${caster_support_mass}" />
+          <origin xyz="0 0 0" />
+          <xacro:cylinder_inertia  m="${caster_support_mass}" r="0.010" h="0.010" />  <!--Check these values -->
+        </inertial>
+      </link>
 
-  <!--CASTER WHEEL -->
-  <!-- xacro:caster_wheel robot_id="${robot_id}" parent="${robot_id}_support" hq="${hq}" -->
-  <xacro:caster_wheel robot_id="${robot_id}" parent="${robot_id}_support" hq="${hq}" use_sim="$(arg use_sim)">
-		<origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}" rpy="0 0 0"/>
-   </xacro:caster_wheel>
- </xacro:macro>
+    <!--CASTER WHEEL -->
+    <xacro:caster_wheel robot_id="${robot_id}" parent="${robot_id}_support" hq="${hq}" use_sim="$(arg use_sim)">
+    </xacro:caster_wheel>
+  </xacro:macro>
 
- <xacro:macro name="caster_wheel" params="robot_id parent *origin hq use_sim">
+ <xacro:macro name="caster_wheel" params="robot_id parent hq use_sim">
+
   <xacro:if value="${use_sim}">
     <joint name="${robot_id}_joint_wheel" type="continuous">
       <parent link="${parent}"/>
       <child link="${robot_id}_wheel"/>
-      <insert_block name="origin" />
+      <origin xyz="-0.033 0.0 -0.071" rpy="0 0 0"/>
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
-      <joint_properties damping="0.1" friction="0.1"/>
+      <joint_properties damping="0.2" friction="2.0"/>
    </joint>
   </xacro:if>
   <xacro:unless value="${use_sim}">
      <joint name="${robot_id}_joint_wheel" type="fixed">
        <parent link="${parent}"/>
        <child link="${robot_id}_wheel"/>
-       <insert_block name="origin" />
+      <origin xyz="-0.033 0.0 -0.07" rpy="0 0 0"/>
        <axis xyz="0 1 0" rpy="0 0 0" />
-       <!-- <limit effort="100" velocity="100"/> -->
        <joint_properties damping="0.1" friction="0.1"/>
     </joint>
   </xacro:unless>
     <link name="${robot_id}_wheel">
       <visual>
-        <!-- HIGH RESOLUTION WHEELS -->
-     <!-- xacro:if value="${hq}">
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-		<mesh filename="package://robot_description/meshes/wheels/mcq_prototype_caster_wheel.dae" />
-          </geometry>
-        </xacro:if -->
-       <!-- LOW RESOLUTION WHEELS -->
-       <!-- xacro:unless value="${hq}" -->
-          <origin xyz="0 0 0" rpy="0 0 0" />
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
           <geometry>
             <cylinder length="${caster_height}" radius="${caster_radius}" />
-            <!-- sphere radius="${caster_radius}"/ -->
           </geometry>
-        <!-- /xacro:unless -->
       </visual>
 
      <collision>
-	  <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
-	  <!-- origin xyz="0 0 0" rpy="0 0 0" / -->
-        <geometry>
-		  <!-- mesh filename="package://robot_description/meshes/wheels/mcq_prototype_caster_wheel.dae" / -->
-          <cylinder length="${caster_height}" radius="${caster_radius}" />
-          <!-- sphere radius="${caster_radius}"/ -->
-        </geometry>
-		<surface>
-          <bounce restitution_coefficient = "1"/>
-		</surface>
+        <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+            <geometry>
+              <cylinder length="${caster_height}" radius="${caster_radius}" />
+            </geometry>
+        <surface>
+              <bounce restitution_coefficient = "0.5"/>
+        </surface>
       </collision>
 
       <inertial>

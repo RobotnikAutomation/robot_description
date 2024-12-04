@@ -9,13 +9,15 @@
 	<!-- First we import the robot and all the sensors. All these elements are defined as macro:xacros -->
 
 	<!-- Import summit XL macro -->
-	<xacro:include filename="$(find robot_description)/robots/macros/rbsummit_xl_macro.xacro"/>
+	<xacro:include filename="$(find robot_description)/robots/macros/rbsummit_macro.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
 	<!-- Import antenna -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
+
+    <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbsummit_control.urdf.xacro"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -28,28 +30,19 @@
 	<!-- Flag to select the high or low quality model -->
 	<xacro:property name="hq" value="true" />
 
-	<xacro:arg name="robot_id" default="summit_xl"/>
-	<xacro:arg name="ros_planar_move_plugin" default="false"/>
-    <xacro:arg name="ros_planar_move_plugin_force_based" default="false"/>
-	<xacro:arg name="kinematics" default="skid"/>
 	<xacro:arg name="gpu" default="false"/>
 	<xacro:arg name="gps_latitude" default="0"/>
 	<xacro:arg name="gps_longitude" default="0"/>
 
-	<!-- Wheel parameters -->
-	<xacro:property name="wheel_offset_x" value="0.229" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
-	<xacro:property name="wheel_offset_y" value="0.235" />
-	<xacro:property name="wheel_offset_z" value="0.0" />
-
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
-   	<xacro:rbsummit_xl robot_id="$(arg robot_id)" publish_bf="true" hq="true" kinematics="$(arg kinematics)"/>
+   	<xacro:rbsummit hq="${hq}"/>
 
 	<!-- Custom Sensors -->
 
 	<!-- IMU -->
-	<!-- <xacro:sensor_imu prefix="$(arg prefix)imu" parent="$(arg prefix)base_link" topic="imu/data_raw">
+	<xacro:sensor_vectornav prefix="rbsummit_" parent="rbsummit_base_link" topic="imu/data">
 		<origin xyz="0.0385 0.132 0.158" rpy="0 0 0"/>
-	</xacro:sensor_imu> -->
+  </xacro:sensor_vectornav>
 	<!-- 3d laser -->
 	<!-- <xacro:sensor_rs_helios_16p prefix="$(arg prefix)top_3d_laser" parent="$(arg prefix)base_link" gpu="$(arg gpu)">
 		<origin xyz="-0.11808 0.0 0.38509" rpy="0 0 0"/>
@@ -72,5 +65,6 @@
 			<origin xyz="-0.22528 -0.095 0.23325" rpy="0 0 0"/>
 		</xacro:structure_mastil_teltonika> -->
 
+  <xacro:rbsummit_gz_control controllers="$(arg controllers)"/>
 
 </robot>

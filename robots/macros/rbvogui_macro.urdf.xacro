@@ -22,9 +22,8 @@
 
     <!-- Flag to select the high or low quality model -->
     <xacro:property name="hq" value="true" />
-    <xacro:property name="publish_bf" value="true" />
 
-    <xacro:macro name="rbvogui" params="robot_id publish_bf hq kinematics gpu">
+    <xacro:macro name="rbvogui" params="hq gpu">
 
         <!-- ***************   -->
         <!-- Robots Elements -->
@@ -32,44 +31,23 @@
 
         <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
-        <xacro:rbvogui_base robot_id="${robot_id}" publish_bf="${publish_bf}" hq="${hq}"/>
+        <xacro:rbvogui_base hq="${hq}"/>
 
-        <xacro:steering_wheel robot_id="${robot_id}_front_right_" parent="${robot_id}_base_link" reflect="false" hq="true">
+        <xacro:steering_wheel robot_id="rbvogui_front_right" parent="rbvogui_base_link" reflect="false" hq="true">
             <origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
         </xacro:steering_wheel>
 
-        <xacro:steering_wheel robot_id="${robot_id}_front_left_" parent="${robot_id}_base_link" reflect="true" hq="true">
+        <xacro:steering_wheel robot_id="rbvogui_front_left" parent="rbvogui_base_link" reflect="true" hq="true">
             <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
         </xacro:steering_wheel>
 
-        <xacro:if value="${kinematics == 'omni' or kinematics == 'swerve'}">
-            <xacro:steering_wheel robot_id="${robot_id}_back_left_" parent="${robot_id}_base_link" reflect="true" hq="true">
-                <origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:steering_wheel>
+        <xacro:steering_wheel robot_id="rbvogui_back_left" parent="rbvogui_base_link" reflect="true" hq="true">
+            <origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_wheel>
 
-            <xacro:steering_wheel robot_id="${robot_id}_back_right_" parent="${robot_id}_base_link" reflect="false" hq="true">
-                <origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:steering_wheel>
-        </xacro:if>
-
-        <xacro:if value="${kinematics == 'ackermann'}">
-
-            <!-- TODO CHANGE WHEN CONTROLLER IS BETTER ADAPTED -->
-            <!-- <xacro:fixed_wheel robot_id="${robot_id}back_left_" parent="${robot_id}base_link" reflect="true" hq="true">
-                <origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:fixed_wheel>
-
-            <xacro:fixed_wheel robot_id="${robot_id}back_right_" parent="${robot_id}base_link" reflect="false" hq="true">
-                <origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:fixed_wheel> -->
-            <xacro:steering_wheel robot_id="${robot_id}_back_left_" parent="${robot_id}_base_link" reflect="true" hq="true">
-                <origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:steering_wheel>
-
-            <xacro:steering_wheel robot_id="${robot_id}_back_right_" parent="${robot_id}_base_link" reflect="false" hq="true">
-                <origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-            </xacro:steering_wheel>
-        </xacro:if>
+        <xacro:steering_wheel robot_id="rbvogui_back_right" parent="rbvogui_base_link" reflect="false" hq="true">
+            <origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_wheel>
 
 
     </xacro:macro>

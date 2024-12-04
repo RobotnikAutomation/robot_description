@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-    <xacro:macro name="ros2_control" params="namespace robot_id controllers">
+    <xacro:macro name="ros2_control" params="controllers">
         <gazebo>
           <plugin name="ros_control" filename="libgazebo_ros2_control.so">
-            <namespace>${namespace}</namespace>
-            <robot_param>${robot_id}_description</robot_param>
-            <robot_param_node>${robot_id}_state_publisher</robot_param_node>
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
             <parameters>${controllers}</parameters>
           </plugin>
         </gazebo>
 
-        <xacro:macro name="ros2_joint" params="interface jmin jmax robot_id name">
-          <joint name="${robot_id}${name}">
+        <xacro:macro name="ros2_joint" params="interface jmin jmax name">
+          <joint name="${name}">
             <command_interface name="${interface}">
               <param name="min">${jmin}</param>
               <param name="max">${jmax}</param>
@@ -27,25 +26,22 @@
               <plugin>gazebo_ros2_control/GazeboSystem</plugin>
           </hardware>
 
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" robot_id="${robot_id}_" name="front_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" robot_id="${robot_id}_" name="front_right_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" robot_id="${robot_id}_" name="back_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" robot_id="${robot_id}_" name="back_right_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="rbkairos_front_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="rbkairos_front_right_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="rbkairos_back_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="rbkairos_back_right_wheel_joint"/>
 
         </ros2_control>
     </xacro:macro>
 
-    <xacro:macro name="ros_planar_move" params="namespace robot_id">
+    <xacro:macro name="ros_planar_move">
         <gazebo>
           <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
             <ros>
 
-              <!-- Add a namespace -->
-              <namespace>${namespace}</namespace>
-
               <!-- Remap the default topic -->
               <remapping>cmd_vel:=cmd_vel_limited</remapping>
-              <remapping>odom:=${robot_id}_odom</remapping>
+              <remapping>odom:=rbkairos_odom</remapping>
 
             </ros>
 
@@ -56,8 +52,8 @@
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
 
-            <odometry_frame>${robot_id}_odom</odometry_frame>
-            <robot_base_frame>${robot_id}_base_link</robot_base_frame>
+            <odometry_frame>rbkairos_odom</odometry_frame>
+            <robot_base_frame>rbkairos_base_link</robot_base_frame>
 
             <covariance_x>0.0001</covariance_x>
             <covariance_y>0.0001</covariance_y>

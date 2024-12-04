@@ -89,7 +89,6 @@
 
     <xacro:rubber_wheel robot_id="${robot_id}" parent="${robot_id}_base_wheel" reflect="${reflect}" hq="${hq}" rubber_wheel_radius="${wheel_radius}" rubber_wheel_width="${wheel_width}" rubber_wheel_mass="${wheel_mass}">
         <origin xyz="0 0 0" rpy="0 0 0"/>
-        <axis xyz="0 1 0" />
     </xacro:rubber_wheel>
   </xacro:macro>
 </robot>
