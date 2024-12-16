@@ -10,7 +10,7 @@
 	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
 	<!-- Import rbtheron macro -->
-	<xacro:include filename="$(find robot_description)/robots/macros/rbtheron_macro.xacro"/>
+	<xacro:include filename="$(find robot_description)/macros/rbtheron_macro.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -21,7 +21,8 @@
 	<!-- Import Elevator -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
 
-    <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbtheron_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/gazebo/classic/rbtheron_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/gazebo/ignition/rbtheron_control.urdf.xacro"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -39,9 +40,12 @@
 	<xacro:property name="elevator_y" value="0.0" />
 	<xacro:property name="elevator_z" value="0.2238" />
 
-    <xacro:arg name="use_gazebo" default="true" />
+    <xacro:arg name="use_gazebo_classic" default="false" />
+    <xacro:arg name="use_gazebo_ignition" default="false" />
+    <xacro:arg name="gpu" default="true" />
+  	<xacro:arg name="namespace" default="robot" />
+
     <xacro:arg name="has_elevator" default="false" />
-    <xacro:arg name="controllers" default="" />
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 
@@ -60,8 +64,12 @@
 		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
     </xacro:sensor_vectornav>
 
-    <xacro:if value="$(arg use_gazebo)">
-        <xacro:rbtheron_gz_control controllers="$(arg controllers)"/>
+    <xacro:if value="$(arg use_gazebo_classic)">
+        <xacro:rbtheron_gz_classic_control namespace="$(arg namespace)"/>
+    </xacro:if>
+
+    <xacro:if value="$(arg use_gazebo_ignition)">
+        <xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)"/>
     </xacro:if>
 
 </robot>

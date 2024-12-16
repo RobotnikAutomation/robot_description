@@ -5,7 +5,7 @@ find_package(ament_cmake REQUIRED)
 ament_package_xml()
 
 install(
-    DIRECTORY launch meshes urdf robots config
+    DIRECTORY launch meshes urdf robots gazebo macros
     DESTINATION share/${PROJECT_NAME})
 
 install(DIRECTORY launch

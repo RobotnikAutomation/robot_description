@@ -9,7 +9,7 @@
 	<!-- First we import the robot and all the sensors. All these elements are defined as macro:xacros -->
 
 	<!-- Import summit XL macro -->
-	<xacro:include filename="$(find robot_description)/robots/macros/rbsummit_macro.xacro"/>
+	<xacro:include filename="$(find robot_description)/macros/rbsummit_macro.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -17,7 +17,8 @@
 	<!-- Import antenna -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
 
-    <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbsummit_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/gazebo/classic/rbsummit_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/gazebo/ignition/rbsummit_control.urdf.xacro"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -30,7 +31,12 @@
 	<!-- Flag to select the high or low quality model -->
 	<xacro:property name="hq" value="true" />
 
-	<xacro:arg name="gpu" default="false"/>
+    <!-- Launch Arguments -->
+    <xacro:arg name="use_gazebo_classic" default="false" />
+    <xacro:arg name="use_gazebo_ignition" default="false" />
+    <xacro:arg name="gpu" default="true" />
+  	<xacro:arg name="namespace" default="robot" />
+
 	<xacro:arg name="gps_latitude" default="0"/>
 	<xacro:arg name="gps_longitude" default="0"/>
 
@@ -65,6 +71,12 @@
 			<origin xyz="-0.22528 -0.095 0.23325" rpy="0 0 0"/>
 		</xacro:structure_mastil_teltonika> -->
 
-  <xacro:rbsummit_gz_control controllers="$(arg controllers)"/>
+    <xacro:if value="$(arg use_gazebo_classic)">
+        <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)"/>
+    </xacro:if>
+
+    <xacro:if value="$(arg use_gazebo_ignition)">
+        <xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)"/>
+    </xacro:if>
 
 </robot>

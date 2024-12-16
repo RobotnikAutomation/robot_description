@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-    <xacro:macro name="rbsummit_gz_control" params="controllers">
+    <xacro:macro name="rbsummit_gz_ignition_control" params="namespace">
         <gazebo>
-          <plugin name="ros_control" filename="libgazebo_ros2_control.so">
+          <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>${controllers}</parameters>
+            <parameters>$(find robotnik_controller)/config/rbsummit_controller_example_params.yaml</parameters>
+            <ros>
+                <namespace>/${namespace}</namespace>
+            </ros>
           </plugin>
         </gazebo>
 
@@ -23,7 +26,7 @@
 
         <ros2_control name="GazeboSystem" type="system">
           <hardware>
-              <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
           </hardware>
 
           <xacro:ros2_joint interface="velocity" jmin="-30" jmax="30" name="rbsummit_front_left_wheel_joint"/>

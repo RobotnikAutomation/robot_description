@@ -36,15 +36,6 @@ def generate_launch_description():
     add_to_launcher = AddArgumentParser(ld)
 
     arg = ExtendedArgument(
-        name='robot_id',
-        description='Robot ID',
-        default_value='robot',
-        use_env=True,
-        environment='ROBOT_ID',
-    )
-    add_to_launcher.add_arg(arg)
-
-    arg = ExtendedArgument(
         name='namespace',
         description='Namespace',
         default_value='robot',
@@ -64,7 +55,7 @@ def generate_launch_description():
     robot = LaunchConfiguration('robot')
 
     arg = ExtendedArgument(
-        name='model',
+        name='robot_model',
         description='Robot subvariation from robot basic (rbvogui_6w, rbkairos_ur5e)',
         default_value=robot,
         use_env=True,
@@ -72,23 +63,39 @@ def generate_launch_description():
     )
     add_to_launcher.add_arg(arg)
 
-    model = LaunchConfiguration('model')
+    robot_model = LaunchConfiguration('robot_model')
 
     arg = ExtendedArgument(
         name='robot_xacro_path',
         description='Path to the xacro file',
-        default_value=[FindPackageShare('robot_description'), '/robots/', robot, '/', model, '.urdf.xacro'],
+        default_value=[FindPackageShare('robot_description'), '/robots/', robot, '/', robot_model, '.urdf.xacro'],
         use_env=True,
         environment='ROBOT_XACRO_PATH',
     )
     add_to_launcher.add_arg(arg)
-    
+
     arg = ExtendedArgument(
-        name='controllers',
-        description='controllers parameters yaml file',
-        default_value=[FindPackageShare('robotnik_controller'), '/config/', robot, '_controller_example_params.yaml'],
+        name='gpu',
+        description='Use gpu in sensors',
+        default_value="true",
+    )
+    add_to_launcher.add_arg(arg)
+
+    arg = ExtendedArgument(
+        name='use_gazebo_classic',
+        description='Use gazebo classic simulation',
+        default_value="false",
         use_env=True,
-        environment='ROBOT',
+        environment='GAZEBO_CLASSIC',
+    )
+    add_to_launcher.add_arg(arg)
+
+    arg = ExtendedArgument(
+        name='use_gazebo_ignition',
+        description='Use gazebo ignition simulation',
+        default_value="false",
+        use_env=True,
+        environment='GAZEBO_IGNITION',
     )
     add_to_launcher.add_arg(arg)
 
@@ -99,8 +106,10 @@ def generate_launch_description():
             FindExecutable(name="xacro"),
             " ",
             params['robot_xacro_path'],
-            " robot_id:=", params['robot_id'],
-            " controllers:=", params['controllers']
+            " gpu:=", params['gpu'],
+            " use_gazebo_classic:=", params['use_gazebo_classic'],
+            " use_gazebo_ignition:=", params['use_gazebo_ignition'],
+            " namespace:=", params["namespace"]
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
@@ -115,7 +124,6 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
-            #   'frame_prefix': [params['robot_id'], '/'],
             }
         ],
     ))
