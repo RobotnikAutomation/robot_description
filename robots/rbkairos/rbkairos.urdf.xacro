@@ -6,10 +6,9 @@
   <!-- ***************** -->
 
   <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <xacro:arg name="controllers" default="$(find robot_gazebo)/config/rbkairos_control_gazebo.yaml"/>
 
   <xacro:include filename="$(find robot_description)/macros/rbkairos_macro.urdf.xacro" />
-  <xacro:include filename="$(find robot_description)/gazebo/classic/rbkairos_control.urdf.xacro"/>
-  <xacro:include filename="$(find robot_description)/gazebo/ignition/rbkairos_control.urdf.xacro"/>
 
   <!-- Import all available sensors -->
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -43,16 +42,9 @@
   <xacro:property name="gps_offset_y" value="-0.167"/>
   <xacro:property name="gps_offset_z" value="0.302"/>
 
-  <!-- Launch Arguments -->
-  <xacro:arg name="use_gazebo_classic" default="false" />
-  <xacro:arg name="use_gazebo_ignition" default="false" />
-  <xacro:arg name="gpu" default="true" />
-  <xacro:arg name="namespace" default="robot" />
-
   <xacro:rbkairos/>
 
-  <xacro:include filename="$(find robot_description)/gazebo/classic/rbkairos_control.urdf.xacro" />
-  <xacro:include filename="$(find robot_description)/gazebo/ignition/rbkairos_control.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbkairos_control.urdf.xacro" />
 
   <!-- IMU -->
 	<xacro:sensor_vectornav prefix="rbkairos_" parent="rbkairos_base_link" topic="imu/data">
@@ -85,14 +77,7 @@
     <origin xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}" rpy="0 0 0"/>
   </xacro:sensor_gps-->
 
-  <xacro:if value="$(arg use_gazebo_classic)">
-      <xacro:rbkairos_gz_classic_control namespace="$(arg namespace)"/>
-  </xacro:if>
-
-  <xacro:if value="$(arg use_gazebo_ignition)">
-      <xacro:rbkairos_gz_ignition_control namespace="$(arg namespace)"/>
-  </xacro:if>
-
+  <xacro:ros2_control controllers="$(arg controllers)"/>
   <xacro:ros_planar_move/>
 
 

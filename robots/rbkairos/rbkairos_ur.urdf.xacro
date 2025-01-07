@@ -8,7 +8,7 @@
   <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
   <xacro:arg name="controllers" default="$(find robot_gazebo)/config/rbkairos_control_gazebo.yaml"/>
 
-  <xacro:include filename="$(find robot_description)/robots/macros/rbkairos_macro.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/macros/rbkairos_macro.urdf.xacro" />
 
   <!-- Import UR arm -->
   <!-- <xacro:include filename="$(find ur_description)/urdf/ur.urdf.xacro" /> -->
