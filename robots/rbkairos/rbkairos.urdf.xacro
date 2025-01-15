@@ -6,7 +6,6 @@
   <!-- ***************** -->
 
   <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
-  <xacro:arg name="controllers" default="$(find robot_gazebo)/config/rbkairos_control_gazebo.yaml"/>
 
   <xacro:include filename="$(find robot_description)/macros/rbkairos_macro.urdf.xacro" />
 
@@ -44,7 +43,6 @@
 
   <xacro:rbkairos/>
 
-  <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbkairos_control.urdf.xacro" />
 
   <!-- IMU -->
 	<xacro:sensor_vectornav prefix="rbkairos_" parent="rbkairos_base_link" topic="imu/data">
@@ -76,9 +74,6 @@
   <!--xacro:sensor_gps prefix="$(arg prefix)gps" parent="$(arg prefix)base_link">
     <origin xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}" rpy="0 0 0"/>
   </xacro:sensor_gps-->
-
-  <xacro:ros2_control controllers="$(arg controllers)"/>
-  <xacro:ros_planar_move/>
 
 
 </robot>

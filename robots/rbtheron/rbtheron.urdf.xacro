@@ -21,8 +21,6 @@
 	<!-- Import Elevator -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
 
-    <xacro:include filename="$(find robot_description)/gazebo/classic/rbtheron_control.urdf.xacro"/>
-    <xacro:include filename="$(find robot_description)/gazebo/ignition/rbtheron_control.urdf.xacro"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -40,8 +38,6 @@
 	<xacro:property name="elevator_y" value="0.0" />
 	<xacro:property name="elevator_z" value="0.2238" />
 
-    <xacro:arg name="use_gazebo_classic" default="false" />
-    <xacro:arg name="use_gazebo_ignition" default="false" />
     <xacro:arg name="gpu" default="true" />
   	<xacro:arg name="namespace" default="robot" />
 
@@ -63,13 +59,5 @@
 	<xacro:sensor_vectornav prefix="rbtheron_" parent="rbtheron_base_link" topic="imu/data">
 		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
     </xacro:sensor_vectornav>
-
-    <xacro:if value="$(arg use_gazebo_classic)">
-        <xacro:rbtheron_gz_classic_control namespace="$(arg namespace)"/>
-    </xacro:if>
-
-    <xacro:if value="$(arg use_gazebo_ignition)">
-        <xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)"/>
-    </xacro:if>
 
 </robot>

@@ -2,7 +2,6 @@
 <robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
 
 
-  <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbsummit_xl_base.gazebo.xacro" />
   <xacro:include filename="$(find robot_description)/urdf/structures/inertia.urdf.xacro" />
 
   <xacro:macro name="rbsummit_base" params="hq">

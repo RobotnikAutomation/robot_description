@@ -75,7 +75,7 @@
   </link>
 
   <joint name="rbtheron_base_logo_left_joint" type="fixed">
-    <origin xyz="0.0 0.28931 0.29062" rpy="0 0 0" />
+    <origin xyz="0.0 0.28931 0.19062" rpy="0 0 0" />
     <parent link="rbtheron_base_link"/>
     <child link="rbtheron_base_logo_left" />
   </joint>
@@ -94,7 +94,7 @@
   </link>
 
   <joint name="rbtheron_base_logo_right_joint" type="fixed">
-    <origin xyz="0.0 -0.28931 0.29062" rpy="0 0 ${PI}" />
+    <origin xyz="0.0 -0.28931 0.19062" rpy="0 0 ${PI}" />
     <parent link="rbtheron_base_link"/>
     <child link="rbtheron_base_logo_right" />
   </joint>

@@ -60,11 +60,6 @@
 
   <xacro:rbkairos/>
 
-  <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbkairos_control.urdf.xacro" />
-
-  <!-- UR arm -->
-  <!-- <xacro:ur tf_prefix="rbkairos" ur_type="${ur_type}"/> -->
-
   <!-- IMU -->
 	<xacro:sensor_vectornav prefix="rbkairos_" parent="rbkairos_base_link" topic="imu/data">
     <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
@@ -95,9 +90,6 @@
   <!--xacro:sensor_gps prefix="$(arg prefix)gps" parent="$(arg prefix)base_link">
     <origin xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}" rpy="0 0 0"/>
   </xacro:sensor_gps-->
-
-  <xacro:ros2_control controllers="$(arg controllers)"/>
-  <xacro:ros_planar_move/>
 
 
 </robot>

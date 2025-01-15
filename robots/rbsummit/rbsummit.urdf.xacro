@@ -13,12 +13,12 @@
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_sensors)/urdf/axis_m5013.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_sensors)/urdf/rslidar.urdf.xacro" />
 
 	<!-- Import antenna -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
-
-	<xacro:include filename="$(find robot_description)/gazebo/classic/rbsummit_control.urdf.xacro"/>
-	<xacro:include filename="$(find robot_description)/gazebo/ignition/rbsummit_control.urdf.xacro"/>
+	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/antena-combo-5G-teltonika.urdf.xacro" />
 
 	<!-- ***************** -->
 	<!-- Sensor parameters -->
@@ -28,17 +28,17 @@
 	<xacro:property name="imu_offset_y" value="0.132"/>
 	<xacro:property name="imu_offset_z" value="0.158"/>
 
-	<xacro:property name="top_laser_offset_x" value="-0.11808"/>
+	<xacro:property name="top_laser_offset_x" value="-0.01924"/>
 	<xacro:property name="top_laser_offset_y" value="0.0"/>
-	<xacro:property name="top_laser_offset_z" value="0.38509"/>
+	<xacro:property name="top_laser_offset_z" value="0.35642"/>
 
 	<xacro:property name="front_rgbd_camera_offset_x" value="0.324"/>
 	<xacro:property name="front_rgbd_camera_offset_y" value="0.012"/>
 	<xacro:property name="front_rgbd_camera_offset_z" value="0.172"/>
-
-	<xacro:property name="front_ptz_camera_offset_x" value="0.19"/>
+	<xacro:property name="front_ptz_camera_offset_x" value="0.22151"/>
 	<xacro:property name="front_ptz_camera_offset_y" value="0.0"/>
-	<xacro:property name="front_ptz_camera_offset_z" value="0.26"/>
+	<xacro:property name="front_ptz_camera_offset_z" value="0.24022"/>
+	<xacro:property name="front_ptz_camera_offset_t" value="-1.308996939"/>
 
 	<xacro:property name="gps_offset_x" value="-0.22528"/>
 	<xacro:property name="gps_offset_y" value="0.095"/>
@@ -46,14 +46,9 @@
 
 
 	<!-- Other elements -->
-	<!--
-	<xacro:property name="antenna_offset_x" value="-0.22528"/>
-	<xacro:property name="antenna_offset_y" value="-0.095"/>
-	<xacro:property name="antenna_offset_z" value="0.23325"/>
-	-->
-	<xacro:property name="antenna_offset_x" value="-0.25528"/>
+	<xacro:property name="antenna_offset_x" value="-0.18324"/>
 	<xacro:property name="antenna_offset_y" value="0.0"/>
-	<xacro:property name="antenna_offset_z" value="0.23325"/>
+	<xacro:property name="antenna_offset_z" value="0.27488"/>
 
 	<!-- ***************** -->
 	<!-- Global parameters -->
@@ -67,8 +62,6 @@
 	<xacro:property name="hq" value="true" />
 
 	<!-- Launch Arguments -->
-	<xacro:arg name="use_gazebo_classic" default="false" />
-	<xacro:arg name="use_gazebo_ignition" default="false" />
 	<xacro:arg name="gpu" default="true" />
 	<xacro:arg name="namespace" default="robot" />
 
@@ -92,7 +85,7 @@
 	</xacro:sensor_vectornav>
 
 	<!-- 3d laser -->
-	<xacro:sensor_robosense_helios
+	<xacro:sensor_robosense_rslidar_16
 		frame_prefix="rbsummit_top_3d_laser_"
 		parent="rbsummit_base_link"
 		gpu="$(arg gpu)"
@@ -101,51 +94,21 @@
 			xyz="${top_laser_offset_x} ${top_laser_offset_y} ${top_laser_offset_z}"
 			rpy="0 0 0"
 		/>
-	</xacro:sensor_robosense_helios>
+	</xacro:sensor_robosense_rslidar_16>
 
 	<!-- ptz camera -->
-	<!--
-	<xacro:sensor_axis
-		prefix="rbsummit_front_ptz_camera"
+	<xacro:sensor_axis_m5013
+		frame_prefix="rbsummit_front_ptz_camera_"
 		parent="rbsummit_base_link"
 	>
 		<origin
-			xyz="0.19 0 0.26"
-			rpy="0 ${15*PI/180} 0"
+			xyz="${front_ptz_camera_offset_x} ${front_ptz_camera_offset_y} ${front_ptz_camera_offset_z}"
+			rpy="0 ${front_ptz_camera_offset_t} 0"
 		/>
 
-	</xacro:sensor_axis>
-	-->
+	</xacro:sensor_axis_m5013>
 
-	<!-- RGBD -->
-	<xacro:sensor_intel_realsense_d435
-		frame_prefix="rbsummit_front_rgbd_camera_"
-		parent="rbsummit_base_link"
-		topic_prefix="front_rgbd_camera"
-	>
-		<origin
-			xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}"
-			rpy="0 0 0"
-		/>
-	</xacro:sensor_intel_realsense_d435>
-
-	<!-- GPS -->
-	<xacro:sensor_gps
-		frame_prefix="rbsummit_gps_"
-		parent="rbsummit_base_link"
-		update_rate="5"
-	>
-		<origin
-			xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}"
-			rpy="0 0 0"
-		/>
-	</xacro:sensor_gps>
-
-
-	<!-- Other Elements -->
-
-	<!-- Antenna -->
-	<xacro:structure_mastil_teltonika
+	<xacro:sensor_antena_combo_5G_teltonika
 		prefix="rbsummit_antenna"
 		parent="rbsummit_base_link"
 	>
@@ -153,14 +116,6 @@
 			xyz="${antenna_offset_x} ${antenna_offset_y} ${antenna_offset_z}"
 			rpy="0 0 0"
 		/>
-	</xacro:structure_mastil_teltonika>
-
-	<xacro:if value="$(arg use_gazebo_classic)">
-		<xacro:rbsummit_gz_classic_control namespace="$(arg namespace)"/>
-	</xacro:if>
-
-	<xacro:if value="$(arg use_gazebo_ignition)">
-		<xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)"/>
-	</xacro:if>
+	</xacro:sensor_antena_combo_5G_teltonika>
 
 </robot>
