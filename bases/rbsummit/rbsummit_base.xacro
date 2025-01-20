@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="summit_xl">
 
 	<!-- Import summit XL base elements -->
-	<xacro:include filename="$(find robot_description)/urdf/bases/rbsummit/rbsummit_base.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
 
 	<!-- Import summit XL wheels -->
 	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
@@ -23,7 +23,7 @@
 		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
 		<!-- Summit XL base -->
-		<xacro:rbsummit_base hq="${hq}" />
+		<xacro:rbsummit_body hq="${hq}" />
 
 		<!-- Summit XL wheels -->
 		<xacro:rubber_wheel robot_id="rbsummit_front_right" parent="rbsummit_base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_right}">

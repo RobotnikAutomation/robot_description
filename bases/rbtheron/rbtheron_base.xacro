@@ -4,7 +4,7 @@
 
 
 	<!-- Import differential base elements -->
-	<xacro:include filename="$(find robot_description)/urdf/bases/rbtheron/rbtheron_base.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/bodies/rbtheron/rbtheron_body.urdf.xacro" />
 
 	<!-- Import wheels -->
 	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
@@ -31,7 +31,7 @@
 		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
 		<!-- RB_THERON base -->
-		<xacro:rbtheron_base hq="${hq}" />
+		<xacro:rbtheron_body hq="${hq}" />
 
 		<!-- WHEELS -->
 		<xacro:rubber_wheel robot_id="rbtheron_right" parent="rbtheron_base_link" hq="${hq}">

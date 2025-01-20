@@ -4,7 +4,7 @@
 
   <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbvogui_base.gazebo.xacro" />
 
-  <xacro:macro name="rbvogui_base" params="hq">
+  <xacro:macro name="rbvogui_body" params="hq">
 
     <!-- Robot mechanical and motor parameters -->
     <xacro:property name="PI" value="3.1415926535897931"/>

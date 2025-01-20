@@ -8,7 +8,7 @@
     <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
     <!-- Import rbvogui base elements-->
-    <xacro:include filename="$(find robot_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/bodies/rbvogui/rbvogui_body.urdf.xacro" />
 
     <!-- Import rbvogui wheels -->
     <xacro:include filename="$(find robot_description)/urdf/wheels/steering_wheel/steering_wheel.urdf.xacro" />
@@ -31,7 +31,7 @@
 
         <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
-        <xacro:rbvogui_base hq="${hq}"/>
+        <xacro:rbvogui_body hq="${hq}"/>
 
         <xacro:steering_wheel robot_id="rbvogui_front_right" parent="rbvogui_base_link" reflect="false" hq="true">
             <origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
