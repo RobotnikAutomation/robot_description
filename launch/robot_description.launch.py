@@ -75,9 +75,9 @@ def generate_launch_description():
     add_to_launcher.add_arg(arg)
 
     arg = ExtendedArgument(
-        name='gpu',
-        description='Use gpu in sensors',
-        default_value="true",
+        name='gazebo_classic',
+        description='Simulate robot in Gazebo Classic',
+        default_value="false",
     )
     add_to_launcher.add_arg(arg)
 
@@ -88,8 +88,9 @@ def generate_launch_description():
             FindExecutable(name="xacro"),
             " ",
             params['robot_xacro_path'],
-            " gpu:=", params['gpu'],
-            " namespace:=", params["namespace"]
+            " namespace:=",params["namespace"],
+            " prefix:=robot_",
+            " gazebo_classic:=", params["gazebo_classic"],
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)

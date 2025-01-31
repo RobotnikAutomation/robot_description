@@ -10,11 +10,10 @@
 
 	<!-- Import summit XL macro -->
 	<xacro:include filename="$(find robot_description)/bases/rbsummit/rbsummit_base.xacro"/>
+	<xacro:include filename="$(find robot_description)/gazebo/classic/rbsummit/rbsummit_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-	<!-- <xacro:include filename="$(find robotnik_sensors)/urdf/axis_m5013.urdf.xacro" /> -->
-	<!-- <xacro:include filename="$(find robotnik_sensors)/urdf/rslidar.urdf.xacro" /> -->
 
 	<!-- Import antenna -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
@@ -24,6 +23,11 @@
 	<!-- Sensor parameters -->
 	<!-- ***************** -->
 	<!-- x,y,z in translation from base_link to the center of the sensor -->
+
+	<xacro:arg name="namespace" default="robot"/>
+	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="gazebo_classic" default="false"/>
+
 	<xacro:property name="imu_offset_x" value="0.0385"/>
 	<xacro:property name="imu_offset_y" value="0.132"/>
 	<xacro:property name="imu_offset_z" value="0.158"/>
@@ -63,20 +67,19 @@
 
 	<!-- Launch Arguments -->
 	<xacro:arg name="gpu" default="true" />
-	<xacro:arg name="namespace" default="robot" />
 
 	<xacro:arg name="gps_latitude" default="0"/>
 	<xacro:arg name="gps_longitude" default="0"/>
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
-	<xacro:rbsummit hq="${hq}"/>
+	<xacro:rbsummit prefix="$(arg prefix)" hq="${hq}"/>
 
 	<!-- Custom Sensors -->
 
 	<!-- IMU -->
 	<xacro:sensor_vectornav
-		frame_prefix="rbsummit_imu_"
-		parent="rbsummit_base_link"
+		frame_prefix="$(arg prefix)imu_"
+		parent="$(arg prefix)base_link"
 	>
 		<origin
 			xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}"
@@ -117,5 +120,10 @@
 			rpy="0 0 0"
 		/>
 	</xacro:sensor_antena_combo_5G_teltonika> -->
+
+	<!-- Controllers -->
+  <xacro:if value="$(arg gazebo_classic)">
+    <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+  </xacro:if>
 
 </robot>

@@ -11,12 +11,10 @@
 
 	<!-- Import rbtheron macro -->
 	<xacro:include filename="$(find robot_description)/bases/rbtheron/rbtheron_base.xacro"/>
+	<xacro:include filename="$(find robot_description)/gazebo/classic/rbtheron/rbtheron_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-
-	<!-- Import Gazebo Stuff -->
-	<xacro:include filename="$(find robot_description)/urdf/structures/common.gazebo.xacro" />
 
 	<!-- Import Elevator -->
 	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
@@ -38,14 +36,15 @@
 	<xacro:property name="elevator_y" value="0.0" />
 	<xacro:property name="elevator_z" value="0.2238" />
 
-    <xacro:arg name="gpu" default="true" />
-  	<xacro:arg name="namespace" default="robot" />
+	<xacro:arg name="namespace" default="robot"/>
+	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="gazebo_classic" default="false"/>
 
-    <xacro:arg name="has_elevator" default="false" />
+    <!-- <xacro:arg name="has_elevator" default="false" /> -->
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 
-	<xacro:rbtheron hq="${hq}"/>
+	<xacro:rbtheron prefix="$(arg prefix)" hq="${hq}"/>
 
   	<!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
 
@@ -62,5 +61,10 @@
 	<!-- <xacro:sensor_vectornav prefix="rbtheron_" parent="rbtheron_base_link" topic="imu/data">
 		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
     </xacro:sensor_vectornav> -->
+
+	<!-- Controllers -->
+	<xacro:if value="$(arg gazebo_classic)">
+		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+	</xacro:if>
 
 </robot>

@@ -22,7 +22,7 @@
 	<xacro:property name="castor_offset_z" value="0.0448" />
 
 
-	<xacro:macro name="rbtheron" params="hq">
+	<xacro:macro name="rbtheron" params="prefix:=robot_ hq:=true">
 
 		<!-- *************** -->
 		<!-- Robots Elements -->
@@ -31,27 +31,27 @@
 		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
 
 		<!-- RB_THERON base -->
-		<xacro:rbtheron_body hq="${hq}" />
+		<xacro:rbtheron_body prefix="${prefix}" hq="${hq}" />
 
 		<!-- WHEELS -->
-		<xacro:rubber_wheel robot_id="rbtheron_right" parent="rbtheron_base_link" hq="${hq}">
+		<xacro:rubber_wheel robot_id="${prefix}right" parent="${prefix}base_link" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
-		<xacro:rubber_wheel robot_id="rbtheron_left" parent="rbtheron_base_link" hq="${hq}">
+		<xacro:rubber_wheel robot_id="${prefix}left" parent="${prefix}base_link" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 
 		<!-- Castor wheels-->
-		<xacro:caster robot_id="rbtheron_front_left" parent="rbtheron_base_link" hq="${hq}" use_sim="true">
+		<xacro:caster robot_id="${prefix}front_left" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="rbtheron_front_right" parent="rbtheron_base_link" hq="${hq}" use_sim="true">
+		<xacro:caster robot_id="${prefix}front_right" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="rbtheron_rear_left" parent="rbtheron_base_link" hq="${hq}" use_sim="true">
+		<xacro:caster robot_id="${prefix}rear_left" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${-castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="rbtheron_rear_right" parent="rbtheron_base_link" hq="${hq}" use_sim="true">
+		<xacro:caster robot_id="${prefix}rear_right" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${-castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
 

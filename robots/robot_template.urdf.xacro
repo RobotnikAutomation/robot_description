@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ***************** -->
+  <!-- Imported elements -->
+  <!-- ***************** -->
+
+  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+  <xacro:include filename="$(find robot_description)/bases/rbvogui/rbvogui_base.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- Args -->
+
+  <xacro:arg name="robot" default="rbvogui"/>
+  <xacro:arg name="namespace" default="robot"/>
+  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="has_arm" default="false"/>
+  <xacro:arg name="gazebo_classic" default="false"/>
+
+  <!-- Properties -->
+
+  <xacro:property name="hq" value="true"/>
+
+  <xacro:property name="front_laser_offset_x" value="0.2865"/>
+  <xacro:property name="front_laser_offset_y" value="-0.20894"/>
+  <xacro:property name="front_laser_offset_z" value="0.2973"/>
+
+  <!-- Robot -->
+  <xacro:rbvogui prefix="$(arg prefix)" hq="${hq}"/>
+
+  <!-- Sensors -->
+
+  <!-- <xacro:sensor_sick_s300 prefix="rbkairos_front_laser" parent="rbkairos_base_link" prefix_topic="front_laser" gpu="true"> -->
+    <!-- <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${3/4*PI}" /> -->
+  <!-- </xacro:sensor_sick_s300> -->
+
+  <!-- Arm -->
+
+  <xacro:if value="$(arg has_arm)">
+    <xacro:arg name="ur_type" default="ur5e"/>
+    <xacro:arg name="ur_name" default="$(arg ur_type)"/>
+    <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+    <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+    <xacro:arg name="physical_params" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+    <xacro:arg name="visual_params" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="fake_sensor_commands" default="false" />
+    <xacro:arg name="sim_gazebo" default="true" />
+    <xacro:arg name="sim_ignition" default="false" />
+
+    <xacro:include filename="$(find robot_description)/urdf/arms/ur/ur.urdf.xacro"/>
+  </xacro:if>
+
+  <!-- Control -->
+  <xacro:include filename="$(find robot_description)/gazebo/classic/rbvogui/rbvogui_control.urdf.xacro" />
+
+  <!-- <xacro:if value="$(arg gazebo_classic)">
+    <xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+    <xacro:ros_planar_move_gazebo_classic/>
+  </xacro:if> -->
+
+</robot>

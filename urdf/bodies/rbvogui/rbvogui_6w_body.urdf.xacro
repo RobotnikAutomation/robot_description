@@ -2,10 +2,10 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
-  <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbvogui_base.gazebo.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/bodies/rbvogui/rbvogui_base.gazebo.xacro" />
   <xacro:include filename="$(find robot_description)/urdf/structures/rbvogui_chassis/rbvogui_inertia.urdf.xacro" />
 
-  <xacro:macro name="rbvogui_body" params="prefix publish_bf hq">
+  <xacro:macro name="rbvogui_body" params="prefix:=robot_ hq:=true">
 
     <!-- Robot mechanical and motor parameters -->
     <xacro:property name="PI" value="3.1415926535897931"/>
@@ -13,23 +13,14 @@
 
 
     <!-- BASE FOOTPRINT -->
-    <xacro:if value="${publish_bf}">
-      <link name="${prefix}base_footprint">
-        <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <box size="0.001 0.001 0.001" />
-          </geometry>
-        </visual>
-      </link>
+      <link name="${prefix}base_footprint"/>
 
-      <joint name="${prefix}base_footprint_joint" type="fixed">
-        <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
-        <!-- ${wheel_radius} property must be defined inside wheel description -->
-        <parent link="${prefix}base_footprint"/>
-        <child link="${prefix}base_link" />
-      </joint>
-    </xacro:if>
+    <joint name="${prefix}base_footprint_joint" type="fixed">
+      <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_footprint"/>
+      <child link="${prefix}base_link" />
+    </joint>
 
 
     <!-- BASE_LINK -->

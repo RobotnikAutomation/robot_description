@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
 
-
   <xacro:include filename="$(find robot_description)/urdf/structures/inertia.urdf.xacro" />
 
-  <xacro:macro name="rbsummit_body" params="hq">
+  <xacro:macro name="rbsummit_body" params="prefix:=robot_ hq:=true">
 
 	  <!-- Robot mechanical and motor parameters -->
 	  <xacro:property name="PI" value="3.1415926535897931"/>
 	  <xacro:property name="wheel_radius" value="0.11"/>
 
 	  <!-- BASE FOOTPRINT -->
-	<link name="rbsummit_base_footprint">
+	<link name="${prefix}base_footprint">
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
@@ -20,14 +19,14 @@
 		</visual>
 	</link>
 
-	<joint name="rbsummit_base_footprint_joint" type="fixed">
+	<joint name="${prefix}base_footprint_joint" type="fixed">
 		<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" /> <!-- ${wheel_radius} property must be defined inside wheel description -->
-		<parent link="rbsummit_base_footprint"/>
-		<child link="rbsummit_base_link" />
+		<parent link="${prefix}base_footprint"/>
+		<child link="${prefix}base_link" />
 	</joint>
 
 	  <!-- BASE_LINK -->
-	  <link name="rbsummit_base_link">
+	  <link name="${prefix}base_link">
 		<inertial>
 		  <mass value="25.0" />
 		  <origin xyz="0 0 0" />
@@ -58,14 +57,14 @@
 	  </link>
 
 		<!-- DOCKING CONTACTS -->
-		<joint name="rbsummit_base_docking_joint" type="fixed">
+		<joint name="${prefix}base_docking_joint" type="fixed">
 			<origin xyz="0.284 0.012 0.068" rpy="0 0 0 " />
-			<parent link="rbsummit_base_link"/>
-			<child link="rbsummit_base_docking_contact_link" />
+			<parent link="${prefix}base_link"/>
+			<child link="${prefix}base_docking_contact_link" />
 		</joint>
 
 		<!-- DOCKING LINK -->
-		<link name="rbsummit_base_docking_contact_link" />
+		<link name="${prefix}base_docking_contact_link" />
 
   </xacro:macro>
 </robot>

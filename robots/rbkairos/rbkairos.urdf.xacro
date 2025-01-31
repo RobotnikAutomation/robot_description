@@ -5,12 +5,17 @@
   <!-- Imported elements -->
   <!-- ***************** -->
 
-  <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
   <xacro:include filename="$(find robot_description)/bases/rbkairos/rbkairos_base.urdf.xacro" />
-
-  <!-- Import all available sensors -->
+  <xacro:include filename="$(find robot_description)/gazebo/classic/rbkairos/rbkairos_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- Properties and Arguments -->
+
+  <xacro:arg name="namespace" default="robot"/>
+  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="gazebo_classic" default="false"/>
 
   <xacro:property name="front_laser_offset_x" value="0.2865"/>
   <xacro:property name="front_laser_offset_y" value="-0.20894"/>
@@ -24,7 +29,7 @@
   <xacro:property name="imu_offset_y" value="-0.129"/>
   <xacro:property name="imu_offset_z" value="0.212"/>
 
-  <xacro:rbkairos/>
+  <xacro:rbkairos prefix="$(arg prefix)"/>
 
   <!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
 
@@ -41,5 +46,10 @@
     <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${-1/4*PI}" />
   </xacro:sensor_sick_s300> -->
 
+  <!-- Controllers -->
+  <xacro:if value="$(arg gazebo_classic)">
+    <xacro:rbkairos_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+    <xacro:ros_planar_move_gazebo_classic/>
+  </xacro:if>
 
 </robot>

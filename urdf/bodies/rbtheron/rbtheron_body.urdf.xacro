@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
 <robot name="rb_theron_v4" xmlns:xacro="http://wiki.ros.org/xacro">
 
-
-  <xacro:include filename="$(find robot_description)/urdf/bases/gazebo/rbtheron_base.gazebo.xacro" />
-
-  <xacro:macro name="rbtheron_body" params="hq">
+  <xacro:macro name="rbtheron_body" params="prefix:=robot_ hq:=true">
 
   <!-- Robot mechanical and motor parameters -->
   <xacro:property name="PI" value="3.1415926535897931"/>
   <xacro:property name="wheel_radius" default="0.0762" />
 
 	<!-- BASE FOOTPRINT -->
-	<link name="rbtheron_base_footprint">
+	<link name="${prefix}base_footprint">
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
@@ -20,14 +17,14 @@
 		</visual>
 	</link>
 
-	<joint name="rbtheron_base_footprint_joint" type="fixed">
+	<joint name="${prefix}base_footprint_joint" type="fixed">
 		<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0" /> <!-- ${wheel_radius} property must be defined inside wheel description -->
-		<parent link="rbtheron_base_footprint"/>
-		<child link="rbtheron_base_link" />
+		<parent link="${prefix}base_footprint"/>
+		<child link="${prefix}base_link" />
 	</joint>
 
   <!-- BASE_LINK -->
-  <link name="rbtheron_base_link">
+  <link name="${prefix}base_link">
     <inertial>
       <mass value="45.0" />
       <origin xyz="0 0 0" />
@@ -57,12 +54,12 @@
     </collision>
   </link>
 
-  <gazebo reference="rbtheron_base_link">
+  <gazebo reference="${prefix}base_link">
     <material>Gazebo/Black</material>
   </gazebo>
 
   <!-- LOGO ROBOTNIK IZQUIERDO -->
-  <link name="rbtheron_base_logo_left">
+  <link name="${prefix}base_logo_left">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
@@ -74,14 +71,14 @@
     </visual>
   </link>
 
-  <joint name="rbtheron_base_logo_left_joint" type="fixed">
+  <joint name="${prefix}base_logo_left_joint" type="fixed">
     <origin xyz="0.0 0.28931 0.19062" rpy="0 0 0" />
-    <parent link="rbtheron_base_link"/>
-    <child link="rbtheron_base_logo_left" />
+    <parent link="${prefix}base_link"/>
+    <child link="${prefix}base_logo_left" />
   </joint>
 
   <!-- LOGO ROBOTNIK DERECHO -->
-  <link name="rbtheron_base_logo_right">
+  <link name="${prefix}base_logo_right">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
@@ -93,14 +90,14 @@
     </visual>
   </link>
 
-  <joint name="rbtheron_base_logo_right_joint" type="fixed">
+  <joint name="${prefix}base_logo_right_joint" type="fixed">
     <origin xyz="0.0 -0.28931 0.19062" rpy="0 0 ${PI}" />
-    <parent link="rbtheron_base_link"/>
-    <child link="rbtheron_base_logo_right" />
+    <parent link="${prefix}base_link"/>
+    <child link="${prefix}base_logo_right" />
   </joint>
 
   <!-- LOGO ROBOTNIK FRONTAL -->
-  <link name="rbtheron_base_logo_front">
+  <link name="${prefix}base_logo_front">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
@@ -112,14 +109,14 @@
     </visual>
   </link>
 
-  <joint name="rbtheron_base_logo_front_joint" type="fixed">
+  <joint name="${prefix}base_logo_front_joint" type="fixed">
     <origin xyz="0.345 0.0 0.0" rpy="0 0 ${-PI/2}" />
-    <parent link="rbtheron_base_link"/>
-    <child link="rbtheron_base_logo_front" />
+    <parent link="${prefix}base_link"/>
+    <child link="${prefix}base_logo_front" />
   </joint>
 
   <!-- LOGO ROBOTNIK TRASERO -->
-  <link name="rbtheron_base_logo_rear">
+  <link name="${prefix}base_logo_rear">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
@@ -131,21 +128,21 @@
     </visual>
   </link>
 
-  <joint name="rbtheron_base_logo_rear_joint" type="fixed">
+  <joint name="${prefix}base_logo_rear_joint" type="fixed">
     <origin xyz="-0.345 0.0 0.0" rpy="0 0 ${PI/2}" />
-    <parent link="rbtheron_base_link"/>
-    <child link="rbtheron_base_logo_rear" />
+    <parent link="${prefix}base_link"/>
+    <child link="${prefix}base_logo_rear" />
   </joint>
 
    <!-- DOCKING CONTACT -->
 
-    <link name="rbtheron_base_docking_contact">
+    <link name="${prefix}base_docking_contact">
     </link>
 
-    <joint name="rbtheron_base_docking_joint" type="fixed">
+    <joint name="${prefix}base_docking_joint" type="fixed">
       <origin xyz="0.35 0 0.09" rpy="0 0 0" />
-      <parent link="rbtheron_base_link"/>
-      <child link="rbtheron_base_docking_contact" />
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}base_docking_contact" />
     </joint>
 
   </xacro:macro>

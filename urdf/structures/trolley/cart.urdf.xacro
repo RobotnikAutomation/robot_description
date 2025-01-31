@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cart">
+
+  <xacro:include filename="$(find robot_description)/urdf/structures/trolley/cart_base.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/structures/trolley/cart_front_wheel.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/structures/trolley/cart_rear_wheel.urdf.xacro" />
+  <!-- <xacro:include filename="$(find rbvogui_description)/urdf/cart/markers.urdf.xacro" /> -->
+
+  <xacro:arg name="prefix" default="robot_" />
+  <xacro:arg name="connected" default="false" />
+  <xacro:arg name="namespace" default="robot" />
+
+  <!-- Transform from chassis to wheels -->
+  <xacro:property name="front_caster_wheel_x" value="0.620" />
+  <xacro:property name="front_caster_wheel_y" value="0.6045" />
+  <xacro:property name="front_caster_wheel_z" value="-0.11201" />
+
+  <xacro:property name="rear_wheel_x" value="-0.40883" />
+  <xacro:property name="rear_wheel_y" value="0.5895" />
+  <xacro:property name="rear_wheel_z" value="-0.075" />
+
+  <xacro:cart_base prefix="$(arg prefix)" connected="$(arg connected)" namespace="$(arg namespace)">
+  </xacro:cart_base>
+
+  <xacro:rear_wheel prefix="$(arg prefix)right_" parent="$(arg prefix)chassis">
+    <origin xyz="${rear_wheel_x} ${-rear_wheel_y} ${rear_wheel_z}" rpy="0.0 0.0 0.0"/>
+  </xacro:rear_wheel>
+
+  <xacro:rear_wheel prefix="$(arg prefix)left_" parent="$(arg prefix)chassis">
+    <origin xyz="${rear_wheel_x} ${rear_wheel_y} ${rear_wheel_z}" rpy="0.0 0.0 0.0"/>
+  </xacro:rear_wheel>
+
+  <xacro:front_wheel prefix="$(arg prefix)right_" parent="$(arg prefix)chassis">
+    <origin xyz="${front_caster_wheel_x} ${-front_caster_wheel_y} ${front_caster_wheel_z}" rpy="0.0 0.0 0.0"/>
+  </xacro:front_wheel>
+
+  <xacro:front_wheel prefix="$(arg prefix)left_" parent="$(arg prefix)chassis">
+    <origin xyz="${front_caster_wheel_x} ${front_caster_wheel_y} ${front_caster_wheel_z}" rpy="0.0 0.0 0.0"/>
+  </xacro:front_wheel>
+
+  <!-- <xacro:markers prefix="${prefix}"/> -->
+
+
+</robot>
