@@ -80,6 +80,15 @@ def generate_launch_description():
         default_value="false",
     )
     add_to_launcher.add_arg(arg)
+    
+    arg = ExtendedArgument(
+        name='frame_prefix',
+        description='prefix of each frame',
+        default_value='robot_',
+        use_env=True,
+        environment='FRAME_PREFIX',
+    )
+    add_to_launcher.add_arg(arg)
 
     params = add_to_launcher.process_arg()
 
@@ -89,7 +98,7 @@ def generate_launch_description():
             " ",
             params['robot_xacro_path'],
             " namespace:=",params["namespace"],
-            " prefix:=robot_",
+            " prefix:=",params["frame_prefix"],
             " gazebo_classic:=", params["gazebo_classic"],
         ]
     )
