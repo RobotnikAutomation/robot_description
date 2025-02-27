@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ***************** -->
+  <!-- Imported elements -->
+  <!-- ***************** -->
+
+  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+  <xacro:include filename="$(find robot_description)/bases/rbrobout/rbrobout_base.urdf.xacro" />
+  <!-- <xacro:include filename="$(find robot_description)/gazebo/classic/rbkairos/rbkairos_control.urdf.xacro" /> -->
+  <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- Properties and Arguments -->
+
+  <xacro:arg name="namespace" default="robot"/>
+  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="gazebo_classic" default="false"/>
+
+  <xacro:property name="front_laser_offset_x" value="0.2865"/>
+  <xacro:property name="front_laser_offset_y" value="-0.20894"/>
+  <xacro:property name="front_laser_offset_z" value="0.2973"/>
+
+  <xacro:property name="rear_laser_offset_x" value="-0.2865"/>
+  <xacro:property name="rear_laser_offset_y" value="0.20894"/>
+  <xacro:property name="rear_laser_offset_z" value="0.2973"/>
+
+  <xacro:property name="imu_offset_x" value="0.127"/>
+  <xacro:property name="imu_offset_y" value="-0.129"/>
+  <xacro:property name="imu_offset_z" value="0.212"/>
+
+  <xacro:rbrobout prefix="$(arg prefix)"/>
+
+
+
+</robot>
