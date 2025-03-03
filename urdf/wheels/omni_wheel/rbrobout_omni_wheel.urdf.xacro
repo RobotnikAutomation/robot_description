@@ -28,7 +28,7 @@
     <link name="${prefix}_wheel_link">
       <visual>
         <xacro:if value="${hq}">
-          <origin xyz="0 0 0" rpy="0 0 0" />
+          <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
           <geometry>
             <mesh filename="package://robot_description/meshes/wheels/omni_wheel/robout_wheel.stl" />
           </geometry>
@@ -47,7 +47,7 @@
       </visual>
 
       <collision>
-				<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+				<origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
 					<cylinder length="${omni_wheel_height}" radius="${omni_wheel_radius}" />
         </geometry>
