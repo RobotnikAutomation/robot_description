@@ -66,5 +66,8 @@
 	<xacro:if value="$(arg gazebo_classic)">
 		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
+  <xacro:unless value="$(arg gazebo_classic)">
+    <xacro:base_hw_controller/>
+  </xacro:unless>
 
 </robot>

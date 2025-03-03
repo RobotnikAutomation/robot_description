@@ -8,6 +8,7 @@
   <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
   <xacro:include filename="$(find robot_description)/urdf/bases/rbkairos/rbkairos_base.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/base_hw/rbkairos.ros2_control.urdf" />
   <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbkairos/rbkairos_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
@@ -51,5 +52,8 @@
     <xacro:rbkairos_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
     <xacro:ros_planar_move_gazebo_classic/>
   </xacro:if>
+  <xacro:unless value="$(arg gazebo_classic)">
+    <xacro:base_hw_controller/>
+  </xacro:unless>
 
 </robot>

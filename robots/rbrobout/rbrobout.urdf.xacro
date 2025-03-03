@@ -32,5 +32,8 @@
   <xacro:rbrobout prefix="$(arg prefix)"/>
 
 
+  <xacro:unless value="$(arg gazebo_classic)">
+    <xacro:base_hw_controller/>
+  </xacro:unless>
 
 </robot>
