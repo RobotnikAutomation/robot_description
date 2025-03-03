@@ -9,8 +9,8 @@
 	<!-- First we import the robot and all the sensors. All these elements are defined as macro:xacros -->
 
 	<!-- Import summit XL macro -->
-	<xacro:include filename="$(find robot_description)/bases/rbsummit/rbsummit_base.xacro"/>
-	<xacro:include filename="$(find robot_description)/gazebo/classic/rbsummit/rbsummit_control.urdf.xacro"/>
+	<xacro:include filename="$(find robot_description)/urdf/bases/rbsummit/rbsummit_base.xacro"/>
+	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbsummit/rbsummit_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />

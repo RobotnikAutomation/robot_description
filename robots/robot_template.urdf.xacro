@@ -7,7 +7,7 @@
 
   <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
-  <xacro:include filename="$(find robot_description)/bases/rbvogui/rbvogui_base.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- Args -->
@@ -31,9 +31,14 @@
 
   <!-- Sensors -->
 
-  <!-- <xacro:sensor_sick_s300 prefix="rbkairos_front_laser" parent="rbkairos_base_link" prefix_topic="front_laser" gpu="true"> -->
-    <!-- <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${3/4*PI}" /> -->
-  <!-- </xacro:sensor_sick_s300> -->
+  <xacro:sensor_sick_s300
+      frame_prefix="$(arg prefix)front_laser_"
+      parent="$(arg prefix)chassis_link"
+      node_namespace="$(arg namespace)"
+      node_name="front_laser"
+      simulation="$(arg gazebo_classic)">
+      <origin xyz="0.53 0.33 0.1145" rpy="${PI} 0 ${PI/4}"/>
+  </xacro:sensor_sick_s300>
 
   <!-- Arm -->
 
@@ -53,7 +58,7 @@
   </xacro:if>
 
   <!-- Control -->
-  <xacro:include filename="$(find robot_description)/gazebo/classic/rbvogui/rbvogui_control.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
 
   <!-- <xacro:if value="$(arg gazebo_classic)">
     <xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
