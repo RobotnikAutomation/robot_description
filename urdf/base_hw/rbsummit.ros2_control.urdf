@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="summit" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="base_hw_controller">
+  <xacro:macro name="rbsummit_base_hw_controller">
 
     <xacro:macro name="command" params="name mins maxs">
       <command_interface name="${name}">

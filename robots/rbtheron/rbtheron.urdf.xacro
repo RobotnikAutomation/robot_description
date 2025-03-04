@@ -11,6 +11,8 @@
 
 	<!-- Import rbtheron macro -->
 	<xacro:include filename="$(find robot_description)/urdf/bases/rbtheron/rbtheron_base.xacro"/>
+
+    <xacro:include filename="$(find robot_description)/urdf/base_hw/rbtheron.ros2_control.urdf" />
 	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbtheron/rbtheron_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
@@ -67,7 +69,7 @@
 		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
   <xacro:unless value="$(arg gazebo_classic)">
-    <xacro:base_hw_controller/>
+    <xacro:rbtheron_base_hw_controller/>
   </xacro:unless>
 
 </robot>

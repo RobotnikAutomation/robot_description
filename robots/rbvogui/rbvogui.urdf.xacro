@@ -9,6 +9,8 @@
 
     <!-- Import rbvogui base elements-->
     <xacro:include filename="$(find robot_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
+
+    <xacro:include filename="$(find robot_description)/urdf/base_hw/rbvogui.ros2_control.urdf" />
     <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
 
     <!-- Import all available sensors -->
@@ -80,7 +82,7 @@
 		<xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
     <xacro:unless value="$(arg gazebo_classic)">
-        <xacro:base_hw_controller/>
+        <xacro:rbvogui_base_hw_controller/>
     </xacro:unless>
 
 </robot>

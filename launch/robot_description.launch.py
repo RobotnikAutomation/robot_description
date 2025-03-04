@@ -80,7 +80,7 @@ def generate_launch_description():
         default_value="false",
     )
     add_to_launcher.add_arg(arg)
-    
+
     arg = ExtendedArgument(
         name='frame_prefix',
         description='prefix of each frame',

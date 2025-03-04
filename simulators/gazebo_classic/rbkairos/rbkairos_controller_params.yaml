@@ -23,12 +23,12 @@
       use_sim_time: true
       publish_rate: 200
       joints:
-        - robot_ur5e_shoulder_pan_joint
-        - robot_ur5e_shoulder_lift_joint
-        - robot_ur5e_elbow_joint
-        - robot_ur5e_wrist_1_joint
-        - robot_ur5e_wrist_2_joint
-        - robot_ur5e_wrist_3_joint
+        - robot_arm_shoulder_pan_joint
+        - robot_arm_shoulder_lift_joint
+        - robot_arm_elbow_joint
+        - robot_arm_wrist_1_joint
+        - robot_arm_wrist_2_joint
+        - robot_arm_wrist_3_joint
 
       command_interfaces:
         - position

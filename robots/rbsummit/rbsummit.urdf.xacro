@@ -10,6 +10,8 @@
 
 	<!-- Import summit XL macro -->
 	<xacro:include filename="$(find robot_description)/urdf/bases/rbsummit/rbsummit_base.xacro"/>
+
+    <xacro:include filename="$(find robot_description)/urdf/base_hw/rbsummit.ros2_control.urdf" />
 	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbsummit/rbsummit_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
@@ -39,6 +41,7 @@
 	<xacro:property name="front_rgbd_camera_offset_x" value="0.324"/>
 	<xacro:property name="front_rgbd_camera_offset_y" value="0.012"/>
 	<xacro:property name="front_rgbd_camera_offset_z" value="0.172"/>
+
 	<xacro:property name="front_ptz_camera_offset_x" value="0.22151"/>
 	<xacro:property name="front_ptz_camera_offset_y" value="0.0"/>
 	<xacro:property name="front_ptz_camera_offset_z" value="0.24022"/>
@@ -126,7 +129,7 @@
     <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
   </xacro:if>
   <xacro:unless value="$(arg gazebo_classic)">
-    <xacro:base_hw_controller/>
+    <xacro:rbsummit_base_hw_controller/>
   </xacro:unless>
 
 </robot>
