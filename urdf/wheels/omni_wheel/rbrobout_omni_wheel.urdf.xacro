@@ -47,7 +47,7 @@
       </visual>
 
       <collision>
-				<origin xyz="0 0 0" rpy="0 0 0" />
+				<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
         <geometry>
 					<cylinder length="${omni_wheel_height}" radius="${omni_wheel_radius}" />
         </geometry>
@@ -61,12 +61,11 @@
     </link>
 
     <gazebo reference="${prefix}_wheel_link">
-		<mu1 value="0.0"/>
-		<mu2 value="0.0"/>
-		<kp value="10000000.0" />
-		<kd value="1.0" />
-		<fdir1 value="1 0 0"/>
-        <turnGravityOff>false</turnGravityOff>
+      <mu1>0.90</mu1>
+      <mu2>0.85</mu2>
+      <kp>2.75e6</kp>
+      <kd>8.25e1</kd>
+      <fdir1>0 0 0</fdir1>
     </gazebo>
 
   </xacro:macro>
