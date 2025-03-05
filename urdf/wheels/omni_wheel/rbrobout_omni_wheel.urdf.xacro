@@ -22,7 +22,7 @@
       <xacro:insert_block name="origin" />
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
-      <joint_properties damping="1.0" friction="1.0"/>
+      <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
     <link name="${prefix}_wheel_link">
@@ -61,10 +61,10 @@
     </link>
 
     <gazebo reference="${prefix}_wheel_link">
-      <mu1>0.90</mu1>
-      <mu2>0.85</mu2>
-      <kp>2.75e6</kp>
-      <kd>8.25e1</kd>
+      <mu1>0.0</mu1>
+      <mu2>0.0</mu2>
+      <kp>0</kp>
+      <kd>0</kd>
       <fdir1>0 0 0</fdir1>
     </gazebo>
 

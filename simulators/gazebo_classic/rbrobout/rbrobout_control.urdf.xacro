@@ -33,6 +33,7 @@
           <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="${prefix}front_right_wheel_joint"/>
           <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="${prefix}back_left_wheel_joint"/>
           <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="${prefix}back_right_wheel_joint"/>
+          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="${prefix}lift_ewellix_lift_top_joint"/>
 
         </ros2_control>
     </xacro:macro>
@@ -51,8 +52,12 @@
             <publish_rate>10</publish_rate>
 
             <!-- output -->
-            <publish_odom>false</publish_odom>
-            <publish_odom_tf>false</publish_odom_tf>
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+
+            <odometry_frame>robot_odom</odometry_frame>
+
+            <robot_base_frame>robot_base_footprint</robot_base_frame>
           </plugin>
         </gazebo>
     </xacro:macro>

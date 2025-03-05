@@ -23,6 +23,7 @@
       use_sim_time: true
       publish_rate: 200
       joints:
+        - robot_lift_ewellix_lift_top_joint
         - robot_arm_shoulder_pan_joint
         - robot_arm_shoulder_lift_joint
         - robot_arm_elbow_joint
@@ -67,7 +68,7 @@
       joint_control_topic: ~/joint_control_command
 
       #Odom
-      odom_frame_id: robot_odom
+      odom_frame_id: robot_odom_robotnik_controller
       base_frame_id: robot_base_footprint
       set_odometry_service: ~/set_odometry
 

@@ -78,9 +78,11 @@ def generate_launch_description():
         name='gazebo_classic',
         description='Simulate robot in Gazebo Classic',
         default_value="false",
+        use_env=True,
+        environment='GAZEBO_CLASSIC_SIMULATION',
     )
     add_to_launcher.add_arg(arg)
-
+    
     arg = ExtendedArgument(
         name='frame_prefix',
         description='prefix of each frame',
@@ -114,6 +116,7 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
+              'use_sim_time': params['gazebo_classic']
             }
         ],
     ))
