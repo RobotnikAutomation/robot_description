@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.16">
+  <diagram name="Page-1" id="PdUpcyiJcquEUYtYVBEm">
+    <mxGraphModel dx="1364" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UOs50__VhGiThiFopjpR-10" value="ROBOT" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="640" width="590" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-9" value="BASE" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="130" y="680" width="450" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-7" value="BODY" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="150" y="710" width="310" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-4" value="CHASSIS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="170" y="740" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-5" value="LOGOS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="270" y="740" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-6" value="LEDS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="370" y="740" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-8" value="WHEELS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="480" y="740" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-12" value="SENSORS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="600" y="680" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-13" value="ARMS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="600" y="730" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UOs50__VhGiThiFopjpR-14" value="OTHERS" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="600" y="780" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
