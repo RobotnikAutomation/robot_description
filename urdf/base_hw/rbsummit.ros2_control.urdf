@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<robot name="summit" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="rbsummit_base_hw_controller">
+
+    <xacro:macro name="command" params="name mins maxs">
+      <command_interface name="${name}">
+        <param name="min">${mins}</param>
+        <param name="max">${maxs}</param>
+      </command_interface>
+    </xacro:macro>
+
+    <ros2_control name="summit" type="system">
+      <hardware>
+        <plugin>robotnik_base_hw/RobotnikBaseHW</plugin>
+        <param name="device">can0</param>
+        <param name="sync_hz">50</param>
+
+      </hardware>
+      <joint name="robot_front_left_wheel_joint">
+        <param name="id">0x01</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">9.56</param>
+        <param name="spin">1</param>
+
+        <xacro:command name="position" mins="0.0" maxs="0.0"/>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <xacro:command name="effort"   mins="-50" maxs="50"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+      </joint>
+      <joint name="robot_back_left_wheel_joint">
+        <param name="id">0x02</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">9.56</param>
+        <param name="spin">1</param>
+
+        <xacro:command name="position" mins="0.0" maxs="0.0"/>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <xacro:command name="effort"   mins="-50" maxs="50"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+      </joint>
+      <joint name="robot_front_right_wheel_joint">
+        <param name="id">0x03</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">9.56</param>
+        <param name="spin">-1</param>
+
+        <xacro:command name="position" mins="0.0" maxs="0.0"/>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <xacro:command name="effort"   mins="-50" maxs="50"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+      </joint>
+      <joint name="robot_back_right_wheel_joint">
+        <param name="id">0x04</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">9.56</param>
+        <param name="spin">-1</param>
+
+        <xacro:command name="position" mins="0.0" maxs="0.0"/>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <xacro:command name="effort"   mins="-50" maxs="50"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+      </joint>
+    </ros2_control>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot name="rbkairos" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  	<!-- ***************** -->
+  	<!-- Imported elements -->
+  	<!-- ***************** -->
+
+  	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+  	<!-- Import summit XL base elements -->
+	<xacro:include filename="$(find robot_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
+
+  	<xacro:include filename="$(find robot_description)/urdf/wheels/omni_wheel/omni_wheel.urdf.xacro" />
+
+  	<xacro:property name="PI" value="3.1415926535897931"/>
+
+  	<!-- Wheel parameters -->
+  	<xacro:property name="wheel_offset_x" value="0.21528" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
+  	<xacro:property name="wheel_offset_y" value="0.2590" />
+  	<xacro:property name="wheel_offset_z" value="0.0" />
+
+    <xacro:macro name="rbkairos" params="prefix:=robot_">
+
+  		<!-- *************** -->
+  		<!-- Robots Elements -->
+  		<!-- *************** -->
+
+  		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+  		<xacro:rbkairos_plus_body prefix="${prefix}"/>
+
+  		<xacro:omni_wheel robot_id="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="true">
+  			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+  		</xacro:omni_wheel>
+
+  		<xacro:omni_wheel robot_id="${prefix}front_left" parent="${prefix}base_link" reflect="true" hq="true">
+  			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+  		</xacro:omni_wheel>
+
+  		<xacro:omni_wheel robot_id="${prefix}back_left" parent="${prefix}base_link" reflect="true" hq="true">
+  			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+  		</xacro:omni_wheel>
+
+  		<xacro:omni_wheel robot_id="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="true">
+  			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+  		</xacro:omni_wheel>
+
+     </xacro:macro>
+
+</robot>

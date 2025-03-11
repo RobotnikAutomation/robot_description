@@ -20,19 +20,19 @@
 				  izz="${m*(3*r*r+h*h)/12}" />
 	  </xacro:macro>
 
-	<xacro:macro name="rubber_wheel" params="prefix parent *origin hq">
+	<xacro:macro name="rubber_wheel" params="robot_id parent *origin hq">
 
 		<!--WHEEL TIRE -->
-		<joint name="${prefix}_wheel_joint" type="continuous">
+		<joint name="${robot_id}_wheel_joint" type="continuous">
 			<parent link="${parent}"/>
-			<child link="${prefix}_wheel_link"/>
+			<child link="${robot_id}_wheel_link"/>
 			<xacro:insert_block name="origin" />
 			<axis xyz="0 1 0" rpy="0 0 0" />
 			<limit effort="100" velocity="100"/>
 			<joint_properties damping="0.0" friction="0.0"/>
 		</joint>
 
-		<link name="${prefix}_wheel_link">
+		<link name="${robot_id}_wheel_link">
 			<visual>
 				<!-- HIGH RESOLUTION WHEELS -->
 				<!-- LOW RESOLUTION WHEELS -->
@@ -55,13 +55,13 @@
 			</inertial>
 		</link>
 
-		<joint name="${prefix}_wheel_tire_joint" type="fixed">
-			<parent link="${prefix}_wheel_link"/>
-			<child link="${prefix}_wheel_tire_link"/>
+		<joint name="${robot_id}_wheel_tire_joint" type="fixed">
+			<parent link="${robot_id}_wheel_link"/>
+			<child link="${robot_id}_wheel_tire_link"/>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 		</joint>
 
-		<link name="${prefix}_wheel_tire_link">
+		<link name="${robot_id}_wheel_tire_link">
 			<visual>
         <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
 				<geometry>
@@ -71,8 +71,8 @@
 		</link>
 
 
-		<xacro:rubber_wheel_transmission prefix="${prefix}" />
-		<xacro:rubber_wheel_gazebo prefix="${prefix}" />
+		<xacro:rubber_wheel_transmission robot_id="${robot_id}" />
+		<xacro:rubber_wheel_gazebo robot_id="${robot_id}" />
 
 
 	</xacro:macro>

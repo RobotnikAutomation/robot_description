@@ -14,18 +14,18 @@
               izz="${m*(3*r*r+h*h)/12}" />
   </xacro:macro>
 
-  <xacro:macro name="omni_wheel" params="prefix parent *origin reflect hq">
+  <xacro:macro name="omni_wheel" params="robot_id parent *origin reflect hq">
 
-    <joint name="${prefix}_wheel_joint" type="continuous">
+    <joint name="${robot_id}_wheel_joint" type="continuous">
       <parent link="${parent}"/>
-      <child link="${prefix}_wheel_link"/>
+      <child link="${robot_id}_wheel_link"/>
       <xacro:insert_block name="origin" />
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
-    <link name="${prefix}_wheel_link">
+    <link name="${robot_id}_wheel_link">
       <visual>
         <xacro:if value="${hq}">
           <origin xyz="0 0 0" rpy="0 0 0" />
@@ -70,17 +70,17 @@
       </inertial>
     </link>
 
-    <transmission name="${prefix}_wheel_joint_trans">
+    <transmission name="${robot_id}_wheel_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_wheel_joint" >
+      <joint name="${robot_id}_wheel_joint" >
         <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${prefix}_wheel_joint_motor">
+      <actuator name="${robot_id}_wheel_joint_motor">
          <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
-    <gazebo reference="${prefix}_wheel_link">
+    <gazebo reference="${robot_id}_wheel_link">
 		<mu1 value="0.0"/>
 		<mu2 value="0.0"/>
 		<kp value="10000000.0" />

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="summit_xl">
+
+	<!-- Import summit XL base elements -->
+	<xacro:include filename="$(find robot_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
+
+	<!-- Import summit XL wheels -->
+	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+
+	<!-- Wheel parameters -->
+	<xacro:property name="wheel_offset_x" value="0.229" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
+	<xacro:property name="wheel_offset_y" value="0.235" />
+	<xacro:property name="wheel_offset_z" value="0.0" />
+
+    <xacro:macro name="rbsummit" params="prefix:=robot_ hq:=true">
+		<xacro:property name="mesh_file_left" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_left" />
+		<xacro:property name="mesh_file_right" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_right" />
+
+		<!-- *************** -->
+		<!-- Robots Elements -->
+		<!-- *************** -->
+
+		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+		<!-- Summit XL base -->
+		<xacro:rbsummit_body prefix="${prefix}" hq="${hq}" />
+
+		<!-- Summit XL wheels -->
+		<xacro:rubber_wheel robot_id="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_right}">
+			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+		</xacro:rubber_wheel>
+
+		<xacro:rubber_wheel robot_id="${prefix}front_left" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_left}">
+			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+		</xacro:rubber_wheel>
+
+		<xacro:rubber_wheel robot_id="${prefix}back_left" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_left}">
+			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+		</xacro:rubber_wheel>
+
+		<xacro:rubber_wheel robot_id="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_right}">
+			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+		</xacro:rubber_wheel>
+
+   </xacro:macro>
+</robot>
+

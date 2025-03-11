@@ -36,15 +36,6 @@ def generate_launch_description():
     add_to_launcher = AddArgumentParser(ld)
 
     arg = ExtendedArgument(
-        name='robot_id',
-        description='Robot ID',
-        default_value='robot',
-        use_env=True,
-        environment='ROBOT_ID',
-    )
-    add_to_launcher.add_arg(arg)
-
-    arg = ExtendedArgument(
         name='namespace',
         description='Namespace',
         default_value='robot',
@@ -54,40 +45,50 @@ def generate_launch_description():
     add_to_launcher.add_arg(arg)
 
     arg = ExtendedArgument(
+        name='robot',
+        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit)',
+        default_value='rbvogui',
+        use_env=True,
+        environment='ROBOT',
+    )
+    add_to_launcher.add_arg(arg)
+    robot = LaunchConfiguration('robot')
+
+    arg = ExtendedArgument(
         name='robot_model',
-        description='Robot model',
-        default_value='robot_description',
+        description='Robot subvariation from robot basic (rbvogui_6w, rbkairos_ur5e)',
+        default_value=robot,
         use_env=True,
         environment='ROBOT_MODEL',
     )
     add_to_launcher.add_arg(arg)
 
-    arg = ExtendedArgument(
-        name='robot_xacro_package',
-        description='Package where the xacro file is located',
-        default_value='robot_description',
-        use_env=True,
-        environment='ROBOT_XACRO_PACKAGE',
-    )
-    add_to_launcher.add_arg(arg)
+    robot_model = LaunchConfiguration('robot_model')
 
-    arg = ExtendedArgument(
-        name='robot_xacro_file',
-        description='Name of the xacro file',
-        default_value='robot.urdf.xacro',
-        use_env=True,
-        environment='ROBOT_XACRO_FILE',
-    )
-    add_to_launcher.add_arg(arg)
-
-    robot_xacro_package = LaunchConfiguration('robot_xacro_package')
-    robot_xacro_file = LaunchConfiguration('robot_xacro_file')
     arg = ExtendedArgument(
         name='robot_xacro_path',
         description='Path to the xacro file',
-        default_value=[FindPackageShare(robot_xacro_package), '/robots/', robot_xacro_file],
+        default_value=[FindPackageShare('robot_description'), '/robots/', robot, '/', robot_model, '.urdf.xacro'],
         use_env=True,
         environment='ROBOT_XACRO_PATH',
+    )
+    add_to_launcher.add_arg(arg)
+
+    arg = ExtendedArgument(
+        name='gazebo_classic',
+        description='Simulate robot in Gazebo Classic',
+        default_value="false",
+        use_env=True,
+        environment='GAZEBO_CLASSIC_SIMULATION',
+    )
+    add_to_launcher.add_arg(arg)
+    
+    arg = ExtendedArgument(
+        name='frame_prefix',
+        description='prefix of each frame',
+        default_value='robot_',
+        use_env=True,
+        environment='FRAME_PREFIX',
     )
     add_to_launcher.add_arg(arg)
 
@@ -98,7 +99,9 @@ def generate_launch_description():
             FindExecutable(name="xacro"),
             " ",
             params['robot_xacro_path'],
-            " prefix:=''",
+            " namespace:=",params["namespace"],
+            " prefix:=",params["frame_prefix"],
+            " gazebo_classic:=", params["gazebo_classic"],
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
@@ -113,7 +116,7 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
-              'frame_prefix': [params['robot_id'], '/'],
+              'use_sim_time': params['gazebo_classic']
             }
         ],
     ))
