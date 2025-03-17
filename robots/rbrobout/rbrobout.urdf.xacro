@@ -9,6 +9,7 @@
 
   <xacro:include filename="$(find robot_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
   <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- Properties and Arguments -->
@@ -16,6 +17,7 @@
   <xacro:arg name="namespace" default="robot"/>
   <xacro:arg name="prefix" default="robot_"/>
   <xacro:arg name="gazebo_classic" default="false"/>
+  <xacro:arg name="gazebo_ignition" default="false"/>
 
   <xacro:property name="front_laser_offset_x" value="0.8"/>
   <xacro:property name="front_laser_offset_y" value="0.366"/>
@@ -36,7 +38,8 @@
         frame_prefix="$(arg prefix)vectornav_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
-        simulation="$(arg gazebo_classic)">
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
     </xacro:sensor_vectornav>
 
@@ -46,7 +49,8 @@
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="front_laser"
-        simulation="$(arg gazebo_classic)">
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 0 ${1/4*PI}"/>
     </xacro:sensor_sick_microscan3>
 
@@ -56,7 +60,8 @@
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="rear_laser"
-        simulation="$(arg gazebo_classic)">
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 0 ${-3/4*PI}"/>
     </xacro:sensor_sick_microscan3>
 
@@ -65,8 +70,13 @@
         <xacro:rbrobout_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
     </xacro:if>
+    <xacro:if value="$(arg gazebo_ignition)">
+        <xacro:rbrobout_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+    </xacro:if>
     <xacro:unless value="$(arg gazebo_classic)">
-        <xacro:rbrobout_base_hw_controller/>
+        <xacro:unless value="$(arg gazebo_ignition)">
+            <xacro:rbrobout_base_hw_controller/>
+        </xacro:unless>
     </xacro:unless>
 
 </robot>

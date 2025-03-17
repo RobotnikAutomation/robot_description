@@ -13,6 +13,7 @@
 
     <xacro:include filename="$(find robot_description)/urdf/base_hw/rbsummit.ros2_control.urdf" />
 	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbsummit/rbsummit_control.urdf.xacro"/>
+	<xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbsummit/rbsummit_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -29,6 +30,7 @@
 	<xacro:arg name="namespace" default="robot"/>
 	<xacro:arg name="prefix" default="robot_"/>
 	<xacro:arg name="gazebo_classic" default="false"/>
+	<xacro:arg name="gazebo_ignition" default="false"/>
 
 	<xacro:property name="imu_offset_x" value="0.0385"/>
 	<xacro:property name="imu_offset_y" value="0.132"/>
@@ -91,16 +93,18 @@
 	</xacro:sensor_vectornav>
 
 	<!-- 3d laser -->
-	<!-- <xacro:sensor_robosense_rslidar_16
+	<xacro:sensor_robosense_rslidar_16
 		frame_prefix="rbsummit_top_3d_laser_"
 		parent="rbsummit_base_link"
 		gpu="$(arg gpu)"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)"
 	>
 		<origin
 			xyz="${top_laser_offset_x} ${top_laser_offset_y} ${top_laser_offset_z}"
 			rpy="0 0 0"
 		/>
-	</xacro:sensor_robosense_rslidar_16> -->
+	</xacro:sensor_robosense_rslidar_16>
 
 	<!-- ptz camera -->
 	<!-- <xacro:sensor_axis_m5013
@@ -129,8 +133,13 @@
     <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
   </xacro:if>
-  <xacro:unless value="$(arg gazebo_classic)">
-    <xacro:rbsummit_base_hw_controller/>
-  </xacro:unless>
+  <xacro:if value="$(arg gazebo_ignition)">
+    <xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+  </xacro:if>
+    <xacro:unless value="$(arg gazebo_classic)">
+        <xacro:unless value="$(arg gazebo_ignition)">
+            <xacro:rbsummit_base_hw_controller/>
+        </xacro:unless>
+    </xacro:unless>
 
 </robot>

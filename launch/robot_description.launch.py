@@ -84,6 +84,15 @@ def generate_launch_description():
     add_to_launcher.add_arg(arg)
     
     arg = ExtendedArgument(
+        name='gazebo_ignition',
+        description='Simulate robot in Gazebo Ignition',
+        default_value="false",
+        use_env=True,
+        environment='GAZEBO_IGNITION_SIMULATION',
+    )
+    add_to_launcher.add_arg(arg)
+    
+    arg = ExtendedArgument(
         name='frame_prefix',
         description='prefix of each frame',
         default_value='robot_',
@@ -102,6 +111,7 @@ def generate_launch_description():
             " namespace:=",params["namespace"],
             " prefix:=",params["frame_prefix"],
             " gazebo_classic:=", params["gazebo_classic"],
+            " gazebo_ignition:=", params["gazebo_ignition"],
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
