@@ -18,7 +18,7 @@ The description of a robot is divided in three parts:
 - **body**: the chassis of each robot.
 
 
-![image](/img/RD2.png)
+![image](/img/robot_urdf.png)
 
 
 This repostory contains 3 high level folders:
