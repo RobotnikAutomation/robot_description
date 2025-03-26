@@ -21,39 +21,23 @@
       publish_rate: 200
 
       #General Params
-      profile_list: ["base"]
       profile: base
       debug: true
       open_loop: true
 
       #Timeouts
       joint_command_timeout: 0.1
-      imu_timeout: 1.0
       cmd_vel_timeout: 1.0
-
-      #Topics
-      cmd_vel_topic: ~/cmd_vel
-      odom_topic: ~/odom
-      imu_topic: /robot/imu/data
-      emergency_topic: ~/emergency
-      joint_control_topic: ~/joint_control_command
 
       #Odom
       odom_frame_id: robot_odom
       base_frame_id: robot_base_footprint
-      set_odometry_service: ~/set_odometry
-
-      #Imu
-      use_imu: true
+      use_2D_odom: true
 
       #Kinematics Params
       wheel_radius: 0.1125
       track_width:  0.47
       wheel_base: 0.458
-
-      max_steering_position_error: 0.3
-
-      wheels_positions: ["front_right", "front_left", "back_right", "back_left"]
 
       #Cartesian and wheels limits
       base:
