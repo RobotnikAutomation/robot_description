@@ -1,4 +1,4 @@
-# robot_description
+# robotnik_description
 
 This package includes the description for Robotnik robots.
 
@@ -106,25 +106,25 @@ Boolean to set if simulating in gazebo classic. To be deprecated.
 ## Usage
 
 ```
-ros2 launch robot_description robot_description.launch.py
+ros2 launch robotnik_description robot_description.launch.py
 ```
 
 Launches the description for the RB-Vogui, the default robot.
 
 ```
-ros2 launch robot_description robot_description.launch.py robot:=rbkairos
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos
 ```
 
 Launches the description for the RB-Kairos mobile base.
 
 ```
-ros2 launch robot_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur
 ```
 
 Launches the description for the RB-Kairos with a UR arm.
 
 ```
-ros2 launch robot_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur namespace:=robot_b
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur namespace:=robot_b
 ```
 
 Launches the description for the RB-Kairos with a UR arm, under the namespace robot_b

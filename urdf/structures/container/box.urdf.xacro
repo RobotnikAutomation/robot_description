@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="box" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/structures/inertia.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/inertia.urdf.xacro" />
 
   <xacro:arg name="prefix" default="box_"/>
   <xacro:property name="prefix" value="$(arg prefix)" />
@@ -24,13 +24,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/meshes/structures/container/box_base.stl"/>
+        <mesh filename="package://robotnik_description/meshes/structures/container/box_base.stl"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/meshes/structures/container/box_base.stl"/>
+        <mesh filename="package://robotnik_description/meshes/structures/container/box_base.stl"/>
       </geometry>
     </collision>
   </link>
@@ -50,13 +50,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/meshes/structures/container/handle.stl"/>
+        <mesh filename="package://robotnik_description/meshes/structures/container/handle.stl"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_description/meshes/structures/container/handle.stl"/>
+        <mesh filename="package://robotnik_description/meshes/structures/container/handle.stl"/>
       </geometry>
     </collision>  
   </link>

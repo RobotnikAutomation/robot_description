@@ -14,13 +14,13 @@
                 <color rgba="1 1 1 1"/>
 	      </material>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/structures/rbvogui_chassis/zed_support.STL" scale="1.0 1.0 1.0"/>
+	        <mesh filename="package://robotnik_description/meshes/structures/rbvogui_chassis/zed_support.STL" scale="1.0 1.0 1.0"/>
 	      </geometry>
 	    </visual>
 	    <collision>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/structures/rbvogui_chassis/zed_support.STL" scale="1.0 1.0 1.0"/>
+	        <mesh filename="package://robotnik_description/meshes/structures/rbvogui_chassis/zed_support.STL" scale="1.0 1.0 1.0"/>
 	      </geometry>
 	    </collision>
 	  </link>

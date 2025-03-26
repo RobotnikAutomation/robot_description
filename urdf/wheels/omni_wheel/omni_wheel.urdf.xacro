@@ -86,14 +86,14 @@
                     <origin xyz="0 0 0" rpy="0 0 ${PI/4}" />
                         <geometry>
                             <mesh
-                                filename="package://robot_description/meshes/wheels/omni_wheel/omni_wheel_1.dae" />
+                                filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel_1.dae" />
                         </geometry>
                     </xacro:if>
                     <xacro:unless value="${reflect}">
                     <origin xyz="0 0 0" rpy="0 0 ${-PI/4}" />
                         <geometry>
                             <mesh
-                                filename="package://robot_description/meshes/wheels/omni_wheel/omni_wheel_2.dae" />
+                                filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel_2.dae" />
                         </geometry>
                     </xacro:unless>
                 </xacro:if>

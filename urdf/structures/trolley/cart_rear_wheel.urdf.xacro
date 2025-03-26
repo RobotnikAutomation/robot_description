@@ -33,7 +33,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/back_wheel.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/back_wheel.stl" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="black">
           <color rgba="0.2 0.2 0.2 0.8"/>

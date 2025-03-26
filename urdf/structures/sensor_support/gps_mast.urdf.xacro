@@ -23,7 +23,7 @@
            <color rgba="1 1 1 1"/>
         </material>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/structures/sensor_support/gps_mast.STL" scale="1.0 1.0 1.0"/>
+	        <mesh filename="package://robotnik_description/meshes/structures/sensor_support/gps_mast.STL" scale="1.0 1.0 1.0"/>
 	      </geometry>
 	    </visual>
 	    <collision>

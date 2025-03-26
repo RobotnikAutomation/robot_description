@@ -9,18 +9,18 @@
 	<!-- First we import the robot and all the sensors. All these elements are defined as macro:xacros -->
 
 	<!-- Import summit XL macro -->
-	<xacro:include filename="$(find robot_description)/urdf/bases/rbsummit/rbsummit_base.xacro"/>
+	<xacro:include filename="$(find robotnik_description)/urdf/bases/rbsummit/rbsummit_base.xacro"/>
 
-    <xacro:include filename="$(find robot_description)/urdf/base_hw/rbsummit.ros2_control.urdf" />
-	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbsummit/rbsummit_control.urdf.xacro"/>
-	<xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbsummit/rbsummit_control.urdf.xacro"/>
+    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbsummit.ros2_control.urdf" />
+	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbsummit/rbsummit_control.urdf.xacro"/>
+	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbsummit/rbsummit_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
 	<!-- Import antenna -->
-	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
-	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/antena-combo-5G-teltonika.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/structures/sensor_support/structure_teltonika.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/structures/sensor_support/antena-combo-5G-teltonika.urdf.xacro" />
 
 	<!-- ***************** -->
 	<!-- Sensor parameters -->
@@ -93,7 +93,7 @@
 	</xacro:sensor_vectornav>
 
 	<!-- 3d laser -->
-	<xacro:sensor_robosense_rslidar_16
+	<!-- <xacro:sensor_robosense_rslidar_16
 		frame_prefix="rbsummit_top_3d_laser_"
 		parent="rbsummit_base_link"
 		gpu="$(arg gpu)"
@@ -104,7 +104,7 @@
 			xyz="${top_laser_offset_x} ${top_laser_offset_y} ${top_laser_offset_z}"
 			rpy="0 0 0"
 		/>
-	</xacro:sensor_robosense_rslidar_16>
+	</xacro:sensor_robosense_rslidar_16> -->
 
 	<!-- ptz camera -->
 	<!-- <xacro:sensor_axis_m5013

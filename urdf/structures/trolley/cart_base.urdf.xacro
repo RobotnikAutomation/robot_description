@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="cart_base">
 
-  <xacro:include filename="$(find robot_description)/urdf/structures/inertia.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/inertia.urdf.xacro" />
 
   <xacro:arg name="prefix" default="robot_" />
   <xacro:arg name="connected" default="false" />
@@ -56,7 +56,7 @@
       <visual>
         <origin xyz="0.0 0.0 0" rpy="0 0.0 0"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/cart.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/cart.stl" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="red">
           <color rgba="0.9 0.9 0.9 1"/>     
@@ -86,13 +86,13 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/lanza.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/lanza.stl" scale="1.0 1.0 1.0"/>
         </geometry>
       </visual>
       <collision>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/lanza.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/lanza.stl" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
     </link>

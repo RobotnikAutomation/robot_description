@@ -30,7 +30,7 @@
         <xacro:if value="${hq}">
           <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
           <geometry>
-            <mesh filename="package://robot_description/meshes/wheels/omni_wheel/robout_wheel.stl" />
+            <mesh filename="package://robotnik_description/meshes/wheels/omni_wheel/robout_wheel.stl" />
           </geometry>
         </xacro:if>
 

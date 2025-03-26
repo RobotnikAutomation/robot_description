@@ -5,7 +5,7 @@ This is a Work in Progress document.
 
 So in that case, the specific model and variation of the robot depends only in the robot.urdf.xacro that can be found in [robots folder](/robots/)
 
-To create a new robot that it's not defined in robot_description we will use the [mobile base macro files](/urdf/bases/). This macro files includes the body and wheels, all the basics of the robots, all the modifications are over this macro.
+To create a new robot that it's not defined in robotnik_description we will use the [mobile base macro files](/urdf/bases/). This macro files includes the body and wheels, all the basics of the robots, all the modifications are over this macro.
 
 You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacro) file.
 
@@ -14,7 +14,7 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
 ```xml
 <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
-  <xacro:include filename="$(find robot_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
 ```
@@ -81,7 +81,7 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
     <xacro:arg name="sim_gazebo" default="true" />
     <xacro:arg name="sim_ignition" default="false" />
 
-    <xacro:include filename="$(find robot_description)/urdf/arms/ur/ur.urdf.xacro"/>
+    <xacro:include filename="$(find robotnik_description)/urdf/arms/ur/ur.urdf.xacro"/>
   </xacro:if>
 ```
 
@@ -90,7 +90,7 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
 ```xml
 
   <!-- Control -->
-  <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
 
   <xacro:if value="$(arg gazebo_classic)">
     <xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
@@ -105,7 +105,7 @@ To understand the structure of the robots definition let's see an example, in th
 First, it is included the macro file of the base robot (body + wheels) and the sensors macro that are in the package [robotnik_sensors](https://github.com/RobotnikAutomation/robotnik_sensors/tree/humble-devel).
 
 ```xml
-  <xacro:include filename="$(find robot_description)/urdf/bases/rbkairos/rbkairos_base.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbkairos/rbkairos_base.urdf.xacro" />
 
   <!-- Import all available sensors -->
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -161,9 +161,9 @@ As in the previous robot file, first it is included the robot body macro file an
 
 ```
 
-	<xacro:include filename="$(find robot_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
 
-  <xacro:include filename="$(find robot_description)/urdf/wheels/omni_wheel/omni_wheel.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/wheels/omni_wheel/omni_wheel.urdf.xacro" />
 ```
 
 Then, it is defined the properties of the position of the wheels.

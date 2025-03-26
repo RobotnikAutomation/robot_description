@@ -22,13 +22,13 @@
            <color rgba="0.1 0.1 0.1 1"/>
         </material>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/structures/sensor_support/structure_rear_sick.stl"/>
+	        <mesh filename="package://robotnik_description/meshes/structures/sensor_support/structure_rear_sick.stl"/>
 	      </geometry>
 	    </visual>
 	    <collision>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <geometry>
-	        <mesh filename="package://robot_description/meshes/structures/sensor_support/structure_rear_sick.stl"/>
+	        <mesh filename="package://robotnik_description/meshes/structures/sensor_support/structure_rear_sick.stl"/>
 	      </geometry>
 	    </collision>
 	  </link>

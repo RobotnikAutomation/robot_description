@@ -33,7 +33,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robot_description/meshes/wheels/caster_wheel/caster_wheel.stl" scale="0.82 0.82 0.82"/>
+          <mesh filename="package://robotnik_description/meshes/wheels/caster_wheel/caster_wheel.stl" scale="0.82 0.82 0.82"/>
         </geometry>
         <material name="darkgrey">
           <color rgba="0.2 0.2 0.2 1"/>

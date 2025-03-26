@@ -32,7 +32,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/base_support_wheel.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/base_support_wheel.stl" scale="1.0 1.0 1.0"/>
         </geometry>
       </visual>
     </link>
@@ -61,7 +61,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 -${40*PI/180}"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/support_wheel.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/support_wheel.stl" scale="1.0 1.0 1.0"/>
         </geometry>
       </visual>
       <collision>
@@ -96,7 +96,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0 ${PI/2}"/>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/trolley/front_wheel.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://robotnik_description/meshes/structures/trolley/front_wheel.stl" scale="1.0 1.0 1.0"/>
         </geometry>
         <material name="black">
           <color rgba="0.1 0.1 0.1 1"/>     

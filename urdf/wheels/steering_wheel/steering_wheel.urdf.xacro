@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/wheels/wheel.gazebo.xacro" />
-  <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/wheels/wheel.gazebo.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
 
   <xacro:property name="wheel_radius" value="0.1165" /> <!-- rbvogui uses wheels with 0.233 m of diameter-->
   <xacro:property name="wheel_width" value="0.1375" />
@@ -40,7 +40,7 @@
             <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
           </xacro:unless>
           <geometry>
-            <mesh filename="package://robot_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
+            <mesh filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
           </geometry>
         </xacro:if>
 
@@ -52,7 +52,7 @@
             <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
           </xacro:unless>
           <geometry>
-            <mesh filename="package://robot_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
+            <mesh filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
           </geometry>
         </xacro:unless>
 
@@ -69,7 +69,7 @@
           <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
         </xacro:unless>
         <geometry>
-          <mesh filename="package://robot_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
+          <mesh filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_stl_color.dae" />
         </geometry>        
       </collision>
 

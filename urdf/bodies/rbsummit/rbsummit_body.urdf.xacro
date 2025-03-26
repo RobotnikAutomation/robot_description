@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/structures/inertia.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/inertia.urdf.xacro" />
 
   <xacro:macro name="rbsummit_body" params="prefix:=robot_ hq:=true">
 
@@ -36,12 +36,12 @@
 		   <origin xyz="0 0 0" rpy="0 0 0" />
 		   <xacro:if value="${hq}">
 		   <geometry>
-			 <mesh filename="package://robot_description/meshes/bases/rbsummit/rbsummit_xl_chassis.dae"/>
+			 <mesh filename="package://robotnik_description/meshes/bases/rbsummit/rbsummit_xl_chassis.dae"/>
 		   </geometry>
 		   </xacro:if>
 		   <xacro:unless value="${hq}">
 		   <geometry>
-			 <mesh filename="package://robot_description/meshes/bases/rbsummit/rbsummit_xl_chassis_simple.stl"/>
+			 <mesh filename="package://robotnik_description/meshes/bases/rbsummit/rbsummit_xl_chassis_simple.stl"/>
 		   </geometry>
 		   </xacro:unless>
 		   <material name="darkgrey">
@@ -51,7 +51,7 @@
 		<collision>
 		   <origin xyz="0 0 0" rpy="0 0 0 " />
 		   <geometry>
-			 <mesh filename="package://robot_description/meshes/bases/rbsummit/rbsummit_xl_chassis_collision.dae"/>
+			 <mesh filename="package://robotnik_description/meshes/bases/rbsummit/rbsummit_xl_chassis_collision.dae"/>
 		   </geometry>
 		</collision>
 	  </link>
