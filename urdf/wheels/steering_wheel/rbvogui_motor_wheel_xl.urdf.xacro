@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/gazebo/rbvogui_wheel.gazebo.xacro" />
-  <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rbvogui_xl_rubber_wheel_285mm.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/gazebo/rbvogui_wheel.gazebo.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rbvogui_xl_rubber_wheel_285mm.urdf.xacro" />
 
   <xacro:property name="M_PI" value="3.1415926535897931" />
 
@@ -57,7 +57,7 @@
 			<origin xyz="0 0 0.0" rpy="0 0 0" />
 		  </xacro:unless>
           <geometry>            
-            <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
+            <mesh filename="package://robotnik_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
           </geometry> 
         </xacro:if>
          
@@ -70,7 +70,7 @@
 			<origin xyz="0 0 0" rpy="0 0 0" />
 		  </xacro:unless>
           <geometry>
-              <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
+              <mesh filename="package://robotnik_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
           </geometry>
         </xacro:unless>
         <material name="red">
@@ -86,7 +86,7 @@
 			<origin xyz="0 0 0.0" rpy="0 0 0" />
 		</xacro:unless>
         <geometry>
-            <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
+            <mesh filename="package://robotnik_description/meshes/wheels/rubber_wheel/hub_rbvogui_xl.stl" />
         </geometry>
       </collision>
 

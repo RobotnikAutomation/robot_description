@@ -9,10 +9,10 @@
 	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
 	<!-- Import RB-Robout base elements -->
-	<xacro:include filename="$(find robot_description)/urdf/bodies/rbrobout/rbrobout_body.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbrobout/rbrobout_body.urdf.xacro" />
 
 	<!-- Import RB-Robout wheels -->
-  	<xacro:include filename="$(find robot_description)/urdf/wheels/omni_wheel/rbrobout_omni_wheel.urdf.xacro" />
+  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/omni_wheel/rbrobout_omni_wheel.urdf.xacro" />
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />

@@ -31,12 +31,12 @@
           <origin xyz="0 0 0" rpy="0 0 0" />
           <xacro:if value="${reflect}">
             <geometry>
-              <mesh filename="package://robot_description/meshes/wheels/omni_wheel/omni_wheel.stl" />
+              <mesh filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel.stl" />
             </geometry>
           </xacro:if>
           <xacro:unless value="${reflect}">
             <geometry>
-              <mesh filename="package://robot_description/meshes/wheels/omni_wheel/omni_wheel.stl" />
+              <mesh filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel.stl" />
             </geometry>
 		  </xacro:unless>
         </xacro:if>

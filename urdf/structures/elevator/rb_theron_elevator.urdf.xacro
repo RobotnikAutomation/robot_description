@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"> 
 	
 	
-	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.transmission.xacro"/>
-	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.gazebo.xacro"/>
+	<xacro:include filename="$(find robotnik_description)/urdf/structures/elevator/rb_theron_elevator.transmission.xacro"/>
+	<xacro:include filename="$(find robotnik_description)/urdf/structures/elevator/rb_theron_elevator.gazebo.xacro"/>
 	
 	<xacro:macro name="elevator_platform" params="prefix parent hq *origin">
 	<!-- PARAMS: -->
@@ -39,12 +39,12 @@
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<xacro:if value="${hq}">
 				<geometry>
-					<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_base.dae"/>
+					<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_base.dae"/>
 				</geometry>
 			</xacro:if>
 			<xacro:unless value="${hq}">
 				<geometry>
-					<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_base.stl"/>
+					<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_base.stl"/>
 				</geometry>
 			</xacro:unless>
 			<material name="darkgrey">
@@ -54,7 +54,7 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0 " />
 			<geometry>
-				<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_base.dae"/>
+				<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_base.dae"/>
 			</geometry>
 		</collision>
 	</link>
@@ -82,12 +82,12 @@
 			<origin xyz="0 -0.05 0" rpy="0 0 0" />
 			<xacro:if value="${hq}">
 				<geometry>
-					<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_platform.dae"/>
+					<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_platform.dae"/>
 				</geometry>
 			</xacro:if>
 			<xacro:unless value="${hq}">
 				<geometry>
-					<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_platform.stl"/>
+					<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_platform.stl"/>
 				</geometry>
 			</xacro:unless>
 			<material name="black">
@@ -97,7 +97,7 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0 " />
 			<geometry>
-				<mesh filename="package://robot_description/meshes/structures/elevator/rb_theron_elevator_platform.dae"/>
+				<mesh filename="package://robotnik_description/meshes/structures/elevator/rb_theron_elevator_platform.dae"/>
 			</geometry>
 		</collision>
 		

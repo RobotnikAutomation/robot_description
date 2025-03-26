@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:include filename="$(find robot_description)/urdf/bodies/rbvogui/rbvogui_base.gazebo.xacro" />
-  <xacro:include filename="$(find robot_description)/urdf/structures/rbvogui_chassis/rbvogui_inertia.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/bodies/rbvogui/rbvogui_base.gazebo.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/rbvogui_chassis/rbvogui_inertia.urdf.xacro" />
 
   <xacro:macro name="rbvogui_body" params="prefix:=robot_ base_height:=0.1425 hq:=true">
 
@@ -41,12 +41,12 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <xacro:if value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_chassis.stl"/>
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_chassis.stl"/>
           </geometry>
         </xacro:if>
         <xacro:unless value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_chassis.stl"/>
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_chassis.stl"/>
           </geometry>
         </xacro:unless>
         <material name="darkgrey">
@@ -56,7 +56,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0 " />
         <geometry>
-          <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_chassis.stl"/>
+          <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_chassis.stl"/>
         </geometry>
       </collision>
     </link>
@@ -79,13 +79,13 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <xacro:if value="${hq}">
           <geometry>
-             <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_battery.stl"/>
+             <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_battery.stl"/>
 
           </geometry>
         </xacro:if>
         <xacro:unless value="${hq}">
           <geometry>
-             <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_battery.stl"/> 
+             <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_battery.stl"/> 
 
           </geometry>
         </xacro:unless>
@@ -96,7 +96,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0 " />
         <geometry>
-           <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_battery.stl"/> 
+           <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_battery.stl"/> 
         </geometry>
       </collision>
     </link>
@@ -114,12 +114,12 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <xacro:if value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_contactors.stl" />
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_contactors.stl" />
           </geometry>
         </xacro:if>
         <xacro:unless value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_contactors.stl" />
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_contactors.stl" />
           </geometry>
         </xacro:unless>
         <material name="lighbrown">
@@ -142,12 +142,12 @@
         <origin xyz="0 0 -0.06" rpy="0 0 0" />
         <xacro:if value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_logos.stl" scale="1.24 1.24 1"/>
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_logos.stl" scale="1.24 1.24 1"/>
           </geometry>
         </xacro:if>
         <xacro:unless value="${hq}">
           <geometry>
-            <mesh filename="package://robot_description/meshes/bases/rbvogui_logos.dae" scale="1.3 1.3 1"/>
+            <mesh filename="package://robotnik_description/meshes/bases/rbvogui_logos.dae" scale="1.3 1.3 1"/>
           </geometry>
         </xacro:unless>
         <material name="lightred">
@@ -166,7 +166,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0.0" />
           <geometry>
-              <mesh filename="package://robot_description/meshes/bases/rbvogui_xl_leds.stl" />
+              <mesh filename="package://robotnik_description/meshes/bases/rbvogui_xl_leds.stl" />
           </geometry>
         <material name="lightgreen">
           <color rgba="0.1 1.0 0.1 1"/>

@@ -3,8 +3,8 @@
 
   <xacro:macro name="rocker_front" params="prefix parent *origin hq reflect">
 
-    <xacro:include filename="$(find robot_description)/urdf/wheels/caster_wheel/rbsherkan_caster.urdf.xacro" />
-    <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
+    <xacro:include filename="$(find robotnik_description)/urdf/wheels/caster_wheel/rbsherkan_caster.urdf.xacro" />
+    <xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
 
     <!-- Base link -->
     <joint name="${prefix}rocker_joint" type="fixed">
@@ -22,7 +22,7 @@
           <origin xyz="0 -0.010422 0" rpy="${M_PI_2} 0 ${M_PI_2}" />
         </xacro:unless>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/rbsherkan_chassis/rbsherkan_rocker.stl"/>
+          <mesh filename="package://robotnik_description/meshes/structures/rbsherkan_chassis/rbsherkan_rocker.stl"/>
         </geometry>
         <material name="darkgrey">
           <color rgba="0.45 0.45 0.45 1"/>
@@ -36,7 +36,7 @@
           <origin xyz="0 -0.010422 0" rpy="${M_PI_2} 0 ${M_PI_2}" />
         </xacro:unless>
         <geometry>
-          <mesh filename="package://robot_description/meshes/structures/rbsherkan_chassis/rbsherkan_rocker.stl"/>
+          <mesh filename="package://robotnik_description/meshes/structures/rbsherkan_chassis/rbsherkan_rocker.stl"/>
         </geometry>
       </collision>
       <inertial>

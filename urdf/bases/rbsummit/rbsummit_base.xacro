@@ -2,10 +2,10 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="summit_xl">
 
 	<!-- Import summit XL base elements -->
-	<xacro:include filename="$(find robot_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
 
 	<!-- Import summit XL wheels -->
-	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+	<xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
 
 	<!-- Wheel parameters -->
 	<xacro:property name="wheel_offset_x" value="0.229" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
@@ -13,8 +13,8 @@
 	<xacro:property name="wheel_offset_z" value="0.0" />
 
     <xacro:macro name="rbsummit" params="prefix:=robot_ hq:=true">
-		<xacro:property name="mesh_file_left" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_left" />
-		<xacro:property name="mesh_file_right" value="robot_description/meshes/wheels/rubber_wheel/rubber_wheel_right" />
+		<xacro:property name="mesh_file_left" value="robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_left" />
+		<xacro:property name="mesh_file_right" value="robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_right" />
 
 		<!-- *************** -->
 		<!-- Robots Elements -->
@@ -44,4 +44,3 @@
 
    </xacro:macro>
 </robot>
-

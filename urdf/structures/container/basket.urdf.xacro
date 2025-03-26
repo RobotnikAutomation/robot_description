@@ -23,13 +23,13 @@
                     <color rgba="1.0 0.0 0.0 1"/>
                 </material>
                 <geometry>
-                    <mesh filename="package://robot_description/meshes/structures/container/basket_chassis.stl"/>
+                    <mesh filename="package://robotnik_description/meshes/structures/container/basket_chassis.stl"/>
                 </geometry>
             </visual>
             <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://robot_description/meshes/structures/container/basket_chassis.stl"/>
+                <mesh filename="package://robotnik_description/meshes/structures/container/basket_chassis.stl"/>
             </geometry>
             </collision>
         </link>
@@ -54,13 +54,13 @@
                     <color rgba="0.1 0.1 0.1 1"/>
                 </material>
                 <geometry>
-                    <mesh filename="package://robot_description/meshes/structures/container/basket_container.stl"/>
+                    <mesh filename="package://robotnik_description/meshes/structures/container/basket_container.stl"/>
                 </geometry>
             </visual>
             <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://robot_description/meshes/structures/container/basket_container.stl"/>
+                <mesh filename="package://robotnik_description/meshes/structures/container/basket_container.stl"/>
             </geometry>
             </collision>
         </link>

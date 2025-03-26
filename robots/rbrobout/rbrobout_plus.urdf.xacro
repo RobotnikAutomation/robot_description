@@ -7,15 +7,15 @@
 
   <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
-  <xacro:include filename="$(find robot_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
 
-  <xacro:include filename="$(find robot_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
-  <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
+  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
 
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-  <xacro:include filename="$(find robot_description)/urdf/structures/rbrobout/top_cover.urdf.xacro" />
-  <xacro:include filename="$(find robot_description)/urdf/structures/rbrobout/cameras_cover.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/rbrobout/top_cover.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/rbrobout/cameras_cover.urdf.xacro" />
 
   <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
   <xacro:include filename="$(find ewellix_description)/urdf/ewellix_lift_900mm.urdf.xacro" />
