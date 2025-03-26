@@ -2,12 +2,12 @@
 <robot name="top_cover" xmlns:xacro="http://wiki.ros.org/xacro">
 
   <xacro:macro name="structure_top_cover" params="prefix parent *origin">
-	 <joint name="${prefix}_base_joint" type="fixed">
+	 <joint name="${prefix}base_joint" type="fixed">
            <xacro:insert_block name="origin" />
            <parent link="${parent}"/>
-           <child link="${prefix}_top_cover_link" />
+           <child link="${prefix}top_cover_link" />
          </joint>
-	  <link name="${prefix}_top_cover_link">
+	  <link name="${prefix}top_cover_link">
 	    <visual>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
 	      <material name="covercolor">
@@ -25,7 +25,7 @@
 	    </collision>
 	  </link>
 
-    <gazebo reference="${prefix}_top_cover_link">
+    <gazebo reference="${prefix}top_cover_link">
 		<visual>  
 		  <material>  
 			<ambient>0.0 0.0 0.0 1.0</ambient>  

@@ -4,15 +4,15 @@
 	<!-- Rubber wheel transmission -->
 	<xacro:macro name="elevator_transmission" params="prefix">
 	<!-- Transmission is important to link the joints and the controller (see rb_theron_control/config/rb_theron_control.yaml)-->
-		<transmission name="${prefix}_platform_trans">
+		<transmission name="${prefix}platform_trans">
 			<type>transmission_interface/SimpleTransmission</type>
-			<joint name="${prefix}_platform_joint">
+			<joint name="${prefix}platform_joint">
 				<!-- for the gazebo plugin -->
 				<!--hardwareInterface>EffortJointInterface</hardwareInterface-->
 				<!-- for ros control controller -->
 				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 			</joint>            
-			<actuator name="${prefix}_platform_joint_motor">    
+			<actuator name="${prefix}platform_joint_motor">    
 				<hardwareInterface>EffortJointInterface</hardwareInterface>    
 				<mechanicalReduction>1</mechanicalReduction>
 			</actuator>

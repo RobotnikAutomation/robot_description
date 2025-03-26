@@ -5,13 +5,13 @@
   <xacro:macro name="sensor_antena_combo_5G_teltonika" params="prefix parent *origin gps_latitude:=^|39.5080331 gps_longitude:=^|-0.4619816 update_rate:=^|5">
 
 	  <!-- ANTENNA GPS -->
-	  <joint name="${prefix}_joint" type="fixed">
+	  <joint name="${prefix}joint" type="fixed">
 	    <axis xyz="0 1 0"/>
 	    <xacro:insert_block name="origin"/>
 	    <parent link="${parent}"/>
-	    <child link="${prefix}_base_link"/>
+	    <child link="${prefix}base_link"/>
 	  </joint>
-	  <link name="${prefix}_base_link">
+	  <link name="${prefix}base_link">
 		<inertial>
 			<origin xyz="0.0 0 0.015" rpy="0 0 0" />
 			<mass value="0.2" />
@@ -35,7 +35,7 @@
 	  </link>
 
 
-	  <gazebo reference="${prefix}_base_link">
+	  <gazebo reference="${prefix}base_link">
 	    <material>Gazebo/Black</material>
 	    <gravity>true</gravity>
 	  </gazebo>

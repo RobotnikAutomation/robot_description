@@ -21,16 +21,16 @@
 	<xacro:macro name="rubber_wheel" params="prefix parent *origin reflect hq">
 
 		<!--WHEEL TIRE -->
-		<joint name="${prefix}_wheel_joint" type="continuous">
+		<joint name="${prefix}wheel_joint" type="continuous">
 			<parent link="${parent}"/>
-			<child link="${prefix}_wheel_link"/>
+			<child link="${prefix}wheel_link"/>
 			<xacro:insert_block name="origin" />
 			<axis xyz="0 1 0" rpy="0 0 0" />
 			<limit effort="100" velocity="100"/>
 			<joint_properties damping="0.0" friction="0.0"/>
 		</joint>
 
-		<link name="${prefix}_wheel_link">
+		<link name="${prefix}wheel_link">
 			<visual>
 				<!-- HIGH RESOLUTION WHEELS -->
 				<!-- LOW RESOLUTION WHEELS -->

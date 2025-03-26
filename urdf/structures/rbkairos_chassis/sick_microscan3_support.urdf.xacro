@@ -4,13 +4,13 @@
   <xacro:macro name="sick_microscan3_support" params="prefix parent *origin">
 
     <!--CONTAINER -->
-    <joint name="${prefix}_support_joint" type="fixed">
+    <joint name="${prefix}support_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
-      <child link="${prefix}_support_link"/>
+      <child link="${prefix}support_link"/>
     </joint>
 
-    <link name="${prefix}_support_link">
+    <link name="${prefix}support_link">
 	       <visual>
 	      <geometry>
 	        <mesh filename="package://robotnik_description/meshes/structures/rbkairos_chassis/sick_microscan3_support.stl"/>

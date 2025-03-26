@@ -16,16 +16,16 @@
 
   <xacro:macro name="rbrobout_omni_wheel" params="prefix parent *origin reflect hq">
 
-    <joint name="${prefix}_wheel_joint" type="continuous">
+    <joint name="${prefix}wheel_joint" type="continuous">
       <parent link="${parent}"/>
-      <child link="${prefix}_wheel_link"/>
+      <child link="${prefix}wheel_link"/>
       <xacro:insert_block name="origin" />
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
-    <link name="${prefix}_wheel_link">
+    <link name="${prefix}wheel_link">
       <visual>
         <xacro:if value="${hq}">
           <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
@@ -60,7 +60,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_wheel_link">
+    <gazebo reference="${prefix}wheel_link">
       <mu1>0.0</mu1>
       <mu2>0.0</mu2>
       <kp>0</kp>

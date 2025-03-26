@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 	<xacro:macro name="rubber_wheel_gazebo" params="prefix">
-		<gazebo reference="${prefix}_wheel_link">
+		<gazebo reference="${prefix}wheel_link">
 			<mu1 value="5.0"/>
 			<mu2 value="0.5"/>
 			<kp value="10000000.0" />

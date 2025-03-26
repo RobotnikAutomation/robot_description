@@ -3,14 +3,14 @@
 
   <xacro:macro name="top_structure" params="prefix parent *origin">
 
-	  <joint name="${prefix}_joint" type="fixed">
+	  <joint name="${prefix}joint" type="fixed">
 	    <axis xyz="0 1 0"/>
 	    <xacro:insert_block name="origin"/>
 	    <parent link="${parent}"/>
-	    <child link="${prefix}_link"/>
+	    <child link="${prefix}link"/>
 	  </joint>
 
-	  <link name="${prefix}_link">
+	  <link name="${prefix}link">
 	    <inertial>
 	      <mass value="0.001"/>
 	      <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -33,7 +33,7 @@
 	    </collision>
 	  </link>
 
-	  <gazebo reference="${prefix}_link">
+	  <gazebo reference="${prefix}link">
 	    <material>Gazebo/White</material>
 	    <gravity>true</gravity>
 	  </gazebo>

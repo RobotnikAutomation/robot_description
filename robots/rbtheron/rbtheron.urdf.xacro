@@ -55,7 +55,7 @@
 
 	<!-- ELEVATOR_PLATFORM -->
 	<!-- <xacro:if value="$(arg has_elevator)">
-		<xacro:elevator_platform robot_id="rbtheron_elevator" parent="rbtheron_base_link" hq="${hq}">
+		<xacro:elevator_platform prefix="rbtheron_elevator" parent="rbtheron_base_link" hq="${hq}">
 			<origin xyz="${elevator_x} -${elevator_y} ${elevator_z}" rpy="1.5708 0 1.5708"/>
 		</xacro:elevator_platform>
 	</xacro:if> -->

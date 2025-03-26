@@ -16,13 +16,13 @@
      /> 
     </xacro:macro>
 	<!-- ELEVATOR_BASE_LINK -->
-	<joint name="${prefix}_base_joint" type="fixed">
+	<joint name="${prefix}base_joint" type="fixed">
 		<parent link="${parent}"/>
-		<child link="${prefix}_base_link"/>
+		<child link="${prefix}base_link"/>
 		<xacro:insert_block name="origin" />
 	</joint> 
 	
-	<link name="${prefix}_base_link">
+	<link name="${prefix}base_link">
 		<!--inertial>
 			<mass value="0.1" />
 			<origin xyz="0 0 0" />
@@ -60,14 +60,14 @@
 	</link>
 
 	<!-- ELEVATOR PLATFORM -->
-	<joint name="${prefix}_platform_joint" type="prismatic">
+	<joint name="${prefix}platform_joint" type="prismatic">
 			<origin xyz="0.0 0.0 0.041" rpy="0 0 0 " />
-			<parent link="${prefix}_base_link"/>
-			<child link="${prefix}_platform_link" />
+			<parent link="${prefix}base_link"/>
+			<child link="${prefix}platform_link" />
 			<axis xyz="0 0 1"/>
 			<limit effort="10.0" lower="0.0" upper="0.034" velocity="0.5"/>
 	</joint> 
-	<link name="${prefix}_platform_link">
+	<link name="${prefix}platform_link">
 		<!--inertial>
 			<mass value="0.05" />
 			<origin xyz="0 0 0" />

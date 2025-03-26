@@ -24,13 +24,13 @@
               izz="${m*r*r/2}" />
   </xacro:macro>
 
-  <xacro:macro name="caster" params="robot_id parent *origin hq use_sim">
+  <xacro:macro name="caster" params="prefix parent *origin hq use_sim">
 
     <!--CASTER SUPPORT -->
     <xacro:if value="${use_sim}">
-      <joint name="${robot_id}_joint_support" type="continuous">
+      <joint name="${prefix}joint_support" type="continuous">
         <parent link="${parent}"/>
-        <child link="${robot_id}_support"/>
+        <child link="${prefix}support"/>
         <xacro:insert_block name="origin" />
         <axis xyz="0 0 1" rpy="0 ${M_PI} 0" />
         <limit effort="100" velocity="100"/>
@@ -38,15 +38,15 @@
       </joint>
     </xacro:if>
     <xacro:unless value="${use_sim}">
-      <joint name="${robot_id}_joint_support" type="fixed">
+      <joint name="${prefix}joint_support" type="fixed">
           <parent link="${parent}"/>
-          <child link="${robot_id}_support"/>
+          <child link="${prefix}support"/>
           <xacro:insert_block name="origin" />
           <axis xyz="0 0 1" rpy="0 ${M_PI} 0" />
           <dynamics damping="0" friction="0.01"/>
         </joint>
     </xacro:unless>
-      <link name="${robot_id}_support">
+      <link name="${prefix}support">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
@@ -62,16 +62,16 @@
       </link>
 
     <!--CASTER WHEEL -->
-    <xacro:caster_wheel robot_id="${robot_id}" parent="${robot_id}_support" hq="${hq}" use_sim="$(arg use_sim)">
+    <xacro:caster_wheel prefix="${prefix}" parent="${prefix}support" hq="${hq}" use_sim="$(arg use_sim)">
     </xacro:caster_wheel>
   </xacro:macro>
 
- <xacro:macro name="caster_wheel" params="robot_id parent hq use_sim">
+ <xacro:macro name="caster_wheel" params="prefix parent hq use_sim">
 
   <xacro:if value="${use_sim}">
-    <joint name="${robot_id}_joint_wheel" type="continuous">
+    <joint name="${prefix}joint_wheel" type="continuous">
       <parent link="${parent}"/>
-      <child link="${robot_id}_wheel"/>
+      <child link="${prefix}wheel"/>
       <origin xyz="-0.033 0.0 -0.071" rpy="0 0 0"/>
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
@@ -79,15 +79,15 @@
    </joint>
   </xacro:if>
   <xacro:unless value="${use_sim}">
-     <joint name="${robot_id}_joint_wheel" type="fixed">
+     <joint name="${prefix}joint_wheel" type="fixed">
        <parent link="${parent}"/>
-       <child link="${robot_id}_wheel"/>
+       <child link="${prefix}wheel"/>
       <origin xyz="-0.033 0.0 -0.07" rpy="0 0 0"/>
        <axis xyz="0 1 0" rpy="0 0 0" />
        <joint_properties damping="0.1" friction="0.1"/>
     </joint>
   </xacro:unless>
-    <link name="${robot_id}_wheel">
+    <link name="${prefix}wheel">
       <visual>
           <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
           <geometry>
@@ -114,29 +114,29 @@
 
   <!-- Transmission is important to link the joints and the controller-->
   <xacro:if value="${use_sim}">
-    <transmission name="${robot_id}_support_joint_trans">
+    <transmission name="${prefix}support_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${robot_id}_joint_support">
+      <joint name="${prefix}joint_support">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${robot_id}_support_joint_motor">
+      <actuator name="${prefix}support_joint_motor">
         <mechanicalReduction>1</mechanicalReduction>
       	<motorTorqueConstant>1</motorTorqueConstant>
       </actuator>
     </transmission>
 
-    <transmission name="${robot_id}_wheel_joint_trans">
+    <transmission name="${prefix}wheel_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${robot_id}_joint_wheel">
+      <joint name="${prefix}joint_wheel">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${robot_id}_wheel_joint_motor">
+      <actuator name="${prefix}wheel_joint_motor">
         <mechanicalReduction>1</mechanicalReduction>
 		<motorTorqueConstant>1</motorTorqueConstant>
       </actuator>
     </transmission>
   </xacro:if>
-    <gazebo reference="${robot_id}_support">
+    <gazebo reference="${prefix}support">
 			<mu1 value="5.0"/>
 			<mu2 value="0.5"/>
 			<kp value="10000000.0" />
@@ -145,7 +145,7 @@
       <turnGravityOff>false</turnGravityOff>
     </gazebo>
 
-     <gazebo reference="${robot_id}_wheel">
+     <gazebo reference="${prefix}wheel">
 			<mu1 value="100.0"/>
 			<mu2 value="100.0"/>
 			<!-- kp value="10000000.0" / -->
