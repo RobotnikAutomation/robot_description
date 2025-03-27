@@ -13,8 +13,6 @@
 	<xacro:property name="wheel_offset_z" value="0.0" />
 
     <xacro:macro name="rbsummit" params="prefix:=robot_ hq:=true">
-		<xacro:property name="mesh_file_left" value="robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_left" />
-		<xacro:property name="mesh_file_right" value="robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_right" />
 
 		<!-- *************** -->
 		<!-- Robots Elements -->
@@ -26,19 +24,19 @@
 		<xacro:rbsummit_body prefix="${prefix}" hq="${hq}" />
 
 		<!-- Summit XL wheels -->
-		<xacro:rubber_wheel robot_id="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_right}">
+		<xacro:rubber_wheel robot_id="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 
-		<xacro:rubber_wheel robot_id="${prefix}front_left" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_left}">
+		<xacro:rubber_wheel robot_id="${prefix}front_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 
-		<xacro:rubber_wheel robot_id="${prefix}back_left" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_left}">
+		<xacro:rubber_wheel robot_id="${prefix}back_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 
-		<xacro:rubber_wheel robot_id="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}" mesh_file="${mesh_file_right}">
+		<xacro:rubber_wheel robot_id="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 

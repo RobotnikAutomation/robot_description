@@ -21,7 +21,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 -${PI/2}" />
 			<geometry>
-				<mesh filename="package://robotnik_description/meshes/structures/rbrobout/cameras_cover.stl"/>
+				<mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_cameras_cover.stl"/>
 			</geometry>
 			<material name="grey">
 				<color rgba="0.5 0.5 0.5 5"/>
@@ -30,7 +30,7 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 -${PI/2}" />
 			<geometry>
-				<mesh filename="package://robotnik_description/meshes/structures/rbrobout/cameras_cover.stl"/>
+				<mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_cameras_cover.stl"/>
 			</geometry>
 		</collision>
 	</link>
