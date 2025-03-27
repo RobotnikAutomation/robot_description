@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="structure" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="summit_hm_structure" params="prefix parent *origin mesh_file:=robotnik_description/meshes/structures/summit_hm/summit_hm_top_structure
+  <xacro:macro name="summit_hm_structure" params="prefix parent *origin mesh_file:=robot_description/meshes/structures/summit_hm/summit_hm_top_structure
   												gazebo_color:=Gazebo/Gray">
 
 	  <joint name="${prefix}_joint" type="fixed">

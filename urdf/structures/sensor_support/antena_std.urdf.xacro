@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="sensor_antena_std" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- if no latitude/longitud is specified, then use Fuente del Jarro as default -->
+  <xacro:macro name="sensor_antena_std" params="prefix parent *origin mesh_file:=robot_description/meshes/others/antena_wifi_antena_wifi_2J7A747Bc
+  												gazebo_color:=Gazebo/Gray">
+
+	  <!-- ANTENNA GPS -->
+	  <joint name="${prefix}_joint" type="fixed">
+	    <axis xyz="0 1 0"/>
+	    <xacro:insert_block name="origin"/>
+	    <parent link="${parent}"/>
+	    <child link="${prefix}_base_link"/>
+	  </joint>
+	  <link name="${prefix}_base_link">
+	    <visual>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+	        <mesh filename="package://${mesh_file}.dae"/>
+	      </geometry>
+	    </visual>
+	    <collision>
+	      <origin rpy="0 0 0" xyz="0 0 0"/>
+	      <geometry>
+	        <mesh filename="package://${mesh_file}.stl"/>
+	      </geometry>
+	    </collision>
+	  </link>
+
+	  <gazebo reference="${prefix}_link">
+	    <material>${gazebo_color}</material>
+	    <gravity>true</gravity>
+	  </gazebo>
+
+  </xacro:macro>
+
+</robot>

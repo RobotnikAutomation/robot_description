@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ***************** -->
+  <!-- Imported elements -->
+  <!-- ***************** -->
+
+  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+  <xacro:include filename="$(find robot_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
+
+  <!-- Properties and Arguments -->
+
+  <xacro:arg name="namespace" default="robot"/>
+  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="gazebo_classic" default="false"/>
+  <xacro:arg name="simulator" default="gazebo_ignition"/>
+
+  <xacro:property name="front_laser_offset_x" value="0.2865"/>
+  <xacro:property name="front_laser_offset_y" value="-0.20894"/>
+  <xacro:property name="front_laser_offset_z" value="0.2973"/>
+
+  <xacro:property name="rear_laser_offset_x" value="-0.2865"/>
+  <xacro:property name="rear_laser_offset_y" value="0.20894"/>
+  <xacro:property name="rear_laser_offset_z" value="0.2973"/>
+
+  <xacro:property name="imu_offset_x" value="0.127"/>
+  <xacro:property name="imu_offset_y" value="-0.129"/>
+  <xacro:property name="imu_offset_z" value="0.212"/>
+
+  <xacro:rbrobout prefix="$(arg prefix)"/>
+
+  <!-- IMU -->
+    <xacro:sensor_vectornav
+        frame_prefix="$(arg prefix)vectornav_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        simulation="$(arg gazebo_classic)"
+        simulator="$(arg simulator)">
+        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_vectornav>
+
+  <!-- 2d laser -->
+    <xacro:sensor_sick_microscan3
+        frame_prefix="$(arg prefix)front_laser_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_laser"
+        simulation="$(arg gazebo_classic)"
+        simulator="$(arg simulator)"
+        topic_prefix="front_laser">
+        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 0 ${1/4*PI}"/>
+    </xacro:sensor_sick_microscan3>
+
+    <!-- 2d laser -->
+    <xacro:sensor_sick_microscan3
+        frame_prefix="$(arg prefix)rear_laser_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="rear_laser"
+        simulation="$(arg gazebo_classic)"
+        simulator="$(arg simulator)"
+        topic_prefix="rear_laser">
+        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 0 ${-3/4*PI}"/>
+    </xacro:sensor_sick_microscan3>
+
+    <!-- Controllers -->
+    
+    <xacro:property name="simulator" value="$(arg simulator)"/>
+
+
+    <xacro:if value="${simulator == 'gazebo_classic'}">
+        <xacro:rbrobout_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+        <xacro:ros_planar_move_gazebo_classic/>
+    </xacro:if>
+    <xacro:if value="${simulator == 'gazebo_ignition'}">
+        <xacro:rbrobout_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+        <xacro:ros_diff_move_gazebo_ignition prefix="$(arg prefix)"/>
+    </xacro:if>
+    <xacro:if value="${simulator == 'none'}">
+        <xacro:rbrobout_base_hw_controller/>
+    </xacro:if>
+
+</robot>

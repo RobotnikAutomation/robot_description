@@ -8,12 +8,12 @@
     <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
     <!-- Import rbvogui base elements-->
-    <xacro:include filename="$(find robotnik_description)/robots/urdf/bases/rbvogui_base.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/urdf/ros2_control/rbvogui_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/robots/urdf/bases/rbvogui_base.urdf.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/ros2_control/rbvogui_control.urdf.xacro"/>
 
     <!-- Import all available sensors -->
     <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/urdf/structures/sensor_support/gps_mast.urdf.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/gps_mast.urdf.xacro" />
 
     <!-- Flag to select the high or low quality model -->
     <xacro:property name="hq" value="true" />
@@ -57,8 +57,8 @@
     <xacro:ros2_control namespace="$(arg namespace)" robot_id="$(arg robot_id)_" controllers="$(arg controllers)"/>
 
     <!-- Cart -->
-    <!-- <xacro:include filename="$(find robotnik_description)/urdf/cart/robot_cart_connection.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/urdf/cart/cart_base.urdf.xacro" />
+    <!-- <xacro:include filename="$(find robot_description)/urdf/cart/robot_cart_connection.urdf.xacro" />
+    <xacro:include filename="$(find robot_description)/urdf/cart/cart_base.urdf.xacro" />
     <xacro:arg name="cart" default="false" />
     <xacro:arg name="connected" default="false" />
 

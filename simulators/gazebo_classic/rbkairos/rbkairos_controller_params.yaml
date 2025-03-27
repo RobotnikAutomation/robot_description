@@ -8,7 +8,7 @@
         type: joint_state_broadcaster/JointStateBroadcaster
 
       robotnik_base_controller:
-        type: robotnik_controllers/RBKairosController
+        type: robotnik_controller/RBKairosController
 
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController

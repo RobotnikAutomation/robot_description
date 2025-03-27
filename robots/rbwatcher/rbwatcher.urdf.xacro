@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+	<!-- ***************** -->
+	<!-- Imported elements -->
+	<!-- ***************** -->
+
+	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+	<!-- Import summit XL base elements -->
+	<xacro:include filename="$(find robot_description)/urdf/bases/rbwatcher/rbwatcher_base.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/summit_hm/summit_hm_structure.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/antena_std.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbwatcher/rbwatcher_control.urdf.xacro" />
+
+
+	<!-- Import all available sensors -->
+	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+
+	<!-- Flag to select the high or low quality model -->
+	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="kinematics" default="skid"/>
+	<xacro:arg name="gpu" default="false"/>
+	<xacro:arg name="gps_latitude" default="0"/>
+	<xacro:arg name="gps_longitude" default="0"/>
+	<xacro:arg name="sim_control_period" default="0.004"/>
+	<xacro:arg name="namespace" default="robot"/>
+        <xacro:arg name="gazebo_classic" default="true"/>
+        <xacro:arg name="gazebo_ignition" default="false"/>
+
+
+    <xacro:macro name="rbwatcher" params="prefix publish_bf hq kinematics:=skid leika:=false">
+		<xacro:property name="top_structure_mesh" value="robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure" />
+		<xacro:property name="top_structure_x" value="-0.17024"/>
+		<xacro:property name="top_structure_y" value="0"/>
+		<xacro:property name="top_structure_z" value="0.27609"/>
+		<xacro:property name="PI" value="3.1415926535897931"/>
+		<xacro:property name="antenna_mesh" value="robot_description/meshes/others/antena_wifi_2J7A747Bc" />
+
+
+		<!-- *************** -->
+		<!-- Robots Elements -->
+		<!-- *************** -->
+
+		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+		<!-- Summit XL base -->
+		<xacro:rbwatcher_base prefix="${prefix}" publish_bf="true" hq="${hq}" />
+		
+		<xacro:summit_hm_structure prefix="${prefix}top_structure" parent="${prefix}base_link" mesh_file="${top_structure_mesh}" >
+			<origin xyz="${top_structure_x} ${top_structure_y} ${top_structure_z}" rpy="0 0 0"/>
+		</xacro:summit_hm_structure>
+
+    	<!-- IMU -->
+    	<xacro:sensor_vectornav         
+    	frame_prefix="$(arg prefix)vectornav_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+    	  	<origin xyz="-0.03534 0.132 0.16109" rpy="0 0 0"/>
+    	</xacro:sensor_vectornav>
+    	
+    	<!-- RGBD -->
+    	<xacro:sensor_intel_realsense_d435 
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_camera"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)"
+        topic_prefix="front_rgbd_camera">
+	<origin xyz="0.29881 0.0 0.15243" rpy="0 0 0"/>
+    	</xacro:sensor_intel_realsense_d435>
+
+	<xacro:sensor_intel_realsense_d435 
+        frame_prefix="$(arg prefix)rear_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="rear_camera"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)"
+        topic_prefix="rear_rgbd_camera">
+		<origin xyz="-0.308 0.0 0.18308" rpy="0 ${-PI} 0"/>
+    	</xacro:sensor_intel_realsense_d435>
+
+        <!-- GPS -->
+        <xacro:sensor_ublox frame_prefix="$(arg prefix)gps" topic_prefix="gps" parent="$(arg prefix)base_link" node_namespace="$(arg namespace)">
+            <origin xyz="-0.24824 0.095 0.76359" rpy="0 0 0"/>
+        </xacro:sensor_ublox>
+
+    	<!-- LIDAR -->
+    	<xacro:sensor_robosense_helios_16p frame_prefix="$(arg prefix)top_3d_laser" node_namespace="$(arg namespace)" topic_prefix="top_3d_laser" parent="$(arg prefix)base_link" gpu="$(arg gpu)" simulation="$(arg gazebo_ignition)">
+    	  	<origin xyz="-0.11924 0.0 0.38609" rpy="0 0 0"/>
+    	</xacro:sensor_robosense_helios_16p>
+
+		<!-- Antenna -->
+		<xacro:sensor_antena_std prefix="$(arg prefix)antenna" parent="$(arg prefix)base_link" mesh_file="${antenna_mesh}">
+			<origin xyz="-0.24124 0.0 0.31109" rpy="0 0 0"/>
+		</xacro:sensor_antena_std>
+
+		<!-- PTZ camera -->
+		<xacro:unless value="${leika}">
+			<xacro:sensor_link_750_nh prefix="$(arg prefix)top_ptz_camera" topic_prefix="top_ptz_camera" parent="$(arg prefix)base_link" fps="15.0"
+			node_namespace="$(arg namespace)">
+				<origin xyz="-0.11808 0 0.55429" rpy="0 0 0"/>
+			</xacro:sensor_link_750_nh>
+		</xacro:unless>
+		
+		<!-- Leika Laser -->
+		<xacro:if value="${leika}">
+			<xacro:sensor_blk_arc prefix="$(arg prefix)top_ptz_camera" parent="$(arg prefix)base_link">
+				<origin xyz="-0.11808 0 0.65" rpy="0 0 0"/>
+			</xacro:sensor_blk_arc>
+		</xacro:if>
+
+		<xacro:rbwatcher_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+
+   </xacro:macro>
+
+   <xacro:rbwatcher prefix="$(arg prefix)" publish_bf="true" hq="true" kinematics="$(arg kinematics)"/>
+
+
+</robot>

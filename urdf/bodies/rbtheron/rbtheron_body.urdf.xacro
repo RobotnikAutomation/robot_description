@@ -34,12 +34,12 @@
       <origin xyz="0 0 0" rpy="0 0 0" />
       <xacro:if value="${hq}">
       <geometry>
-      <mesh filename="package://robotnik_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+      <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
       </geometry>
       </xacro:if>
       <xacro:unless value="${hq}">
       <geometry>
-        <mesh filename="package://robotnik_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+        <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
       </geometry>
       </xacro:unless>
       <material name="black">
@@ -49,7 +49,7 @@
     <collision>
        <origin xyz="0 0 0" rpy="0 0 0" />
        <geometry>
-        <mesh filename="package://robotnik_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
+        <mesh filename="package://robot_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
        </geometry>
     </collision>
   </link>
@@ -63,7 +63,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://robotnik_description/meshes/bases/robotnik_logo_chasis.stl"/>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
     </geometry>
     <material name="darkgrey">
       <color rgba="0.5 0.5 0.5 1"/>
@@ -82,7 +82,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://robotnik_description/meshes/bases/robotnik_logo_chasis.stl"/>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
     </geometry>
     <material name="darkgrey">
       <color rgba="0.5 0.5 0.5 1"/>
@@ -101,7 +101,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://robotnik_description/meshes/bases/robotnik_logo_chasis.stl"/>
+      <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
     </geometry>
     <material name="darkgrey">
       <color rgba="0.5 0.5 0.5 1"/>
@@ -120,7 +120,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
-    <mesh filename="package://robotnik_description/meshes/bases/robotnik_logo_chasis.stl"/>
+    <mesh filename="package://robot_description/meshes/bases/robotnik_logo_chasis.stl"/>
     </geometry>
     <material name="darkgrey">
       <color rgba="0.5 0.5 0.5 1"/>

@@ -10,17 +10,16 @@
 	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
 	<!-- Import rbtheron macro -->
-	<xacro:include filename="$(find robotnik_description)/urdf/bases/rbtheron/rbtheron_base.xacro"/>
+	<xacro:include filename="$(find robot_description)/urdf/bases/rbtheron/rbtheron_base.xacro"/>
 
-    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbtheron.ros2_control.urdf" />
-	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbtheron/rbtheron_control.urdf.xacro"/>
-	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbtheron/rbtheron_control.urdf.xacro"/>
+    <xacro:include filename="$(find robot_description)/urdf/base_hw/rbtheron.ros2_control.urdf" />
+	<xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbtheron/rbtheron_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
 	<!-- Import Elevator -->
-	<xacro:include filename="$(find robotnik_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
+	<xacro:include filename="$(find robot_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
 
 
 	<!-- ***************** -->
@@ -42,7 +41,6 @@
 	<xacro:arg name="namespace" default="robot"/>
 	<xacro:arg name="prefix" default="robot_"/>
 	<xacro:arg name="gazebo_classic" default="false"/>
-	<xacro:arg name="gazebo_ignition" default="false"/>
 
     <!-- <xacro:arg name="has_elevator" default="false" /> -->
 
@@ -71,13 +69,8 @@
 		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
 	</xacro:if>
-	<xacro:if value="$(arg gazebo_ignition)">
-		<xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-	</xacro:if>
-    <xacro:unless value="$(arg gazebo_classic)">
-        <xacro:unless value="$(arg gazebo_ignition)">
-            <xacro:rbtheron_base_hw_controller/>
-        </xacro:unless>
-    </xacro:unless>
+  <xacro:unless value="$(arg gazebo_classic)">
+    <xacro:rbtheron_base_hw_controller/>
+  </xacro:unless>
 
 </robot>

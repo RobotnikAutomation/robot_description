@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find robotnik_description)/urdf/wheels/wheel.gazebo.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/wheels/wheel.gazebo.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel.urdf.xacro" />
 
   <xacro:property name="M_PI" value="3.1415926535897931" />
   <!-- Wheels -->
@@ -50,7 +50,7 @@
             <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
           </xacro:unless>
           <geometry>
-            <mesh filename="package://robotnik_description/meshes/wheels/mw_frame.stl" />
+            <mesh filename="package://robot_description/meshes/wheels/mw_frame.stl" />
           </geometry>
         </xacro:if>
 
@@ -63,7 +63,7 @@
             <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
           </xacro:unless>
           <geometry>
-            <mesh filename="package://robotnik_description/meshes/wheels/mw_frame.stl" />
+            <mesh filename="package://robot_description/meshes/wheels/mw_frame.stl" />
           </geometry>
         </xacro:unless>
 
@@ -81,7 +81,7 @@
           <origin xyz="0 0 0.0" rpy="0 0 ${M_PI}" />
         </xacro:unless>
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/wheels/mw_frame.stl" />
+          <mesh filename="package://robot_description/meshes/wheels/mw_frame.stl" />
         </geometry>
       </collision>
 

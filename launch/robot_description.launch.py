@@ -68,7 +68,7 @@ def generate_launch_description():
     arg = ExtendedArgument(
         name='robot_xacro_path',
         description='Path to the xacro file',
-        default_value=[FindPackageShare('robotnik_description'), '/robots/', robot, '/', robot_model, '.urdf.xacro'],
+        default_value=[FindPackageShare('robot_description'), '/robots/', robot, '/', robot_model, '.urdf.xacro'],
         use_env=True,
         environment='ROBOT_XACRO_PATH',
     )
