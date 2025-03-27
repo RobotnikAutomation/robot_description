@@ -29,21 +29,21 @@
 
   		<xacro:rbkairos_plus_body prefix="${prefix}"/>
 
-  		<xacro:mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
 			xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:mecanum_wheel>
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
 			xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:mecanum_wheel>
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
 			xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:mecanum_wheel>
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
 			xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:mecanum_wheel>
+  		</xacro:rbkairos_mecanum_wheel>
 
      </xacro:macro>
 
