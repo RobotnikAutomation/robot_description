@@ -193,19 +193,19 @@ And finally, the robot macro definition which includes calling the macro body (c
 
   		<xacro:rbkairos_plus_body />
 
-  		<xacro:omni_wheel robot_id="rbkairos_front_right" parent="rbkairos_base_link" reflect="false" hq="true">
+  		<xacro:omni_wheel prefix="rbkairos_front_right" parent="rbkairos_base_link" reflect="false" hq="true">
   			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   		</xacro:omni_wheel>
 
-  		<xacro:omni_wheel robot_id="rbkairos_front_left" parent="rbkairos_base_link" reflect="true" hq="true">
+  		<xacro:omni_wheel prefix="rbkairos_front_left" parent="rbkairos_base_link" reflect="true" hq="true">
   			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   		</xacro:omni_wheel>
 
-  		<xacro:omni_wheel robot_id="rbkairos_back_left" parent="rbkairos_base_link" reflect="true" hq="true">
+  		<xacro:omni_wheel prefix="rbkairos_back_left" parent="rbkairos_base_link" reflect="true" hq="true">
   			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   		</xacro:omni_wheel>
 
-  		<xacro:omni_wheel robot_id="rbkairos_back_right" parent="rbkairos_base_link" reflect="false" hq="true">
+  		<xacro:omni_wheel prefix="rbkairos_back_right" parent="rbkairos_base_link" reflect="false" hq="true">
   			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
   		</xacro:omni_wheel>
 
