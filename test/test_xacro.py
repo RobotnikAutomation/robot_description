@@ -40,12 +40,19 @@ for root, dirs, files in os.walk(package_share_directory):
 
 @pytest.mark.parametrize('xacro_file', xacro_files)
 def test_xacro_file(xacro_file):
-    (_, tmp_urdf_output_file) = tempfile.mkstemp(suffix=".urdf")
+    (fd, tmp_urdf_output_file) = tempfile.mkstemp(suffix=".urdf")
+    os.close(fd)
 
     namespace = "robot"
     frame_prefix = "robot"
     gazebo_classic = "False"
     gazebo_ignition = "False"
+
+    xacro_path = shutil.which('xacro')
+    assert xacro_path, "xacro is not installed"
+
+    check_urdf_path = shutil.which('check_urdf')
+    assert check_urdf_path, "check_urdf is not installed"
 
     xacro_command = (
         f"{ shutil.which('xacro') }"
@@ -64,18 +71,18 @@ def test_xacro_file(xacro_file):
     try:
         # Generate URDF file
         print(f"running: {xacro_command}")
-        xacro_process = subprocess.Popen(
-            xacro_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
+        xacro_process = subprocess.run(
+            xacro_command, capture_output=True, text=True, shell=True
         )
-        assert xacro_process.wait() == 0, f"> xacro failed: {xacro_process.stderr.read().decode()}"
-        assert os.path.exists(tmp_urdf_output_file), f"> xacro failed: {xacro_process.stderr.read().decode()}"
+        assert xacro_process.returncode == 0, f"> xacro failed: {xacro_process.stderr}"
+        assert os.path.exists(tmp_urdf_output_file), f"> xacro failed, output file not found: {tmp_urdf_output_file}"
 
         # Check URDF file
         print(f"running: {check_command}")
-        check_process = subprocess.Popen(
-            check_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
+        check_process = subprocess.run(
+            check_command, capture_output=True, text=True, shell=True
         )
-        assert check_process.wait() == 0, f"> check_urdf failed: {check_process.stderr.read().decode()}"
+        assert check_process.returncode == 0, f"> check_urdf failed: {check_process.stderr}"
 
         # Check meshes
         check_meshes(tmp_urdf_output_file)
