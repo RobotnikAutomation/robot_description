@@ -34,24 +34,24 @@
 		<xacro:rbtheron_body prefix="${prefix}" hq="${hq}" />
 
 		<!-- WHEELS -->
-		<xacro:rubber_wheel robot_id="${prefix}right" parent="${prefix}base_link" hq="${hq}">
+		<xacro:rubber_wheel prefix="${prefix}right_" parent="${prefix}base_link" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
-		<xacro:rubber_wheel robot_id="${prefix}left" parent="${prefix}base_link" hq="${hq}">
+		<xacro:rubber_wheel prefix="${prefix}left_" parent="${prefix}base_link" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rubber_wheel>
 
 		<!-- Castor wheels-->
-		<xacro:caster robot_id="${prefix}front_left" parent="${prefix}base_link" hq="${hq}" use_sim="true">
+		<xacro:caster prefix="${prefix}front_left_" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="${prefix}front_right" parent="${prefix}base_link" hq="${hq}" use_sim="true">
+		<xacro:caster prefix="${prefix}front_right_" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="${prefix}rear_left" parent="${prefix}base_link" hq="${hq}" use_sim="true">
+		<xacro:caster prefix="${prefix}rear_left_" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${-castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
-		<xacro:caster robot_id="${prefix}rear_right" parent="${prefix}base_link" hq="${hq}" use_sim="true">
+		<xacro:caster prefix="${prefix}rear_right_" parent="${prefix}base_link" hq="${hq}" use_sim="true">
 			<origin xyz="${-castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0"/>
 		</xacro:caster>
 

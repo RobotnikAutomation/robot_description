@@ -9,19 +9,19 @@
               izz="${m*(3*r*r+h*h)/12}" />
   </xacro:macro>
 
-  <xacro:macro name="rubber_wheel" params="robot_id parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5">
+  <xacro:macro name="rubber_wheel" params="prefix parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5">
 
 <!--WHEEL TIRE -->
-    <joint name="${robot_id}_wheel_joint" type="continuous">
+    <joint name="${prefix}wheel_joint" type="continuous">
       <parent link="${parent}"/>
-      <child link="${robot_id}_wheel"/>
+      <child link="${prefix}wheel"/>
       <xacro:insert_block name="origin" />
       <axis xyz="0 1 0" rpy="0 0 0" />
       <limit effort="100" velocity="100"/>
       <joint_properties damping="0.5" friction="2.0"/>
     </joint>
 
-    <link name="${robot_id}_wheel">
+    <link name="${prefix}wheel">
       <visual>
         <!-- HIGH RESOLUTION WHEELS -->
         <xacro:if value="${hq}">
@@ -57,7 +57,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${robot_id}_wheel">
+    <gazebo reference="${prefix}wheel">
 			<!-- <material>Gazebo/Black</material> -->
       <mu1>0.9</mu1>
       <mu2>0.5</mu2>
