@@ -3,9 +3,9 @@
 
     <xacro:property name="M_PI" value="3.1415926535897931" />
     <!-- Wheels -->
-    <xacro:property name="omni_wheel_radius" value="0.127" />
-    <xacro:property name="omni_wheel_height" value="0.087" />
-    <xacro:property name="omni_wheel_mass" value="6.5" /> <!-- in kg-->
+    <xacro:property name="mecanum_wheel_radius" value="0.127" />
+    <xacro:property name="mecanum_wheel_height" value="0.087" />
+    <xacro:property name="mecanum_wheel_mass" value="6.5" /> <!-- in kg-->
 
 
     <xacro:macro name="cylinder_inertia" params="m r h">
@@ -14,7 +14,7 @@
             izz="${m*(3*r*r+h*h)/12}" />
     </xacro:macro>
 
-    <xacro:macro name="omni_wheel" params="prefix parent *origin reflect hq">
+    <xacro:macro name="mecanum_wheel" params="prefix parent *origin reflect hq">
 
         <joint name="${prefix}wheel_joint" type="continuous">
             <parent link="${parent}" />
@@ -40,15 +40,15 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <sphere radius="${omni_wheel_radius}" />
+                    <sphere radius="${mecanum_wheel_radius}" />
                 </geometry>
             </collision>
 
             <inertial>
-                <mass value="${omni_wheel_mass}" />
+                <mass value="${mecanum_wheel_mass}" />
                 <origin xyz="0 0 0" />
-                <xacro:cylinder_inertia m="${omni_wheel_mass}" r="${omni_wheel_radius}"
-                    h="${omni_wheel_height}" />
+                <xacro:cylinder_inertia m="${mecanum_wheel_mass}" r="${mecanum_wheel_radius}"
+                    h="${mecanum_wheel_height}" />
             </inertial>
         </link>
 
@@ -86,14 +86,14 @@
                     <origin xyz="0 0 0" rpy="0 0 ${PI/4}" />
                         <geometry>
                             <mesh
-                                filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel_1.dae" />
+                                filename="package://robotnik_description/meshes/wheels/mecanum_wheel/mecanum_wheel_1.dae" />
                         </geometry>
                     </xacro:if>
                     <xacro:unless value="${reflect}">
                     <origin xyz="0 0 0" rpy="0 0 ${-PI/4}" />
                         <geometry>
                             <mesh
-                                filename="package://robotnik_description/meshes/wheels/omni_wheel/omni_wheel_2.dae" />
+                                filename="package://robotnik_description/meshes/wheels/mecanum_wheel/mecanum_wheel_2.dae" />
                         </geometry>
                     </xacro:unless>
                 </xacro:if>
@@ -101,7 +101,7 @@
                 <xacro:unless value="${hq}">
                     <origin xyz="0 0 0" rpy="0 0 0" />
                     <geometry>
-                        <sphere radius="${omni_wheel_radius}" />
+                        <sphere radius="${mecanum_wheel_radius}" />
                     </geometry>
                 </xacro:unless>
 
@@ -118,10 +118,10 @@
             </collision>
 
             <inertial>
-                <mass value="${omni_wheel_mass}" />
+                <mass value="${mecanum_wheel_mass}" />
                 <origin xyz="0 0 0" />
-                <xacro:cylinder_inertia m="${omni_wheel_mass}" r="${omni_wheel_radius}"
-                    h="${omni_wheel_height}" />
+                <xacro:cylinder_inertia m="${mecanum_wheel_mass}" r="${mecanum_wheel_radius}"
+                    h="${mecanum_wheel_height}" />
             </inertial>
 
         </link>

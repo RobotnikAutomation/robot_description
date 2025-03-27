@@ -12,7 +12,7 @@
 	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbrobout/rbrobout_body.urdf.xacro" />
 
 	<!-- Import RB-Robout wheels -->
-  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/omni_wheel/rbrobout_omni_wheel.urdf.xacro" />
+  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbrobout_mecanum_wheel.urdf.xacro" />
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -38,21 +38,21 @@
 		<xacro:rbrobout_body prefix="${prefix}" />
 
 		<!-- Wheels -->
-		<xacro:rbrobout_omni_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${PI/4}"/>
-		</xacro:rbrobout_omni_wheel>
+		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${-PI/4}"/>
-		</xacro:rbrobout_omni_wheel>
+		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${PI/4}"/>
-		</xacro:rbrobout_omni_wheel>
+		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${-PI/4}"/>
-		</xacro:rbrobout_omni_wheel>
+		</xacro:rbrobout_mecanum_wheel>
 
    </xacro:macro>
 
