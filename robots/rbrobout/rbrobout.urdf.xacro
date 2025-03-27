@@ -8,8 +8,11 @@
   <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
   <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
+
+  <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
+  
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- Properties and Arguments -->

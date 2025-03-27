@@ -3,9 +3,9 @@
 
   <xacro:macro name="rbrobout_body" params="prefix:=robot_">
 
-      <!-- Robot mechanical and motor parameters -->
-      <xacro:property name="PI" value="3.1415926535897931"/>
-     <xacro:property name="wheel_radius" value="0.127" />
+    <!-- Robot mechanical and motor parameters -->
+    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="wheel_radius" value="0.127" />
 
       <!-- BASE FOOTPRINT -->
         <link name="${prefix}base_footprint">
@@ -33,7 +33,7 @@
           <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-        <mesh filename="package://robotnik_description/meshes/bases/rbrobout/robout_chassis.stl"/>
+        <mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_chassis.stl"/>
         </geometry>
         <material name="darkgrey">
         <color rgba="0.1 0.1 0.1 1"/>
@@ -42,7 +42,7 @@
           <collision>
              <origin xyz="0 0 0" rpy="0 0 0 " />
              <geometry>
-               <mesh filename="package://robotnik_description/meshes/bases/rbrobout/robout_chassis.stl"/>
+               <mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_chassis.stl"/>
              </geometry>
           </collision>
       </link>

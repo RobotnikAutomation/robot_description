@@ -19,10 +19,6 @@
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-	<!-- Import Elevator -->
-	<xacro:include filename="$(find robotnik_description)/urdf/structures/elevator/rb_theron_elevator.urdf.xacro"/>
-
-
 	<!-- ***************** -->
 	<!-- Global parameters -->
 	<!-- ***************** -->
@@ -34,37 +30,28 @@
 	<!-- Flag to select the high or low quality model -->
 	<xacro:property name="hq" value="true" />
 
-	<!-- ELEVATOR PARAMETERS -->
-	<xacro:property name="elevator_x" value="0.0" />
-	<xacro:property name="elevator_y" value="0.0" />
-	<xacro:property name="elevator_z" value="0.2238" />
-
 	<xacro:arg name="namespace" default="robot"/>
 	<xacro:arg name="prefix" default="robot_"/>
 	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
-    <!-- <xacro:arg name="has_elevator" default="false" /> -->
-
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 
 	<xacro:rbtheron prefix="$(arg prefix)" hq="${hq}"/>
 
-  	<!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
-
-
-	<!-- ELEVATOR_PLATFORM -->
-	<!-- <xacro:if value="$(arg has_elevator)">
-		<xacro:elevator_platform robot_id="rbtheron_elevator" parent="rbtheron_base_link" hq="${hq}">
-			<origin xyz="${elevator_x} -${elevator_y} ${elevator_z}" rpy="1.5708 0 1.5708"/>
-		</xacro:elevator_platform>
-	</xacro:if> -->
-
 	<!-- SENSORS -->
+    <xacro:property name="imu_offset_x" value="-0.1975"/>
+    <xacro:property name="imu_offset_y" value="0.0"/>
+    <xacro:property name="imu_offset_z" value="0.1598"/>
 
-	<!-- <xacro:sensor_vectornav prefix="rbtheron_" parent="rbtheron_base_link" topic="imu/data">
-		<origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0"/>
-    </xacro:sensor_vectornav> -->
+    <xacro:sensor_vectornav
+        frame_prefix="$(arg prefix)vectornav_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_vectornav>
 
 	<!-- Controllers -->
 	<xacro:if value="$(arg gazebo_classic)">

@@ -9,8 +9,7 @@
               izz="${m*(3*r*r+h*h)/12}" />
   </xacro:macro>
 
-  <xacro:macro name="rubber_wheel" params="robot_id parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5
-                                          mesh_file:=robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_right">
+  <xacro:macro name="rubber_wheel" params="robot_id parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5">
 
 <!--WHEEL TIRE -->
     <joint name="${robot_id}_wheel_joint" type="continuous">
@@ -33,7 +32,7 @@
             <origin xyz="0 0 0" rpy="${M_PI} 0 0" />
           </xacro:if>
           <geometry>
-							<mesh filename="package://${mesh_file}.dae" />	
+							<mesh filename="package://robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel.dae" />	
           </geometry>
         </xacro:if>
        <!-- LOW RESOLUTION WHEELS -->

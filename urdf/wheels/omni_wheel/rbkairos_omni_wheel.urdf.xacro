@@ -14,18 +14,18 @@
             izz="${m*(3*r*r+h*h)/12}" />
     </xacro:macro>
 
-    <xacro:macro name="omni_wheel" params="robot_id parent *origin reflect hq">
+    <xacro:macro name="omni_wheel" params="prefix parent *origin reflect hq">
 
-        <joint name="${robot_id}_wheel_joint" type="continuous">
+        <joint name="${prefix}wheel_joint" type="continuous">
             <parent link="${parent}" />
-            <child link="${robot_id}_wheel_link" />
+            <child link="${prefix}wheel_link" />
             <xacro:insert_block name="origin" />
             <axis xyz="0 1 0" rpy="0 0 0" />
             <limit effort="100000" velocity="100" />
             <!-- <joint_properties damping="1.0" friction="1.0"/> -->
         </joint>
 
-        <link name="${robot_id}_wheel_link">
+        <link name="${prefix}wheel_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
@@ -52,7 +52,7 @@
             </inertial>
         </link>
 
-        <gazebo reference="${robot_id}_wheel_link">
+        <gazebo reference="${prefix}wheel_link">
             <collision>
                 <surface>
                     <friction>
@@ -73,13 +73,13 @@
             </collision>
         </gazebo>
 
-        <joint name="${robot_id}_visual_wheel_joint" type="fixed">
+        <joint name="${prefix}visual_wheel_joint" type="fixed">
             <parent link="${parent}" />
-            <child link="${robot_id}_visual_wheel_link" />
+            <child link="${prefix}visual_wheel_link" />
             <xacro:insert_block name="origin" />
         </joint>
 
-        <link name="${robot_id}_visual_wheel_link">
+        <link name="${prefix}visual_wheel_link">
             <visual>
                 <xacro:if value="${hq}">
                     <xacro:if value="${reflect}">

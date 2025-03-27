@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+  <xacro:macro name="top_cover" params="prefix parent *origin">
+
+    <joint name="${prefix}top_cover_base_joint" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}top_cover_base_link" />
+      </joint>
+
+    <!-- BASE_LINK -->
+    <link name="${prefix}top_cover_base_link">
+    <inertial>
+        <mass value="200.0" />
+        <origin xyz="0 0 0" />
+        <!-- TODO -->
+        <inertia  ixx="1.391" ixy="0.004"  ixz="0.0"  iyy="6.853"  iyz="0.0"  izz="6.125" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_top_cover.stl"/>
+        </geometry>
+        <material name="darkgrey">
+            <color rgba="0.1 0.1 0.1 1"/>
+        </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0 " />
+        <geometry>
+            <mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_top_cover.stl"/>
+        </geometry>
+    </collision>
+    </link>
+
+        <!-- DOCKING CONTACTS -->
+        <!-- <joint name="${prefix}base_docking_joint" type="fixed">
+            <origin xyz="0.284 0.012 0.068" rpy="0 0 0 " />
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}base_docking_contact_link" />
+        </joint> -->
+
+        <!-- DOCKING LINK -->
+        <!-- <link name="${prefix}base_docking_contact_link" /> -->
+
+  </xacro:macro>
+</robot>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:include filename="$(find robotnik_description)/urdf/structures/inertia.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/inertia.urdf.xacro" />
 
   <xacro:macro name="rbsummit_body" params="prefix:=robot_ hq:=true">
 

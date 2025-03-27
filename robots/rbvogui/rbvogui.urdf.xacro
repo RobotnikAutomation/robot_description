@@ -11,11 +11,11 @@
     <xacro:include filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
 
     <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbvogui.ros2_control.urdf" />
+    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
     <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_control.urdf.xacro" />
 
     <!-- Import all available sensors -->
     <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/urdf/structures/sensor_support/gps_mast.urdf.xacro" />
 
     <!-- Flag to select the high or low quality model -->
     <xacro:property name="hq" value="true" />

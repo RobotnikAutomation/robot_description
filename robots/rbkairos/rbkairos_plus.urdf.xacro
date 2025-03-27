@@ -14,7 +14,6 @@
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_control.urdf.xacro" />
 
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/structures/rbkairos_chassis/structure_hokuyo.urdf.xacro" />
 
   <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
 

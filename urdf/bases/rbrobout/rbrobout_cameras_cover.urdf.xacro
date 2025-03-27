@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+  <xacro:macro name="cameras_cover" params="prefix parent *origin">
+
+	<joint name="${prefix}cameras_cover_base_joint" type="fixed">
+		<xacro:insert_block name="origin" />
+		<parent link="${parent}"/>
+		<child link="${prefix}cameras_cover_base_link" />
+  	</joint>
+
+	<!-- BASE_LINK -->
+	<link name="${prefix}cameras_cover_base_link">
+		<inertial>
+			<mass value="200.0" />
+			<origin xyz="0 0 0" />
+			<!-- TODO -->
+			<inertia  ixx="1.391" ixy="0.004"  ixz="0.0"  iyy="6.853"  iyz="0.0"  izz="6.125" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 -${PI/2}" />
+			<geometry>
+				<mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_cameras_cover.stl"/>
+			</geometry>
+			<material name="grey">
+				<color rgba="0.5 0.5 0.5 5"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 -${PI/2}" />
+			<geometry>
+				<mesh filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_cameras_cover.stl"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="${prefix}cameras_cover_camera_left_joint" type="fixed">
+		<parent link="${prefix}cameras_cover_base_link"/>
+		<child link="${prefix}cameras_cover_camera_left_link" />
+		<origin xyz="-0.013 0.089 0" rpy="0 0 -0.4363"/>
+  	</joint>
+	<link name="${prefix}cameras_cover_camera_left_link"/>
+
+	<joint name="${prefix}cameras_cover_camera_left_optical_joint" type="fixed">
+		<parent link="${prefix}cameras_cover_camera_left_link"/>
+		<child link="${prefix}cameras_cover_camera_left_optical_frame" />
+		<origin xyz="-0.0 0.0 0" rpy="-${PI/2} 0 -${PI/2}"/>
+  	</joint>
+	<link name="${prefix}cameras_cover_camera_left_optical_frame"/>
+
+	<joint name="${prefix}cameras_cover_camera_right_joint" type="fixed">
+		<parent link="${prefix}cameras_cover_base_link"/>
+		<child link="${prefix}cameras_cover_camera_right_link" />
+		<origin xyz="-0.013 -0.089 0" rpy="0 0 0.4363"/>
+  	</joint>
+	<link name="${prefix}cameras_cover_camera_right_link"/>
+
+	<joint name="${prefix}cameras_cover_camera_right_optical_joint" type="fixed">
+		<parent link="${prefix}cameras_cover_camera_right_link"/>
+		<child link="${prefix}cameras_cover_camera_right_optical_frame" />
+		<origin xyz="-0.0 0.0 0" rpy="-${PI/2} 0 -${PI/2}"/>
+  	</joint>
+	<link name="${prefix}cameras_cover_camera_right_optical_frame"/>
+
+
+	  
+
+  </xacro:macro>
+</robot>
