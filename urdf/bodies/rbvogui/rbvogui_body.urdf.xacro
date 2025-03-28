@@ -23,7 +23,7 @@
 
     <!-- Chassis -->
     <joint name="${prefix}chassis_joint" type="fixed">
-      <origin xyz="-0.012 0 0.1775" rpy="0 0 0" /> <!-- Modificar para cada vogui -->
+      <origin xyz="-0.012 0 0.1775" rpy="0 0 0" />
       <parent link="${prefix}base_link"/>
       <child link="${prefix}chassis_link" />
     </joint>
