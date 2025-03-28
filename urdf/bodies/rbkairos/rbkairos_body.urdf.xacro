@@ -52,12 +52,12 @@
   </gazebo>
 
 
-  <!-- CHAPAS INOX TAPAS -->
-  <link name="${prefix}base_chapa">
+  <!-- TOP COVER -->
+  <link name="${prefix}top_cover">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://robotnik_description/meshes/bases/rbkairos/rbkairos_chapas_inox_tapas.stl"/>
+      <mesh filename="package://robotnik_description/meshes/bases/rbkairos/rbkairos_top_cover.stl"/>
     </geometry>
     <material name="darkgrey">
       <color rgba="0.5 0.5 0.5 1"/>
@@ -65,13 +65,13 @@
     </visual>
   </link>
 
-  <joint name="${prefix}base_tapa_joint" type="fixed">
+  <joint name="${prefix}top_cover_joint" type="fixed">
     <origin xyz="0.0 0 0.38062" rpy="0 0 0" />
     <parent link="${prefix}base_link"/>
-    <child link="${prefix}base_chapa" />
+    <child link="${prefix}top_cover" />
   </joint>
 
-  <!-- LOGO ROBOTNIK IZQUIERDO -->
+  <!-- LOGO ROBOTNIK LEFT -->
   <link name="${prefix}base_logo_left">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
@@ -90,7 +90,7 @@
     <child link="${prefix}base_logo_left" />
   </joint>
 
-  <!-- LOGO ROBOTNIK DERECHO -->
+  <!-- LOGO ROBOTNIK RIGHT -->
   <link name="${prefix}base_logo_right">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
@@ -109,7 +109,7 @@
     <child link="${prefix}base_logo_right" />
   </joint>
 
-  <!-- LOGO ROBOTNIK FRONTAL -->
+  <!-- LOGO ROBOTNIK FRONT -->
   <link name="${prefix}base_logo_front">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
@@ -128,7 +128,7 @@
     <child link="${prefix}base_logo_front" />
   </joint>
 
-  <!-- LOGO ROBOTNIK TRASERO -->
+  <!-- LOGO ROBOTNIK REAR -->
   <link name="${prefix}base_logo_rear">
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />

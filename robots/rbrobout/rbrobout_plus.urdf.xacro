@@ -18,7 +18,7 @@
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
-  <!-- xacro:include filename="$(find ewellix_description)/urdf/ewellix_lift_900mm.urdf.xacro" / -->
+  <xacro:include filename="$(find robotnik_description)/urdf/structures/ewellix/all_ewellix_lift.urdf.xacro" />
 
   <!-- Properties and Arguments -->
 
@@ -76,21 +76,20 @@
   <xacro:property name="lift_orientation_p" value="0"/>
   <xacro:property name="lift_orientation_y" value="0"/>
 
-  <xacro:rbrobout prefix="$(arg prefix)"/>
+  <xacro:rbrobout prefix="$(arg prefix)"  gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
   <xacro:top_cover prefix="$(arg prefix)" parent="$(arg prefix)base_link">
       <origin xyz="0 0 0" rpy="0 0 0"/>
   </xacro:top_cover>
 
-  <!-- xacro:ewellix_lift_900mm prefix="$(arg prefix)lift_" parent="$(arg prefix)base_link">
+  <xacro:ewellix_lift_900mm prefix="$(arg prefix)lift_" parent="$(arg prefix)base_link">
       <origin xyz="${lift_position_x} 0 ${lift_position_z}" rpy="0 0 0"/>
-  </xacro:ewellix_lift_900mm-->
-<!-- parent="$(arg prefix)lift_ewellix_lift_top_link"
-      -->
+  </xacro:ewellix_lift_900mm>
+
   <xacro:ur_robot
       tf_prefix="$(arg prefix)arm_"
       name="$(arg ur_type)"
-      parent="$(arg prefix)base_link"
+      parent="$(arg prefix)lift_ewellix_lift_top_link"
       joint_limits_parameters_file="$(arg joint_limit_params)"
       kinematics_parameters_file="$(arg kinematics_params)"
       physical_parameters_file="$(arg physical_params)"
