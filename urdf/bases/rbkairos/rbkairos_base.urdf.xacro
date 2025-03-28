@@ -10,7 +10,7 @@
   	<!-- Import summit XL base elements -->
 	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
 
-  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/omni_wheel/rbkairos_omni_wheel.urdf.xacro" />
+  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
 
   	<xacro:property name="PI" value="3.1415926535897931"/>
 
@@ -19,7 +19,7 @@
   	<xacro:property name="wheel_offset_y" value="0.2590" />
   	<xacro:property name="wheel_offset_z" value="0.0" />
 
-    <xacro:macro name="rbkairos" params="prefix:=robot_">
+    <xacro:macro name="rbkairos" params="prefix:=robot_ gazebo_classic:=false gazebo_ignition:=false">
 
   		<!-- *************** -->
   		<!-- Robots Elements -->
@@ -29,21 +29,21 @@
 
   		<xacro:rbkairos_plus_body prefix="${prefix}"/>
 
-  		<xacro:omni_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="true">
-  			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${PI/4}"/>
-  		</xacro:omni_wheel>
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+			xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:omni_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="true">
-  			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${-PI/4}"/>
-  		</xacro:omni_wheel>
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+			xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:omni_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="true">
-  			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${PI/4}"/>
-  		</xacro:omni_wheel>
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+			xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
+  		</xacro:rbkairos_mecanum_wheel>
 
-  		<xacro:omni_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="true">
-  			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 ${-PI/4}"/>
-  		</xacro:omni_wheel>
+  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+			xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
+  		</xacro:rbkairos_mecanum_wheel>
 
      </xacro:macro>
 

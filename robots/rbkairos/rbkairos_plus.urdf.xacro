@@ -60,7 +60,7 @@
 
   <!-- Kairos -->
 
-  <xacro:rbkairos prefix="$(arg prefix)"/>
+  <xacro:rbkairos prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
   <!-- Import UR arm -->
 

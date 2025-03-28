@@ -76,7 +76,7 @@
   <xacro:property name="lift_orientation_p" value="0"/>
   <xacro:property name="lift_orientation_y" value="0"/>
 
-  <xacro:rbrobout prefix="$(arg prefix)"/>
+  <xacro:rbrobout prefix="$(arg prefix)"  gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
   <xacro:top_cover prefix="$(arg prefix)" parent="$(arg prefix)base_link">
       <origin xyz="0 0 0" rpy="0 0 0"/>

@@ -34,7 +34,7 @@
   <xacro:property name="imu_offset_y" value="-0.3"/>
   <xacro:property name="imu_offset_z" value="0.0725"/>
 
-  <xacro:rbrobout prefix="$(arg prefix)"/>
+  <xacro:rbrobout prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
   <!-- IMU -->
     <xacro:sensor_vectornav
