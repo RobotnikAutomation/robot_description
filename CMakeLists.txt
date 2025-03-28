@@ -8,10 +8,11 @@ install(
     DIRECTORY launch meshes urdf robots simulators
     DESTINATION share/${PROJECT_NAME})
 
-install(DIRECTORY launch
-    DESTINATION lib/${PROJECT_NAME}
-)
-
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  ament_add_pytest_test(urdf_xacro test/test_xacro.py)
+endif()
 
 ament_package()
