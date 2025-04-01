@@ -9,27 +9,33 @@ Available robots are:
  - RB-Robout
  - RB-Summit
 
+## Quick Usage
+
+```
+ros2 launch robotnik_description robot_description.launch.py robot:=ROBOT [robot_model:=ROBOT_MODEL]
+```
+
+Launches the description of a ROBOT, specifically ROBOT_MODEL.
+
 ## Structure
 
-The description of a robot is divided in three parts:
+The description of a robot is divided into three parts:
 
-- **robot**: the whole robot, including all its parts and customizations.
-- **base**: the basic unit for each robot, composed of chassis + wheels.
-- **body**: the chassis of each robot.
-
+- **robot**: The whole robot, including all its parts and customizations.
+- **base**: The basic unit for each robot, composed of chassis + wheels.
+- **body**: The chassis of each robot.
 
 ![image](/img/robot_urdf.png)
 
+This repository contains three high-level folders:
 
-This repostory contains 3 high level folders:
+- **robots**: Contains the URDF for complete robots, including the mobile base, arms, sensors, etc.
+- **urdf**: Contains the URDF files of components that compose a robot.
+- **meshes**: Contains the 3D meshes for each individual component of the robots.
 
-- **robots**: contains the URDF for complete robots, that include the mobile base, arms, sensors, etc. 
-- **urdf**: contains the URDF files of components that compose a robot.
-- **meshes**: contains the 3D meshes for each individual component of the robots.
+### Robots
 
-### robots
-
-The robots folder contains a folder for each robot type:
+The `robots` folder contains a folder for each robot type:
 
  - rbkairos
  - rbrobout
@@ -37,79 +43,76 @@ The robots folder contains a folder for each robot type:
  - rbvogui
  - rbtheron
 
- Inside each robot type folder, there may exist several versions.
- 
-### urdf
+Inside each robot type folder, there may exist several versions.
 
-The urdf folder contains a folder for each main component:
+### URDF
 
-  - bases: body of robots + wheels + structures + arms.
-  - bodies: include chassis.
-  - structures: other structures that are included in a robot (columns, protection, elevator, support, etc.)
-  - wheels: with the different type of wheels.
+The `urdf` folder contains a folder for each main component:
 
+  - **bases**: Body of robots, including wheels, structures, and arms.
+  - **bodies**: Includes chassis.
+  - **structures**: Other structures included in a robot (e.g., columns, protection, elevator, support, etc.).
+  - **wheels**: Contains the different types of wheels.
 
 ## Launch
 
-The launch that can be found in this package run the robot state publisher node, publishing the topic robot_description.
+The launch files in this package run the `robot_state_publisher` node, publishing the topic `robot_description`.
 
 ### Nodes
 
-- **robot_state_publisher** (robot_state_publisher/robot_state_publisher)
+- **robot_state_publisher** (`robot_state_publisher/robot_state_publisher`)
 
-Standard robot_state_publisher node from [robot_state_publisher](https://github.com/ros/robot_state_publisher)
+  Standard `robot_state_publisher` node from [robot_state_publisher](https://github.com/ros/robot_state_publisher).
 
 ### Topics
 
-#### Input topics
+#### Input Topics
 
-- **joint_states** (sensor_msgs/msg/JointState)
+- **joint_states** (`sensor_msgs/msg/JointState`)
 
-The joint state updates to the robot poses
+  The joint state updates to the robot poses.
 
-#### Output topics
+#### Output Topics
 
-- **~/robot_description** (std_msgs/msg/String)
+- **~/robot_description** (`std_msgs/msg/String`)
 
-The description of the robot URDF as a string.
+  The description of the robot URDF as a string.
 
-- **tf** (std_msgs/msg/String)
+- **tf** (`std_msgs/msg/String`)
 
-The transforms corresponding to the movable joints of the robot.
+  The transforms corresponding to the movable joints of the robot.
 
-- **tf_static** (std_msgs/msg/String)
+- **tf_static** (`std_msgs/msg/String`)
 
-The transforms corresponding to the static joints of the robot.
+  The transforms corresponding to the static joints of the robot.
 
 ### Arguments
 
-- **namespace** (string, default: robot)
+- **namespace** (string, default: `robot`)
 
-Adds a namespace to this launch.
+  Adds a namespace to this launch.
 
-- **robot** (string, default: *rbvogui*)
+- **robot** (string, default: ``)
 
-Which robot select from folder [robots](#robots).
+  Specifies which robot to select from the [robots](#robots) folder.
 
-- **robot_model** (string, default: *same as robot*)
+- **robot_model** (string, default: same as `robot`)
 
-Specify the model to use, from  [robots](/robots/)
+  Specifies the model to use from the [robots](#robots) folder.
 
-- **robot_xacro_path** (string, default: *none*)
+- **robot_xacro_path** (string, default: `none`)
 
-Absolute path to specify a custom urdf/xacro robot description, discarding robot and robot_model arguments.
+  Absolute path to specify a custom URDF/Xacro robot description, discarding the `robot` and `robot_model` arguments.
 
-- **gazebo_classic** (boolean, default: False)
+- **gazebo_ignition** (boolean, default: `False`)
 
-Boolean to set if simulating in gazebo classic. To be deprecated.
+  Boolean to set if simulating in Gazebo Ignition.
+
+- **gazebo_classic** (boolean, default: `False`)
+
+  Boolean to set if simulating in Gazebo Classic. To be deprecated.
 
 ## Usage
-
-```
-ros2 launch robotnik_description robot_description.launch.py
-```
-
-Launches the description for the RB-Vogui, the default robot.
 
 ```
 ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos
@@ -118,15 +121,13 @@ ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos
 Launches the description for the RB-Kairos mobile base.
 
 ```
-ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_plus
 ```
 
 Launches the description for the RB-Kairos with a UR arm.
 
 ```
-ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_ur namespace:=robot_b
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_plus namespace:=robot_b
 ```
 
-Launches the description for the RB-Kairos with a UR arm, under the namespace robot_b
-
-
+Launches the description for the RB-Kairos with a UR arm, under the namespace `robot_b`.
