@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ***************** -->
+  <!-- Imported elements -->
+  <!-- ***************** -->
+
+  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+  <xacro:include filename="$(find robot_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/structures/ewellix/all_ewellix_lift.urdf.xacro" />
+  <xacro:include filename="$(find robot_description)/urdf/bases/rbrobout/rbrobout_top_cover.urdf.xacro" />
+
+  <!-- Properties and Arguments -->
+
+  <xacro:arg name="namespace" default="robot"/>
+  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="gazebo_classic" default="true"/>
+  <xacro:arg name="gazebo_ignition" default="false"/>
+
+  <xacro:property name="front_laser_offset_x" value="0.8"/>
+  <xacro:property name="front_laser_offset_y" value="0.3666"/>
+  <xacro:property name="front_laser_offset_z" value="-0.06"/>
+
+  <xacro:property name="rear_laser_offset_x" value="-0.8"/>
+  <xacro:property name="rear_laser_offset_y" value="-0.3666"/>
+  <xacro:property name="rear_laser_offset_z" value="-0.06"/>
+ 
+  <xacro:property name="imu_offset_x" value="0.242"/>
+  <xacro:property name="imu_offset_y" value="-0.053"/>
+  <xacro:property name="imu_offset_z" value="-0.028"/>
+  
+  <xacro:property name="front_rgbd_camera_offset_x" value="0.835"/>
+  <xacro:property name="front_rgbd_camera_offset_y" value="0.0"/>
+  <xacro:property name="front_rgbd_camera_offset_z" value="0.1555"/>
+
+  <xacro:property name="rear_rgbd_camera_offset_x" value="-0.835"/>
+  <xacro:property name="rear_rgbd_camera_offset_y" value="0.0"/>
+  <xacro:property name="rear_rgbd_camera_offset_z" value="0.1555"/>
+  
+  <xacro:property name="lift_position_x" value="0.72328"/>
+  <xacro:property name="lift_position_y" value="0"/>
+  <xacro:property name="lift_position_z" value="0.38"/>
+  <xacro:property name="lift_orientation_r" value="0"/>
+  <xacro:property name="lift_orientation_p" value="0"/>
+  <xacro:property name="lift_orientation_y" value="0"/>
+
+  <xacro:rbrobout prefix="$(arg prefix)"/>
+  
+  <xacro:top_cover prefix="$(arg prefix)" parent="$(arg prefix)base_link">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:top_cover>
+
+  <xacro:ewellix_lift_900mm prefix="$(arg prefix)lift_" parent="$(arg prefix)base_link">
+      <origin xyz="${lift_position_x} 0 ${lift_position_z}" rpy="0 0 0"/>
+  </xacro:ewellix_lift_900mm>
+
+  <!-- IMU -->
+    <xacro:sensor_vectornav
+        frame_prefix="$(arg prefix)vectornav_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_vectornav>
+   
+  <!-- Front Camera -->
+    <xacro:sensor_intel_realsense_d435
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_camera"
+        gazebo_ignition="$(arg gazebo_ignition)"
+        gazebo_classic="$(arg gazebo_classic)"
+        topic_prefix="front_rgbd_camera">
+        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_intel_realsense_d435>
+
+
+    <!-- Rear Camera -->
+    <xacro:sensor_intel_realsense_d435
+        frame_prefix="$(arg prefix)rear_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="rear_camera"
+        gazebo_ignition="$(arg gazebo_ignition)"
+        gazebo_classic="$(arg gazebo_classic)"
+        topic_prefix="rear_rgbd_camera">
+        <origin xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}" rpy="0 ${PI} 0"/>
+    </xacro:sensor_intel_realsense_d435>
+
+  <!-- 2d laser -->
+    <xacro:sensor_sick_microscan3
+        frame_prefix="$(arg prefix)front_laser_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_laser"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 0 ${1/4*PI}"/>
+    </xacro:sensor_sick_microscan3>
+
+    <!-- 2d laser -->
+    <xacro:sensor_sick_microscan3
+        frame_prefix="$(arg prefix)rear_laser_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="rear_laser"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 0 ${-3/4*PI}"/>
+    </xacro:sensor_sick_microscan3>
+
+    <!-- Controllers -->
+    <xacro:if value="$(arg gazebo_classic)">
+        <xacro:rbrobout_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+        <xacro:ros_planar_move_gazebo_classic/>
+    </xacro:if>
+    <xacro:if value="$(arg gazebo_ignition)">
+        <xacro:rbrobout_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+    </xacro:if>
+    <xacro:unless value="$(arg gazebo_classic)">
+        <xacro:unless value="$(arg gazebo_ignition)">
+            <xacro:rbrobout_base_hw_controller/>
+        </xacro:unless>
+    </xacro:unless>
+    
+</robot>

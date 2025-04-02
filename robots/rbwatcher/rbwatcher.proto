@@ -2,7 +2,7 @@
 # license: Apache License 2.0
 # license url: http://www.apache.org/licenses/LICENSE-2.0
 # This is a proto file for Webots for the rbwatcher
-# Extracted from: /home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/robots/rbwatcher/rbwatcher.urdf
+# Extracted from: /tmp/tmpu9etbf4b.urdf
 
 PROTO rbwatcher [
   field  SFVec3f     translation     0 0 0
@@ -14,7 +14,6 @@ PROTO rbwatcher [
   field  SFBool      supervisor      FALSE        # Is `Robot.supervisor`.
   field  SFBool      synchronization TRUE         # Is `Robot.synchronization`.
   field  SFBool      selfCollision   FALSE        # Is `Robot.selfCollision`.
-  field  MFNode      toolSlot        []           # Extend the robot with new nodes at the end of the arm.
 ]
 {
   Robot {
@@ -40,8 +39,15 @@ PROTO rbwatcher [
       Solid {
         translation 0.000000 0.000000 0.117500
         children [
-          DEF rbwatcher_body_visual CadShape {
-            url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/bases/rbwatcher/rbwatcher_body.dae"
+          Shape {
+            appearance DEF darkgrey PBRAppearance {
+              baseColor 0.100000 0.100000 0.100000
+              roughness 1.000000
+              metalness 0
+            }
+            geometry DEF rbwatcher_body Mesh {
+              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/bases/rbwatcher/rbwatcher_body.stl"
+            }
           }
           HingeJoint {
             jointParameters HingeJointParameters {
@@ -62,12 +68,12 @@ PROTO rbwatcher [
               translation 0.227950 -0.155000 0.000000
               children [
                 DEF rubber_wheel_v2_right_visual CadShape {
-                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.dae"
+                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.dae"
                 }
               ]
               name "robot_front_right_wheel"
               boundingObject DEF rubber_wheel_v2_right Mesh {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"
+                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"
               }
               physics Physics {
                 density -1
@@ -99,46 +105,13 @@ PROTO rbwatcher [
               translation 0.227950 0.155000 0.000000
               children [
                 DEF rubber_wheel_v2_left_visual CadShape {
-                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.dae"
+                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.dae"
                 }
               ]
               name "robot_front_left_wheel"
               boundingObject DEF rubber_wheel_v2_left Mesh {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"
+                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"
               }
-              physics Physics {
-                density -1
-                mass 4.000000
-                centerOfMass [ 0.000000 0.000000 0.000000 ]
-                inertiaMatrix [
-                  2.052758e-02 2.761250e-02 2.052758e-02
-                  0.000000e+00 0.000000e+00 0.000000e+00
-                ]
-              }
-            }
-          }
-          HingeJoint {
-            jointParameters HingeJointParameters {
-              axis 0.000000 1.000000 0.000000
-              anchor -0.227950 0.155000 0.000000
-            }
-            device [
-              RotationalMotor {
-                name "robot_back_left_wheel_joint"
-                maxVelocity 100.0
-                maxTorque 100.0
-              }
-              PositionSensor {
-                name "robot_back_left_wheel_joint_sensor"
-              }
-            ]
-            endPoint Solid {
-              translation -0.227950 0.155000 0.000000
-              children [
-                USE rubber_wheel_v2_left_visual
-              ]
-              name "robot_back_left_wheel"
-              boundingObject USE rubber_wheel_v2_left
               physics Physics {
                 density -1
                 mass 4.000000
@@ -183,16 +156,49 @@ PROTO rbwatcher [
               }
             }
           }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 1.000000 0.000000
+              anchor -0.227950 0.155000 0.000000
+            }
+            device [
+              RotationalMotor {
+                name "robot_back_left_wheel_joint"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_back_left_wheel_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation -0.227950 0.155000 0.000000
+              children [
+                USE rubber_wheel_v2_left_visual
+              ]
+              name "robot_back_left_wheel"
+              boundingObject USE rubber_wheel_v2_left
+              physics Physics {
+                density -1
+                mass 4.000000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  2.052758e-02 2.761250e-02 2.052758e-02
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
           Solid {
             translation -0.170240 0.000000 0.276090
             children [
               DEF rbwatcher_top_structure_visual CadShape {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.dae"
+                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.dae"
               }
             ]
             name "robot_top_structure_link"
             boundingObject DEF rbwatcher_top_structure Mesh {
-              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.stl"
+              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.stl"
             }
             physics Physics {
               density -1
@@ -237,8 +243,13 @@ PROTO rbwatcher [
               }
             ]
             name "robot_vectornav_base_link"
-            boundingObject Box {
-               size 0.036000 0.037000 0.009000
+            boundingObject Pose {
+              translation 0.000000 0.000000 0.004500
+              children [
+                Box {
+                   size 0.036000 0.037000 0.009000
+                }
+              ]
             }
             physics Physics {
               density -1
@@ -335,8 +346,13 @@ PROTO rbwatcher [
               }
             ]
             name "robot_front_rgbd_camera_link"
-            boundingObject Box {
-               size 0.025050 0.090000 0.025000
+            boundingObject Pose {
+              translation 0.000000 -0.017500 0.000000
+              children [
+                Box {
+                   size 0.025050 0.090000 0.025000
+                }
+              ]
             }
             physics Physics {
               density -1
@@ -350,7 +366,7 @@ PROTO rbwatcher [
           }
           Solid {
             translation -0.318000 0.020000 0.183080
-            rotation 0.000000 -1.000000 0.000000 3.141593
+            rotation 0.000000 1.000000 0.000000 3.141593
             children [
               Pose {
                 translation 0.014900 -0.017500 0.000000
@@ -432,8 +448,13 @@ PROTO rbwatcher [
               }
             ]
             name "robot_rear_rgbd_camera_link"
-            boundingObject Box {
-               size 0.025050 0.090000 0.025000
+            boundingObject Pose {
+              translation 0.000000 -0.017500 0.000000
+              children [
+                Box {
+                   size 0.025050 0.090000 0.025000
+                }
+              ]
             }
             physics Physics {
               density -1
@@ -459,9 +480,14 @@ PROTO rbwatcher [
                 }
               }
             ]
-            name "robot_gpsbase_link"
-            boundingObject Box {
-               size 0.060700 0.083000 0.022500
+            name "robot_gps_base_link"
+            boundingObject Pose {
+              translation 0.000000 0.000000 0.011250
+              children [
+                Box {
+                   size 0.060700 0.083000 0.022500
+                }
+              ]
             }
             physics Physics {
               density -1
@@ -486,6 +512,22 @@ PROTO rbwatcher [
                   url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/3d_lidar/robotsense/helios_16p.stl"
                 }
               }
+              Solid {
+                translation 0.000000 0.000000 0.063500
+                children [
+                  Lidar {
+                    name "top_3d_laser"
+                    fieldOfView 6.283185
+                    verticalFieldOfView 1.483530
+                    horizontalResolution 1200
+                    numberOfLayers 16
+                    minRange 0.300000
+                    maxRange 100.000000
+                    resolution 0.001000
+                  }
+                ]
+                name "robot_top_3d_laserlink"
+              }
             ]
             name "robot_top_3d_laserbase_link"
             boundingObject USE helios_16p
@@ -503,12 +545,12 @@ PROTO rbwatcher [
             translation -0.241240 0.000000 0.311090
             children [
               DEF antena_wifi_2J7A747Bc_visual CadShape {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/others/antena_wifi_2J7A747Bc.dae"
+                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/others/antena_wifi_2J7A747Bc.dae"
               }
             ]
             name "robot_antenna_base_link"
             boundingObject DEF antena_wifi_2J7A747Bc Mesh {
-              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/others/antena_wifi_2J7A747Bc.stl"
+              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/others/antena_wifi_2J7A747Bc.stl"
             }
             physics Physics {
             }
@@ -722,7 +764,12 @@ PROTO rbwatcher [
                           }
                         ]
                         name "robot_top_ptz_camera_tilt_link"
-                        boundingObject USE link_750_tilt
+                        boundingObject Pose {
+                          rotation 1.000000 0.000000 0.000000 1.570796
+                          children [
+                            USE link_750_tilt
+                          ]
+                        }
                         physics Physics {
                           density -1
                           mass 0.100000
@@ -750,7 +797,12 @@ PROTO rbwatcher [
               }
             ]
             name "robot_top_ptz_camera_base_link"
-            boundingObject USE link_750_base
+            boundingObject Pose {
+              translation -0.070000 -0.070000 -0.045000
+              children [
+                USE link_750_base
+              ]
+            }
             physics Physics {
               density -1
               mass 0.800000
@@ -763,9 +815,7 @@ PROTO rbwatcher [
           }
         ]
         name "robot_base_link"
-        boundingObject DEF rbwatcher_body Mesh {
-          url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/src/robot_description/meshes/bases/rbwatcher/rbwatcher_body.stl"
-        }
+        boundingObject USE rbwatcher_body
         physics Physics {
           density -1
           mass 50.000000
