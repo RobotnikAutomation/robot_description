@@ -20,17 +20,21 @@
   <xacro:arg name="gazebo_classic" default="false"/>
   <xacro:arg name="gazebo_ignition" default="false"/>
 
-  <xacro:property name="front_laser_offset_x" value="0.2865"/>
-  <xacro:property name="front_laser_offset_y" value="-0.20894"/>
-  <xacro:property name="front_laser_offset_z" value="0.2973"/>
+  <xacro:property name="front_laser_offset_x" value="0.42109"/>
+  <xacro:property name="front_laser_offset_y" value="-0.32737"/>
+  <xacro:property name="front_laser_offset_z" value="0.16037"/>
 
-  <xacro:property name="rear_laser_offset_x" value="-0.2865"/>
-  <xacro:property name="rear_laser_offset_y" value="0.20894"/>
-  <xacro:property name="rear_laser_offset_z" value="0.2973"/>
+  <xacro:property name="rear_laser_offset_x" value="-0.42109"/>
+  <xacro:property name="rear_laser_offset_y" value="0.32737"/>
+  <xacro:property name="rear_laser_offset_z" value="0.16037"/>
 
   <xacro:property name="imu_offset_x" value="0.127"/>
   <xacro:property name="imu_offset_y" value="-0.129"/>
   <xacro:property name="imu_offset_z" value="0.212"/>
+
+  <xacro:property name="front_rgbd_camera_offset_x" value="0.35850"/>
+  <xacro:property name="front_rgbd_camera_offset_y" value="0.0"/>
+  <xacro:property name="front_rgbd_camera_offset_z" value="0.25062"/>
 
   <xacro:rbkairos prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
@@ -65,6 +69,17 @@
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${-1/4*PI}"/>
     </xacro:sensor_sick_s300>
+
+  <!-- CAMERA -->
+    <xacro:sensor_intel_realsense_d435
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_camera"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_intel_realsense_d435>
 
   <!-- Controllers -->
   <xacro:if value="$(arg gazebo_classic)">
