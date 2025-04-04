@@ -38,8 +38,6 @@
 
   <xacro:rbkairos prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
-  <!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
-
   <!-- IMU -->
     <xacro:sensor_vectornav
         frame_prefix="$(arg prefix)vectornav_"
