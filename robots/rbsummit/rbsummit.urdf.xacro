@@ -69,6 +69,7 @@
 		frame_prefix="$(arg prefix)top_3d_laser_"
 		parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
+        node_name="top_lidar"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
 		<origin
@@ -78,18 +79,16 @@
 	</xacro:sensor_robosense_helios_16p>
 
 	<!-- CAMERA -->
-	<xacro:sensor_intel_realsense_d435
-		frame_prefix="$(arg prefix)front_rgbd_camera_"
-		parent="$(arg prefix)base_link"
-		topic_prefix="front_rgbd_camera"
+
+    <xacro:sensor_intel_realsense_d435
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
+        node_name="front_camera"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-		<origin
-			xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}"
-			rpy="0 0 0"
-		/>
-	</xacro:sensor_intel_realsense_d435>
+        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_intel_realsense_d435>
 
 	<!-- GPS -->
 	<xacro:sensor_ublox_with_mast
