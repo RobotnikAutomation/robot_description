@@ -2,6 +2,14 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.1 (2025-04-04)
+------------------
+
+* Add default sensors for robot:
+    - RB-Summit
+    - RB-Theron
+    - RB-Kairos, RB-Kairos Plus
+
 1.0.0 (2025-03-28)
 ------------------
 
