@@ -73,7 +73,7 @@
       physical_parameters_file="$(arg physical_params)"
       visual_parameters_file="$(arg visual_params)"
       sim_gazebo="$(arg gazebo_classic)">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.56362" rpy="0 0 0"/>
   </xacro:ur_robot>
 
 
