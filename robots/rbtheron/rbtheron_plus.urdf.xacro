@@ -109,6 +109,10 @@
 	<xacro:property name="rear_laser_offset_y" value="0.215"/>
 	<xacro:property name="rear_laser_offset_z" value="0.1613"/>
 
+	<xacro:property name="top_lidar_offset_x" value="0.26"/>
+	<xacro:property name="top_lidar_offset_y" value="0.0"/>
+	<xacro:property name="top_lidar_offset_z" value="0.51"/>
+
 	<!-- IMU -->
     <xacro:sensor_vectornav
         frame_prefix="$(arg prefix)vectornav_"
@@ -159,6 +163,17 @@
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}" rpy="0 0 ${PI}"/>
     </xacro:sensor_intel_realsense_d435>
+
+    <!-- 3D LiDAR -->
+    <xacro:sensor_robosense_bpearl
+        frame_prefix="$(arg prefix)top_lidar_"
+        parent="$(arg prefix)top_chassis"
+        node_namespace="$(arg namespace)"
+        node_name="top_lidar"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${top_lidar_offset_x} ${top_lidar_offset_y} ${top_lidar_offset_z}" rpy="0 ${PI/2} 0"/>
+    </xacro:sensor_robosense_bpearl>
 
 	<!-- Controllers -->
 	<xacro:if value="$(arg gazebo_classic)">
