@@ -42,8 +42,8 @@
         <mesh filename="package://robotnik_description/meshes/bases/rbtheron/theron_base_v4.stl"/>
       </geometry>
       </xacro:unless>
-      <material name="black">
-        <color rgba="0.0 0.0 0.0 1"/>
+      <material name="grey">
+        <color rgba="0.2 0.2 0.2 1"/>
       </material>
     </visual>
     <collision>
@@ -72,7 +72,7 @@
   </link>
 
   <joint name="${prefix}base_logo_left_joint" type="fixed">
-    <origin xyz="0.0 0.28931 0.19062" rpy="0 0 0" />
+    <origin xyz="0.0 0.27531 0.19062" rpy="0 0 0" />
     <parent link="${prefix}base_link"/>
     <child link="${prefix}base_logo_left" />
   </joint>
@@ -91,7 +91,7 @@
   </link>
 
   <joint name="${prefix}base_logo_right_joint" type="fixed">
-    <origin xyz="0.0 -0.28931 0.19062" rpy="0 0 ${PI}" />
+    <origin xyz="0.0 -0.27531 0.19062" rpy="0 0 ${PI}" />
     <parent link="${prefix}base_link"/>
     <child link="${prefix}base_logo_right" />
   </joint>
@@ -110,7 +110,7 @@
   </link>
 
   <joint name="${prefix}base_logo_front_joint" type="fixed">
-    <origin xyz="0.345 0.0 0.0" rpy="0 0 ${-PI/2}" />
+    <origin xyz="0.332 0.0 0.0" rpy="0 0 ${-PI/2}" />
     <parent link="${prefix}base_link"/>
     <child link="${prefix}base_logo_front" />
   </joint>
@@ -129,7 +129,7 @@
   </link>
 
   <joint name="${prefix}base_logo_rear_joint" type="fixed">
-    <origin xyz="-0.345 0.0 0.0" rpy="0 0 ${PI/2}" />
+    <origin xyz="-0.332 0.0 0.0" rpy="0 0 ${PI/2}" />
     <parent link="${prefix}base_link"/>
     <child link="${prefix}base_logo_rear" />
   </joint>
