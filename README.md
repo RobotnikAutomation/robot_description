@@ -9,6 +9,12 @@ Available robots are:
  - RB-Robout
  - RB-Summit
 
+Available robot models are:
+ - RB-Kairos+
+ - RB-Theron+
+ - RB-Vogui+
+ - RB-Robout+
+
 ## Quick Usage
 
 ```
