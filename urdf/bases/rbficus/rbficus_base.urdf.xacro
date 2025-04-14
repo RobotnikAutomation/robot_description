@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<robot name="rbficus" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <!-- ***************** -->
+    <!-- Imported elements -->
+    <!-- ***************** -->
+
+    <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+    <!-- Import rbficus base elements-->
+    <xacro:include filename="$(find robotnik_description)/urdf/bodies/rbficus/rbficus_body.urdf.xacro" />
+    <xacro:include filename="$(find robotnik_description)/urdf/wheels/steering_wheel/rbficus_steering_wheel.urdf.xacro" />
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="deg2rad" value="0.01745329251"/>
+
+    <xacro:arg name="prefix" default="robot_" />
+    <!-- <xacro:arg name="gpu" default="true" /> -->
+
+    <xacro:macro name="rbficus" params="prefix">
+
+        <!-- *************** -->
+        <!-- Robots Elements -->
+        <!-- *************** -->
+
+        <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+        <xacro:rbficus_body prefix="${prefix}"/>
+
+        <!-- WHEELS -->
+        <xacro:rbficus_steering_wheel prefix="${prefix}front_right_" parent="${prefix}chassis_link" reflect="true" hq="true">
+            <origin xyz="0.615 0.670 0.27319" rpy="0 0 0"/>
+        </xacro:rbficus_steering_wheel>
+
+        <xacro:rbficus_steering_wheel prefix="${prefix}front_left_" parent="${prefix}chassis_link" reflect="false" hq="true">
+            <origin xyz="0.615 -0.670 0.27319" rpy="0 0 0"/>
+        </xacro:rbficus_steering_wheel>
+
+        <xacro:rbficus_steering_wheel prefix="${prefix}back_right_" parent="${prefix}rocker_link" reflect="true" hq="true">
+            <origin xyz="0.220 0.670 0.27319" rpy="0 0 0"/>
+        </xacro:rbficus_steering_wheel>
+
+        <xacro:rbficus_steering_wheel prefix="${prefix}back_left_" parent="${prefix}rocker_link" reflect="false" hq="true">
+            <origin xyz="0.220 -0.670 0.27319" rpy="0 0 0"/>
+        </xacro:rbficus_steering_wheel>
+    </xacro:macro>
+
+</robot>
