@@ -1,119 +1,124 @@
 <?xml version="1.0" ?>
 <robot name="rbficus" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="command" params="name mins maxs">
-    <command_interface name="${name}">
-      <param name="min">${mins}</param>
-      <param name="max">${maxs}</param>
-    </command_interface>
+  <xacro:macro name="rbficus_base_hw_controller">
+
+    <xacro:macro name="command" params="name mins maxs">
+      <command_interface name="${name}">
+        <param name="min">${mins}</param>
+        <param name="max">${maxs}</param>
+      </command_interface>
+    </xacro:macro>
+
+    <ros2_control name="rbficus" type="system">
+      <hardware>
+        <plugin>robotnik_base_hw/RobotnikBaseHW</plugin>
+        <param name="device">can0</param>
+        <param name="sync_hz">50</param>
+
+      </hardware>
+
+      <!-- Traction Joints -->
+      <joint name="robot_front_left_wheel_joint">
+        <param name="id">0x01</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">40</param>
+        <param name="spin">1</param>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+      <joint name="robot_back_left_wheel_joint">
+        <param name="id">0x02</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">40</param>
+        <param name="spin">1</param>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+      <joint name="robot_front_right_wheel_joint">
+        <param name="id">0x03</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">40</param>
+        <param name="spin">-1</param>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+      <joint name="robot_back_right_wheel_joint">
+        <param name="id">0x04</param>
+        <param name="encoder_resolution">4000</param>
+        <param name="gearbox_ratio">40</param>
+        <param name="spin">-1</param>
+        <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <!-- Steering joints -->
+      <joint name="robot_front_left_steering_joint">
+        <param name="id">0x05</param>
+        <param name="encoder_resolution">4096</param>
+        <param name="gearbox_ratio">144</param>
+
+        <!-- Absolute algorithm -->
+        <param name="absolute_type">potentiometer</param>
+        <param name="potentiometer_voltage_calibration">2.55</param>
+        <param name="spin">-1</param>
+        <xacro:command name="position" mins="-2.5" maxs="2.5"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort"   />
+      </joint>
+      <joint name="robot_back_left_steering_joint">
+        <param name="id">0x06</param>
+        <param name="encoder_resolution">4096</param>
+        <param name="gearbox_ratio">144</param>
+
+        <!-- Absolute algorithm -->
+        <param name="absolute_type">potentiometer</param>
+        <param name="potentiometer_voltage_calibration">2.55</param>
+        <param name="spin">-1</param>
+        <xacro:command name="position" mins="-2.5" maxs="2.5"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort"   />
+      </joint>
+      <joint name="robot_front_right_steering_joint">
+        <param name="id">0x07</param>
+        <param name="encoder_resolution">4096</param>
+        <param name="gearbox_ratio">144</param>
+
+        <!-- Absolute algorithm -->
+        <param name="absolute_type">potentiometer</param>
+        <param name="potentiometer_voltage_calibration">2.55</param>
+        <param name="spin">-1</param>
+        <xacro:command name="position" mins="-2.5" maxs="2.5"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort"   />
+      </joint>
+      <joint name="robot_back_right_steering_joint">
+        <param name="id">0x08</param>
+        <param name="encoder_resolution">4096</param>
+        <param name="gearbox_ratio">144</param>
+
+        <!-- Absolute algorithm -->
+        <param name="absolute_type">potentiometer</param>
+        <param name="potentiometer_voltage_calibration">2.55</param>
+        <param name="spin">-1</param>
+        <xacro:command name="position" mins="-2.5" maxs="2.5"/>
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort"   />
+      </joint>
+    </ros2_control>
+
   </xacro:macro>
 
-  <ros2_control name="rbficus" type="system">
-    <hardware>
-      <plugin>robotnik_base_hw/RobotnikBaseHW</plugin>
-      <param name="device">can0</param>
-      <param name="sync_hz">50</param>
-
-    </hardware>
-
-    <!-- Traction Joints -->
-    <joint name="robot_front_left_wheel_joint">
-      <param name="id">0x01</param>
-      <param name="encoder_resolution">4000</param>
-      <param name="gearbox_ratio">40</param>
-      <param name="spin">1</param>
-      <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-    <joint name="robot_back_left_wheel_joint">
-      <param name="id">0x02</param>
-      <param name="encoder_resolution">4000</param>
-      <param name="gearbox_ratio">40</param>
-      <param name="spin">1</param>
-      <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-    <joint name="robot_front_right_wheel_joint">
-      <param name="id">0x03</param>
-      <param name="encoder_resolution">4000</param>
-      <param name="gearbox_ratio">40</param>
-      <param name="spin">-1</param>
-      <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-    <joint name="robot_back_right_wheel_joint">
-      <param name="id">0x04</param>
-      <param name="encoder_resolution">4000</param>
-      <param name="gearbox_ratio">40</param>
-      <param name="spin">-1</param>
-      <xacro:command name="velocity" mins="-18.8495" maxs="18.8495"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort" />
-    </joint>
-
-    <!-- Steering joints -->
-    <joint name="robot_front_left_steering_joint">
-      <param name="id">0x05</param>
-      <param name="encoder_resolution">4096</param>
-      <param name="gearbox_ratio">144</param>
-
-      <!-- Absolute algorithm -->
-      <param name="absolute_type">potentiometer</param>
-      <param name="potentiometer_voltage_calibration">2.55</param>
-      <param name="spin">-1</param>
-      <xacro:command name="position" mins="-2.5" maxs="2.5"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort"   />
-    </joint>
-    <joint name="robot_back_left_steering_joint">
-      <param name="id">0x06</param>
-      <param name="encoder_resolution">4096</param>
-      <param name="gearbox_ratio">144</param>
-
-      <!-- Absolute algorithm -->
-      <param name="absolute_type">potentiometer</param>
-      <param name="potentiometer_voltage_calibration">2.55</param>
-      <param name="spin">-1</param>
-      <xacro:command name="position" mins="-2.5" maxs="2.5"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort"   />
-    </joint>
-    <joint name="robot_front_right_steering_joint">
-      <param name="id">0x07</param>
-      <param name="encoder_resolution">4096</param>
-      <param name="gearbox_ratio">144</param>
-
-      <!-- Absolute algorithm -->
-      <param name="absolute_type">potentiometer</param>
-      <param name="potentiometer_voltage_calibration">2.55</param>
-      <param name="spin">-1</param>
-      <xacro:command name="position" mins="-2.5" maxs="2.5"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort"   />
-    </joint>
-    <joint name="robot_back_right_steering_joint">
-      <param name="id">0x08</param>
-      <param name="encoder_resolution">4096</param>
-      <param name="gearbox_ratio">144</param>
-
-      <!-- Absolute algorithm -->
-      <param name="absolute_type">potentiometer</param>
-      <param name="potentiometer_voltage_calibration">2.55</param>
-      <param name="spin">-1</param>
-      <xacro:command name="position" mins="-2.5" maxs="2.5"/>
-      <state_interface name="position" />
-      <state_interface name="velocity" />
-      <state_interface name="effort"   />
-    </joint>
-  </ros2_control>
 </robot>
