@@ -8,9 +8,8 @@
   <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
   <xacro:include filename="$(find robotnik_description)/urdf/bases/rbficus/rbficus_base.urdf.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbvogui.ros2_control.urdf" />
-    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbficus/rbficus_control.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbficus/rbficus_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbficus.ros2_control.urdf" />
+  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbficus/rbficus_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- Properties and Arguments -->
@@ -35,17 +34,11 @@
   <xacro:rbficus prefix="$(arg prefix)"/>
 
 	<!-- Controllers -->
-	<xacro:if value="$(arg gazebo_classic)">
-		<xacro:rbficus_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-        <xacro:ros_planar_move_gazebo_classic/>
-	</xacro:if>
 	<xacro:if value="$(arg gazebo_ignition)">
 		<xacro:rbficus_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
-    <xacro:unless value="$(arg gazebo_classic)">
-        <xacro:unless value="$(arg gazebo_ignition)">
-            <xacro:rbvogui_base_hw_controller/>
-        </xacro:unless>
-    </xacro:unless>
+  <xacro:unless value="$(arg gazebo_ignition)">
+      <xacro:rbficus_base_hw_controller/>
+  </xacro:unless>
 
 </robot>
