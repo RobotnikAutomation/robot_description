@@ -35,9 +35,9 @@
       use_2D_odom: true
 
       #Kinematics Params
-      wheel_radius: 0.1125    #0.2552
-      wheel_base:   0.76      #0.43
-      track_width:  0.4745    #0.538
+      wheel_radius: 0.193    #0.2552
+      wheel_base:   1.25      
+      track_width:  1.34    #0.538
       min_turning_ratio:  1.0
 
       max_steering_position_error: 0.3
