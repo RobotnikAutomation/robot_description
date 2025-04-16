@@ -10,6 +10,7 @@
   <xacro:include filename="$(find robotnik_description)/urdf/bases/rbficus/rbficus_base.urdf.xacro" />
   <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbficus.ros2_control.urdf" />
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbficus/rbficus_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbficus/rbficus_control.urdf.xacro" />
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- Properties and Arguments -->
@@ -37,8 +38,13 @@
 	<xacro:if value="$(arg gazebo_ignition)">
 		<xacro:rbficus_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
+	<xacro:if value="$(arg gazebo_classic)">
+		<xacro:rbficus_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
+	</xacro:if>
   <xacro:unless value="$(arg gazebo_ignition)">
-      <xacro:rbficus_base_hw_controller/>
+    <xacro:unless value="$(arg gazebo_classic)">
+        <xacro:rbficus_base_hw_controller/>
+    </xacro:unless>
   </xacro:unless>
 
 </robot>
