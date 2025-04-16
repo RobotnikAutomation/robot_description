@@ -2,6 +2,11 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Unreleased
+------------------
+
+* Add RB-Ficus
+
 1.0.3 (2025-04-04)
 ------------------
 
