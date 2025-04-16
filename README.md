@@ -8,6 +8,7 @@ Available robots are:
  - RB-Vogui
  - RB-Robout
  - RB-Summit
+ - RB-Ficus
 
 Available robot models are:
  - RB-Kairos+
