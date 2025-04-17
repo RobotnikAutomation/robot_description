@@ -2,23 +2,23 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.3 (2025-04-04)
+2.0.0 (2025-04-17)
 ------------------
 
-* Add RB-Theron Plus
-
-1.0.2 (2025-04-08)
-------------------
-
-* Add RB-Vogui Plus
+* Clean up and reorganization of the package.
+* Contributors: Marc Bosch, Carlos Gascon, Rafael Martin
 
 1.0.1 (2025-04-04)
 ------------------
 
+* Added robot:
+    - RB-Vogui Plus
+    - RB-Theron Plus
 * Add default sensors for robot:
     - RB-Summit
     - RB-Theron
     - RB-Kairos, RB-Kairos Plus
+* Contributors: Marc Bosch, Carlos Gascon, Rafael Martin
 
 1.0.0 (2025-03-28)
 ------------------
