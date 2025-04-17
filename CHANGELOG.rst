@@ -1,15 +1,14 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-1.0.2 (2025-04-14)
+
+1.0.2 (2025-04-07)
 ------------------
 
-* Add RB-Theron Plus
-
-1.0.1 (2025-04-07)
-------------------
-
-* Modified arm position in RB-Kairos Plus
+* Added robot:
+    - RB-Theron Plus
+* Fix Z axis for UR arm, RB-Kairos+
+* Contributors: Carlos Gascon, Alejandro Arnal
 
 1.0.0 (2025-03-28)
 ------------------
