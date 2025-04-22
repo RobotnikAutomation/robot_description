@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
-<!-- RBVogui v3.0 -->
-<robot name="rbvogui" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="rbvogui" xmlns:xacro="http://wiki.ros.org/xacro">
+
     <!-- ***************** -->
     <!-- Imported elements -->
     <!-- ***************** -->
 
-    <!-- First we import all posible elements defined in the urdf.xacro files. All these elements
-    are defined as macro:xacros -->
+    <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined
+  as macro:xacros -->
 
-    <!-- Import rbvogui base elements-->
     <xacro:include
         filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
 
@@ -18,11 +17,27 @@
     <xacro:include
         filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_control.urdf.xacro" />
 
-    <!-- Import all available sensors -->
     <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-    <!-- Flag to select the high or low quality model -->
-    <xacro:property name="hq" value="true" />
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
+
+    <!-- Properties and Arguments -->
+
+    <xacro:arg name="namespace" default="robot" />
+    <xacro:arg name="prefix" default="robot_" />
+    <xacro:arg name="gazebo_classic" default="false" />
+    <xacro:arg name="gazebo_ignition" default="false" />
+
+    <xacro:arg name="ur_type" default="ur5e" />
+    <xacro:arg name="joint_limit_params"
+        default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml" />
+    <xacro:arg name="kinematics_params"
+        default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml" />
+    <xacro:arg name="physical_params"
+        default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml" />
+    <xacro:arg name="visual_params"
+        default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml" />
+
     <xacro:property name="front_laser_offset_x" value="0.53" />
     <xacro:property name="front_laser_offset_y" value="0.33" />
     <xacro:property name="front_laser_offset_z" value="0.1145" />
@@ -43,16 +58,23 @@
     <xacro:property name="rear_rgbd_camera_offset_y" value="0.0" />
     <xacro:property name="rear_rgbd_camera_offset_z" value="0.29" />
 
+    <!-- Vogui -->
 
-    <!-- Launch Arguments -->
-    <xacro:arg name="namespace" default="robot" />
-    <xacro:arg name="prefix" default="robot_" />
-    <xacro:arg name="gazebo_classic" default="false" />
-    <xacro:arg name="gazebo_ignition" default="false" />
+    <xacro:rbvogui prefix="$(arg prefix)" />
 
-    <xacro:rbvogui prefix="$(arg prefix)" hq="${hq}" />
+    <!-- Import UR arm -->
 
-    <!-- SENSORS see robotnik_sensors for the specific configuration -->
+    <xacro:ur_robot
+        tf_prefix="$(arg prefix)arm_"
+        name="$(arg ur_type)"
+        parent="$(arg prefix)base_link"
+        joint_limits_parameters_file="$(arg joint_limit_params)"
+        kinematics_parameters_file="$(arg kinematics_params)"
+        physical_parameters_file="$(arg physical_params)"
+        visual_parameters_file="$(arg visual_params)"
+        sim_gazebo="$(arg gazebo_classic)">
+        <origin xyz="0 0 0.3995" rpy="0 0 0" />
+    </xacro:ur_robot>
 
     <!-- IMU -->
     <xacro:sensor_vectornav
@@ -112,7 +134,6 @@
             xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}"
             rpy="0 0 -${PI}" />
     </xacro:sensor_intel_realsense_d435>
-
 
     <!-- Controllers -->
     <xacro:if value="$(arg gazebo_classic)">

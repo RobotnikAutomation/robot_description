@@ -2,6 +2,13 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.0 (2025-04-22)
+------------------
+
+* Added robot:
+    - RB-Vogui Plus
+* Contributors: Carlos Gascon, Alejandro Arnal
+
 1.0.2 (2025-04-07)
 ------------------
 
