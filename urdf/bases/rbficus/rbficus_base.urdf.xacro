@@ -19,14 +19,14 @@
     <xacro:arg name="prefix" default="robot_" />
     <!-- <xacro:arg name="gpu" default="true" /> -->
 
-    <xacro:macro name="rbficus" params="prefix">
+    <xacro:macro name="rbficus" params="prefix gazebo_classic gazebo_ignition">
 
         <!-- *************** -->
         <!-- Robots Elements -->
         <!-- *************** -->
 
         <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
-        <xacro:rbficus_body prefix="${prefix}"/>
+        <xacro:rbficus_body prefix="${prefix}" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"/>
 
         <!-- WHEELS -->
         <xacro:rbficus_steering_wheel prefix="${prefix}front_right_" parent="${prefix}chassis_link" reflect="true" hq="true">
