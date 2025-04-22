@@ -64,7 +64,7 @@
         </visual>
         <collision>
             <geometry>
-                <box size="0.624 0.544 0.629"/>
+                <mesh filename="package://robotnik_description/meshes/bases/rbtheron/rbtheron_plus_top_chassis.stl"/>
             </geometry>
         </collision>
         <inertial>
