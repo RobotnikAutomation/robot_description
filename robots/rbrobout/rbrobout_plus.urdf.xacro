@@ -9,7 +9,6 @@
 
   <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
   <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_top_cover.urdf.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_cameras_cover.urdf.xacro" />
 
   <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbrobout/rbrobout_control.urdf.xacro" />
