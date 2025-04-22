@@ -31,7 +31,7 @@
   <xacro:property name="imu_offset_y" value="-0.129"/>
   <xacro:property name="imu_offset_z" value="0.212"/>
 
-  <xacro:rbficus prefix="$(arg prefix)"/>
+  <xacro:rbficus prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
 	<!-- Controllers -->
 	<xacro:if value="$(arg gazebo_ignition)">

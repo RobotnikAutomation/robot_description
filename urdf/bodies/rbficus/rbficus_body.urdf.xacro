@@ -3,7 +3,7 @@
 
     <xacro:include filename="$(find robotnik_description)/urdf/inertia.urdf.xacro" />
 
-    <xacro:macro name="rbficus_body" params="prefix">
+    <xacro:macro name="rbficus_body" params="prefix gazebo_classic gazebo_ignition">
 
         <!-- Robot mechanical and motor parameters -->
         <xacro:property name="PI" value="3.1415926535897931" />
@@ -18,7 +18,6 @@
             <parent link="${prefix}base_footprint" />
             <child link="${prefix}base_link" />
         </joint>
-
 
         <!-- base -->
         <link name="${prefix}base_link" />
@@ -55,13 +54,23 @@
         </link>
 
         <!-- Rocker Chassis Joint -->
-        <joint name="${prefix}rocker_chassis" type="revolute">
-            <axis xyz="1 0 0" />
-            <origin xyz="-0.835 0 0.047" rpy="0 0 0" />
-            <parent link="${prefix}chassis_link" />
-            <child link="${prefix}rocker_link" />
-            <limit effort="30" velocity="1.0" lower="${-15*PI/180}" upper="${15*PI/180}" />
-        </joint>
+        <xacro:if value="${gazebo_classic or gazebo_ignition}">
+            <joint name="${prefix}rocker_chassis" type="revolute">
+                <axis xyz="1 0 0" />
+                <origin xyz="-0.835 0 0.047" rpy="0 0 0" />
+                <parent link="${prefix}chassis_link" />
+                <child link="${prefix}rocker_link" />
+                <limit effort="30" velocity="1.0" lower="${-15*PI/180}" upper="${15*PI/180}" />
+            </joint>
+        </xacro:if>
+
+        <xacro:unless value="${gazebo_classic or gazebo_ignition}">
+            <joint name="${prefix}rocker_chassis" type="fixed">
+                <origin xyz="-0.835 0 0.047" rpy="0 0 0" />
+                <parent link="${prefix}chassis_link" />
+                <child link="${prefix}rocker_link" />
+            </joint>
+        </xacro:unless>
 
         <!-- Rocker -->
         <link name="${prefix}rocker_link">
