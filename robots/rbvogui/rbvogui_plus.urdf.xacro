@@ -138,7 +138,6 @@
     <!-- Controllers -->
     <xacro:if value="$(arg gazebo_classic)">
         <xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)" />
-        <xacro:ros_planar_move_gazebo_classic />
     </xacro:if>
     <xacro:if value="$(arg gazebo_ignition)">
         <xacro:rbvogui_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)" />
