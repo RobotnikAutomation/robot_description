@@ -5,9 +5,9 @@
 
         <gazebo>
           <plugin name="ros_control" filename="libgazebo_ros2_control.so">
-            <robot_param>robotnik_description</robot_param>
+            <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find robotnik_description)/simulators/gazebo_classic/rbvogui/rbvogui_controller_params.yaml</parameters>
+            <parameters>$(find robotnik_gazebo_classic)/config/rbvogui/rbvogui_controller_params.yaml</parameters>
             <ros>
                 <namespace>/${namespace}</namespace>
             </ros>
@@ -43,30 +43,6 @@
 
         </ros2_control>
 
-    </xacro:macro>
-
-    <xacro:macro name="ros_planar_move_gazebo_classic">
-        <gazebo>
-          <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
-            <ros>
-
-              <!-- Remap the default topic -->
-              <remapping>cmd_vel:=/robot/robotnik_base_controller/cmd_vel</remapping>
-
-            </ros>
-
-            <update_rate>100</update_rate>
-            <publish_rate>10</publish_rate>
-
-            <!-- output -->
-            <publish_odom>true</publish_odom>
-            <publish_odom_tf>true</publish_odom_tf>
-
-            <odometry_frame>robot_odom</odometry_frame>
-
-            <robot_base_frame>robot_base_footprint</robot_base_frame>
-          </plugin>
-        </gazebo>
     </xacro:macro>
 
 </robot>

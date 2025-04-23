@@ -7,7 +7,7 @@
           <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_controller_params.yaml</parameters>
+            <parameters>$(find robotnik_gazebo_ignition)/config/rbvogui/rbvogui_controller_params.yaml</parameters>
             <ros>
                 <namespace>/${namespace}</namespace>
             </ros>
