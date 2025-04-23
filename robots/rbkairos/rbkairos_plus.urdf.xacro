@@ -64,10 +64,6 @@
       sim_ignition="$(arg gazebo_ignition)">
       <origin xyz="0 0 0" rpy="0 0 0"/>
   </xacro:ur_robot>
-
-
-  <!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
-
   
   <!-- IMU -->
     <xacro:sensor_vectornav
