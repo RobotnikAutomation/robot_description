@@ -24,6 +24,7 @@
   <xacro:arg name="namespace" default="robot"/>
   <xacro:arg name="prefix" default="robot_"/>
   <xacro:arg name="gazebo_classic" default="false"/>
+  <xacro:arg name="gazebo_ignition" default="false"/>
 
   <xacro:arg name="ur_type" default="ur10e"/>
   <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
