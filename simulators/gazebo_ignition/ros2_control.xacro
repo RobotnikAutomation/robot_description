@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="ros2_joint" params="name interface jmin jmax">
+    <joint name="${name}">
+      <command_interface name="${interface}">
+        <param name="min">${jmin}</param>
+        <param name="max">${jmax}</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="gz_ignition_control" params="namespace controller_param_file **wheel_block">
+    <xacro:property name="ros_distro" value="$(env ROS_DISTRO)" />
+    <xacro:if value="${ros_distro == 'humble'}">
+      <xacro:property name="plugin_name" value="ign_ros2_control::IgnitionROS2ControlPlugin" />
+      <xacro:property name="plugin_path" value="ign_ros2_control-system" />
+      <xacro:property name="plugin_system_name" value="IgnitionSystem" />
+      <xacro:property name="plugin_system" value="ign_ros2_control/IgnitionSystem" />
+    </xacro:if>
+    <xacro:unless value="${ros_distro == 'humble'}">
+      <xacro:property name="plugin_name" value="gz_ros2_control::GazeboSimROS2ControlPlugin" />
+      <xacro:property name="plugin_path" value="gz_ros2_control-system" />
+      <xacro:property name="plugin_system_name" value="GazeboSystem" />
+      <xacro:property name="plugin_system" value="gz_ros2_control/GazeboSimSystem" />
+    </xacro:unless>
+    <gazebo>
+      <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>robot_state_publisher</robot_param_node>
+        <parameters>${controller_param_file}</parameters>
+        <ros>
+          <namespace>/${namespace}</namespace>
+        </ros>
+      </plugin>
+    </gazebo>
+    <ros2_control name="${plugin_system_name}" type="system">
+      <hardware>
+        <plugin>${plugin_system}</plugin>
+      </hardware>
+      <xacro:insert_block name="wheel_block" />
+    </ros2_control>
+  </xacro:macro>
+</robot>
