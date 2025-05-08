@@ -71,6 +71,7 @@
       odom_frame_id: robot_odom
       base_frame_id: robot_base_footprint
       set_odometry_service: ~/set_odometry
+      use_2D_odom: true
 
       #Imu
       use_imu: true

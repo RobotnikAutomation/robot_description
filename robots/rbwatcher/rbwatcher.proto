@@ -2,7 +2,7 @@
 # license: Apache License 2.0
 # license url: http://www.apache.org/licenses/LICENSE-2.0
 # This is a proto file for Webots for the rbwatcher
-# Extracted from: /tmp/tmpu9etbf4b.urdf
+# Extracted from: /tmp/tmpqc8ztk40.urdf
 
 PROTO rbwatcher [
   field  SFVec3f     translation     0 0 0
@@ -67,14 +67,19 @@ PROTO rbwatcher [
             endPoint Solid {
               translation 0.227950 -0.155000 0.000000
               children [
-                DEF rubber_wheel_v2_right_visual CadShape {
-                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.dae"
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF rubber_wheel_v2_right Mesh {
+                    url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"
+                  }
                 }
               ]
               name "robot_front_right_wheel"
-              boundingObject DEF rubber_wheel_v2_right Mesh {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"
-              }
+              boundingObject USE rubber_wheel_v2_right
               physics Physics {
                 density -1
                 mass 4.000000
@@ -104,14 +109,19 @@ PROTO rbwatcher [
             endPoint Solid {
               translation 0.227950 0.155000 0.000000
               children [
-                DEF rubber_wheel_v2_left_visual CadShape {
-                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.dae"
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF rubber_wheel_v2_left Mesh {
+                    url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"
+                  }
                 }
               ]
               name "robot_front_left_wheel"
-              boundingObject DEF rubber_wheel_v2_left Mesh {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"
-              }
+              boundingObject USE rubber_wheel_v2_left
               physics Physics {
                 density -1
                 mass 4.000000
@@ -141,7 +151,14 @@ PROTO rbwatcher [
             endPoint Solid {
               translation -0.227950 -0.155000 0.000000
               children [
-                USE rubber_wheel_v2_right_visual
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE rubber_wheel_v2_right
+                }
               ]
               name "robot_back_right_wheel"
               boundingObject USE rubber_wheel_v2_right
@@ -174,7 +191,14 @@ PROTO rbwatcher [
             endPoint Solid {
               translation -0.227950 0.155000 0.000000
               children [
-                USE rubber_wheel_v2_left_visual
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE rubber_wheel_v2_left
+                }
               ]
               name "robot_back_left_wheel"
               boundingObject USE rubber_wheel_v2_left
@@ -192,14 +216,19 @@ PROTO rbwatcher [
           Solid {
             translation -0.170240 0.000000 0.276090
             children [
-              DEF rbwatcher_top_structure_visual CadShape {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.dae"
+              Shape {
+                appearance DEF alu_color PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry DEF rbwatcher_top_structure Mesh {
+                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.stl"
+                }
               }
             ]
             name "robot_top_structure_link"
-            boundingObject DEF rbwatcher_top_structure Mesh {
-              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.stl"
-            }
+            boundingObject USE rbwatcher_top_structure
             physics Physics {
               density -1
               mass 0.001000
@@ -268,8 +297,15 @@ PROTO rbwatcher [
                 translation 0.014900 -0.017500 0.000000
                 rotation 0.577350 0.577350 0.577350 2.094395
                 children [
-                  DEF intel_d435_color_visual CadShape {
-                    url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/depth/intel_realsense_d435/intel_d435_color.dae"
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.500000 0.500000 0.500000
+                      roughness 1.000000
+                      metalness 0
+                    }
+                    geometry DEF intel_d435_color Mesh {
+                      url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/depth/intel_realsense_d435/intel_d435_color.stl"
+                    }
                   }
                 ]
               }
@@ -372,7 +408,14 @@ PROTO rbwatcher [
                 translation 0.014900 -0.017500 0.000000
                 rotation 0.577350 0.577350 0.577350 2.094395
                 children [
-                  USE intel_d435_color_visual
+                  Shape {
+                    appearance PBRAppearance {
+                      baseColor 0.500000 0.500000 0.500000
+                      roughness 1.000000
+                      metalness 0
+                    }
+                    geometry USE intel_d435_color
+                  }
                 ]
               }
               Solid {
@@ -544,14 +587,19 @@ PROTO rbwatcher [
           Solid {
             translation -0.241240 0.000000 0.311090
             children [
-              DEF antena_wifi_2J7A747Bc_visual CadShape {
-                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/others/antena_wifi_2J7A747Bc.dae"
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry DEF antena_wifi_2J7A747Bc Mesh {
+                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/others/antena_wifi_2J7A747Bc.stl"
+                }
               }
             ]
             name "robot_antenna_base_link"
-            boundingObject DEF antena_wifi_2J7A747Bc Mesh {
-              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/others/antena_wifi_2J7A747Bc.stl"
-            }
+            boundingObject USE antena_wifi_2J7A747Bc
             physics Physics {
             }
           }

@@ -17,7 +17,7 @@
 
   <xacro:arg name="namespace" default="robot"/>
   <xacro:arg name="prefix" default="robot_"/>
-  <xacro:arg name="gazebo_classic" default="true"/>
+  <xacro:arg name="gazebo_classic" default="false"/>
   <xacro:arg name="gazebo_ignition" default="false"/>
 
   <xacro:property name="front_laser_offset_x" value="0.8"/>

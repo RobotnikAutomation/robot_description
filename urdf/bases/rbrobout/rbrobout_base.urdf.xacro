@@ -38,19 +38,19 @@
 		<xacro:rbrobout_body prefix="${prefix}" />
 
 		<!-- Wheels -->
-		<xacro:rbrobout_omni_wheel prefix="${prefix}front_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:rbrobout_omni_wheel prefix1="${prefix}" prefix2="front_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rbrobout_omni_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}front_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:rbrobout_omni_wheel prefix1="${prefix}" prefix2="front_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rbrobout_omni_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}back_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
+		<xacro:rbrobout_omni_wheel prefix1="${prefix}" prefix2="back_left" parent="${prefix}base_link" reflect="true" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rbrobout_omni_wheel>
 
-		<xacro:rbrobout_omni_wheel prefix="${prefix}back_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
+		<xacro:rbrobout_omni_wheel prefix1="${prefix}" prefix2="back_right" parent="${prefix}base_link" reflect="false" hq="${hq}">
 			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
 		</xacro:rbrobout_omni_wheel>
 

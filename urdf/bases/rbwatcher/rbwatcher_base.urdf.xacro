@@ -12,7 +12,7 @@
 	<xacro:include filename="$(find robot_description)/urdf/bodies/rbwatcher/rbwatcher_body.urdf.xacro" />
 
 	<!-- Import RB-Watcher wheels -->
-  	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+  	<xacro:include filename="$(find robot_description)/urdf/wheels/rubber_wheel/rbwatcher_rubber_wheel.urdf.xacro" />
   	<xacro:include filename="$(find robot_description)/urdf/wheels/omni_wheel/omni_wheel.urdf.xacro" />
 
 	<!-- Import all available sensors -->
@@ -48,7 +48,8 @@
 
 		<!-- Wheels -->
 		<xacro:rubber_wheel
-	            prefix="${prefix}front_right"
+	            prefix1="${prefix}"
+	            prefix2="front_right"
 	            parent="${prefix}base_link"
 	            reflect="false" hq="${hq}"
 	            rubber_wheel_radius="${rubber_wheel_radius}"
@@ -59,7 +60,8 @@
 		</xacro:rubber_wheel>
 		
 		<xacro:rubber_wheel
-	            prefix="${prefix}front_left"
+	            prefix1="${prefix}"
+	            prefix2="front_left"
 	            parent="${prefix}base_link"
 	            reflect="false" hq="${hq}"
 	            rubber_wheel_radius="${rubber_wheel_radius}"
@@ -70,7 +72,8 @@
 		</xacro:rubber_wheel>
 		
 		<xacro:rubber_wheel
-	            prefix="${prefix}back_right"
+	            prefix1="${prefix}"
+	            prefix2="back_right"
 	            parent="${prefix}base_link"
 	            reflect="false" hq="${hq}"
 	            rubber_wheel_radius="${rubber_wheel_radius}"
@@ -81,7 +84,8 @@
 		</xacro:rubber_wheel>
 		
 		<xacro:rubber_wheel
-	            prefix="${prefix}back_left"
+	            prefix1="${prefix}"
+	            prefix2="back_left"
 	            parent="${prefix}base_link"
 	            reflect="false" hq="${hq}"
 	            rubber_wheel_radius="${rubber_wheel_radius}"

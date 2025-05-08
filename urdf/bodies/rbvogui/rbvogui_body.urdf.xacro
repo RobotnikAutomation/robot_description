@@ -19,7 +19,12 @@
     </joint>
 
     <!-- BASE_LINK -->
-    <link name="${prefix}base_link"/>
+      <link name="${prefix}base_link">
+          <inertial>
+        <mass value="0.0" />
+        <origin xyz="0 0 0" />
+          </inertial>
+      </link>
 
     <!-- Chassis -->
     <joint name="${prefix}chassis_joint" type="fixed">

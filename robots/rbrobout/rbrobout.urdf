@@ -82,7 +82,7 @@
     <origin rpy="0 0 0" xyz="0.558 -0.2865 0.0"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="100" velocity="100"/>
-    <joint_properties damping="0.5" friction="2.0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
   <link name="robot_front_right_wheel_link">
     <visual>
@@ -107,10 +107,10 @@
     </inertial>
   </link>
   <gazebo reference="robot_front_right_wheel_link">
-    <mu1>0.90</mu1>
-    <mu2>0.85</mu2>
-    <kp>2.75e6</kp>
-    <kd>8.25e1</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>0</kp>
+    <kd>0</kd>
     <fdir1>0 0 0</fdir1>
   </gazebo>
   <joint name="robot_front_left_wheel_joint" type="continuous">
@@ -119,7 +119,7 @@
     <origin rpy="0 0 0" xyz="0.558 0.2865 0.0"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="100" velocity="100"/>
-    <joint_properties damping="0.5" friction="2.0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
   <link name="robot_front_left_wheel_link">
     <visual>
@@ -144,10 +144,10 @@
     </inertial>
   </link>
   <gazebo reference="robot_front_left_wheel_link">
-    <mu1>0.90</mu1>
-    <mu2>0.85</mu2>
-    <kp>2.75e6</kp>
-    <kd>8.25e1</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>0</kp>
+    <kd>0</kd>
     <fdir1>0 0 0</fdir1>
   </gazebo>
   <joint name="robot_back_left_wheel_joint" type="continuous">
@@ -156,7 +156,7 @@
     <origin rpy="0 0 0" xyz="-0.558 0.2865 0.0"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="100" velocity="100"/>
-    <joint_properties damping="0.5" friction="2.0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
   <link name="robot_back_left_wheel_link">
     <visual>
@@ -181,10 +181,10 @@
     </inertial>
   </link>
   <gazebo reference="robot_back_left_wheel_link">
-    <mu1>0.90</mu1>
-    <mu2>0.85</mu2>
-    <kp>2.75e6</kp>
-    <kd>8.25e1</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>0</kp>
+    <kd>0</kd>
     <fdir1>0 0 0</fdir1>
   </gazebo>
   <joint name="robot_back_right_wheel_joint" type="continuous">
@@ -193,7 +193,7 @@
     <origin rpy="0 0 0" xyz="-0.558 -0.2865 0.0"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="100" velocity="100"/>
-    <joint_properties damping="0.5" friction="2.0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
   </joint>
   <link name="robot_back_right_wheel_link">
     <visual>
@@ -218,10 +218,10 @@
     </inertial>
   </link>
   <gazebo reference="robot_back_right_wheel_link">
-    <mu1>0.90</mu1>
-    <mu2>0.85</mu2>
-    <kp>2.75e6</kp>
-    <kd>8.25e1</kd>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>0</kp>
+    <kd>0</kd>
     <fdir1>0 0 0</fdir1>
   </gazebo>
   <joint name="robot_vectornav_base_joint" type="fixed">
@@ -258,93 +258,6 @@
     <child link="robot_vectornav_link"/>
   </joint>
   <link name="robot_vectornav_link"/>
-  <gazebo reference="robot_vectornav_link">
-    <gravity>true</gravity>
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>200.0</update_rate>
-      <visualize>true</visualize>
-      <imu>
-        <orientation>
-          <x>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-3</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-3</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-3</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </z>
-        </orientation>
-        <angular_velocity>
-          <x>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-4</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-4</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>2e-3</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </z>
-        </angular_velocity>
-        <linear_acceleration>
-          <x>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>1.7e-2</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>1.7e-2</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <!-- <stddev>1.7e-2</stddev> -->
-              <stddev>0.01</stddev>
-            </noise>
-          </z>
-        </linear_acceleration>
-      </imu>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu">
-        <ros>
-          <namespace>robot</namespace>
-          <remapping>~/out:=imu/data</remapping>
-        </ros>
-        <initial_orientation_as_reference>false</initial_orientation_as_reference>
-        <frame_name>robot_vectornav_link</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
   <gazebo reference="robot_vectornav_base_link">
     <material>Gazebo/Red</material>
   </gazebo>
@@ -435,141 +348,6 @@
     <child link="robot_front_rgbd_camera_color_optical_frame"/>
   </joint>
   <link name="robot_front_rgbd_camera_color_optical_frame"/>
-  <gazebo reference="robot_front_rgbd_camera_color_frame">
-    <sensor name="front_camera_color" type="camera">
-      <camera name="front_camera_color">
-        <horizontal_fov>1.2112585008840648</horizontal_fov>
-        <vertical_fov>0.6806784082777885</vertical_fov>
-        <image>
-          <width>1920</width>
-          <height>1080</height>
-          <format>RGB_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="front_camera_color">
-        <ros>
-          <namespace>robot/front_camera_color</namespace>
-        </ros>
-        <camera_name>front_camera_color</camera_name>
-        <frame_name>robot_front_rgbd_camera_color_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_front_rgbd_camera_infra2_frame">
-    <sensor name="front_camera_irred1" type="camera">
-      <camera name="front_camera_irred1">
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>L_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="front_camera_irred1">
-        <ros>
-          <namespace>robot/front_camera_irred1</namespace>
-        </ros>
-        <camera_name>front_camera_irred1</camera_name>
-        <frame_name>robot_front_rgbd_camera_infra1_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_front_rgbd_camera_infra2_frame">
-    <sensor name="front_camera_irred2" type="camera">
-      <camera name="front_camera_irred2">
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>L_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="front_camera_irred2">
-        <ros>
-          <namespace>robot/front_camera_irred2</namespace>
-        </ros>
-        <camera_name>front_camera_irred2</camera_name>
-        <frame_name>robot_front_rgbd_camera_infra2_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_front_rgbd_camera_depth_frame">
-    <sensor name="front_camera_depth" type="depth">
-      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
-      <visualize>false</visualize>
-      <update_rate>30</update_rate>
-      <camera>
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>B8G8R8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="front_camera_depth">
-        <ros>
-          <namespace>robot</namespace>
-          <remapping>~/image_raw:=front_rgbd_camera_depthrgb/image_raw_color</remapping>
-          <remapping>~/camera_info:=front_rgbd_camera_depthrgb/camera_info</remapping>
-          <remapping>~/points:=front_rgbd_camera_depthpoint_cloud/cloud_registered</remapping>
-          <remapping>~/depth/camera_info:=front_rgbd_camera_depthdepth/camera_info</remapping>
-          <remapping>~/depth/image_raw:=front_rgbd_camera_depthdepth/depth_registered</remapping>
-        </ros>
-        <camera_name>front_camera_depth</camera_name>
-        <frame_name>robot_front_rgbd_camera_depth_optical_frame</frame_name>
-        <min_depth>0.1</min_depth>
-        <max_depth>100</max_depth>
-      </plugin>
-    </sensor>
-  </gazebo>
   <joint name="robot_rear_rgbd_camera_base_joint" type="fixed">
     <origin rpy="0 3.14159265359 0" xyz="-0.835 0.0 0.1555"/>
     <parent link="robot_base_link"/>
@@ -657,141 +435,6 @@
     <child link="robot_rear_rgbd_camera_color_optical_frame"/>
   </joint>
   <link name="robot_rear_rgbd_camera_color_optical_frame"/>
-  <gazebo reference="robot_rear_rgbd_camera_color_frame">
-    <sensor name="rear_camera_color" type="camera">
-      <camera name="rear_camera_color">
-        <horizontal_fov>1.2112585008840648</horizontal_fov>
-        <vertical_fov>0.6806784082777885</vertical_fov>
-        <image>
-          <width>1920</width>
-          <height>1080</height>
-          <format>RGB_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="rear_camera_color">
-        <ros>
-          <namespace>robot/rear_camera_color</namespace>
-        </ros>
-        <camera_name>rear_camera_color</camera_name>
-        <frame_name>robot_rear_rgbd_camera_color_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_rear_rgbd_camera_infra2_frame">
-    <sensor name="rear_camera_irred1" type="camera">
-      <camera name="rear_camera_irred1">
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>L_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="rear_camera_irred1">
-        <ros>
-          <namespace>robot/rear_camera_irred1</namespace>
-        </ros>
-        <camera_name>rear_camera_irred1</camera_name>
-        <frame_name>robot_rear_rgbd_camera_infra1_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_rear_rgbd_camera_infra2_frame">
-    <sensor name="rear_camera_irred2" type="camera">
-      <camera name="rear_camera_irred2">
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>L_INT8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.05</stddev>
-        </noise>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <visualize>false</visualize>
-      <plugin filename="libgazebo_ros_camera.so" name="rear_camera_irred2">
-        <ros>
-          <namespace>robot/rear_camera_irred2</namespace>
-        </ros>
-        <camera_name>rear_camera_irred2</camera_name>
-        <frame_name>robot_rear_rgbd_camera_infra2_optical_frame</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo reference="robot_rear_rgbd_camera_depth_frame">
-    <sensor name="rear_camera_depth" type="depth">
-      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
-      <visualize>false</visualize>
-      <update_rate>30</update_rate>
-      <camera>
-        <horizontal_fov>1.4870205226991688</horizontal_fov>
-        <vertical_fov>0.8377580409572782</vertical_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>B8G8R8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>100</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="rear_camera_depth">
-        <ros>
-          <namespace>robot</namespace>
-          <remapping>~/image_raw:=rear_rgbd_camera_depthrgb/image_raw_color</remapping>
-          <remapping>~/camera_info:=rear_rgbd_camera_depthrgb/camera_info</remapping>
-          <remapping>~/points:=rear_rgbd_camera_depthpoint_cloud/cloud_registered</remapping>
-          <remapping>~/depth/camera_info:=rear_rgbd_camera_depthdepth/camera_info</remapping>
-          <remapping>~/depth/image_raw:=rear_rgbd_camera_depthdepth/depth_registered</remapping>
-        </ros>
-        <camera_name>rear_camera_depth</camera_name>
-        <frame_name>robot_rear_rgbd_camera_depth_optical_frame</frame_name>
-        <min_depth>0.1</min_depth>
-        <max_depth>100</max_depth>
-      </plugin>
-    </sensor>
-  </gazebo>
   <joint name="robot_front_laser_base_joint" type="fixed">
     <origin rpy="0 0 0.7853981633975" xyz="0.8 0.3666 -0.06"/>
     <parent link="robot_base_link"/>
@@ -822,41 +465,6 @@
     <child link="robot_front_laser_link"/>
   </joint>
   <link name="robot_front_laser_link"/>
-  <gazebo reference="robot_front_laser_link">
-    <sensor name="robot_front_laser_sensor" type="ray">
-      <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
-      <update_rate>30</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>700</samples>
-            <resolution>1</resolution>
-            <min_angle>-2.35</min_angle>
-            <max_angle>2.35</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.05</min>
-          <max>64.0</max>
-          <resolution>0.00575</resolution>
-        </range>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.01</stddev>
-        </noise>
-      </ray>
-      <plugin filename="libgazebo_ros_ray_sensor.so" name="front_laser">
-        <ros>
-          <namespace>robot</namespace>
-          <remapping>~/out:=~/scan</remapping>
-        </ros>
-        <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>robot_front_laser_link</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
   <joint name="robot_rear_laser_base_joint" type="fixed">
     <origin rpy="0 0 -2.3561944901925003" xyz="-0.8 -0.3666 -0.06"/>
     <parent link="robot_base_link"/>
@@ -887,114 +495,91 @@
     <child link="robot_rear_laser_link"/>
   </joint>
   <link name="robot_rear_laser_link"/>
-  <gazebo reference="robot_rear_laser_link">
-    <sensor name="robot_rear_laser_sensor" type="ray">
-      <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
-      <update_rate>30</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>700</samples>
-            <resolution>1</resolution>
-            <min_angle>-2.35</min_angle>
-            <max_angle>2.35</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.05</min>
-          <max>64.0</max>
-          <resolution>0.00575</resolution>
-        </range>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.01</stddev>
-        </noise>
-      </ray>
-      <plugin filename="libgazebo_ros_ray_sensor.so" name="rear_laser">
-        <ros>
-          <namespace>robot</namespace>
-          <remapping>~/out:=~/scan</remapping>
-        </ros>
-        <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>robot_rear_laser_link</frame_name>
-      </plugin>
-    </sensor>
-  </gazebo>
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="ros2_control">
-      <robot_param>robot_description</robot_param>
-      <robot_param_node>robot_state_publisher</robot_param_node>
-      <parameters>/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/simulators/gazebo_classic/rbrobout/rbrobout_controller_params.yaml</parameters>
-      <ros>
-        <namespace>/robot</namespace>
-      </ros>
-    </plugin>
-  </gazebo>
-  <ros2_control name="GazeboSystem" type="system">
+  <ros2_control name="robout" type="system">
     <hardware>
-      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      <plugin>robotnik_base_hw/RobotnikBaseHW</plugin>
+      <param name="device">can0</param>
+      <param name="sync_hz">50</param>
     </hardware>
     <joint name="robot_front_left_wheel_joint">
+      <param name="id">0x01</param>
+      <param name="encoder_resolution">4000</param>
+      <param name="gearbox_ratio">9.56</param>
+      <param name="spin">1</param>
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.0</param>
+      </command_interface>
       <command_interface name="velocity">
-        <param name="min">-10</param>
-        <param name="max">10</param>
+        <param name="min">-18.8495</param>
+        <param name="max">18.8495</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-50</param>
+        <param name="max">50</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="robot_front_right_wheel_joint">
-      <command_interface name="velocity">
-        <param name="min">-10</param>
-        <param name="max">10</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
     </joint>
     <joint name="robot_back_left_wheel_joint">
+      <param name="id">0x02</param>
+      <param name="encoder_resolution">4000</param>
+      <param name="gearbox_ratio">9.56</param>
+      <param name="spin">1</param>
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.0</param>
+      </command_interface>
       <command_interface name="velocity">
-        <param name="min">-20</param>
-        <param name="max">20</param>
+        <param name="min">-18.8495</param>
+        <param name="max">18.8495</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-50</param>
+        <param name="max">50</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+    </joint>
+    <joint name="robot_front_right_wheel_joint">
+      <param name="id">0x03</param>
+      <param name="encoder_resolution">4000</param>
+      <param name="gearbox_ratio">9.56</param>
+      <param name="spin">-1</param>
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.0</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-18.8495</param>
+        <param name="max">18.8495</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-50</param>
+        <param name="max">50</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
     </joint>
     <joint name="robot_back_right_wheel_joint">
-      <command_interface name="velocity">
-        <param name="min">-20</param>
-        <param name="max">20</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="robot_lift_ewellix_lift_top_joint">
+      <param name="id">0x04</param>
+      <param name="encoder_resolution">4000</param>
+      <param name="gearbox_ratio">9.56</param>
+      <param name="spin">-1</param>
       <command_interface name="position">
-        <param name="min">-20</param>
-        <param name="max">20</param>
+        <param name="min">0.0</param>
+        <param name="max">0.0</param>
+      </command_interface>
+      <command_interface name="velocity">
+        <param name="min">-18.8495</param>
+        <param name="max">18.8495</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">-50</param>
+        <param name="max">50</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
-      <state_interface name="effort"/>
     </joint>
   </ros2_control>
-  <gazebo>
-    <plugin filename="libgazebo_ros_planar_move.so" name="planar_move">
-      <ros>
-        <!-- Remap the default topic -->
-        <remapping>cmd_vel:=/robot/robotnik_base_controller/cmd_vel</remapping>
-      </ros>
-      <update_rate>100</update_rate>
-      <publish_rate>10</publish_rate>
-      <!-- output -->
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <odometry_frame>robot_odom</odometry_frame>
-      <robot_base_frame>robot_base_footprint</robot_base_frame>
-    </plugin>
-  </gazebo>
 </robot>

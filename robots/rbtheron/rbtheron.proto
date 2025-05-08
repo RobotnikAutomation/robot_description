@@ -1,0 +1,912 @@
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the rbtheron
+# Extracted from: /tmp/tmpvi0qfwyj.urdf
+
+PROTO rbtheron [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "rbtheron"  # Is `Robot.name`.
+  field  SFString    controller      "void"      # Is `Robot.controller`.
+  field  MFString    controllerArgs  []          # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""          # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE       # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE        # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE       # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColor 0.500000 0.500000 0.500000
+          roughness 1.000000
+          metalness 0
+        }
+        geometry Box {
+           size 0.001000 0.001000 0.001000
+        }
+      }
+      Solid {
+        translation 0.000000 0.000000 0.076200
+        children [
+          Shape {
+            appearance DEF black PBRAppearance {
+              baseColor 0.000000 0.000000 0.000000
+              roughness 1.000000
+              metalness 0
+            }
+            geometry DEF theron_base_v4 Mesh {
+              url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/bases/rbtheron/theron_base_v4.stl"
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 1.000000 0.000000
+              anchor 0.000000 -0.251600 0.000000
+            }
+            device [
+              RotationalMotor {
+                name "robot_right_wheel_joint"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_right_wheel_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.000000 -0.251600 0.000000
+              children [
+                Pose {
+                  rotation 1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        radius 0.0762
+                        height 0.025
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "robot_right_wheel_link"
+              boundingObject Pose {
+                rotation 1.000000 0.000000 0.000000 1.570796
+                children [
+                  Cylinder {
+                    radius 0.0762
+                    height 0.025
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 1.000000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  1.503693e-03 1.503693e-03 2.903220e-03
+                  0.000000e+00 0.000000e+00 -1.713926e-19
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 1.000000 0.000000
+              anchor 0.000000 0.251600 0.000000
+            }
+            device [
+              RotationalMotor {
+                name "robot_left_wheel_joint"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_left_wheel_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.000000 0.251600 0.000000
+              children [
+                Pose {
+                  rotation 1.000000 0.000000 0.000000 1.570796
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.500000 0.500000 0.500000
+                        roughness 1.000000
+                        metalness 0
+                      }
+                      geometry Cylinder {
+                        radius 0.0762
+                        height 0.025
+                      }
+                    }
+                  ]
+                }
+              ]
+              name "robot_left_wheel_link"
+              boundingObject Pose {
+                rotation 1.000000 0.000000 0.000000 1.570796
+                children [
+                  Cylinder {
+                    radius 0.0762
+                    height 0.025
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 1.000000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  1.503693e-03 1.503693e-03 2.903220e-03
+                  0.000000e+00 0.000000e+00 -1.713926e-19
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.235000 0.182500 0.044800
+              dampingConstant 0.8
+              staticFriction 0.01
+            }
+            device [
+              RotationalMotor {
+                name "robot_front_left_joint_support"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_front_left_joint_support_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.235000 0.182500 0.044800
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF caster_wheel Mesh {
+                    url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robot_description/share/robot_description/meshes/wheels/caster_wheel/caster_wheel.stl"
+                  }
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor -0.033000 0.000000 -0.071000
+                  }
+                  device [
+                    RotationalMotor {
+                      name "robot_front_left_joint_wheel"
+                      maxVelocity 100.0
+                      maxTorque 100.0
+                    }
+                    PositionSensor {
+                      name "robot_front_left_joint_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -0.033000 0.000000 -0.071000
+                    children [
+                      Pose {
+                        rotation 1.000000 0.000000 0.000000 1.570796
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              roughness 1.000000
+                              metalness 0
+                            }
+                            geometry Cylinder {
+                              radius 0.05
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "robot_front_left_wheel"
+                    boundingObject Pose {
+                      rotation 1.000000 0.000000 0.000000 1.570796
+                      children [
+                        Cylinder {
+                          radius 0.05
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.250000
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        1.692708e-04 1.692708e-04 3.125000e-04
+                        0.000000e+00 0.000000e+00 0.000000e+00
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "robot_front_left_support"
+              physics Physics {
+                density -1
+                mass 1.500000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  5.000000e-05 5.000000e-05 7.500000e-05
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor 0.235000 -0.182500 0.044800
+              dampingConstant 0.8
+              staticFriction 0.01
+            }
+            device [
+              RotationalMotor {
+                name "robot_front_right_joint_support"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_front_right_joint_support_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0.235000 -0.182500 0.044800
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE caster_wheel
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor -0.033000 0.000000 -0.071000
+                  }
+                  device [
+                    RotationalMotor {
+                      name "robot_front_right_joint_wheel"
+                      maxVelocity 100.0
+                      maxTorque 100.0
+                    }
+                    PositionSensor {
+                      name "robot_front_right_joint_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -0.033000 0.000000 -0.071000
+                    children [
+                      Pose {
+                        rotation 1.000000 0.000000 0.000000 1.570796
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              roughness 1.000000
+                              metalness 0
+                            }
+                            geometry Cylinder {
+                              radius 0.05
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "robot_front_right_wheel"
+                    boundingObject Pose {
+                      rotation 1.000000 0.000000 0.000000 1.570796
+                      children [
+                        Cylinder {
+                          radius 0.05
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.250000
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        1.692708e-04 1.692708e-04 3.125000e-04
+                        0.000000e+00 0.000000e+00 0.000000e+00
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "robot_front_right_support"
+              physics Physics {
+                density -1
+                mass 1.500000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  5.000000e-05 5.000000e-05 7.500000e-05
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor -0.235000 0.182500 0.044800
+              dampingConstant 0.8
+              staticFriction 0.01
+            }
+            device [
+              RotationalMotor {
+                name "robot_rear_left_joint_support"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_rear_left_joint_support_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation -0.235000 0.182500 0.044800
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE caster_wheel
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor -0.033000 0.000000 -0.071000
+                  }
+                  device [
+                    RotationalMotor {
+                      name "robot_rear_left_joint_wheel"
+                      maxVelocity 100.0
+                      maxTorque 100.0
+                    }
+                    PositionSensor {
+                      name "robot_rear_left_joint_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -0.033000 0.000000 -0.071000
+                    children [
+                      Pose {
+                        rotation 1.000000 0.000000 0.000000 1.570796
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              roughness 1.000000
+                              metalness 0
+                            }
+                            geometry Cylinder {
+                              radius 0.05
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "robot_rear_left_wheel"
+                    boundingObject Pose {
+                      rotation 1.000000 0.000000 0.000000 1.570796
+                      children [
+                        Cylinder {
+                          radius 0.05
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.250000
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        1.692708e-04 1.692708e-04 3.125000e-04
+                        0.000000e+00 0.000000e+00 0.000000e+00
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "robot_rear_left_support"
+              physics Physics {
+                density -1
+                mass 1.500000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  5.000000e-05 5.000000e-05 7.500000e-05
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0.000000 0.000000 1.000000
+              anchor -0.235000 -0.182500 0.044800
+              dampingConstant 0.8
+              staticFriction 0.01
+            }
+            device [
+              RotationalMotor {
+                name "robot_rear_right_joint_support"
+                maxVelocity 100.0
+                maxTorque 100.0
+              }
+              PositionSensor {
+                name "robot_rear_right_joint_support_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation -0.235000 -0.182500 0.044800
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE caster_wheel
+                }
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0.000000 1.000000 0.000000
+                    anchor -0.033000 0.000000 -0.071000
+                  }
+                  device [
+                    RotationalMotor {
+                      name "robot_rear_right_joint_wheel"
+                      maxVelocity 100.0
+                      maxTorque 100.0
+                    }
+                    PositionSensor {
+                      name "robot_rear_right_joint_wheel_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -0.033000 0.000000 -0.071000
+                    children [
+                      Pose {
+                        rotation 1.000000 0.000000 0.000000 1.570796
+                        children [
+                          Shape {
+                            appearance PBRAppearance {
+                              baseColor 0.500000 0.500000 0.500000
+                              roughness 1.000000
+                              metalness 0
+                            }
+                            geometry Cylinder {
+                              radius 0.05
+                              height 0.025
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "robot_rear_right_wheel"
+                    boundingObject Pose {
+                      rotation 1.000000 0.000000 0.000000 1.570796
+                      children [
+                        Cylinder {
+                          radius 0.05
+                          height 0.025
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.250000
+                      centerOfMass [ 0.000000 0.000000 0.000000 ]
+                      inertiaMatrix [
+                        1.692708e-04 1.692708e-04 3.125000e-04
+                        0.000000e+00 0.000000e+00 0.000000e+00
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "robot_rear_right_support"
+              physics Physics {
+                density -1
+                mass 1.500000
+                centerOfMass [ 0.000000 0.000000 0.000000 ]
+                inertiaMatrix [
+                  5.000000e-05 5.000000e-05 7.500000e-05
+                  0.000000e+00 0.000000e+00 0.000000e+00
+                ]
+              }
+            }
+          }
+          Solid {
+            translation -0.197500 0.000000 0.159800
+            children [
+              Shape {
+                appearance DEF vectornav_imu_color PBRAppearance {
+                  baseColor 1.000000 0.000000 0.000000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry DEF vectornav_vn100 Mesh {
+                  url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/imu/vectornav_vn100.stl"
+                }
+              }
+              Solid {
+                translation -0.007450 0.000000 0.008800
+                children [
+                  InertialUnit {
+                    name "imu inertial"
+                  }
+                  Accelerometer {
+                    name "imu accelerometer"
+                  }
+                  Gyro {
+                    name "imu gyro"
+                  }
+                  Compass {
+                    name "imu compass"
+                  }
+                ]
+                name "robot_vectornav_link"
+              }
+            ]
+            name "robot_vectornav_base_link"
+            boundingObject Pose {
+              translation 0.000000 0.000000 0.004500
+              children [
+                Box {
+                   size 0.036000 0.037000 0.009000
+                }
+              ]
+            }
+            physics Physics {
+              density -1
+              mass 0.050000
+              centerOfMass [ 0.000000 0.000000 0.010000 ]
+              inertiaMatrix [
+                3.333333e-06 3.333333e-06 3.333333e-06
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation 0.267500 -0.215000 0.161300
+            rotation 0.923880 -0.382683 0.000000 3.141593
+            children [
+              DEF hokuyo_ust_20lx_visual CadShape {
+                url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/hokuyo_ust_20lx.dae"
+              }
+              Solid {
+                translation 0.000000 0.000000 0.047400
+                children [
+                  Lidar {
+                    name "robot_front_laser_sensor"
+                    fieldOfView 4.712400
+                    horizontalResolution 1081
+                    numberOfLayers 1
+                    minRange 0.060000
+                    maxRange 20.000000
+                    noise 0.000500
+                    resolution 0.004359
+                  }
+                ]
+                name "robot_front_laser_link"
+              }
+            ]
+            name "robot_front_laser_base_link"
+            boundingObject Pose {
+              translation 0.000000 0.000000 0.036000
+              children [
+                Cylinder {
+                  radius 0.022
+                  height 0.072
+                }
+              ]
+            }
+            physics Physics {
+              density -1
+              mass 0.130000
+              centerOfMass [ 0.000000 0.000000 0.036000 ]
+              inertiaMatrix [
+                8.016667e-05 8.016667e-05 5.416667e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation -0.267500 0.215000 0.161300
+            rotation -0.382683 -0.923880 -0.000000 3.141593
+            children [
+              USE hokuyo_ust_20lx_visual
+              Solid {
+                translation 0.000000 0.000000 0.047400
+                children [
+                  Lidar {
+                    name "robot_rear_laser_sensor"
+                    fieldOfView 4.712400
+                    horizontalResolution 1081
+                    numberOfLayers 1
+                    minRange 0.060000
+                    maxRange 20.000000
+                    noise 0.000500
+                    resolution 0.004359
+                  }
+                ]
+                name "robot_rear_laser_link"
+              }
+            ]
+            name "robot_rear_laser_base_link"
+            boundingObject Pose {
+              translation 0.000000 0.000000 0.036000
+              children [
+                Cylinder {
+                  radius 0.022
+                  height 0.072
+                }
+              ]
+            }
+            physics Physics {
+              density -1
+              mass 0.130000
+              centerOfMass [ 0.000000 0.000000 0.036000 ]
+              inertiaMatrix [
+                8.016667e-05 8.016667e-05 5.416667e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation 0.314500 0.020000 0.189800
+            children [
+              Pose {
+                translation 0.014900 -0.017500 0.000000
+                rotation 0.577350 0.577350 0.577350 2.094395
+                children [
+                  DEF intel_d435_color_visual CadShape {
+                    url "/home/joel/Documentos/GitHub/Robotnik_practicas/Robotnik_ws/install/robotnik_sensors/share/robotnik_sensors/meshes/depth/intel_realsense_d435/intel_d435_color.dae"
+                  }
+                ]
+              }
+              Solid {
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      RangeFinder {
+                        name "front_camera_depth"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.007000
+                        near 0.100000
+                        minRange 0.100000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_front_rgbd_camera_depth_frame"
+              }
+              Solid {
+                translation 0.000000 -0.050000 0.000000
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "front_camera_irred1"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "front_camera_irred2"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_front_rgbd_camera_infra2_frame"
+              }
+              Solid {
+                translation 0.000000 0.015000 0.000000
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "front_camera_color"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_front_rgbd_camera_color_frame"
+              }
+            ]
+            name "robot_front_rgbd_camera_link"
+            boundingObject Pose {
+              translation 0.000000 -0.017500 0.000000
+              children [
+                Box {
+                   size 0.025050 0.090000 0.025000
+                }
+              ]
+            }
+            physics Physics {
+              density -1
+              mass 0.100000
+              centerOfMass [ 0.002500 -0.015000 0.000000 ]
+              inertiaMatrix [
+                7.270833e-05 1.041667e-05 7.270833e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation -0.314500 -0.020000 0.115800
+            rotation 0.000000 0.000000 1.000000 3.141593
+            children [
+              Pose {
+                translation 0.014900 -0.017500 0.000000
+                rotation 0.577350 0.577350 0.577350 2.094395
+                children [
+                  USE intel_d435_color_visual
+                ]
+              }
+              Solid {
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      RangeFinder {
+                        name "rear_camera_depth"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.007000
+                        near 0.100000
+                        minRange 0.100000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_rear_rgbd_camera_depth_frame"
+              }
+              Solid {
+                translation 0.000000 -0.050000 0.000000
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "rear_camera_irred1"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "rear_camera_irred2"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_rear_rgbd_camera_infra2_frame"
+              }
+              Solid {
+                translation 0.000000 0.015000 0.000000
+                children [
+                  Pose {
+                    translation 0 0 0
+                    rotation 0.577350 -0.577350 0.577350 2.094395
+                    children [
+                      Camera {
+                        name "rear_camera_color"
+                        fieldOfView 1.047198
+                        width 640
+                        height 480
+                        noise 0.050000
+                      }
+                    ]
+                  }
+                ]
+                name "robot_rear_rgbd_camera_color_frame"
+              }
+            ]
+            name "robot_rear_rgbd_camera_link"
+            boundingObject Pose {
+              translation 0.000000 -0.017500 0.000000
+              children [
+                Box {
+                   size 0.025050 0.090000 0.025000
+                }
+              ]
+            }
+            physics Physics {
+              density -1
+              mass 0.100000
+              centerOfMass [ 0.002500 -0.015000 0.000000 ]
+              inertiaMatrix [
+                7.270833e-05 1.041667e-05 7.270833e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+        ]
+        name "robot_base_link"
+        boundingObject USE theron_base_v4
+        physics Physics {
+          density -1
+          mass 45.000000
+          centerOfMass [ 0.000000 0.000000 0.000000 ]
+          inertiaMatrix [
+            1.391000e+00 6.853000e+00 6.125000e+00
+            4.000000e-03 0.000000e+00 0.000000e+00
+          ]
+        }
+      }
+    ]
+    name IS name
+  }
+}

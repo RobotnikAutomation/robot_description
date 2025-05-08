@@ -23,7 +23,7 @@
            <color rgba="0.5 0.5 0.5 1"/>
         </material>
 	      <geometry>
-	        <mesh filename="package://${mesh_file}.dae"/>
+	        <mesh filename="package://${mesh_file}.stl"/>
 	      </geometry>
 	    </visual>
 	    <collision>

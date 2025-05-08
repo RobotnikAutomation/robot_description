@@ -46,8 +46,8 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='robot',
-        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit)',
-        default_value='rbvogui',
+        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit, rbrbout)',
+        default_value='',
         use_env=True,
         environment='ROBOT',
     )
@@ -56,7 +56,7 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='robot_model',
-        description='Robot subvariation from robot basic (rbvogui_6w, rbkairos_ur5e)',
+        description='Robot subvariation from robot basic (rbkairos_plus, rbrobout_plus, etc)',
         default_value=robot,
         use_env=True,
         environment='ROBOT_MODEL',

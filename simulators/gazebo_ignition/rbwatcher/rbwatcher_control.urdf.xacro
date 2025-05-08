@@ -29,12 +29,12 @@
               <plugin>ign_ros2_control/IgnitionSystem</plugin>
           </hardware>
 
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="${prefix}front_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="${prefix}front_right_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="${prefix}back_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="${prefix}back_right_wheel_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="${prefix}top_ptz_camera_pan_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="${prefix}top_ptz_camera_tilt_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_front_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_front_right_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="robot_back_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="robot_back_right_wheel_joint"/>
+          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="robot_top_ptz_camera_pan_joint"/>
+          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="robot_top_ptz_camera_tilt_joint"/>
 
         </ros2_control>
     </xacro:macro>

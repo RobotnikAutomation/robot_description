@@ -34,12 +34,12 @@
 		<origin xyz="0 0 0" rpy="0 0 0" />
 		<xacro:if value="${hq}">
 		<geometry>
-			<mesh filename="package://robot_description/meshes/bases/rbwatcher/rbwatcher_body.dae"/>
+			<mesh filename="package://robot_description/meshes/bases/rbwatcher/rbwatcher_body.stl"/>
 		</geometry>
 		</xacro:if>
 		<xacro:unless value="${hq}">
 		<geometry>
-			<mesh filename="package://robot_description/meshes/bases/rbwatcher/rbwatcher_body.dae"/>
+			<mesh filename="package://robot_description/meshes/bases/rbwatcher/rbwatcher_body.stl"/>
 		</geometry>
 		</xacro:unless>
 		<material name="darkgrey">

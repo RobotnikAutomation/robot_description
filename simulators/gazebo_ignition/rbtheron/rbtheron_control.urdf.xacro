@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-    <xacro:macro name="rbrobout_gz_ignition_control"  params="namespace prefix">
+    <xacro:macro name="rbtheron_gz_ignition_control" params="namespace prefix">
         <gazebo>
-          <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
+            <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin" filename="ign_ros2_control-system">
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find robot_description)/simulators/gazebo_ignition/rbrobout/rbrobout_controller_params.yaml</parameters>
+            <parameters>$(find robot_description)/simulators/gazebo_ignition/rbtheron/rbtheron_controller_params.yaml</parameters>
             <ros>
                 <namespace>/${namespace}</namespace>
             </ros>
@@ -26,15 +26,13 @@
 
         <ros2_control name="IgnitionSystem" type="system">
           <hardware>
-              <plugin>ign_ros2_control/IgnitionSystem</plugin>
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
           </hardware>
 
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_front_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_front_right_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="robot_back_left_wheel_joint"/>
-          <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20" name="robot_back_right_wheel_joint"/>
-          <xacro:ros2_joint interface="position" jmin="-20" jmax="20" name="robot_lift_ewellix_lift_top_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_left_wheel_joint"/>
+          <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10" name="robot_right_wheel_joint"/>
 
         </ros2_control>
     </xacro:macro>
+
 </robot>

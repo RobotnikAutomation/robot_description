@@ -8,7 +8,7 @@
         type: joint_state_broadcaster/JointStateBroadcaster
 
       robotnik_base_controller:
-        type: robotnik_controller/RBKairosController
+        type: robotnik_controller/RBTheronController
 
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController
@@ -57,7 +57,7 @@
       wheel_base:   0.31
       track_width:  1.116
 
-      wheels_positions: ["front_right", "front_left", "back_right", "back_left"]
+      wheels_positions: ["right", "left"]
 
       #Cartesian and wheels limits
       base:
@@ -85,9 +85,9 @@
               min: -1.0
               max:  1.0
 
-        front_right:
+        right:
           traction:
-            joint_name: robot_front_right_wheel_joint
+            joint_name: robot_right_wheel_joint
             limits:
               velocity:
                 min: -27.7
@@ -95,29 +95,10 @@
               acceleration:
                 min: -10.0
                 max:  10.0
-        front_left:
+
+        left:
           traction:
-            joint_name: robot_front_left_wheel_joint
-            limits:
-              velocity:
-                min: -27.7
-                max:  27.7
-              acceleration:
-                min: -10.0
-                max:  10.0
-        back_right:
-          traction:
-            joint_name: robot_back_right_wheel_joint
-            limits:
-              velocity:
-                min: -27.7
-                max:  27.7
-              acceleration:
-                min: -10.0
-                max:  10.0
-        back_left:
-          traction:
-            joint_name: robot_back_left_wheel_joint
+            joint_name: robot_left_wheel_joint
             limits:
               velocity:
                 min: -27.7
