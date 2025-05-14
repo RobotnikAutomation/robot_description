@@ -165,14 +165,23 @@
     </xacro:sensor_intel_realsense_d435>
 
     <!-- 3D LiDAR -->
+    <joint name="$(arg prefix)top_lidar_aux_joint" type="fixed">
+        <origin xyz="${top_lidar_offset_x} ${top_lidar_offset_y} ${top_lidar_offset_z}" rpy="0 ${PI/2}  0"/>
+        <parent link="$(arg prefix)top_chassis"/>
+        <child link="$(arg prefix)top_lidar_aux"/>
+    </joint>
+
+    <link name="$(arg prefix)top_lidar_aux">
+    </link>
+
     <xacro:sensor_robosense_bpearl
         frame_prefix="$(arg prefix)top_lidar_"
-        parent="$(arg prefix)top_chassis"
+        parent="$(arg prefix)top_lidar_aux"
         node_namespace="$(arg namespace)"
         node_name="top_lidar"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${top_lidar_offset_x} ${top_lidar_offset_y} ${top_lidar_offset_z}" rpy="0 ${PI/2} 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${PI/3}"/>
     </xacro:sensor_robosense_bpearl>
 
 	<!-- Controllers -->
