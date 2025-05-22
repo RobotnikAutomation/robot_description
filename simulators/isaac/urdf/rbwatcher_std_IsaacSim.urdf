@@ -1,0 +1,304 @@
+<?xml version="1.0" ?>
+<robot name="summit_xl">
+
+  <!-- BASE FOOTPRINT -->
+  <link name="robot_base_footprint">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <!-- Joint connecting base footprint and base link -->
+  <joint name="robot_base_footprint_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.1175"/>
+    <parent link="robot_base_footprint"/>
+    <child link="robot_base_link"/>
+  </joint>
+  
+  <!-- BASE_LINK -->
+  <link name="robot_base_link">
+    <inertial>
+      <mass value="50.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.391" ixy="0.004" ixz="0.0" iyy="6.853" iyz="0.0" izz="6.125"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/bases/rbwatcher_body.dae"/>
+      </geometry>
+      <material name="darkgrey">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/bases/rbwatcher_body.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  
+  <!-- DOCKING CONTACTS -->
+  <joint name="robot_base_docking_joint" type="fixed">
+    <origin rpy="0 0 0 " xyz="0.29378 0.0 0.07321"/>
+    <parent link="robot_base_link"/>
+    <child link="robot_base_docking_contact_link"/>
+  </joint>
+  
+  
+  <!-- DOCKING LINK -->
+  <link name="robot_base_docking_contact_link"/>
+
+  <!-- ****** -->  
+  <!-- WHEELS -->
+  <!-- ****** -->
+  
+  <!-- Front Right -->
+  <joint name="robot_front_right_wheel_joint" type="continuous">
+    <parent link="robot_base_link"/>
+    <child link="robot_front_right_wheel"/>
+    <origin rpy="0 0 0" xyz="0.22795 -0.155 0.0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <link name="robot_front_right_wheel">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <inertial>
+      <mass value="4"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02052758333333333" ixy="0" ixz="0" iyy="0.027612499999999998" iyz="0" izz="0.02052758333333333"/>
+    </inertial>
+  </link>
+  
+  <transmission name="robot_front_right_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_front_right_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="robot_front_right_wheel_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>20</motorTorqueConstant>
+    </actuator>
+  </transmission>
+  
+  <gazebo reference="robot_front_right_wheel">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <!-- Front Left -->
+  <joint name="robot_front_left_wheel_joint" type="continuous">
+    <parent link="robot_base_link"/>
+    <child link="robot_front_left_wheel"/>
+    <origin rpy="0 0 0" xyz="0.22795 0.155 0.0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <link name="robot_front_left_wheel">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <inertial>
+      <mass value="4"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02052758333333333" ixy="0" ixz="0" iyy="0.027612499999999998" iyz="0" izz="0.02052758333333333"/>
+    </inertial>
+  </link>
+  
+  <transmission name="robot_front_left_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_front_left_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="robot_front_left_wheel_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>20</motorTorqueConstant>
+    </actuator>
+  </transmission>
+  <gazebo reference="robot_front_left_wheel">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <!-- Back Left -->
+  <joint name="robot_back_left_wheel_joint" type="continuous">
+    <parent link="robot_base_link"/>
+    <child link="robot_back_left_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.22795 0.155 0.0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <link name="robot_back_left_wheel">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_left.stl"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <inertial>
+      <mass value="4"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02052758333333333" ixy="0" ixz="0" iyy="0.027612499999999998" iyz="0" izz="0.02052758333333333"/>
+    </inertial>
+  </link>
+  
+  <transmission name="robot_back_left_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_back_left_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="robot_back_left_wheel_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>20</motorTorqueConstant>
+    </actuator>
+  </transmission>
+  <gazebo reference="robot_back_left_wheel">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <!--Back Right -->
+  <joint name="robot_back_right_wheel_joint" type="continuous">
+    <parent link="robot_base_link"/>
+    <child link="robot_back_right_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.22795 -0.155 0.0"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <link name="robot_back_right_wheel">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheels/rubber_wheel/rubber_wheel_v2_right.stl"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <inertial>
+      <mass value="4"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02052758333333333" ixy="0" ixz="0" iyy="0.027612499999999998" iyz="0" izz="0.02052758333333333"/>
+    </inertial>
+  </link>
+  
+  <transmission name="robot_back_right_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_back_right_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="robot_back_right_wheel_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>20</motorTorqueConstant>
+    </actuator>
+  </transmission>
+  
+  <gazebo reference="robot_back_right_wheel">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <joint name="robot_top_structure_joint" type="fixed">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="-0.17024 0 0.27609"/>
+    <parent link="robot_base_link"/>
+    <child link="robot_top_structure_link"/>
+  </joint>
+  
+  <!-- TOP STRUCTURE --> 
+  <link name="robot_top_structure_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alu_color">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="robot_top_structure_link">
+    <material>Gazebo/Gray</material>
+    <gravity>true</gravity>
+  </gazebo>  
+  
+</robot>
