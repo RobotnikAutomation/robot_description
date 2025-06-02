@@ -48,14 +48,14 @@
       </link>
 
         <!-- DOCKING CONTACTS -->
-        <!-- <joint name="${prefix}base_docking_joint" type="fixed">
-            <origin xyz="0.284 0.012 0.068" rpy="0 0 0 " />
-            <parent link="${prefix}base_link"/>
+        <joint name="${prefix}base_docking_joint" type="fixed">
+            <origin xyz="0.858 0.02 0.008" rpy="0 0 0 " />
+            <parent link="${prefix}base_footprint"/>
             <child link="${prefix}base_docking_contact_link" />
-        </joint> -->
+        </joint>
 
         <!-- DOCKING LINK -->
-        <!-- <link name="${prefix}base_docking_contact_link" /> -->
+        <link name="${prefix}base_docking_contact_link" />
 
   </xacro:macro>
 </robot>
