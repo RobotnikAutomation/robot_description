@@ -67,18 +67,15 @@
   <xacro:ur_robot
       tf_prefix="$(arg prefix)arm_"
       name="$(arg ur_type)"
-      parent="$(arg prefix)base_link"
+      parent="$(arg prefix)top_cover"
       joint_limits_parameters_file="$(arg joint_limit_params)"
       kinematics_parameters_file="$(arg kinematics_params)"
       physical_parameters_file="$(arg physical_params)"
       visual_parameters_file="$(arg visual_params)"
-      sim_gazebo="$(arg gazebo_classic)">
-      <origin xyz="0 0 0.56362" rpy="0 0 0"/>
+      sim_gazebo="$(arg gazebo_classic)"
+      sim_ignition="$(arg gazebo_ignition)">
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
   </xacro:ur_robot>
-
-
-  <!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
-
   
   <!-- IMU -->
     <xacro:sensor_vectornav

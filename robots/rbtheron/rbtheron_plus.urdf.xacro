@@ -99,7 +99,7 @@
 
 	<xacro:property name="rear_rgbd_camera_offset_x" value="-0.3045"/>
 	<xacro:property name="rear_rgbd_camera_offset_y" value="0.0"/>
-	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1158"/>
+	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1598"/>
 
 	<xacro:property name="front_laser_offset_x" value="0.2675"/>
 	<xacro:property name="front_laser_offset_y" value="-0.215"/>
