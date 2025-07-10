@@ -34,43 +34,20 @@
 
 	<xacro:property name="top_laser_offset_x" value="-0.01924"/>
 	<xacro:property name="top_laser_offset_y" value="0.0"/>
-	<xacro:property name="top_laser_offset_z" value="0.35642"/>
+	<xacro:property name="top_laser_offset_z" value="0.27642"/>
 
 	<xacro:property name="front_rgbd_camera_offset_x" value="0.324"/>
 	<xacro:property name="front_rgbd_camera_offset_y" value="0.012"/>
 	<xacro:property name="front_rgbd_camera_offset_z" value="0.172"/>
 
-	<xacro:property name="front_ptz_camera_offset_x" value="0.22151"/>
-	<xacro:property name="front_ptz_camera_offset_y" value="0.0"/>
-	<xacro:property name="front_ptz_camera_offset_z" value="0.24022"/>
-	<xacro:property name="front_ptz_camera_offset_t" value="-1.308996939"/>
-
 	<xacro:property name="gps_offset_x" value="-0.22528"/>
 	<xacro:property name="gps_offset_y" value="0.095"/>
-	<xacro:property name="gps_offset_z" value="0.275"/>
-
-
-	<!-- Other elements -->
-	<xacro:property name="antenna_offset_x" value="-0.18324"/>
-	<xacro:property name="antenna_offset_y" value="0.0"/>
-	<xacro:property name="antenna_offset_z" value="0.27488"/>
-
-	<!-- ***************** -->
-	<!-- Global parameters -->
-	<!-- ***************** -->
-
-	<!-- Second we define all the parameters and arguments to customize the robot characteristics -->
+	<xacro:property name="gps_offset_z" value="0.48"/>
 
 	<xacro:property name="PI" value="3.1415926535897931"/>
 
 	<!-- Flag to select the high or low quality model -->
 	<xacro:property name="hq" value="true" />
-
-	<!-- Launch Arguments -->
-	<xacro:arg name="gpu" default="true" />
-
-	<xacro:arg name="gps_latitude" default="0"/>
-	<xacro:arg name="gps_longitude" default="0"/>
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 	<xacro:rbsummit prefix="$(arg prefix)" hq="${hq}"/>
@@ -86,6 +63,46 @@
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
     </xacro:sensor_vectornav>
+
+	<!-- 3D LIDAR -->
+	<xacro:sensor_robosense_helios_16p
+		frame_prefix="$(arg prefix)top_3d_laser_"
+		parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="top_lidar"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+		<origin
+			xyz="${top_laser_offset_x} ${top_laser_offset_y} ${top_laser_offset_z}"
+			rpy="0 0 0"
+		/>
+	</xacro:sensor_robosense_helios_16p>
+
+	<!-- CAMERA -->
+
+    <xacro:sensor_intel_realsense_d435
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
+        node_namespace="$(arg namespace)"
+        node_name="front_camera"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
+    </xacro:sensor_intel_realsense_d435>
+
+	<!-- GPS -->
+	<xacro:sensor_ublox_with_mast
+		frame_prefix="$(arg prefix)gps_"
+		parent="$(arg prefix)base_link"
+		update_rate="5"
+        node_namespace="$(arg namespace)"
+        gazebo_classic="$(arg gazebo_classic)"
+        gazebo_ignition="$(arg gazebo_ignition)">
+		<origin
+			xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}"
+			rpy="0 0 0"
+		/>
+	</xacro:sensor_ublox_with_mast>
 
 	<!-- Controllers -->
     <xacro:if value="$(arg gazebo_classic)">

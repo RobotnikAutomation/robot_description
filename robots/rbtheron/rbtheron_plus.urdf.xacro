@@ -170,9 +170,7 @@
         <parent link="$(arg prefix)top_chassis"/>
         <child link="$(arg prefix)top_lidar_aux"/>
     </joint>
-
-    <link name="$(arg prefix)top_lidar_aux">
-    </link>
+    <link name="$(arg prefix)top_lidar_aux" />
 
     <xacro:sensor_robosense_bpearl
         frame_prefix="$(arg prefix)top_lidar_"
@@ -181,7 +179,7 @@
         node_name="top_lidar"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="0 0 0" rpy="0 0 ${PI/3}"/>
+        <origin xyz="${top_lidar_offset_x} ${top_lidar_offset_y} ${top_lidar_offset_z}" rpy="0 ${PI/2} 0"/>
     </xacro:sensor_robosense_bpearl>
 
 	<!-- Controllers -->
@@ -197,5 +195,4 @@
             <xacro:rbtheron_base_hw_controller/>
         </xacro:unless>
     </xacro:unless>
-
 </robot>
