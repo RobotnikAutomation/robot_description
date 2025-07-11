@@ -20,7 +20,7 @@
   <!-- Properties and Arguments -->
 
   <xacro:arg name="namespace" default="robot"/>
-  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="prefix" default=""/>
   <xacro:arg name="gazebo_classic" default="false"/>
   <xacro:arg name="gazebo_ignition" default="false"/>
 
