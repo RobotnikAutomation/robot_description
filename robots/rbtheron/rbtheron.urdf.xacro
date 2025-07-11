@@ -31,13 +31,13 @@
 	<xacro:property name="hq" value="true" />
 
 	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="frame_prefix" default=""/>
+	<xacro:arg name="prefix" default=""/>
 	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
 
-	<xacro:rbtheron prefix="$(arg frame_prefix)" hq="${hq}"/>
+	<xacro:rbtheron prefix="$(arg prefix)" hq="${hq}"/>
 
 	<!-- SENSORS -->
     <xacro:property name="imu_offset_x" value="-0.1975"/>
@@ -63,8 +63,8 @@
 
 	<!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg frame_prefix)imu_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)imu_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
@@ -73,8 +73,8 @@
 
 	<!-- 2D LASER -->
     <xacro:sensor_hokuyo_ust20lx
-        frame_prefix="$(arg frame_prefix)front_laser_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)front_laser_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="front_laser"
         gazebo_classic="$(arg gazebo_classic)"
@@ -83,8 +83,8 @@
     </xacro:sensor_hokuyo_ust20lx>
 
     <xacro:sensor_hokuyo_ust20lx
-        frame_prefix="$(arg frame_prefix)rear_laser_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)rear_laser_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="rear_laser"
         gazebo_classic="$(arg gazebo_classic)"
@@ -94,8 +94,8 @@
 
   	<!-- CAMERAS -->
     <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg frame_prefix)front_rgbd_camera_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="front_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -104,8 +104,8 @@
     </xacro:sensor_intel_realsense_d435>
 
     <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg frame_prefix)rear_rgbd_camera_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)rear_rgbd_camera_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="rear_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -115,11 +115,11 @@
 
 	<!-- Controllers -->
 	<xacro:if value="$(arg gazebo_classic)">
-		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+		<xacro:rbtheron_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
 	</xacro:if>
 	<xacro:if value="$(arg gazebo_ignition)">
-		<xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+		<xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
     <xacro:unless value="$(arg gazebo_classic)">
         <xacro:unless value="$(arg gazebo_ignition)">

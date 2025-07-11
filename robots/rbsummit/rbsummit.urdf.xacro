@@ -24,7 +24,7 @@
 	<!-- x,y,z in translation from base_link to the center of the sensor -->
 
 	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="frame_prefix" default=""/>
+	<xacro:arg name="prefix" default=""/>
 	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
@@ -50,14 +50,14 @@
 	<xacro:property name="hq" value="true" />
 
 	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
-	<xacro:rbsummit prefix="$(arg frame_prefix)" hq="${hq}"/>
+	<xacro:rbsummit prefix="$(arg prefix)" hq="${hq}"/>
 
 	<!-- Custom Sensors -->
 
 	<!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg frame_prefix)imu_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)imu_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
@@ -66,8 +66,8 @@
 
 	<!-- 3D LIDAR -->
 	<xacro:sensor_robosense_helios_16p
-		frame_prefix="$(arg frame_prefix)top_3d_laser_"
-		parent="$(arg frame_prefix)base_link"
+		frame_prefix="$(arg prefix)top_3d_laser_"
+		parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="top_lidar"
         gazebo_classic="$(arg gazebo_classic)"
@@ -81,8 +81,8 @@
 	<!-- CAMERA -->
 
     <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg frame_prefix)front_rgbd_camera_"
-        parent="$(arg frame_prefix)base_link"
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         node_name="front_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -92,8 +92,8 @@
 
 	<!-- GPS -->
 	<xacro:sensor_ublox_with_mast
-		frame_prefix="$(arg frame_prefix)gps_"
-		parent="$(arg frame_prefix)base_link"
+		frame_prefix="$(arg prefix)gps_"
+		parent="$(arg prefix)base_link"
 		update_rate="5"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
@@ -106,11 +106,11 @@
 
 	<!-- Controllers -->
     <xacro:if value="$(arg gazebo_classic)">
-      <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+      <xacro:rbsummit_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
     </xacro:if>
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+      <xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
     </xacro:if>
     <xacro:unless value="$(arg gazebo_classic)">
       <xacro:unless value="$(arg gazebo_ignition)">

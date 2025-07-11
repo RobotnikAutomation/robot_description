@@ -28,11 +28,11 @@
 
     <!-- Launch Arguments -->
     <xacro:arg name="namespace" default="robot"/>
-    <xacro:arg name="frame_prefix" default=""/>
+    <xacro:arg name="prefix" default=""/>
     <xacro:arg name="gazebo_classic" default="false"/>
     <xacro:arg name="gazebo_ignition" default="false"/>
 
-    <xacro:rbvogui prefix="$(arg frame_prefix)" hq="${hq}"/>
+    <xacro:rbvogui prefix="$(arg prefix)" hq="${hq}"/>
 
     <xacro:property name="front_laser_offset_x" value="0.53" />
     <xacro:property name="front_laser_offset_y" value="0.33" />
@@ -58,8 +58,8 @@
     <!-- TODO: Restore simulation functionality, removed jazzy -->
     <xacro:ur_robot
         name="$(arg ur_type)"
-        tf_prefix="$(arg frame_prefix)arm_"
-        parent="$(arg frame_prefix)chassis_link"
+        tf_prefix="$(arg prefix)arm_"
+        parent="$(arg prefix)chassis_link"
         joint_limits_parameters_file="$(arg joint_limit_params)"
         kinematics_parameters_file="$(arg kinematics_params)"
         physical_parameters_file="$(arg physical_params)"
@@ -68,8 +68,8 @@
     </xacro:ur_robot>
 
     <xacro:sensor_vectornav
-        frame_prefix="$(arg frame_prefix)imu_"
-        parent="$(arg frame_prefix)chassis_link"
+        frame_prefix="$(arg prefix)imu_"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
@@ -78,8 +78,8 @@
 
     <!-- Front Camera -->
     <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg frame_prefix)front_rgbd_camera_"
-        parent="$(arg frame_prefix)chassis_link"
+        frame_prefix="$(arg prefix)front_rgbd_camera_"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -89,8 +89,8 @@
 
     <!-- Rear Camera -->
     <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg frame_prefix)rear_rgbd_camera_"
-        parent="$(arg frame_prefix)chassis_link"
+        frame_prefix="$(arg prefix)rear_rgbd_camera_"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="rear_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -99,8 +99,8 @@
     </xacro:sensor_intel_realsense_d435>
 
     <xacro:sensor_sick_s300
-        frame_prefix="$(arg frame_prefix)front_laser_"
-        parent="$(arg frame_prefix)chassis_link"
+        frame_prefix="$(arg prefix)front_laser_"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_laser"
         gazebo_classic="$(arg gazebo_classic)"
@@ -109,8 +109,8 @@
     </xacro:sensor_sick_s300>
 
     <xacro:sensor_sick_s300
-        frame_prefix="$(arg frame_prefix)rear_laser_"
-        parent="$(arg frame_prefix)chassis_link"
+        frame_prefix="$(arg prefix)rear_laser_"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="rear_laser"
         gazebo_classic="$(arg gazebo_classic)"
@@ -120,11 +120,11 @@
 
 	<!-- Controllers -->
 	<xacro:if value="$(arg gazebo_classic)">
-		<xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+		<xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
         <xacro:ros_planar_move_gazebo_classic/>
 	</xacro:if>
 	<xacro:if value="$(arg gazebo_ignition)">
-		<xacro:rbvogui_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg frame_prefix)"/>
+		<xacro:rbvogui_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
 	</xacro:if>
     <xacro:unless value="$(arg gazebo_classic)">
         <xacro:unless value="$(arg gazebo_ignition)">
