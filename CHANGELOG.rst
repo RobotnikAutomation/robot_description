@@ -2,6 +2,12 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Unreleased
+----------
+
+* Sync humble and jazzy branches.
+* Contributors: Rafael Martin, Robert Vasquez
+
 2.0.0 (2025-04-17)
 ------------------
 
