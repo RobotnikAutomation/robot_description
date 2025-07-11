@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="rb_theron"
+<robot name="rb1"
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
@@ -13,6 +13,8 @@
 	<xacro:include filename="$(find robotnik_description)/urdf/bases/rb1/rb1_base.xacro"/>
 
     <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rb1.ros2_control.urdf" />
+	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rb1/rb1_control.urdf.xacro"/>
+	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rb1/rb1_control.urdf.xacro"/>
 
 	<!-- Import all available sensors -->
 	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -29,7 +31,7 @@
 	<xacro:property name="hq" value="true" />
 
 	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="prefix" default=""/>
 	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
