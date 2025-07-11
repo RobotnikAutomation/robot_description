@@ -50,6 +50,7 @@
 
 	<xacro:property name="rear_rgbd_camera_offset_x" value="-0.3045"/>
 	<xacro:property name="rear_rgbd_camera_offset_y" value="0.0"/>
+	<!-- rear camera offset_z rb_theron chassis type v3: 0.1598 v4 (default): 0.1158 -->
 	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1158"/>
 
 	<xacro:property name="front_laser_offset_x" value="0.2675"/>
@@ -62,7 +63,7 @@
 
 	<!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
@@ -80,6 +81,7 @@
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${3/4*PI}"/>
     </xacro:sensor_hokuyo_ust20lx>
+
     <xacro:sensor_hokuyo_ust20lx
         frame_prefix="$(arg prefix)rear_laser_"
         parent="$(arg prefix)base_link"

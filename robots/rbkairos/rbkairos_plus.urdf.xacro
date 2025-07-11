@@ -51,27 +51,21 @@
   <xacro:rbkairos prefix="$(arg prefix)" gazebo_classic="$(arg gazebo_classic)" gazebo_ignition="$(arg gazebo_ignition)"/>
 
   <!-- Import UR arm -->
-
+  <!-- TODO: Restore simulation functionality, removed jazzy -->
   <xacro:ur_robot
-      tf_prefix="$(arg prefix)arm_"
       name="$(arg ur_type)"
+      tf_prefix="$(arg prefix)arm_"
       parent="$(arg prefix)top_cover"
       joint_limits_parameters_file="$(arg joint_limit_params)"
       kinematics_parameters_file="$(arg kinematics_params)"
       physical_parameters_file="$(arg physical_params)"
-      visual_parameters_file="$(arg visual_params)"
-      sim_gazebo="$(arg gazebo_classic)"
-      sim_ignition="$(arg gazebo_ignition)">
+      visual_parameters_file="$(arg visual_params)">
       <origin xyz="0 0 0" rpy="0 0 0"/>
   </xacro:ur_robot>
 
-
-  <!-- PENDIENTE DE ACTUALIZAR ROBOTNIK_SENSORS -->
-
-  
   <!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
@@ -109,7 +103,7 @@
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
     </xacro:sensor_intel_realsense_d435>
-  
+
   <!-- Controllers -->
   <xacro:if value="$(arg gazebo_classic)">
     <xacro:rbkairos_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
