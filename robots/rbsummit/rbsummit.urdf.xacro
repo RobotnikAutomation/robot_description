@@ -24,7 +24,7 @@
 	<!-- x,y,z in translation from base_link to the center of the sensor -->
 
 	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="prefix" default=""/>
 	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
@@ -56,7 +56,7 @@
 
 	<!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
