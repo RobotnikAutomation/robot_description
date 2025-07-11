@@ -50,23 +50,20 @@
 
 	<xacro:property name="rear_rgbd_camera_offset_x" value="-0.3045"/>
 	<xacro:property name="rear_rgbd_camera_offset_y" value="0.0"/>
-	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1598"/>
+	<!-- rear camera offset_z rb_theron chassis type v3: 0.1598 v4 (default): 0.1158 -->
+	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1158"/>
 
-	<xacro:property name="front_laser_offset_x" value="0.268"/>
+	<xacro:property name="front_laser_offset_x" value="0.2675"/>
 	<xacro:property name="front_laser_offset_y" value="-0.215"/>
 	<xacro:property name="front_laser_offset_z" value="0.1613"/>
 
-	<xacro:property name="rear_laser_offset_x" value="-0.268"/>
+	<xacro:property name="rear_laser_offset_x" value="-0.2675"/>
 	<xacro:property name="rear_laser_offset_y" value="0.215"/>
 	<xacro:property name="rear_laser_offset_z" value="0.1613"/>
 
-	<xacro:property name="top_lidar_offset_x" value="0.26"/>
-	<xacro:property name="top_lidar_offset_y" value="0.0"/>
-	<xacro:property name="top_lidar_offset_z" value="0.51"/>
-
 	<!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"

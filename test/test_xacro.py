@@ -44,7 +44,7 @@ def test_xacro_file(xacro_file):
     os.close(fd)
 
     namespace = "robot"
-    frame_prefix = "robot"
+    frame_prefix = "robot_"
     gazebo_classic = "False"
     gazebo_ignition = "False"
 

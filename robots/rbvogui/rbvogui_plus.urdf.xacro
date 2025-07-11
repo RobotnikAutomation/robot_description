@@ -16,7 +16,7 @@
     <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
     <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
-    
+
     <xacro:arg name="ur_type" default="ur10e"/>
     <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
     <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
@@ -31,7 +31,7 @@
     <xacro:arg name="prefix" default="robot_"/>
     <xacro:arg name="gazebo_classic" default="false"/>
     <xacro:arg name="gazebo_ignition" default="false"/>
- 
+
     <xacro:rbvogui prefix="$(arg prefix)" hq="${hq}"/>
 
     <xacro:property name="front_laser_offset_x" value="0.53" />
@@ -55,21 +55,20 @@
     <xacro:property name="rear_rgbd_camera_offset_z" value="0.29" />
 
     <!-- Import UR arm -->
+    <!-- TODO: Restore simulation functionality, removed jazzy -->
     <xacro:ur_robot
-        tf_prefix="$(arg prefix)arm_"
         name="$(arg ur_type)"
+        tf_prefix="$(arg prefix)arm_"
         parent="$(arg prefix)chassis_link"
         joint_limits_parameters_file="$(arg joint_limit_params)"
         kinematics_parameters_file="$(arg kinematics_params)"
         physical_parameters_file="$(arg physical_params)"
-        visual_parameters_file="$(arg visual_params)"
-        sim_gazebo="$(arg gazebo_classic)"
-        sim_ignition="$(arg gazebo_ignition)">
+        visual_parameters_file="$(arg visual_params)">
         <origin xyz="0 0 0.235" rpy="0 0 0"/>
     </xacro:ur_robot>
 
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         gazebo_classic="$(arg gazebo_classic)"
@@ -80,7 +79,7 @@
     <!-- Front Camera -->
     <xacro:sensor_intel_realsense_d435
         frame_prefix="$(arg prefix)front_rgbd_camera_"
-        parent="$(arg prefix)base_link"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_camera"
         gazebo_classic="$(arg gazebo_classic)"
@@ -91,36 +90,32 @@
     <!-- Rear Camera -->
     <xacro:sensor_intel_realsense_d435
         frame_prefix="$(arg prefix)rear_rgbd_camera_"
-        parent="$(arg prefix)base_link"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="rear_camera"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-        <origin
-            xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}"
-            rpy="0 0 -${PI}" />
+        <origin xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}" rpy="0 0 -${PI}" />
     </xacro:sensor_intel_realsense_d435>
 
     <xacro:sensor_sick_s300
         frame_prefix="$(arg prefix)front_laser_"
-        parent="$(arg prefix)base_link"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_laser"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}"
-            rpy="0 ${-PI} ${-3/4*PI}" />
+        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${-3/4*PI}" />
     </xacro:sensor_sick_s300>
 
     <xacro:sensor_sick_s300
         frame_prefix="$(arg prefix)rear_laser_"
-        parent="$(arg prefix)base_link"
+        parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="rear_laser"
         gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}"
-            rpy="0 ${-PI} ${1/4*PI}" />
+        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${1/4*PI}" />
     </xacro:sensor_sick_s300>
 
 	<!-- Controllers -->
