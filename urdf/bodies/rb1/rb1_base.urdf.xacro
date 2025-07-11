@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="rb1_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="rb1" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
 	<!-- ***************** -->
@@ -103,7 +103,7 @@
 		<xacro:elevator_platform prefix="$(arg prefix)elevator" parent="$(arg prefix)base_link" hq="${hq}">
 			<origin xyz="${elevator_x} -${elevator_y} ${elevator_z}" rpy="0 0 0"/>
 		</xacro:elevator_platform>
-	</xacro:if>	
+	</xacro:if>
 
 	<!-- SENSORS -->
 
