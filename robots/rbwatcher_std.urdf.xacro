@@ -58,7 +58,7 @@
     	
     	<!-- RGBD -->
     	<xacro:sensor_intel_d435 prefix="${prefix}front_rgbd_camera" parent="${prefix}base_link" prefix_topic="front_rgbd_camera">
-			<origin xyz="0.29881 0.0 0.15243" rpy="0 0 0"/>
+			<origin xyz="0.3003 0.0 0.15184" rpy="0 0 0"/>
     	</xacro:sensor_intel_d435>
 
 		<!--xacro:sensor_intel_d435 prefix="${prefix}rear_rgbd_camera" parent="${prefix}base_link" prefix_topic="rear_rgbd_camera">
@@ -67,17 +67,17 @@
 
         <!-- GPS -->
         <xacro:sensor_ublox prefix="${prefix}gps" parent="${prefix}base_link" use_mast="false">
-            <origin xyz="-0.24824 0.095 0.76359" rpy="0 0 0"/>
+            <origin xyz="-0.24702 0.095 0.773" rpy="0 0 0"/>
         </xacro:sensor_ublox>
 
     	<!-- LIDAR -->
     	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)" suffix_topic="_raw">
-    	  	<origin xyz="-0.11924 0.0 0.38609" rpy="0 0 0"/>
+    	  	<origin xyz="-0.11802 0.0 0.3855" rpy="0 0 0"/>
     	</xacro:sensor_rs_helios_16p>
 
 		<!-- Antenna -->
 		<xacro:sensor_antena_std prefix="${prefix}antenna" parent="${prefix}base_link" mesh_file="${antenna_mesh}">
-			<origin xyz="-0.24124 0.0 0.31109" rpy="0 0 0"/>
+			<origin xyz="-0.24004 0.0 0.31005" rpy="0 0 0"/>
 		</xacro:sensor_antena_std>
 
 		<!-- PTZ camera -->
