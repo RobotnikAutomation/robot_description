@@ -45,7 +45,6 @@ def test_xacro_file(xacro_file):
 
     namespace = "robot"
     frame_prefix = "robot"
-    gazebo_classic = "False"
     gazebo_ignition = "False"
 
     xacro_path = shutil.which('xacro')
@@ -59,7 +58,6 @@ def test_xacro_file(xacro_file):
         f" { xacro_file }"
         f" namespace:={namespace}"
         f" prefix:={frame_prefix}"
-        f" gazebo_classic:={gazebo_classic}"
         f" gazebo_ignition:={gazebo_ignition}"
         f" -o { tmp_urdf_output_file }"
     )

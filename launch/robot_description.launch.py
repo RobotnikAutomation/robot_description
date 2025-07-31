@@ -73,15 +73,6 @@ def generate_launch_description():
         environment='ROBOT_XACRO_PATH',
     )
     add_to_launcher.add_arg(arg)
-
-    arg = ExtendedArgument(
-        name='gazebo_classic',
-        description='Simulate robot in Gazebo Classic',
-        default_value="false",
-        use_env=True,
-        environment='GAZEBO_CLASSIC_SIMULATION',
-    )
-    add_to_launcher.add_arg(arg)
     
     arg = ExtendedArgument(
         name='gazebo_ignition',
@@ -110,7 +101,6 @@ def generate_launch_description():
             params['robot_xacro_path'],
             " namespace:=",params["namespace"],
             " prefix:=",params["frame_prefix"],
-            " gazebo_classic:=", params["gazebo_classic"],
             " gazebo_ignition:=", params["gazebo_ignition"],
         ]
     )
@@ -126,7 +116,7 @@ def generate_launch_description():
             {
               'robot_description': robot_description_param,
               'publish_frequency': 100.0,
-              'use_sim_time': params['gazebo_classic']
+              'use_sim_time': params['gazebo_ignition']
             }
         ],
     ))

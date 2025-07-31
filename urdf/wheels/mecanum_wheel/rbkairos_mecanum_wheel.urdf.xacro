@@ -14,12 +14,12 @@
             izz="${m*(3*r*r+h*h)/12}" />
     </xacro:macro>
 
-    <xacro:macro name="rbkairos_mecanum_wheel" params="prefix parent xyz reflect hq gazebo_classic:=false gazebo_ignition:=false">
+    <xacro:macro name="rbkairos_mecanum_wheel" params="prefix parent xyz reflect hq gazebo_ignition:=false">
 
         <joint name="${prefix}wheel_joint" type="continuous">
             <parent link="${parent}" />
             <child link="${prefix}wheel_link" />
-            <xacro:if value="${gazebo_classic or gazebo_ignition}">
+            <xacro:if value="${gazebo_ignition}">
                 <xacro:if value="${reflect}">
                     <origin xyz="${xyz}" rpy="0.0 0.0 -${PI/4}"/>
                 </xacro:if>
@@ -27,7 +27,7 @@
                     <origin xyz="${xyz}" rpy="0.0 0.0 ${PI/4}"/>
                 </xacro:unless>
             </xacro:if>
-            <xacro:unless value="${gazebo_classic or gazebo_ignition}">
+            <xacro:unless value="${gazebo_ignition}">
                 <origin xyz="${xyz}" rpy="0.0 0.0 0.0"/>
             </xacro:unless>
             <limit effort="100000" velocity="100" />
@@ -35,7 +35,7 @@
         </joint>
 
         <link name="${prefix}wheel_link">
-            <xacro:unless value="${gazebo_classic or gazebo_ignition}">
+            <xacro:unless value="${gazebo_ignition}">
                 <visual>
                     <xacro:if value="${hq}">
                         <xacro:if value="${reflect}">
@@ -82,7 +82,7 @@
             </inertial>
         </link>
 
-        <xacro:if value="${gazebo_classic or gazebo_ignition}">
+        <xacro:if value="${gazebo_ignition}">
             <gazebo reference="${prefix}wheel_link">
                 <collision>
                     <surface>

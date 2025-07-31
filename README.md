@@ -114,10 +114,6 @@ The launch files in this package run the `robot_state_publisher` node, publishin
 
   Boolean to set if simulating in Gazebo Ignition.
 
-- **gazebo_classic** (boolean, default: `False`)
-
-  Boolean to set if simulating in Gazebo Classic. To be deprecated.
-
 ## Usage
 
 ```

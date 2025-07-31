@@ -29,7 +29,7 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
   <xacro:arg name="namespace" default="robot"/>
   <xacro:arg name="prefix" default="robot_"/>
   <xacro:arg name="has_arm" default="false"/>
-  <xacro:arg name="gazebo_classic" default="false"/>
+  <xacro:arg name="gazebo_ignition" default="false"/>
 ```
 
 3. Define parameters of the urdf.
@@ -90,11 +90,10 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
 ```xml
 
   <!-- Control -->
-  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbvogui/rbvogui_control.urdf.xacro" />
+  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_control.urdf.xacro" />
 
-  <xacro:if value="$(arg gazebo_classic)">
-    <xacro:rbvogui_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-    <xacro:ros_planar_move_gazebo_classic/>
+  <xacro:if value="$(arg gazebo_ignition)">
+    <xacro:rbvogui_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
   </xacro:if>
 ```
 
