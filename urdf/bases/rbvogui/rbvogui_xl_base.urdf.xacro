@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- rbvogui_xl v3.0 -->
+<robot name="rbvogui_xl" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- ***************** -->
+    <!-- Imported elements -->
+    <!-- ***************** -->
+
+    <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+    <!-- Import rbvogui_xl base elements-->
+    <xacro:include filename="$(find robotnik_description)/urdf/bodies/rbvogui/rbvogui_xl_body.urdf.xacro" />
+
+    <!-- Import rbvogui_xl wheels -->
+    <xacro:include filename="$(find robotnik_description)/urdf/wheels/steering_wheel/steering_wheel_350.urdf.xacro" />
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <!-- Wheel parameters -->
+    <xacro:property name="wheel_offset_x" value="0.4795" />   <!-- x,y,z in translation from base_link to the center of the wheel -->
+    <xacro:property name="wheel_offset_y" value="0.2925" />
+    <xacro:property name="wheel_offset_z" value="0.0" />
+
+    <!-- Flag to select the high or low quality model -->
+    <xacro:property name="hq" value="true" />
+
+    <xacro:macro name="rbvogui_xl" params="prefix:=robot_ hq:=true">
+
+        <!-- ***************   -->
+        <!-- Robots Elements -->
+        <!-- *************** -->
+
+        <!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+        <xacro:rbvogui_xl_body prefix="${prefix}" hq="${hq}"/>
+
+        <xacro:steering_xl_wheel_350 prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
+            <origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_xl_wheel_350>
+
+        <xacro:steering_xl_wheel_350 prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
+            <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_xl_wheel_350>
+
+        <xacro:steering_xl_wheel_350 prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
+            <origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_xl_wheel_350>
+
+        <xacro:steering_xl_wheel_350 prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
+            <origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+        </xacro:steering_xl_wheel_350>
+
+
+    </xacro:macro>
+
+</robot>
