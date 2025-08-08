@@ -3,15 +3,13 @@
     <!-- ***************** -->
     <!-- Imported elements -->
     <!-- ***************** -->
-
     <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
     <!-- Import rbvogui_xl base elements-->
     <xacro:include filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_xl_base.urdf.xacro" />
 
-    <!-- <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbvogui_xl.ros2_control.urdf" /> -->
-    <!-- <xacro:include filename="$(find robotnik_description)/simulators/gazebo_classic/rbvogui_xl/rbvogui_xl_control.urdf.xacro" />
-    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui_xl/rbvogui_xl_control.urdf.xacro" /> -->
+    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbvogui_xl.ros2_control.urdf" />
+    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_xl_control.urdf.xacro" />
 
     <!-- Import all available sensors -->
     <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
@@ -42,7 +40,6 @@
     <!-- Launch Arguments -->
 	<xacro:arg name="namespace" default="robot"/>
 	<xacro:arg name="prefix" default=""/>
-	<xacro:arg name="gazebo_classic" default="false"/>
 	<xacro:arg name="gazebo_ignition" default="false"/>
 
     <xacro:rbvogui_xl prefix="$(arg prefix)" hq="${hq}" />
@@ -54,7 +51,6 @@
         frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
-        gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0" />
     </xacro:sensor_vectornav>
@@ -65,7 +61,6 @@
         parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_camera"
-        gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="0.541 0.0 0.18258" rpy="0 0 0"/>
     </xacro:sensor_intel_realsense_d435>
@@ -76,7 +71,6 @@
         parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="front_laser"
-        gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="0.64555 0.39595 0.1145" rpy="${PI} 0 0.775398" />
     </xacro:sensor_sick_tim571>
@@ -86,23 +80,17 @@
         parent="$(arg prefix)chassis_link"
         node_namespace="$(arg namespace)"
         node_name="rear_laser"
-        gazebo_classic="$(arg gazebo_classic)"
         gazebo_ignition="$(arg gazebo_ignition)">
         <origin xyz="-0.64555 -0.39595 0.1145" rpy="${PI} 0 -2.35219"/>
     </xacro:sensor_sick_tim571>
 
-    <!-- Controllers
-    <xacro:if value="$(arg gazebo_classic)">
-        <xacro:rbvogui_xl_gz_classic_control namespace="$(arg namespace)" prefix="$(arg prefix)" />
-        <xacro:ros_planar_move_gazebo_classic />
-    </xacro:if>
+	<!-- Controllers -->
+
     <xacro:if value="$(arg gazebo_ignition)">
         <xacro:rbvogui_xl_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)" />
     </xacro:if>
-    <xacro:unless value="$(arg gazebo_classic)">
-        <xacro:unless value="$(arg gazebo_ignition)">
-            <xacro:rbvogui_xl_base_hw_controller />
-        </xacro:unless>
-    </xacro:unless>-->
+    <xacro:unless value="$(arg gazebo_ignition)">
+        <xacro:rbvogui_xl_base_hw_controller />
+    </xacro:unless>
 
 </robot>
