@@ -180,5 +180,13 @@
     <xacro:gazebo_color_logo_link prefix="${prefix}"/>
     <xacro:gazebo_color_leds_link prefix="${prefix}"/>
 
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact"/>
+    <joint name="${prefix}base_docking_joint" type="fixed">
+        <origin xyz="0.6405 0 0.10264" rpy="0 0 0"/>
+        <parent link="${prefix}chassis_link"/>
+        <child link="${prefix}base_docking_contact"/>
+    </joint>
+
   </xacro:macro>
 </robot>

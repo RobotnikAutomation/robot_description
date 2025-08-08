@@ -47,15 +47,13 @@
           </collision>
       </link>
 
-        <!-- DOCKING CONTACTS -->
-        <joint name="${prefix}base_docking_joint" type="fixed">
-            <origin xyz="0.858 0.02 0.008" rpy="0 0 0 " />
-            <parent link="${prefix}base_footprint"/>
-            <child link="${prefix}base_docking_contact_link" />
-        </joint>
-
-        <!-- DOCKING LINK -->
-        <link name="${prefix}base_docking_contact_link" />
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact"/>
+    <joint name="${prefix}base_docking_joint" type="fixed">
+        <origin xyz="0.858 0.02 0.008" rpy="0 0 0 " />
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}base_docking_contact" />
+    </joint>
 
   </xacro:macro>
 </robot>

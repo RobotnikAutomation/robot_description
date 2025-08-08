@@ -101,15 +101,12 @@
   </joint>
   <link name="${prefix}top_cover_link"/>
 
-   <!-- DOCKING CONTACT -->
-
-    <link name="${prefix}base_docking_contact">
-    </link>
-
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact"/>
     <joint name="${prefix}base_docking_joint" type="fixed">
-      <origin xyz="0.030 0.000 0.068" rpy="0 0 0 " />
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}base_docking_contact" />
+        <origin xyz="0.030 0.000 0.068" rpy="0 0 0 " />
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}base_docking_contact"/>
     </joint>
 
   </xacro:macro>
