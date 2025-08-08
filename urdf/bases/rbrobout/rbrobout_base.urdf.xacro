@@ -27,7 +27,7 @@
 	<!-- Flag to select the high or low quality model -->
 	<xacro:property name="hq" value="true" />
 
-    <xacro:macro name="rbrobout" params="prefix:=robot_ gazebo_classic:=false gazebo_ignition:=false">
+    <xacro:macro name="rbrobout" params="prefix:=robot_ gazebo_ignition:=false">
 
 		<!-- *************** -->
 		<!-- Robots Elements -->
@@ -38,19 +38,19 @@
 		<xacro:rbrobout_body prefix="${prefix}" />
 
 		<!-- Wheels -->
-		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}" gazebo_ignition="${gazebo_ignition}"
 			xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
 		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}" gazebo_ignition="${gazebo_ignition}"
 			xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
 		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="${hq}" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="${hq}" gazebo_ignition="${gazebo_ignition}"
 			xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
 		</xacro:rbrobout_mecanum_wheel>
 
-		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="${hq}" gazebo_classic="${gazebo_classic}" gazebo_ignition="${gazebo_ignition}"
+		<xacro:rbrobout_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="${hq}" gazebo_ignition="${gazebo_ignition}"
 			xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
 		</xacro:rbrobout_mecanum_wheel>
 
