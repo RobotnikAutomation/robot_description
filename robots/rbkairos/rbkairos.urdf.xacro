@@ -15,7 +15,7 @@
   <!-- Properties and Arguments -->
 
   <xacro:arg name="namespace" default="robot"/>
-  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="prefix" default=""/>
   <xacro:arg name="gazebo_ignition" default="false"/>
 
   <xacro:property name="front_laser_offset_x" value="0.42109"/>
@@ -38,7 +38,7 @@
 
   <!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_ignition="$(arg gazebo_ignition)">

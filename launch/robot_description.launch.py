@@ -73,7 +73,7 @@ def generate_launch_description():
         environment='ROBOT_XACRO_PATH',
     )
     add_to_launcher.add_arg(arg)
-    
+
     arg = ExtendedArgument(
         name='gazebo_ignition',
         description='Simulate robot in Gazebo Ignition',
@@ -82,7 +82,7 @@ def generate_launch_description():
         environment='GAZEBO_IGNITION_SIMULATION',
     )
     add_to_launcher.add_arg(arg)
-    
+
     arg = ExtendedArgument(
         name='frame_prefix',
         description='prefix of each frame',

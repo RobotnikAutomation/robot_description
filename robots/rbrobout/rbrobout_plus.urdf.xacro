@@ -12,7 +12,7 @@
 
   <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
   <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
-  
+
   <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
@@ -21,7 +21,7 @@
   <!-- Properties and Arguments -->
 
   <xacro:arg name="namespace" default="robot"/>
-  <xacro:arg name="prefix" default="robot_"/>
+  <xacro:arg name="prefix" default=""/>
   <xacro:arg name="gazebo_ignition" default="false"/>
 
   <xacro:arg name="ur_type" default="ur10e"/>
@@ -60,21 +60,22 @@
       <origin xyz="${lift_position_x} 0 ${lift_position_z}" rpy="0 0 0"/>
   </xacro:ewellix_lift_900mm>
 
+  <!-- Import UR arm -->
+  <!-- TODO: Restore simulation functionality, removed jazzy -->
   <xacro:ur_robot
-      tf_prefix="$(arg prefix)arm_"
       name="$(arg ur_type)"
+      tf_prefix="$(arg prefix)arm_"
       parent="$(arg prefix)lift_ewellix_lift_top_link"
       joint_limits_parameters_file="$(arg joint_limit_params)"
       kinematics_parameters_file="$(arg kinematics_params)"
       physical_parameters_file="$(arg physical_params)"
-      visual_parameters_file="$(arg visual_params)"
-      sim_ignition="$(arg gazebo_ignition)">
+      visual_parameters_file="$(arg visual_params)">
       <origin xyz="0 0 0" rpy="0 0 0"/>
   </xacro:ur_robot>
 
   <!-- IMU -->
     <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)vectornav_"
+        frame_prefix="$(arg prefix)imu_"
         parent="$(arg prefix)base_link"
         node_namespace="$(arg namespace)"
         gazebo_ignition="$(arg gazebo_ignition)">
