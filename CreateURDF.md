@@ -79,7 +79,6 @@ You can base in the [robot_template.urdf.xacro](/robots/robot_template.urdf.xacr
     <xacro:arg name="use_fake_hardware" default="false" />
     <xacro:arg name="fake_sensor_commands" default="false" />
     <xacro:arg name="sim_gazebo" default="true" />
-    <xacro:arg name="sim_ignition" default="false" />
 
     <xacro:include filename="$(find robotnik_description)/urdf/arms/ur/ur.urdf.xacro"/>
   </xacro:if>
