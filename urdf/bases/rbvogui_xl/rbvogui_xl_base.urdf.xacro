@@ -8,7 +8,7 @@
     <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
 
     <!-- Import rbvogui_xl base elements-->
-    <xacro:include filename="$(find robotnik_description)/urdf/bodies/rbvogui/rbvogui_xl_body.urdf.xacro" />
+    <xacro:include filename="$(find robotnik_description)/urdf/bodies/rbvogui_xl/rbvogui_xl_body.urdf.xacro" />
 
     <!-- Import rbvogui_xl wheels -->
     <xacro:include filename="$(find robotnik_description)/urdf/wheels/steering_wheel/steering_wheel_350.urdf.xacro" />
