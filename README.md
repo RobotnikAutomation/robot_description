@@ -2,18 +2,15 @@
 
 This package includes the description for Robotnik robots.
 
-Available robots are:
- - RB-Kairos
- - RB-Theron
- - RB-Vogui
- - RB-Robout
+Available robots and models are:
+ - RB-Kairos / RB-Kairos+
+ - RB-Theron / RB-Theron+
+ - RB-Robout / RB-Robout+
+ - RB-Vogui / RB-Vogui+
+ - RB-Vogui-XL
  - RB-Summit
+ - RB-1 
 
-Available robot models are:
- - RB-Kairos+
- - RB-Theron+
- - RB-Vogui+
- - RB-Robout+
 
 ## Quick Usage
 
@@ -44,10 +41,12 @@ This repository contains three high-level folders:
 The `robots` folder contains a folder for each robot type:
 
  - rbkairos
- - rbrobout
- - rbsummit
- - rbvogui
  - rbtheron
+ - rbrobout
+ - rbvogui
+ - rbvogui-xl
+ - rbsummit
+ - rb1
 
 Inside each robot type folder, there may exist several versions.
 
