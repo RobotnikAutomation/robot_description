@@ -84,6 +84,15 @@
         <origin xyz="-0.64555 -0.39595 0.1145" rpy="${PI} 0 -2.35219"/>
     </xacro:sensor_sick_tim571>
 
+    <xacro:sensor_robosense_helios_16p
+        frame_prefix="$(arg prefix)top_3d_laser_"
+        parent="$(arg prefix)chassis_link"
+        node_namespace="$(arg namespace)"
+        node_name="top_3d_laser"
+        gazebo_ignition="$(arg gazebo_ignition)">
+        <origin xyz="0.60955 0.0 -0.0145" rpy="${PI} 0 0"/>
+    </xacro:sensor_robosense_helios_16p>
+
 	<!-- Controllers -->
 
     <xacro:if value="$(arg gazebo_ignition)">
