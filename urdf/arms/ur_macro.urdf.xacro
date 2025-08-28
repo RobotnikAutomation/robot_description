@@ -1,10 +1,13 @@
-<?xml version="1.0"?>
-<robot name="ur_macro" xmlns:xacro="http://wiki.ros.org/xacro">
-
+<?xml version="1.0" ?>
+<robot
+  name="ur_macro"
+  xmlns:xacro="http://wiki.ros.org/xacro">
   <!-- TODO: Restore simulation functionality, removed jazzy -->
-  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
+  <xacro:include
+    filename="$(find ur_description)/urdf/ur_macro.xacro" />
 
-  <xacro:macro name="arm_ur"
+  <xacro:macro
+    name="arm_ur"
     params="
     ur_type
     frame_prefix
@@ -12,14 +15,17 @@
     parent
     gazebo_ignition:=false
     ">
-
-    <xacro:property name="joint_limit_params"
+    <xacro:property
+      name="joint_limit_params"
       default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml" />
-    <xacro:property name="kinematics_params"
+    <xacro:property
+      name="kinematics_params"
       default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml" />
-    <xacro:property name="physical_params"
+    <xacro:property
+      name="physical_params"
       default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml" />
-    <xacro:property name="visual_params"
+    <xacro:property
+      name="visual_params"
       default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml" />
 
     <xacro:ur_robot
@@ -35,7 +41,8 @@
     </xacro:ur_robot>
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:include filename="$(find ur_description)/urdf/ur.ros2_control.xacro" />
+      <xacro:include
+        filename="$(find ur_description)/urdf/ur.ros2_control.xacro" />
       <xacro:ur_ros2_control
         name="arm"
         sim_ignition="true"

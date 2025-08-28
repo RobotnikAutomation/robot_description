@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<robot name="rb_theron"
+<?xml version="1.0" ?>
+<robot
+  name="rb_theron"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bodies/rbtheron/rbtheron_body.urdf.xacro" />
   <xacro:include
@@ -12,54 +12,100 @@
     filename="$(find robotnik_description)/simulators/gazebo_ignition/rbtheron/rbtheron_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
-  <xacro:property name="wheel_offset_x" value="0" />
-  <xacro:property name="wheel_offset_y" value="0.2516" />
-  <xacro:property name="wheel_offset_z" value="0.0" />
+  <xacro:property
+    name="wheel_offset_x"
+    value="0" />
+  <xacro:property
+    name="wheel_offset_y"
+    value="0.2516" />
+  <xacro:property
+    name="wheel_offset_z"
+    value="0.0" />
 
-  <xacro:property name="castor_offset_x" value="0.235" />
-  <xacro:property name="castor_offset_y" value="0.1825" />
-  <xacro:property name="castor_offset_z" value="0.0448" />
+  <xacro:property
+    name="castor_offset_x"
+    value="0.235" />
+  <xacro:property
+    name="castor_offset_y"
+    value="0.1825" />
+  <xacro:property
+    name="castor_offset_z"
+    value="0.0448" />
 
-  <xacro:macro name="rbtheron"
+  <xacro:macro
+    name="rbtheron"
     params="
       prefix:=robot_
       gazebo_ignition:=false
       namespace:=''
       ">
-
-    <xacro:property name="hq" value="true" />
-    <xacro:rbtheron_body prefix="${prefix}" hq="${hq}" />
+    <xacro:property
+      name="hq"
+      value="true" />
+    <xacro:rbtheron_body
+      prefix="${prefix}"
+      hq="${hq}" />
 
     <!-- WHEELS -->
-    <xacro:rubber_wheel prefix="${prefix}right_" parent="${prefix}base_link" hq="${hq}">
-      <origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0" />
+    <xacro:rubber_wheel
+      prefix="${prefix}right_"
+      parent="${prefix}base_link"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
     </xacro:rubber_wheel>
-    <xacro:rubber_wheel prefix="${prefix}left_" parent="${prefix}base_link" hq="${hq}">
-      <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0" />
+    <xacro:rubber_wheel
+      prefix="${prefix}left_"
+      parent="${prefix}base_link"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
     </xacro:rubber_wheel>
 
     <!-- CASTOR -->
-    <xacro:caster prefix="${prefix}front_left_" parent="${prefix}base_link" hq="${hq}"
+    <xacro:caster
+      prefix="${prefix}front_left_"
+      parent="${prefix}base_link"
+      hq="${hq}"
       use_sim="true">
-      <origin xyz="${castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0" />
+      <origin
+        xyz="${castor_offset_x} ${castor_offset_y} ${castor_offset_z}"
+        rpy="0 0 0" />
     </xacro:caster>
-    <xacro:caster prefix="${prefix}front_right_" parent="${prefix}base_link" hq="${hq}"
+    <xacro:caster
+      prefix="${prefix}front_right_"
+      parent="${prefix}base_link"
+      hq="${hq}"
       use_sim="true">
-      <origin xyz="${castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0" />
+      <origin
+        xyz="${castor_offset_x} ${-castor_offset_y} ${castor_offset_z}"
+        rpy="0 0 0" />
     </xacro:caster>
-    <xacro:caster prefix="${prefix}rear_left_" parent="${prefix}base_link" hq="${hq}"
+    <xacro:caster
+      prefix="${prefix}rear_left_"
+      parent="${prefix}base_link"
+      hq="${hq}"
       use_sim="true">
-      <origin xyz="${-castor_offset_x} ${castor_offset_y} ${castor_offset_z}" rpy="0 0 0" />
+      <origin
+        xyz="${-castor_offset_x} ${castor_offset_y} ${castor_offset_z}"
+        rpy="0 0 0" />
     </xacro:caster>
-    <xacro:caster prefix="${prefix}rear_right_" parent="${prefix}base_link" hq="${hq}"
+    <xacro:caster
+      prefix="${prefix}rear_right_"
+      parent="${prefix}base_link"
+      hq="${hq}"
       use_sim="true">
-      <origin xyz="${-castor_offset_x} ${-castor_offset_y} ${castor_offset_z}" rpy="0 0 0" />
+      <origin
+        xyz="${-castor_offset_x} ${-castor_offset_y} ${castor_offset_z}"
+        rpy="0 0 0" />
     </xacro:caster>
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbtheron_gz_ignition_control namespace="${namespace}" prefix="${prefix}" />
+      <xacro:rbtheron_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
     </xacro:if>
-
   </xacro:macro>
-
 </robot>

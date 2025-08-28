@@ -1,16 +1,22 @@
-<?xml version="1.0"?>
-<robot name="rbrobout"
+<?xml version="1.0" ?>
+<robot
+  name="rbrobout"
   xmlns:xacro="http://wiki.ros.org/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
-  <xacro:arg name="namespace" default="robot" />
-  <xacro:arg name="prefix" default="" />
-  <xacro:arg name="gazebo_ignition" default="false" />
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
 
   <!-- RB-ROBOUT -->
   <xacro:rbrobout
@@ -24,7 +30,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.3 -0.3 0.0725" rpy="0 0 0" />
+    <origin
+      xyz="0.3 -0.3 0.0725"
+      rpy="0 0 0" />
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
@@ -34,7 +42,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.8 0.366 -0.06" rpy="0 0 ${1/4*pi}" />
+    <origin
+      xyz="0.8 0.366 -0.06"
+      rpy="0 0 ${1/4*pi}" />
   </xacro:sensor_sick_microscan3>
   <xacro:sensor_sick_microscan3
     frame_prefix="$(arg prefix)rear_laser_"
@@ -42,7 +52,8 @@
     node_namespace="$(arg namespace)"
     node_name="rear_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.8 -0.366 -0.06" rpy="0 0 ${-3/4*pi}" />
+    <origin
+      xyz="-0.8 -0.366 -0.06"
+      rpy="0 0 ${-3/4*pi}" />
   </xacro:sensor_sick_microscan3>
-
 </robot>

@@ -1,23 +1,28 @@
-<?xml version="1.0"?>
-<robot name="summit_xl"
+<?xml version="1.0" ?>
+<robot
+  name="summit_xl"
   xmlns:xacro="http://wiki.ros.org/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbsummit/rbsummit_base.xacro" />
   <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
-  <xacro:arg name="namespace" default="robot" />
-  <xacro:arg name="prefix" default="" />
-  <xacro:arg name="gazebo_ignition" default="false" />
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
 
   <!-- RB-SUMMIT -->
   <xacro:rbsummit
     prefix="$(arg prefix)"
     gazebo_ignition="$(arg gazebo_ignition)"
-    namespace="$(arg namespace)"
-  />
+    namespace="$(arg namespace)" />
 
   <!-- IMU -->
   <xacro:sensor_vectornav
@@ -25,7 +30,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.0385 0.132 0.158" rpy="0 0 0" />
+    <origin
+      xyz="0.0385 0.132 0.158"
+      rpy="0 0 0" />
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
@@ -35,7 +42,9 @@
     node_namespace="$(arg namespace)"
     node_name="top_lidar"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0 -0.01924 0.27642" rpy="0 0 0" />
+    <origin
+      xyz="0 -0.01924 0.27642"
+      rpy="0 0 0" />
   </xacro:sensor_robosense_helios_16p>
 
   <!-- CAMERAS -->
@@ -45,7 +54,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_camera"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.324 0.012 0.172" rpy="0 0 0" />
+    <origin
+      xyz="0.324 0.012 0.172"
+      rpy="0 0 0" />
   </xacro:sensor_intel_realsense_d435>
 
   <!-- GPS -->
@@ -55,7 +66,8 @@
     node_namespace="$(arg namespace)"
     node_name="gps"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.22528 0.095 0.48" rpy="0 0 0" />
+    <origin
+      xyz="-0.22528 0.095 0.48"
+      rpy="0 0 0" />
   </xacro:sensor_ublox_with_mast>
-
 </robot>

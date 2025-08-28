@@ -1,8 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:macro name="rbkairos_gz_ignition_control" params="namespace prefix">
+  <xacro:macro
+    name="rbkairos_gz_ignition_control"
+    params="namespace prefix">
     <gazebo>
-      <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
+      <plugin
+        name="gz_ros2_control::GazeboSimROS2ControlPlugin"
+        filename="gz_ros2_control-system">
         <robot_param>robot_description</robot_param>
         <robot_param_node>robot_state_publisher</robot_param_node>
         <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_controller_params.yaml</parameters>
@@ -12,7 +16,9 @@
       </plugin>
     </gazebo>
 
-    <xacro:macro name="ros2_joint" params="interface jmin jmax name">
+    <xacro:macro
+      name="ros2_joint"
+      params="interface jmin jmax name">
       <joint name="${name}">
         <command_interface name="${interface}">
           <param name="min">${jmin}</param>
@@ -24,20 +30,33 @@
       </joint>
     </xacro:macro>
 
-    <ros2_control name="IgnitionSystem" type="system">
+    <ros2_control
+      name="IgnitionSystem"
+      type="system">
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
 
-      <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10"
+      <xacro:ros2_joint
+        interface="velocity"
+        jmin="-10"
+        jmax="10"
         name="${prefix}front_left_wheel_joint" />
-      <xacro:ros2_joint interface="velocity" jmin="-10" jmax="10"
+      <xacro:ros2_joint
+        interface="velocity"
+        jmin="-10"
+        jmax="10"
         name="${prefix}front_right_wheel_joint" />
-      <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20"
+      <xacro:ros2_joint
+        interface="velocity"
+        jmin="-20"
+        jmax="20"
         name="${prefix}back_left_wheel_joint" />
-      <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20"
+      <xacro:ros2_joint
+        interface="velocity"
+        jmin="-20"
+        jmax="20"
         name="${prefix}back_right_wheel_joint" />
-
     </ros2_control>
   </xacro:macro>
 </robot>

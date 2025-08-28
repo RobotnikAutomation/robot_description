@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<robot name="rbkairos_plus"
+<?xml version="1.0" ?>
+<robot
+  name="rbkairos_plus"
   xmlns:xacro="http://wiki.ros.org/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbkairos/rbkairos_base.urdf.xacro" />
   <xacro:include
@@ -10,10 +10,18 @@
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
-  <xacro:arg name="namespace" default="robot" />
-  <xacro:arg name="prefix" default="" />
-  <xacro:arg name="gazebo_ignition" default="false" />
-  <xacro:arg name="ur_type" default="ur5e" />
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+  <xacro:arg
+    name="ur_type"
+    default="ur5e" />
 
   <!-- RB-KAIROS -->
   <xacro:rbkairos
@@ -26,8 +34,10 @@
     ur_type="$(arg ur_type)"
     frame_prefix="$(arg prefix)arm_"
     parent="$(arg prefix)top_cover"
-    gazebo_ignition="$(arg gazebo_ignition)" >
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
   </xacro:arm_ur>
 
   <!-- IMU -->
@@ -36,7 +46,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.127 -0.129 0.212" rpy="0 0 0" />
+    <origin
+      xyz="0.127 -0.129 0.212"
+      rpy="0 0 0" />
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
@@ -46,7 +58,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.2865 -0.20894 0.2973" rpy="0 ${-PI} ${3/4*PI}" />
+    <origin
+      xyz="0.2865 -0.20894 0.2973"
+      rpy="0 ${-pi} ${3/4*pi}" />
   </xacro:sensor_sick_s300>
   <xacro:sensor_sick_s300
     frame_prefix="$(arg prefix)rear_laser_"
@@ -54,7 +68,9 @@
     node_namespace="$(arg namespace)"
     node_name="rear_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.2865 0.20894 0.2973" rpy="0 ${-PI} ${-1/4*PI}" />
+    <origin
+      xyz="-0.2865 0.20894 0.2973"
+      rpy="0 ${-pi} ${-1/4*pi}" />
   </xacro:sensor_sick_s300>
 
   <!-- CAMERAS -->
@@ -64,7 +80,8 @@
     node_namespace="$(arg namespace)"
     node_name="front_camera"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.35850 0.0 0.25062" rpy="0 0 0" />
+    <origin
+      xyz="0.35850 0.0 0.25062"
+      rpy="0 0 0" />
   </xacro:sensor_intel_realsense_d435>
-
 </robot>

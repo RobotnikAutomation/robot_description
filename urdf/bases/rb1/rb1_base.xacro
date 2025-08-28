@@ -1,6 +1,7 @@
-<?xml version="1.0"?>
-<robot name="rb1_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
+<?xml version="1.0" ?>
+<robot
+  name="rb1_base"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include
     filename="$(find robotnik_description)/urdf/bodies/rb1/rb1_body.urdf.xacro" />
 
@@ -10,33 +11,53 @@
   <xacro:include
     filename="$(find robotnik_description)/simulators/gazebo_ignition/rb1/rb1_control.urdf.xacro" />
 
-  <!-- Wheel parameters -->
-  <xacro:property name="wheel_offset_x" value="0" />
-  <xacro:property name="wheel_offset_y" value="0.218" />
-  <xacro:property name="wheel_offset_z" value="0.0512" />
+  <!-- WHEELS PROPERTIES -->
+  <xacro:property
+    name="wheel_offset_x"
+    value="0" />
+  <xacro:property
+    name="wheel_offset_y"
+    value="0.218" />
+  <xacro:property
+    name="wheel_offset_z"
+    value="0.0512" />
 
-  <xacro:macro name="rb1"
+  <xacro:macro
+    name="rb1"
     params="
       prefix:=robot_
       gazebo_ignition:=false
       namespace:=''
       ">
-
-    <xacro:property name="hq" value="true" />
-    <xacro:rb1_body prefix="${prefix}" hq="${hq}" />
+    <xacro:property
+      name="hq"
+      value="true" />
+    <xacro:rb1_body
+      prefix="${prefix}"
+      hq="${hq}" />
 
     <!-- WHEELS -->
-    <xacro:rubber_wheel prefix="${prefix}right_" parent="${prefix}base_link" hq="${hq}">
-      <origin xyz="${wheel_offset_x} ${-wheel_offset_y} 0.0" rpy="0 0 0" />
+    <xacro:rubber_wheel
+      prefix="${prefix}right_"
+      parent="${prefix}base_link"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${-wheel_offset_y} 0.0"
+        rpy="0 0 0" />
     </xacro:rubber_wheel>
-    <xacro:rubber_wheel prefix="${prefix}left_" parent="${prefix}base_link" hq="${hq}">
-      <origin xyz="${wheel_offset_x} ${wheel_offset_y} 0.0" rpy="0 0 0" />
+    <xacro:rubber_wheel
+      prefix="${prefix}left_"
+      parent="${prefix}base_link"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${wheel_offset_y} 0.0"
+        rpy="0 0 0" />
     </xacro:rubber_wheel>
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rb1_gz_ignition_control namespace="${namespace}" prefix="${prefix}" />
+      <xacro:rb1_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
     </xacro:if>
-
   </xacro:macro>
-
 </robot>

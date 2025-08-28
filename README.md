@@ -9,7 +9,7 @@ Available robots and models are:
  - RB-Vogui / RB-Vogui+
  - RB-Vogui-XL
  - RB-Summit
- - RB-1 
+ - RB-1
 
 
 ## Quick Usage
@@ -40,13 +40,13 @@ This repository contains three high-level folders:
 
 The `robots` folder contains a folder for each robot type:
 
- - rbkairos
- - rbtheron
- - rbrobout
- - rbvogui
- - rbvogui-xl
- - rbsummit
  - rb1
+ - rbkairos
+ - rbrobout
+ - rbsummit
+ - rbtheron
+ - rbvogui
+ - rbvogui_xl
 
 Inside each robot type folder, there may exist several versions.
 
@@ -54,10 +54,11 @@ Inside each robot type folder, there may exist several versions.
 
 The `urdf` folder contains a folder for each main component:
 
-  - **bases**: Body of robots, including wheels, structures, and arms.
-  - **bodies**: Includes chassis.
-  - **structures**: Other structures included in a robot (e.g., columns, protection, elevator, support, etc.).
-  - **wheels**: Contains the different types of wheels.
+- **arms**: Contains the different types of robot arms.
+- **bases**: Body of robots, including wheels, structures, and arms.
+- **bodies**: Includes chassis.
+- **structures**: Other structures included in a robot (e.g., columns, protection, elevator, support, etc.).
+- **wheels**: Contains the different types of wheels.
 
 ## Launch
 

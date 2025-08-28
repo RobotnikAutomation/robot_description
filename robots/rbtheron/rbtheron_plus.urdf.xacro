@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<robot name="rbtheron_plus"
+<?xml version="1.0" ?>
+<robot
+  name="rbtheron_plus"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbtheron/rbtheron_base.xacro" />
   <xacro:include
@@ -12,10 +12,18 @@
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
-  <xacro:arg name="namespace" default="robot" />
-  <xacro:arg name="prefix" default="" />
-  <xacro:arg name="gazebo_ignition" default="false" />
-  <xacro:arg name="ur_type" default="ur5e" />
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+  <xacro:arg
+    name="ur_type"
+    default="ur5e" />
 
   <!-- RB-THERON -->
   <xacro:rbtheron
@@ -25,7 +33,9 @@
   <xacro:rbtheron_plus_top_cover
     prefix="$(arg prefix)"
     parent="$(arg prefix)base_link">
-    <origin xyz="0.0 0.0 0.26" rpy="0.0 0.0 0.0" />
+    <origin
+      xyz="0.0 0.0 0.26"
+      rpy="0.0 0.0 0.0" />
   </xacro:rbtheron_plus_top_cover>
 
   <!-- ARMS -->
@@ -34,7 +44,9 @@
     frame_prefix="$(arg prefix)arm_"
     parent="$(arg prefix)top_chassis"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.2 0 0.6" rpy="0 0 0"/>
+    <origin
+      xyz="-0.2 0 0.6"
+      rpy="0 0 0" />
   </xacro:arm_ur>
 
   <!-- IMU -->
@@ -43,7 +55,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0" />
+    <origin
+      xyz="-0.1975 0.0 0.1598"
+      rpy="0 0 0" />
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
@@ -53,7 +67,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.2675 -0.215 0.1613" rpy="0 ${-pi} ${3/4*pi}" />
+    <origin
+      xyz="0.2675 -0.215 0.1613"
+      rpy="0 ${-pi} ${3/4*pi}" />
   </xacro:sensor_hokuyo_ust20lx>
   <xacro:sensor_hokuyo_ust20lx
     frame_prefix="$(arg prefix)rear_laser_"
@@ -61,7 +77,9 @@
     node_namespace="$(arg namespace)"
     node_name="rear_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.2675 0.215 0.1613" rpy="0 ${-pi} ${-1/4*pi}" />
+    <origin
+      xyz="-0.2675 0.215 0.1613"
+      rpy="0 ${-pi} ${-1/4*pi}" />
   </xacro:sensor_hokuyo_ust20lx>
   <xacro:sensor_robosense_bpearl
     frame_prefix="$(arg prefix)top_lidar_"
@@ -69,7 +87,9 @@
     node_namespace="$(arg namespace)"
     node_name="top_lidar"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.26 0 0.51" rpy="${pi/2} ${pi/6} ${pi/2}" />
+    <origin
+      xyz="0.26 0 0.51"
+      rpy="${pi/2} ${pi/6} ${pi/2}" />
   </xacro:sensor_robosense_bpearl>
 
   <!-- CAMERAS -->
@@ -79,7 +99,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_camera"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.3045 0 0.1898" rpy="0 0 0" />
+    <origin
+      xyz="0.3045 0 0.1898"
+      rpy="0 0 0" />
   </xacro:sensor_intel_realsense_d435>
   <xacro:sensor_intel_realsense_d435
     frame_prefix="$(arg prefix)rear_rgbd_camera_"
@@ -88,7 +110,8 @@
     node_name="rear_camera"
     gazebo_ignition="$(arg gazebo_ignition)">
     <!-- rear camera offset_z rb_theron chassis type v3: 0.1598 v4 (default): 0.1158 -->
-    <origin xyz="-0.3045 0 0.1158" rpy="0 0 ${pi}" />
+    <origin
+      xyz="-0.3045 0 0.1158"
+      rpy="0 0 ${pi}" />
   </xacro:sensor_intel_realsense_d435>
-
 </robot>

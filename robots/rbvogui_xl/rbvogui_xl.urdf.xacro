@@ -1,16 +1,22 @@
-<?xml version="1.0"?>
-<robot name="rbvogui_xl"
+<?xml version="1.0" ?>
+<robot
+  name="rbvogui_xl"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
-
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbvogui_xl/rbvogui_xl_base.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
-  <xacro:arg name="namespace" default="robot" />
-  <xacro:arg name="prefix" default="" />
-  <xacro:arg name="gazebo_ignition" default="false" />
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
 
   <!-- RB-VOGUI-XL -->
   <xacro:rbvogui_xl
@@ -24,7 +30,9 @@
     parent="$(arg prefix)chassis_link"
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.127 -0.129 0.212" rpy="0 0 0" />
+    <origin
+      xyz="0.127 -0.129 0.212"
+      rpy="0 0 0" />
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
@@ -34,7 +42,9 @@
     node_namespace="$(arg namespace)"
     node_name="front_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.66255 0.41295 0.1145" rpy="${pi} 0 ${pi/4}" />
+    <origin
+      xyz="0.66255 0.41295 0.1145"
+      rpy="${pi} 0 ${pi/4}" />
   </xacro:sensor_sick_tim571>
   <xacro:sensor_sick_tim571
     frame_prefix="$(arg prefix)rear_laser_"
@@ -42,7 +52,9 @@
     node_namespace="$(arg namespace)"
     node_name="rear_laser"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="-0.66255 -0.41295 0.1145" rpy="${pi} 0 -${pi*3/4}" />
+    <origin
+      xyz="-0.66255 -0.41295 0.1145"
+      rpy="${pi} 0 -${pi*3/4}" />
   </xacro:sensor_sick_tim571>
   <xacro:sensor_robosense_helios_16p
     frame_prefix="$(arg prefix)top_3d_laser_"
@@ -50,7 +62,9 @@
     node_namespace="$(arg namespace)"
     node_name="top_lidar"
     gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="0.60955 0.0 -0.0145" rpy="${PI} 0 0"/>
+    <origin
+      xyz="0.60955 0.0 -0.0145"
+      rpy="${pi} 0 0" />
   </xacro:sensor_robosense_helios_16p>
 
   <!-- CAMERAS -->
@@ -60,8 +74,8 @@
     node_namespace="$(arg namespace)"
     node_name="front_camera"
     gazebo_ignition="$(arg gazebo_ignition)">
-    <origin xyz="0.541 0.0 0.18258" rpy="0 0 0"/>
+    <origin
+      xyz="0.541 0.0 0.18258"
+      rpy="0 0 0" />
   </xacro:sensor_intel_realsense_d435>
-
-
 </robot>
