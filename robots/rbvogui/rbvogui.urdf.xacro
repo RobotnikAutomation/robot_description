@@ -1,108 +1,66 @@
 <?xml version="1.0"?>
-<!-- RBVogui v3.0 -->
-<robot name="rbvogui" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <!-- ***************** -->
-    <!-- Imported elements -->
-    <!-- ***************** -->
+<robot name="rbvogui"
+  xmlns:xacro="http://wiki.ros.org/xacro">
 
-    <!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-    <!-- Import rbvogui base elements-->
-    <xacro:include filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
+  <!-- ARGUMENTS -->
+  <xacro:arg name="namespace" default="robot" />
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="gazebo_ignition" default="false" />
 
-    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbvogui.ros2_control.urdf" />
-    <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbvogui/rbvogui_control.urdf.xacro" />
+  <!-- RB-VOGUI -->
+  <xacro:rbvogui
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
 
-    <!-- Import all available sensors -->
-    <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.127 -0.129 0.212" rpy="0 0 0" />
+  </xacro:sensor_vectornav>
 
-    <xacro:property name="front_laser_offset_x" value="0.53" />
-    <xacro:property name="front_laser_offset_y" value="0.33" />
-    <xacro:property name="front_laser_offset_z" value="0.1145" />
+  <!-- LASERS -->
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.53 0.33 0.1145" rpy="0 ${-pi} ${-3/4*pi}" />
+  </xacro:sensor_sick_s300>
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.53 -0.33 0.1145" rpy="0 ${-pi} ${1/4*pi}" />
+  </xacro:sensor_sick_s300>
 
-    <xacro:property name="rear_laser_offset_x" value="-0.53" />
-    <xacro:property name="rear_laser_offset_y" value="-0.33" />
-    <xacro:property name="rear_laser_offset_z" value="0.1145" />
-
-    <xacro:property name="imu_offset_x" value="0.127" />
-    <xacro:property name="imu_offset_y" value="-0.129" />
-    <xacro:property name="imu_offset_z" value="0.212" />
-
-    <xacro:property name="front_rgbd_camera_offset_x" value="0.46462" />
-    <xacro:property name="front_rgbd_camera_offset_y" value="0.0" />
-    <xacro:property name="front_rgbd_camera_offset_z" value="0.18258" />
-
-    <xacro:property name="rear_rgbd_camera_offset_x" value="-0.515" />
-    <xacro:property name="rear_rgbd_camera_offset_y" value="0.0" />
-    <xacro:property name="rear_rgbd_camera_offset_z" value="0.29" />
-
-    <!-- Flag to select the high or low quality model -->
-    <xacro:property name="hq" value="true" />
-
-    <!-- Launch Arguments -->
-	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="prefix" default=""/>
-	<xacro:arg name="gazebo_ignition" default="false"/>
-
-    <xacro:rbvogui prefix="$(arg prefix)" hq="${hq}" />
-
-    <!-- SENSORS see robotnik_sensors for the specific configuration -->
-
-    <!-- IMU -->
-    <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)imu_"
-        parent="$(arg prefix)chassis_link"
-        node_namespace="$(arg namespace)"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0" />
-    </xacro:sensor_vectornav>
-
-    <!-- Front Camera -->
-    <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg prefix)front_rgbd_camera_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_camera"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_intel_realsense_d435>
-
-    <!-- Rear Camera -->
-    <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg prefix)rear_rgbd_camera_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="rear_camera"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}" rpy="0 0 -${PI}" />
-    </xacro:sensor_intel_realsense_d435>
-
-    <!-- LASERS -->
-    <xacro:sensor_sick_s300
-        frame_prefix="$(arg prefix)front_laser_"
-        parent="$(arg prefix)chassis_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${-3/4*PI}" />
-    </xacro:sensor_sick_s300>
-
-    <xacro:sensor_sick_s300
-        frame_prefix="$(arg prefix)rear_laser_"
-        parent="$(arg prefix)chassis_link"
-        node_namespace="$(arg namespace)"
-        node_name="rear_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${1/4*PI}" />
-    </xacro:sensor_sick_s300>
-
-	  <!-- Controllers -->
-
-    <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbvogui_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-    </xacro:if>
-    <xacro:unless value="$(arg gazebo_ignition)">
-        <xacro:rbvogui_base_hw_controller/>
-    </xacro:unless>
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.46462 0.0 0.18258" rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)rear_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.515 0.0 0.29" rpy="0 0 -${pi}" />
+  </xacro:sensor_intel_realsense_d435>
 
 </robot>

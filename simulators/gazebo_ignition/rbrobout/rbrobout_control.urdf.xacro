@@ -37,8 +37,6 @@
         name="${prefix}back_left_wheel_joint" />
       <xacro:ros2_joint interface="velocity" jmin="-20" jmax="20"
         name="${prefix}back_right_wheel_joint" />
-      <xacro:ros2_joint interface="position" jmin="-20" jmax="20"
-        name="${prefix}lift_ewellix_lift_top_joint" />
 
     </ros2_control>
   </xacro:macro>

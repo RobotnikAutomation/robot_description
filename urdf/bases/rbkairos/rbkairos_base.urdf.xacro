@@ -1,50 +1,51 @@
 <?xml version="1.0"?>
-<robot name="rbkairos" xmlns:xacro="http://wiki.ros.org/xacro">
+<robot name="rbkairos_base"
+  xmlns:xacro="http://wiki.ros.org/xacro">
 
-  	<!-- ***************** -->
-  	<!-- Imported elements -->
-  	<!-- ***************** -->
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_control.urdf.xacro" />
 
-  	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <!-- WHEELS PROPERTIES -->
+  <xacro:property name="wheel_offset_x" value="0.21528" />
+  <xacro:property name="wheel_offset_y" value="0.2590" />
+  <xacro:property name="wheel_offset_z" value="0.0" />
 
-  	<!-- Import summit XL base elements -->
-	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
+  <xacro:macro name="rbkairos"
+    params="
+      prefix:=robot_
+      gazebo_ignition:=false
+      namespace:=''
+      ">
 
-  	<xacro:include filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
+    <xacro:property name="hq" value="true" />
+    <xacro:rbkairos_plus_body prefix="${prefix}" />
 
-  	<xacro:property name="PI" value="3.1415926535897931"/>
+    <!-- WHEELS -->
+    <xacro:rbkairos_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link"
+      reflect="false" hq="true" gazebo_ignition="${gazebo_ignition}"
+      xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
+    </xacro:rbkairos_mecanum_wheel>
+    <xacro:rbkairos_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link"
+      reflect="true" hq="true" gazebo_ignition="${gazebo_ignition}"
+      xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
+    </xacro:rbkairos_mecanum_wheel>
+    <xacro:rbkairos_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link"
+      reflect="false" hq="true" gazebo_ignition="${gazebo_ignition}"
+      xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
+    </xacro:rbkairos_mecanum_wheel>
+    <xacro:rbkairos_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link"
+      reflect="true" hq="true" gazebo_ignition="${gazebo_ignition}"
+      xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
+    </xacro:rbkairos_mecanum_wheel>
 
-  	<!-- Wheel parameters -->
-  	<xacro:property name="wheel_offset_x" value="0.21528" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
-  	<xacro:property name="wheel_offset_y" value="0.2590" />
-  	<xacro:property name="wheel_offset_z" value="0.0" />
+    <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:rbkairos_gz_ignition_control namespace="${namespace}" prefix="${prefix}" />
+    </xacro:if>
 
-    <xacro:macro name="rbkairos" params="prefix:=robot_ gazebo_ignition:=false">
-
-  		<!-- *************** -->
-  		<!-- Robots Elements -->
-  		<!-- *************** -->
-
-  		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
-
-  		<xacro:rbkairos_plus_body prefix="${prefix}"/>
-
-  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_ignition="${gazebo_ignition}"
-			xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:rbkairos_mecanum_wheel>
-
-  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_ignition="${gazebo_ignition}"
-			xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:rbkairos_mecanum_wheel>
-
-  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="false" hq="true" gazebo_ignition="${gazebo_ignition}"
-			xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:rbkairos_mecanum_wheel>
-
-  		<xacro:rbkairos_mecanum_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="true" hq="true" gazebo_ignition="${gazebo_ignition}"
-			xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}">
-  		</xacro:rbkairos_mecanum_wheel>
-
-     </xacro:macro>
+  </xacro:macro>
 
 </robot>

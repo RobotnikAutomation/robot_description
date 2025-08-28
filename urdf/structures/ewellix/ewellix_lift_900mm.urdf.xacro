@@ -8,14 +8,14 @@
 <!-- - - - - - - - - - - - - - EWELLIX LIFT - - - - - - - - - - - - - -->
 
   <xacro:macro name="ewellix_lift_900mm" params="prefix parent cut_model:=false *origin">
-    
+
     <!-- Lift base link -->
     <link name="${prefix}ewellix_lift_base_link">
 
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_900mm.stl"/>
+          <mesh filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_900mm.stl" scale="0.95 0.95 1"/>
         </geometry>
         <material name="grey">
           <color rgba="0.7 0.7 0.7 1"/>
@@ -25,7 +25,7 @@
       <collision>
         <origin xyz="-0.005 0 0.00235" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_900mm.stl"/>
+          <mesh filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_900mm.stl" scale="0.95 0.95 1"/>
         </geometry>
       </collision>
 
@@ -41,7 +41,7 @@
     <joint name="${prefix}ewellix_lift_base_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
-      <child link="${prefix}ewellix_lift_base_link" /> 
+      <child link="${prefix}ewellix_lift_base_link" />
     </joint>
 
 
@@ -90,15 +90,9 @@
       <parent link="${prefix}ewellix_lift_base_link"/>
       <child link="${prefix}ewellix_lift_top_link" />
       <origin xyz="0 0 0.730" rpy="0 0 0" />
-      <limit effort="1000" lower="0.0" upper="0.9" velocity="0.088"/>
-      <axis xyz="0 0 1" /> 
+      <limit effort="1000000" lower="0.0" upper="0.9" velocity="0.088"/>
+      <axis xyz="0 0 1" />
     </joint>
-
-    <!--
-        PositionJointInterface
-        VelocityJointInterface
-        EffortJointInterface
-    -->
 
     <gazebo reference="${prefix}ewellix_lift_base_link">
       <material>Gazebo/Grey</material>
@@ -108,7 +102,20 @@
       <material>Gazebo/Grey</material>
     </gazebo>
 
+    <ros2_control name="${prefix}ewellix_lift_control" type="system">
+      <hardware>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      </hardware>
+      <joint name="${prefix}ewellix_lift_top_joint">
+        <command_interface name="position"/>
+        <command_interface name="velocity"/>
+        <state_interface name="position">
+          <param name="initial_value">0.2</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+    </ros2_control>
   </xacro:macro>
 
-  
 </robot>

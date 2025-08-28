@@ -1,110 +1,61 @@
 <?xml version="1.0"?>
-<robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
+<robot name="summit_xl"
+  xmlns:xacro="http://wiki.ros.org/xacro">
 
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbsummit/rbsummit_base.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-	<!-- ***************** -->
-	<!-- Imported elements -->
-	<!-- ***************** -->
+  <!-- ARGUMENTS -->
+  <xacro:arg name="namespace" default="robot" />
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="gazebo_ignition" default="false" />
 
-	<!-- First we import the robot and all the sensors. All these elements are defined as macro:xacros -->
+  <!-- RB-SUMMIT -->
+  <xacro:rbsummit
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)"
+  />
 
-	<!-- Import summit XL macro -->
-	<xacro:include filename="$(find robotnik_description)/urdf/bases/rbsummit/rbsummit_base.xacro"/>
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.0385 0.132 0.158" rpy="0 0 0" />
+  </xacro:sensor_vectornav>
 
-    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbsummit.ros2_control.urdf" />
-	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbsummit/rbsummit_control.urdf.xacro"/>
+  <!-- LASERS -->
+  <xacro:sensor_robosense_helios_16p
+    frame_prefix="$(arg prefix)top_3d_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="top_lidar"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0 -0.01924 0.27642" rpy="0 0 0" />
+  </xacro:sensor_robosense_helios_16p>
 
-	<!-- Import all available sensors -->
-	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.324 0.012 0.172" rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
 
-	<!-- ***************** -->
-	<!-- Sensor parameters -->
-	<!-- ***************** -->
-	<!-- x,y,z in translation from base_link to the center of the sensor -->
-
-	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="prefix" default=""/>
-	<xacro:arg name="gazebo_ignition" default="false"/>
-
-	<xacro:property name="imu_offset_x" value="0.0385"/>
-	<xacro:property name="imu_offset_y" value="0.132"/>
-	<xacro:property name="imu_offset_z" value="0.158"/>
-
-	<xacro:property name="top_laser_offset_x" value="-0.01924"/>
-	<xacro:property name="top_laser_offset_y" value="0.0"/>
-	<xacro:property name="top_laser_offset_z" value="0.27642"/>
-
-	<xacro:property name="front_rgbd_camera_offset_x" value="0.324"/>
-	<xacro:property name="front_rgbd_camera_offset_y" value="0.012"/>
-	<xacro:property name="front_rgbd_camera_offset_z" value="0.172"/>
-
-	<xacro:property name="gps_offset_x" value="-0.22528"/>
-	<xacro:property name="gps_offset_y" value="0.095"/>
-	<xacro:property name="gps_offset_z" value="0.48"/>
-
-	<xacro:property name="PI" value="3.1415926535897931"/>
-
-	<!-- Flag to select the high or low quality model -->
-	<xacro:property name="hq" value="true" />
-
-	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
-	<xacro:rbsummit prefix="$(arg prefix)" hq="${hq}"/>
-
-	<!-- Custom Sensors -->
-
-	<!-- IMU -->
-    <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)imu_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_vectornav>
-
-	<!-- 3D LIDAR -->
-	<xacro:sensor_robosense_helios_16p
-		frame_prefix="$(arg prefix)top_3d_laser_"
-		parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="top_lidar"
-        gazebo_ignition="$(arg gazebo_ignition)">
-		<origin
-			xyz="${top_laser_offset_x} ${top_laser_offset_y} ${top_laser_offset_z}"
-			rpy="0 0 0"
-		/>
-	</xacro:sensor_robosense_helios_16p>
-
-	<!-- CAMERA -->
-
-    <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg prefix)front_rgbd_camera_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_camera"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_intel_realsense_d435>
-
-	<!-- GPS -->
-	<xacro:sensor_ublox_with_mast
-		frame_prefix="$(arg prefix)gps_"
-		parent="$(arg prefix)base_link"
-		update_rate="5"
-        node_namespace="$(arg namespace)"
-        gazebo_ignition="$(arg gazebo_ignition)">
-		<origin
-			xyz="${gps_offset_x} ${gps_offset_y} ${gps_offset_z}"
-			rpy="0 0 0"
-		/>
-	</xacro:sensor_ublox_with_mast>
-
-	<!-- Controllers -->
-    <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbsummit_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-    </xacro:if>
-
-    <xacro:unless value="$(arg gazebo_ignition)">
-      <xacro:rbsummit_base_hw_controller/>
-    </xacro:unless>
+  <!-- GPS -->
+  <xacro:sensor_ublox_with_mast
+    frame_prefix="$(arg prefix)gps_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="gps"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.22528 0.095 0.48" rpy="0 0 0" />
+  </xacro:sensor_ublox_with_mast>
 
 </robot>

@@ -1,117 +1,66 @@
 <?xml version="1.0"?>
-<robot name="rb_theron"
-	xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="rbtheron"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbtheron/rbtheron_base.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-	<!-- ***************** -->
-	<!-- Imported elements -->
-	<!-- ***************** -->
+  <!-- ARGUMENTS -->
+  <xacro:arg name="namespace" default="robot" />
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="gazebo_ignition" default="false" />
 
-	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <!-- RB-THERON -->
+  <xacro:rbtheron
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
 
-	<!-- Import rbtheron macro -->
-	<xacro:include filename="$(find robotnik_description)/urdf/bases/rbtheron/rbtheron_base.xacro"/>
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.1975 0.0 0.1598" rpy="0 0 0" />
+  </xacro:sensor_vectornav>
 
-    <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbtheron.ros2_control.urdf" />
-	<xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbtheron/rbtheron_control.urdf.xacro"/>
+  <!-- LASERS -->
+  <xacro:sensor_hokuyo_ust20lx
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.2675 -0.215 0.1613"  rpy="0 ${-pi} ${3/4*pi}"/>
+  </xacro:sensor_hokuyo_ust20lx>
+  <xacro:sensor_hokuyo_ust20lx
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.2675 0.215 0.1613" rpy="0 ${-pi} ${-1/4*pi}"/>
+  </xacro:sensor_hokuyo_ust20lx>
 
-	<!-- Import all available sensors -->
-	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-
-	<!-- ***************** -->
-	<!-- Global parameters -->
-	<!-- ***************** -->
-
-	<!-- Second we define all the parameters and arguments to customize the robot characteristics -->
-
-	<xacro:property name="PI" value="3.1415926535897931"/>
-
-	<!-- Flag to select the high or low quality model -->
-	<xacro:property name="hq" value="true" />
-
-	<xacro:arg name="namespace" default="robot"/>
-	<xacro:arg name="prefix" default=""/>
-	<xacro:arg name="gazebo_ignition" default="false"/>
-
-	<!-- Here we create the robot using the xacro:macro imported at the beggining of this file -->
-
-	<xacro:rbtheron prefix="$(arg prefix)" hq="${hq}"/>
-
-	<!-- SENSORS -->
-    <xacro:property name="imu_offset_x" value="-0.1975"/>
-    <xacro:property name="imu_offset_y" value="0.0"/>
-    <xacro:property name="imu_offset_z" value="0.1598"/>
-
-	<xacro:property name="front_rgbd_camera_offset_x" value="0.3045"/>
-	<xacro:property name="front_rgbd_camera_offset_y" value="0.0"/>
-	<xacro:property name="front_rgbd_camera_offset_z" value="0.1898"/>
-
-	<xacro:property name="rear_rgbd_camera_offset_x" value="-0.3045"/>
-	<xacro:property name="rear_rgbd_camera_offset_y" value="0.0"/>
-	<!-- rear camera offset_z rb_theron chassis type v3: 0.1598 v4 (default): 0.1158 -->
-	<xacro:property name="rear_rgbd_camera_offset_z" value="0.1158"/>
-
-	<xacro:property name="front_laser_offset_x" value="0.2675"/>
-	<xacro:property name="front_laser_offset_y" value="-0.215"/>
-	<xacro:property name="front_laser_offset_z" value="0.1613"/>
-
-	<xacro:property name="rear_laser_offset_x" value="-0.2675"/>
-	<xacro:property name="rear_laser_offset_y" value="0.215"/>
-	<xacro:property name="rear_laser_offset_z" value="0.1613"/>
-
-	<!-- IMU -->
-    <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)imu_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_vectornav>
-
-	<!-- 2D LASER -->
-    <xacro:sensor_hokuyo_ust20lx
-        frame_prefix="$(arg prefix)front_laser_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 ${-PI} ${3/4*PI}"/>
-    </xacro:sensor_hokuyo_ust20lx>
-
-    <xacro:sensor_hokuyo_ust20lx
-        frame_prefix="$(arg prefix)rear_laser_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="rear_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 ${-PI} ${-1/4*PI}"/>
-    </xacro:sensor_hokuyo_ust20lx>
-
-  	<!-- CAMERAS -->
-    <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg prefix)front_rgbd_camera_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_camera"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_rgbd_camera_offset_x} ${front_rgbd_camera_offset_y} ${front_rgbd_camera_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_intel_realsense_d435>
-
-    <xacro:sensor_intel_realsense_d435
-        frame_prefix="$(arg prefix)rear_rgbd_camera_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="rear_camera"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_rgbd_camera_offset_x} ${rear_rgbd_camera_offset_y} ${rear_rgbd_camera_offset_z}" rpy="0 0 ${PI}"/>
-    </xacro:sensor_intel_realsense_d435>
-
-	<!-- Controllers -->
-	<xacro:if value="$(arg gazebo_ignition)">
-		<xacro:rbtheron_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-	</xacro:if>
-    <xacro:unless value="$(arg gazebo_ignition)">
-        <xacro:rbtheron_base_hw_controller/>
-    </xacro:unless>
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.3045 0 0.1898" rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)rear_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.3045 0 0.1358" rpy="0 0 ${pi}"/>
+  </xacro:sensor_intel_realsense_d435>
 
 </robot>

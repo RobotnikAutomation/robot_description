@@ -6,3 +6,5 @@
         type: joint_state_broadcaster/JointStateBroadcaster
       robotnik_base_control:
         type: robotnik_controllers/RBTheronController
+      joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController

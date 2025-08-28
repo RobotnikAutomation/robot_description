@@ -1,114 +1,70 @@
 <?xml version="1.0"?>
-<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+<robot name="rbrobout"
+  xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <!-- ***************** -->
-  <!-- Imported elements -->
-  <!-- ***************** -->
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_top_cover.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/structures/ewellix/all_ewellix_lift.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
-  <!-- Import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+  <!-- ARGUMENTS -->
+  <xacro:arg name="namespace" default="robot" />
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="gazebo_ignition" default="false" />
+  <xacro:arg name="ur_type" default="ur5e" />
 
-  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_top_cover.urdf.xacro" />
-
-  <xacro:include filename="$(find robotnik_description)/urdf/base_hw/rbrobout.ros2_control.urdf" />
-  <xacro:include filename="$(find robotnik_description)/simulators/gazebo_ignition/rbrobout/rbrobout_control.urdf.xacro" />
-
-  <xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
-
-  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
-  <xacro:include filename="$(find robotnik_description)/urdf/structures/ewellix/all_ewellix_lift.urdf.xacro" />
-
-  <!-- Properties and Arguments -->
-
-  <xacro:arg name="namespace" default="robot"/>
-  <xacro:arg name="prefix" default=""/>
-  <xacro:arg name="gazebo_ignition" default="false"/>
-
-  <xacro:arg name="ur_type" default="ur10e"/>
-  <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
-  <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
-  <xacro:arg name="physical_params" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
-  <xacro:arg name="visual_params" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
-
-
-  <xacro:property name="front_laser_offset_x" value="0.8"/>
-  <xacro:property name="front_laser_offset_y" value="0.366"/>
-  <xacro:property name="front_laser_offset_z" value="-0.06"/>
-
-  <xacro:property name="rear_laser_offset_x" value="-0.8"/>
-  <xacro:property name="rear_laser_offset_y" value="-0.366"/>
-  <xacro:property name="rear_laser_offset_z" value="-0.06"/>
-
-  <xacro:property name="imu_offset_x" value="0.3"/>
-  <xacro:property name="imu_offset_y" value="-0.3"/>
-  <xacro:property name="imu_offset_z" value="0.0725"/>
-
-  <xacro:property name="lift_position_x" value="-0.76"/>
-  <xacro:property name="lift_position_y" value="-0.1"/>
-  <xacro:property name="lift_position_z" value="0.18"/>
-  <xacro:property name="lift_orientation_r" value="0"/>
-  <xacro:property name="lift_orientation_p" value="0"/>
-  <xacro:property name="lift_orientation_y" value="0"/>
-
-  <xacro:rbrobout prefix="$(arg prefix)" gazebo_ignition="$(arg gazebo_ignition)"/>
-
+  <!-- RB-ROBOUT -->
+  <xacro:rbrobout
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
   <xacro:top_cover prefix="$(arg prefix)" parent="$(arg prefix)base_link">
-      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+    <origin xyz="0 0 -0.1" rpy="0 0 0" />
   </xacro:top_cover>
-
   <xacro:ewellix_lift_900mm prefix="$(arg prefix)lift_" parent="$(arg prefix)base_link">
-      <origin xyz="${lift_position_x} 0 ${lift_position_z}" rpy="0 0 0"/>
+    <origin xyz="-0.76 0.0 0.18" rpy="0 0 0" />
   </xacro:ewellix_lift_900mm>
 
-  <!-- Import UR arm -->
-  <!-- TODO: Restore simulation functionality, removed jazzy -->
-  <xacro:ur_robot
-      name="$(arg ur_type)"
-      tf_prefix="$(arg prefix)arm_"
-      parent="$(arg prefix)lift_ewellix_lift_top_link"
-      joint_limits_parameters_file="$(arg joint_limit_params)"
-      kinematics_parameters_file="$(arg kinematics_params)"
-      physical_parameters_file="$(arg physical_params)"
-      visual_parameters_file="$(arg visual_params)">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:ur_robot>
+  <!-- ARMS -->
+  <xacro:arm_ur
+    ur_type="$(arg ur_type)"
+    frame_prefix="$(arg prefix)arm_"
+    parent="$(arg prefix)lift_ewellix_lift_top_link"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:arm_ur>
 
   <!-- IMU -->
-    <xacro:sensor_vectornav
-        frame_prefix="$(arg prefix)imu_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${imu_offset_x} ${imu_offset_y} ${imu_offset_z}" rpy="0 0 0"/>
-    </xacro:sensor_vectornav>
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.3 -0.3 0.0725" rpy="0 0 0" />
+  </xacro:sensor_vectornav>
 
-    <!-- 2d laser -->
-    <xacro:sensor_sick_microscan3
-        frame_prefix="$(arg prefix)front_laser_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="front_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${front_laser_offset_x} ${front_laser_offset_y} ${front_laser_offset_z}" rpy="0 0 ${1/4*PI}"/>
-    </xacro:sensor_sick_microscan3>
-
-    <!-- 2d laser -->
-    <xacro:sensor_sick_microscan3
-        frame_prefix="$(arg prefix)rear_laser_"
-        parent="$(arg prefix)base_link"
-        node_namespace="$(arg namespace)"
-        node_name="rear_laser"
-        gazebo_ignition="$(arg gazebo_ignition)">
-        <origin xyz="${rear_laser_offset_x} ${rear_laser_offset_y} ${rear_laser_offset_z}" rpy="0 0 ${-3/4*PI}"/>
-    </xacro:sensor_sick_microscan3>
-
-    <!-- Controllers -->
-
-    <xacro:if value="$(arg gazebo_ignition)">
-        <xacro:rbrobout_gz_ignition_control namespace="$(arg namespace)" prefix="$(arg prefix)"/>
-    </xacro:if>
-    <xacro:unless value="$(arg gazebo_ignition)">
-        <xacro:rbrobout_base_hw_controller/>
-    </xacro:unless>
+  <!-- LASERS -->
+  <xacro:sensor_sick_microscan3
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.8 0.366 -0.06" rpy="0 0 ${1/4*pi}" />
+  </xacro:sensor_sick_microscan3>
+  <xacro:sensor_sick_microscan3
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="-0.8 -0.366 -0.06" rpy="0 0 ${-3/4*pi}" />
+  </xacro:sensor_sick_microscan3>
 
 </robot>
