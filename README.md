@@ -3,13 +3,16 @@
 This package includes the description for Robotnik robots.
 
 Available robots and models are:
+ - RB-1
+ - RB-Ficus
  - RB-Kairos / RB-Kairos+
- - RB-Theron / RB-Theron+
  - RB-Robout / RB-Robout+
+ - RB-Summit
+ - RB-Summit-Steel
+ - RB-Theron / RB-Theron+
  - RB-Vogui / RB-Vogui+
  - RB-Vogui-XL
- - RB-Summit
- - RB-1
+ - RB-Watcher
 
 
 ## Quick Usage
@@ -41,12 +44,15 @@ This repository contains three high-level folders:
 The `robots` folder contains a folder for each robot type:
 
  - rb1
+ - rbficus
  - rbkairos
  - rbrobout
  - rbsummit
+ - rbsummit_steel
  - rbtheron
  - rbvogui
  - rbvogui_xl
+ - rbwatcher
 
 Inside each robot type folder, there may exist several versions.
 
