@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbwatcher"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rb1/rb1_base.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+
+  <!-- RB-1 -->
+  <xacro:rb1
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.1975 0.0 0.1098"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+
+  <!-- LASERS -->
+  <xacro:sensor_hokuyo_ust20lx
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.210 0.0 0.1588"
+      rpy="0 ${pi} ${pi}" />
+  </xacro:sensor_hokuyo_ust20lx>
+
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.234 0.0 0.0408"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+</robot>

@@ -78,7 +78,7 @@
     <link name="${prefix}top_cover">
       <visual>
         <origin
-          xyz="0 0 0"
+          xyz="0 0 0.0065"
           rpy="0 0 0" />
         <geometry>
           <mesh
@@ -94,7 +94,7 @@
       name="${prefix}top_cover_joint"
       type="fixed">
       <origin
-        xyz="0.0 0 0.38062"
+        xyz="0.0 0 0.56162"
         rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}top_cover" />
@@ -120,7 +120,7 @@
       name="${prefix}base_logo_left_joint"
       type="fixed">
       <origin
-        xyz="0.0 0.28931 0.29062"
+        xyz="0.0 0.2894 0.35562"
         rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}base_logo_left" />
@@ -146,7 +146,7 @@
       name="${prefix}base_logo_right_joint"
       type="fixed">
       <origin
-        xyz="0.0 -0.28931 0.29062"
+        xyz="0.0 -0.28931 0.35562"
         rpy="0 0 ${pi}" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}base_logo_right" />
@@ -205,7 +205,9 @@
     </joint>
 
     <!-- DOCKING CONTACT -->
+
     <link name="${prefix}base_docking_contact" />
+
     <joint
       name="${prefix}base_docking_joint"
       type="fixed">

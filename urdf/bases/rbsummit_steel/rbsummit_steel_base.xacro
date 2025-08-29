@@ -1,27 +1,27 @@
 <?xml version="1.0" ?>
 <robot
-  name="rbkairos_base"
-  xmlns:xacro="http://wiki.ros.org/xacro">
+  name="summit_steel_base"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include
-    filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_body.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/bodies/rbsummit_steel/rbsummit_steel_body.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_control.urdf.xacro" />
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbsummit_steel/rbsummit_steel_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property
     name="wheel_offset_x"
-    value="0.21528" />
+    value="0.2225" />
   <xacro:property
     name="wheel_offset_y"
-    value="0.2590" />
+    value="0.2045" />
   <xacro:property
     name="wheel_offset_z"
     value="0.0" />
 
   <xacro:macro
-    name="rbkairos"
+    name="rbsummit_steel"
     params="
       prefix:=robot_
       gazebo_ignition:=false
@@ -30,7 +30,8 @@
     <xacro:property
       name="hq"
       value="true" />
-    <xacro:rbkairos_body prefix="${prefix}" />
+    <xacro:rbsummit_steel_body
+      prefix="${prefix}" />
 
     <!-- WHEELS -->
     <xacro:rbkairos_mecanum_wheel
@@ -63,7 +64,7 @@
       xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" />
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbkairos_gz_ignition_control
+      <xacro:rbsummit_steel_gz_ignition_control
         namespace="${namespace}"
         prefix="${prefix}" />
     </xacro:if>

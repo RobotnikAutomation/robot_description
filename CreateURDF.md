@@ -136,7 +136,7 @@ As in the previous robot file, first it is included the robot body macro file an
 
 ```xml
   <xacro:include
-    filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_plus_body.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_body.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
   <xacro:include
@@ -168,7 +168,7 @@ And finally, the robot macro definition which includes calling the macro body (c
     <xacro:property
       name="hq"
       value="true" />
-    <xacro:rbkairos_plus_body prefix="${prefix}" />
+    <xacro:rbkairos_body prefix="${prefix}" />
 
     <!-- WHEELS -->
     <xacro:rbkairos_mecanum_wheel

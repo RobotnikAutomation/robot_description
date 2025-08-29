@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <robot
-  name="rbkairos"
+  name="rbsummit_steel"
   xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro
-    name="rbkairos_plus_body"
+    name="rbsummit_steel_body"
     params="prefix:=robot_">
     <!-- Robot mechanical and motor parameters -->
 
@@ -53,7 +53,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/bases/rbkairos/rbkairos_plus_chassis.stl" />
+            filename="package://robotnik_description/meshes/bases/rbsummit_steel/rbsummit_steel_chassis.stl" />
         </geometry>
         <material name="black">
           <color rgba="0.0 0.0 0.0 1" />
@@ -65,7 +65,7 @@
           rpy="0 0 0 " />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/bases/rbkairos/rbkairos_plus_chassis.stl" />
+            filename="package://robotnik_description/meshes/bases/rbsummit_steel/rbsummit_steel_chassis.stl" />
         </geometry>
       </collision>
     </link>
@@ -78,11 +78,11 @@
     <link name="${prefix}top_cover">
       <visual>
         <origin
-          xyz="0 0 0.0065"
+          xyz="0 0 0"
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/bases/rbkairos/rbkairos_top_cover.stl" />
+            filename="package://robotnik_description/meshes/bases/rbsummit_steel/rbsummit_steel_top_cover.stl" />
         </geometry>
         <material name="darkgrey">
           <color rgba="0.5 0.5 0.5 1" />
@@ -94,7 +94,7 @@
       name="${prefix}top_cover_joint"
       type="fixed">
       <origin
-        xyz="0.0 0 0.56162"
+        xyz="0.0 0 0.38062"
         rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}top_cover" />
@@ -120,7 +120,7 @@
       name="${prefix}base_logo_left_joint"
       type="fixed">
       <origin
-        xyz="0.0 0.2894 0.35562"
+        xyz="0.0 0.28931 0.29062"
         rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}base_logo_left" />
@@ -146,7 +146,7 @@
       name="${prefix}base_logo_right_joint"
       type="fixed">
       <origin
-        xyz="0.0 -0.28931 0.35562"
+        xyz="0.0 -0.28931 0.29062"
         rpy="0 0 ${pi}" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}base_logo_right" />
@@ -205,9 +205,7 @@
     </joint>
 
     <!-- DOCKING CONTACT -->
-
     <link name="${prefix}base_docking_contact" />
-
     <joint
       name="${prefix}base_docking_joint"
       type="fixed">
