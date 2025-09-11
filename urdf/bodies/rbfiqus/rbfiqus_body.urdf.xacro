@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include
-    filename="$(find robotnik_description)/urdf/bodies/rbficus/rbficus_body.gazebo.xacro" />
+    filename="$(find robotnik_description)/urdf/bodies/rbfiqus/rbfiqus_body.gazebo.xacro" />
 
   <xacro:macro
-    name="rbficus_body"
+    name="rbfiqus_body"
     params="prefix:=robot_ hq:=true">
     <!-- Robot mechanical and motor parameters -->
 
@@ -41,7 +41,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotnik_description/meshes/bases/rbficus/chasis.stl" />
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/chasis.stl" />
                 </geometry>
                 <material name="grey">
                     <color rgba="0.2 0.2 0.2 1" />
@@ -72,7 +72,7 @@
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotnik_description/meshes/bases/rbficus/rocker.stl" />
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/rocker.stl" />
                 </geometry>
                 <material name="grey">
                     <color rgba="0.2 0.2 0.2 1" />
@@ -103,7 +103,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotnik_description/meshes/bases/rbficus/left_box.stl" />
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/left_box.stl" />
                 </geometry>
                 <material name="grey">
                     <color rgba="0.2 0.2 0.2 1" />
@@ -134,7 +134,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://robotnik_description/meshes/bases/rbficus/right_box.stl" />
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/right_box.stl" />
                 </geometry>
                 <material name="grey">
                     <color rgba="0.2 0.2 0.2 1" />

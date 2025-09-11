@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro
-    name="rbficus_gz_ignition_control"
+    name="rbfiqus_gz_ignition_control"
     params="namespace prefix">
     <gazebo>
       <plugin
@@ -9,7 +9,7 @@
         filename="gz_ros2_control-system">
         <robot_param>robot_description</robot_param>
         <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbficus/rbficus_controller_params.yaml</parameters>
+        <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbfiqus/rbfiqus_controller_params.yaml</parameters>
         <ros>
           <namespace>/${namespace}</namespace>
         </ros>

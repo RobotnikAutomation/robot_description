@@ -82,7 +82,7 @@
           </xacro:unless>
           <geometry>
             <mesh
-              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbficus.stl" />
+              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
           </geometry>
         </xacro:if>
 
@@ -99,7 +99,7 @@
           </xacro:unless>
           <geometry>
             <mesh
-              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbficus.stl" />
+              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
           </geometry>
         </xacro:unless>
 
@@ -121,7 +121,7 @@
         </xacro:unless>
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbficus.stl" />
+            filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
         </geometry>
       </collision>
 

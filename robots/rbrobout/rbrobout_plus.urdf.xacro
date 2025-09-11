@@ -90,4 +90,16 @@
       xyz="-0.8 -0.366 -0.06"
       rpy="0 0 ${-3/4*pi}" />
   </xacro:sensor_sick_microscan3>
+  
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.835 0 0.1555"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
 </robot>

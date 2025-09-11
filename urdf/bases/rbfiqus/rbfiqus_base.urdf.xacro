@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <robot
-  name="rbficus_base"
+  name="rbfiqus_base"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include
-    filename="$(find robotnik_description)/urdf/bodies/rbficus/rbficus_body.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/bodies/rbfiqus/rbfiqus_body.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/urdf/wheels/steering_wheel/steering_wheel_rbficus.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/wheels/steering_wheel/steering_wheel_rbfiqus.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbficus/rbficus_control.urdf.xacro" />
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbfiqus/rbfiqus_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property
@@ -21,7 +21,7 @@
     value="0.27319" />
 
   <xacro:macro
-    name="rbficus"
+    name="rbfiqus"
     params="
       prefix:=robot_
       gazebo_ignition:=false
@@ -30,7 +30,7 @@
     <xacro:property
       name="hq"
       value="true" />
-    <xacro:rbficus_body
+    <xacro:rbfiqus_body
       prefix="${prefix}"
       hq="${hq}" />
 
@@ -72,7 +72,7 @@
     </xacro:steering_wheel_rbfiqus>
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbficus_gz_ignition_control
+      <xacro:rbfiqus_gz_ignition_control
         namespace="${namespace}"
         prefix="${prefix}" />
     </xacro:if>

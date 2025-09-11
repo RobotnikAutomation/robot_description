@@ -44,7 +44,7 @@ This repository contains three high-level folders:
 The `robots` folder contains a folder for each robot type:
 
  - rb1
- - rbficus
+ - rbfiqus
  - rbkairos
  - rbrobout
  - rbsummit
