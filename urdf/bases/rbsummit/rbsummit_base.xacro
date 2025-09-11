@@ -1,44 +1,83 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="summit_xl">
+<?xml version="1.0" ?>
+<robot
+  name="summit_xl"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbsummit/rbsummit_control.urdf.xacro" />
 
-	<!-- Import summit XL base elements -->
-	<xacro:include filename="$(find robotnik_description)/urdf/bodies/rbsummit/rbsummit_body.urdf.xacro" />
+  <!-- WHEELS PROPERTIES -->
+  <xacro:property
+    name="wheel_offset_x"
+    value="0.229" />
+  <xacro:property
+    name="wheel_offset_y"
+    value="0.235" />
+  <xacro:property
+    name="wheel_offset_z"
+    value="0.0" />
 
-	<!-- Import summit XL wheels -->
-	<xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
+  <xacro:macro
+    name="rbsummit"
+    params="
+      prefix:=robot_
+      gazebo_ignition:=false
+      namespace:=''
+      ">
+    <xacro:property
+      name="hq"
+      value="true" />
+    <xacro:rbsummit_body
+      prefix="${prefix}"
+      hq="${hq}" />
 
-	<!-- Wheel parameters -->
-	<xacro:property name="wheel_offset_x" value="0.229" />    <!-- x,y,z in translation from base_link to the center of the wheel -->
-	<xacro:property name="wheel_offset_y" value="0.235" />
-	<xacro:property name="wheel_offset_z" value="0.0" />
+    <!-- WHEELS -->
+    <xacro:rubber_wheel
+      prefix="${prefix}front_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
+    <xacro:rubber_wheel
+      prefix="${prefix}front_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
 
-    <xacro:macro name="rbsummit" params="prefix:=robot_ hq:=true">
+    <xacro:rubber_wheel
+      prefix="${prefix}back_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
 
-		<!-- *************** -->
-		<!-- Robots Elements -->
-		<!-- *************** -->
+    <xacro:rubber_wheel
+      prefix="${prefix}back_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
 
-		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
-
-		<!-- Summit XL base -->
-		<xacro:rbsummit_body prefix="${prefix}" hq="${hq}" />
-
-		<!-- Summit XL wheels -->
-		<xacro:rubber_wheel prefix="${prefix}front_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
-			<origin xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-		</xacro:rubber_wheel>
-
-		<xacro:rubber_wheel prefix="${prefix}front_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
-			<origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-		</xacro:rubber_wheel>
-
-		<xacro:rubber_wheel prefix="${prefix}back_left_" parent="${prefix}base_link" reflect="true" hq="${hq}">
-			<origin xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-		</xacro:rubber_wheel>
-
-		<xacro:rubber_wheel prefix="${prefix}back_right_" parent="${prefix}base_link" reflect="false" hq="${hq}">
-			<origin xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
-		</xacro:rubber_wheel>
-
-   </xacro:macro>
+    <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:rbsummit_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
+    </xacro:if>
+  </xacro:macro>
 </robot>

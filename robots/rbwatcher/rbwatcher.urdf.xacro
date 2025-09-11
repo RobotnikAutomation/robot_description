@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbwatcher"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbwatcher/rbwatcher_base.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+
+  <!-- RB-WATCHER -->
+  <xacro:rbwatcher
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.03534 0.132 0.16109"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+
+  <!-- LASERS -->
+  <xacro:sensor_robosense_helios_16p
+    frame_prefix="$(arg prefix)top_3d_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="top_lidar"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.11924 0 0.38609"
+      rpy="0 0 0" />
+  </xacro:sensor_robosense_helios_16p>
+
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.29881 0.0 0.15243"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+
+  <xacro:sensor_link_750_nh
+    frame_prefix="$(arg prefix)top_ptz_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="top_ptz_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.11808 0 0.55429"
+      rpy="0 0 0" />
+  </xacro:sensor_link_750_nh>
+  
+  <!-- GPS -->
+  <xacro:sensor_ublox_with_mast
+    frame_prefix="$(arg prefix)gps_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="gps"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.24824 0.095 0.76359"
+      rpy="0 0 0" />
+  </xacro:sensor_ublox_with_mast>
+</robot>

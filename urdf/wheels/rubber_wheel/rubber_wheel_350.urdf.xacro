@@ -1,35 +1,53 @@
-<?xml version="1.0"?>
-<robot name="wheel"
-	xmlns:xacro="http://www.ros.org/wiki/xacro">
+<?xml version="1.0" ?>
+<robot
+  name="wheel"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/gazebo/rubber_wheel.transmission.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/gazebo/rubber_wheel.gazebo.xacro" />
 
-	<xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/gazebo/rubber_wheel.transmission.xacro"/>
-	<xacro:include filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/gazebo/rubber_wheel.gazebo.xacro"/>
+  <!-- Wheels -->
+  <xacro:property
+    name="wheel_radius"
+    value="0.1745" />
+  <xacro:property
+    name="wheel_height"
+    value="0.1165" />
+  <xacro:property
+    name="wheel_mass"
+    value="5" />
+  <!-- in kg-->
 
+  <xacro:macro
+    name="cylinder_inertia"
+    params="m r h">
+    <inertia
+      ixx="${m*(3*r*r+h*h)/12}"
+      ixy="0"
+      ixz="0"
+      iyy="${m*r*r/2}"
+      iyz="0"
+      izz="${m*(3*r*r+h*h)/12}" />
+  </xacro:macro>
 
-	<xacro:property name="M_PI" value="3.1415926535897931" />
-	<!-- Wheels -->
-	<xacro:property name="wheel_radius" value="0.1745" />
-	<xacro:property name="wheel_height" value="0.1165" />
-	<xacro:property name="wheel_mass" value="5" />
-	<!-- in kg-->
-
-
-	<xacro:macro name="cylinder_inertia" params="m r h">
-		<inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
-				  iyy="${m*r*r/2}" iyz = "0"
-				  izz="${m*(3*r*r+h*h)/12}" />
-	  </xacro:macro>
-
-  <xacro:macro name="rubber_wheel" params="prefix parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5">
-
-<!--WHEEL TIRE -->
-    <joint name="${prefix}wheel_joint" type="continuous">
-      <parent link="${parent}"/>
-      <child link="${prefix}wheel"/>
+  <xacro:macro
+    name="rubber_wheel"
+    params="prefix parent *origin reflect hq rubber_wheel_radius:=0.11 rubber_wheel_width:=0.15 rubber_wheel_mass:=6.5">
+    <!--WHEEL TIRE -->
+    <joint
+      name="${prefix}wheel_joint"
+      type="continuous">
+      <parent link="${parent}" />
+      <child link="${prefix}wheel" />
       <xacro:insert_block name="origin" />
       <axis xyz="0 1 0" />
-      <limit effort="100" velocity="100"/>
-      <joint_properties damping="0.5" friction="2.0"/>
+      <limit
+        effort="100"
+        velocity="100" />
+      <joint_properties
+        damping="0.5"
+        friction="2.0" />
     </joint>
 
     <link name="${prefix}wheel">
@@ -37,49 +55,63 @@
         <!-- HIGH RESOLUTION WHEELS -->
         <xacro:if value="${hq}">
           <xacro:unless value="${reflect}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin
+              xyz="0 0 0"
+              rpy="0 0 0" />
           </xacro:unless>
           <xacro:if value="${reflect}">
-            <origin xyz="0 0 0" rpy="${M_PI} 0 0" />
+            <origin
+              xyz="0 0 0"
+              rpy="${pi} 0 0" />
           </xacro:if>
           <geometry>
-							<mesh filename="package://robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_350.stl" />
+            <mesh
+              filename="package://robotnik_description/meshes/wheels/rubber_wheel/rubber_wheel_350.stl" />
           </geometry>
         </xacro:if>
-       <!-- LOW RESOLUTION WHEELS -->
+        <!-- LOW RESOLUTION WHEELS -->
         <xacro:unless value="${hq}">
-          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <origin
+            xyz="0 0 0"
+            rpy="${pi/2} 0 0" />
           <geometry>
-            <cylinder length="${rubber_wheel_width}" radius="${rubber_wheel_radius}" />
+            <cylinder
+              length="${rubber_wheel_width}"
+              radius="${rubber_wheel_radius}" />
           </geometry>
         </xacro:unless>
-		<material name="black">
-		  <color rgba="0.1 0.1 0.1 1"/>
-		</material>
+        <material name="black">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
       </visual>
 
       <collision>
-          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
-          <geometry>
-						<cylinder length="${rubber_wheel_width}" radius="${rubber_wheel_radius}" />
-          </geometry>
+        <origin
+          xyz="0 0 0"
+          rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder
+            length="${rubber_wheel_width}"
+            radius="${rubber_wheel_radius}" />
+        </geometry>
       </collision>
       <inertial>
         <mass value="${rubber_wheel_mass}" />
         <origin xyz="0 0 0" />
-        <xacro:cylinder_inertia  m="${rubber_wheel_mass}" r="${rubber_wheel_radius}" h="${rubber_wheel_width}" />
+        <xacro:cylinder_inertia
+          m="${rubber_wheel_mass}"
+          r="${rubber_wheel_radius}"
+          h="${rubber_wheel_width}" />
       </inertial>
     </link>
 
     <gazebo reference="${prefix}wheel">
-			<!-- <material>Gazebo/Black</material> -->
+      <!-- <material>Gazebo/Black</material> -->
       <mu1>0.9</mu1>
       <mu2>0.5</mu2>
       <kp>2.75e9</kp>
       <kd>8.25e1</kd>
       <fdir1>1 0 0</fdir1>
-		</gazebo>
-
+    </gazebo>
   </xacro:macro>
-
 </robot>

@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbfiqus/rbfiqus_body.gazebo.xacro" />
+
+  <xacro:macro
+    name="rbfiqus_body"
+    params="prefix:=robot_ hq:=true">
+    <!-- Robot mechanical and motor parameters -->
+
+    <!-- BASE FOOTPRINT -->
+    <link name="${prefix}base_footprint" />
+
+    <joint
+      name="${prefix}base_footprint_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 ${wheel_radius}"
+        rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_footprint" />
+      <child link="${prefix}base_link" />
+    </joint>
+
+    <!-- BASE_LINK -->
+    <link name="${prefix}base_link" />
+
+    <!-- Chassis -->
+    <joint
+      name="${prefix}chassis_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}chassis_link" />
+    </joint>
+
+    <!-- Chassis -->
+        <link name="${prefix}chassis_link">
+            <visual>
+                <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+                <geometry>
+                    <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/chasis.stl" />
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.2 0.2 0.2 1" />
+                </material>
+            </visual>
+            <collision>
+                <origin
+          xyz="0 0 0"
+          rpy="0 0 0 " />
+                <geometry>
+                    <box size="1.1 0.9 0.1" />
+                </geometry>
+            </collision>
+            <inertial>
+                <origin
+          xyz="0.0 0.0 0.0"
+          rpy="0.0 0.0 0.0" />
+                <mass value="50.0" />
+                <xacro:solid_cuboid_inertia
+          w="1.1"
+          h="0.9"
+          d="0.1"
+          m="50" />
+            </inertial>
+        </link>
+
+        <!-- Rocker Chassis Joint -->
+            <joint
+      name="${prefix}rocker_chassis"
+      type="fixed">
+                <origin
+        xyz="-0.835 0 0.047"
+        rpy="0 0 0" />
+                <parent link="${prefix}chassis_link" />
+                <child link="${prefix}rocker_link" />
+            </joint>
+
+        <!-- Rocker -->
+        <link name="${prefix}rocker_link">
+            <visual>
+                <origin
+          xyz="0.0 0.0 0.0"
+          rpy="0 0 0" />
+                <geometry>
+                    <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/rocker.stl" />
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.2 0.2 0.2 1" />
+                </material>
+            </visual>
+            <collision>
+                <origin
+          xyz="0 0 0"
+          rpy="0 0 0 " />
+                <geometry>
+                    <box size="0.2 1.55 0.3" />
+                </geometry>
+            </collision>
+            <inertial>
+                <origin
+          xyz="0.0 0.0 0.0"
+          rpy="0.0 0.0 0.0" />
+                <mass value="5.0" />
+                <xacro:solid_cuboid_inertia
+          w="0.2"
+          h="1.55"
+          d="0.3"
+          m="5" />
+            </inertial>
+        </link>
+
+        <!-- Left Rear Protection Rocker Joint -->
+        <joint
+      name="${prefix}left_rear_protection"
+      type="fixed">
+            <origin
+        xyz="-0.008 0.505 0.23619"
+        rpy="0 0 0" />
+            <parent link="${prefix}rocker_link" />
+            <child
+        link="${prefix}left_rear_protection_link" />
+        </joint>
+
+        <!-- Left Rear Protection -->
+        <link name="${prefix}left_rear_protection_link">
+            <visual>
+                <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+                <geometry>
+                    <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/left_box.stl" />
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.2 0.2 0.2 1" />
+                </material>
+            </visual>
+            <collision>
+                <origin
+          xyz="0.15 0.17 0.12"
+          rpy="0 0 0 " />
+                <geometry>
+                    <box size="0.3 0.27 0.2" />
+                </geometry>
+            </collision>
+            <inertial>
+                <origin
+          xyz="0.0 0.0 0.0"
+          rpy="0.0 0.0 0.0" />
+                <mass value="3.0" />
+                <xacro:solid_cuboid_inertia
+          w="0.3"
+          h="0.27"
+          d="0.2"
+          m="3" />
+            </inertial>
+        </link>
+
+        <!-- Right Rear Protection Rocker Joint-->
+        <joint
+      name="${prefix}right_rear_protection"
+      type="fixed">
+            <origin
+        xyz="-0.008 -0.505 0.23619"
+        rpy="0 0 0" />
+            <parent link="${prefix}rocker_link" />
+            <child
+        link="${prefix}right_rear_protection_link" />
+        </joint>
+
+        <!-- Right Rear Protection -->
+        <link name="${prefix}right_rear_protection_link">
+            <visual>
+                <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+                <geometry>
+                    <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/right_box.stl" />
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.2 0.2 0.2 1" />
+                </material>
+            </visual>
+            <collision>
+                <origin
+          xyz="0.15 -0.17 0.12"
+          rpy="0 0 0 " />
+                <geometry>
+                    <box size="0.3 0.27 0.2" />
+                </geometry>
+            </collision>
+            <inertial>
+                <origin
+          xyz="0.0 0.0 0.0"
+          rpy="0.0 0.0 0.0" />
+                <mass value="3.0" />
+                <xacro:solid_cuboid_inertia
+          w="0.3"
+          h="0.27"
+          d="0.2"
+          m="3" />
+            </inertial>
+        </link>
+
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact" />
+    <joint
+      name="${prefix}base_docking_joint"
+      type="fixed">
+      <origin
+        xyz="0.6405 0 0.10264"
+        rpy="0 0 0" />
+      <parent link="${prefix}chassis_link" />
+      <child link="${prefix}base_docking_contact" />
+    </joint>
+  </xacro:macro>
+</robot>
