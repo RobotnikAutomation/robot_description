@@ -23,6 +23,23 @@ ros2 launch robotnik_description robot_description.launch.py robot:=ROBOT [robot
 
 Launches the description of a ROBOT, specifically ROBOT_MODEL.
 
+## Contributing
+
+All files must be formatted using [Prettier](https://prettier.io/) with the configuration found in [.github/.prettierrc.json](.github/.prettierrc.json).
+
+Install npm, prettier and prettier/plugin-xml:
+
+```bash
+sudo apt install npm
+sudo npm install -g prettier @prettier/plugin-xml
+```
+
+To format the files, run the following command inside the package folder:
+
+```bash
+prettier --plugin=$(npm root -g)/@prettier/plugin-xml/src/plugin.js --config .github/.prettierrc.json --write "urdf/**/*.{xml,xacro,urdf}"
+```
+
 ## Structure
 
 The description of a robot is divided into three parts:
