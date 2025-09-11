@@ -78,9 +78,14 @@
         </xacro:sensor_ublox>
 
     	<!-- LIDAR -->
-    	<xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+		<!-- <xacro:sensor_rs_helios_16p prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
     	  <origin xyz="0.0 0.0 0.38998" rpy="0 0 0"/>
-    	</xacro:sensor_rs_helios_16p>
+    	</xacro:sensor_rs_helios_16p> -->
+
+
+    	<xacro:sensor_sick_multiscan prefix="${prefix}top_3d_laser" prefix_topic="top_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+    	  <origin xyz="0.0 0.0 0.38998" rpy="0 0 0"/>
+    	</xacro:sensor_sick_multiscan>
 
 		<!-- Antenna -->
 		<xacro:sensor_antena_combo_5G_teltonika prefix="${prefix}antenna" parent="${prefix}base_link" gps_latitude="$(arg gps_latitude)" gps_longitude="$(arg gps_longitude)">
