@@ -2,9 +2,15 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Unreleased
-----------
+2.1.0 (2025-09-11)
+------------------
 
+* Clean up URDF files and apply prettier to all files.
+* Removed controller configurations.
+* Added new robots:
+    - RB-Fiqus (new model)
+    - RB-Watcher
+    - RB-Summit-Steel
 * Sync humble and jazzy branches.
 * Contributors: Rafael Martin, Robert Vasquez
 
