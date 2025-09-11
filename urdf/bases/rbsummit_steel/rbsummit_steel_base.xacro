@@ -30,8 +30,7 @@
     <xacro:property
       name="hq"
       value="true" />
-    <xacro:rbsummit_steel_body
-      prefix="${prefix}" />
+    <xacro:rbsummit_steel_body prefix="${prefix}" />
 
     <!-- WHEELS -->
     <xacro:rbkairos_mecanum_wheel

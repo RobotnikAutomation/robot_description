@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <robot
   name="rbwatcher_body"
   xmlns:xacro="http://wiki.ros.org/xacro">
@@ -80,28 +80,36 @@
     </link>
 
     <!-- TOP STRUCTURE -->
-    <joint name="${prefix}top_structure_joint" type="fixed">
+    <joint
+      name="${prefix}top_structure_joint"
+      type="fixed">
       <axis xyz="0 0 1" />
  			<origin
         xyz="-0.17024 0 0.27609"
-        rpy="0 0 0"/>
+        rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}top_structure_link" />
     </joint>
     <link name="${prefix}top_structure_link">
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin
+          rpy="0 0 0"
+          xyz="0 0 0" />
         <material name="${prefix}top_structure_color">
           <color rgba="0.5 0.5 0.5 1" />
         </material>
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.dae" />
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.dae" />
         </geometry>
       </visual>
       <collision>
-        <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin
+          rpy="0 0 0"
+          xyz="0 0 0" />
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.stl" />
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.stl" />
         </geometry>
       </collision>
     </link>
