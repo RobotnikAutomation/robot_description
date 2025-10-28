@@ -17,11 +17,15 @@
   <xacro:arg
     name="gazebo_ignition"
     default="false" />
+  <xacro:arg
+    name="webots"
+    default="false" />
 
   <!-- RB-WATCHER -->
   <xacro:rbwatcher
     prefix="$(arg prefix)"
     gazebo_ignition="$(arg gazebo_ignition)"
+    webots="$(arg webots)"
     namespace="$(arg namespace)" />
 
   <!-- IMU -->

@@ -8,6 +8,8 @@
     filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/simulators/gazebo_ignition/rbwatcher/rbwatcher_control.urdf.xacro" />
+<xacro:include
+    filename="$(find robotnik_description)/simulators/webots/rbwatcher/rbwatcher_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property
@@ -25,6 +27,7 @@
     params="
       prefix:=robot_
       gazebo_ignition:=false
+      webots:=false
       namespace:=''
       ">
     <xacro:property
@@ -74,8 +77,14 @@
         rpy="0 0 0" />
     </xacro:rubber_wheel>
 
-    <xacro:if value="$(arg gazebo_ignition)">
+    <xacro:if value="${gazebo_ignition}">
       <xacro:rbwatcher_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
+    </xacro:if>
+
+    <xacro:if value="${webots}">
+      <xacro:rbwatcher_webots_control
         namespace="${namespace}"
         prefix="${prefix}" />
     </xacro:if>
