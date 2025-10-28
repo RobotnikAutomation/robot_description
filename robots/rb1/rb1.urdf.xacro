@@ -17,6 +17,9 @@
   <xacro:arg
     name="gazebo_ignition"
     default="false" />
+  <xacro:arg
+    name="low_performance_simulation"
+    default="false" />
 
   <!-- RB-1 -->
   <xacro:rb1

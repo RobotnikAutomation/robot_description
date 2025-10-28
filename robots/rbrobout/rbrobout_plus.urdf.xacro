@@ -24,6 +24,9 @@
     name="gazebo_ignition"
     default="false" />
   <xacro:arg
+    name="low_performance_simulation"
+    default="false" />
+  <xacro:arg
     name="ur_type"
     default="ur5e" />
 
