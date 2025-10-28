@@ -24,6 +24,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from launch import LaunchDescription
+from launch.actions import OpaqueFunction
 from launch.substitutions import LaunchConfiguration, Command, FindExecutable
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -46,7 +47,7 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='robot',
-        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit, rbrbout)',
+        description='Robot model (rbvogui, rbkairos, rbtheron, rbsummit, rbrbout, rbwatcher...)',
         default_value='',
         use_env=True,
         environment='ROBOT',
@@ -82,6 +83,25 @@ def generate_launch_description():
         environment='GAZEBO_IGNITION_SIMULATION',
     )
     add_to_launcher.add_arg(arg)
+
+    arg = ExtendedArgument(
+        name='webots',
+        description='Simulate robot in Webots',
+        default_value="false",
+        use_env=True,
+        environment='WEBOTS_SIMULATION',
+    )
+    add_to_launcher.add_arg(arg)
+
+    # Ensure gazebo_ignition and webots are not both true
+    def mutually_exclusive_sim_args(context):
+        gazebo_ignition = context.launch_configurations.get('gazebo_ignition', 'false').lower() == 'true'
+        webots = context.launch_configurations.get('webots', 'false').lower() == 'true'
+        if gazebo_ignition and webots:
+            raise RuntimeError("gazebo_ignition and webots simulation cannot both be true at the same time.")
+    ld.add_action(
+        OpaqueFunction(function=mutually_exclusive_sim_args)
+    )
 
     arg = ExtendedArgument(
         name='frame_prefix',
