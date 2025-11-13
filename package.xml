@@ -7,7 +7,7 @@
   <version>2.1.0</version>
   <description>URDF description for Robotnik robots</description>
 
-  <maintainer email="support@robotnik.es">Robotnik Automation SL</maintainer>
+  <maintainer email="ros-developers@robotnik.es">Robotnik Developers</maintainer>
   <license>BSD-3-Clause</license>
 
   <url type="website">https://github.com/RobotnikAutomation/robot_description</url>
