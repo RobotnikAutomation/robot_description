@@ -3,7 +3,6 @@
   name="ewellix_lift_900mm"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- EWELLIX LIFT -->
-
   <xacro:macro
     name="ewellix_lift_900mm"
     params="prefix parent cut_model:=false *origin">
