@@ -3,13 +3,16 @@
 This package includes the description for Robotnik robots.
 
 Available robots and models are:
+ - RB-1
+ - RB-Ficus
  - RB-Kairos / RB-Kairos+
- - RB-Theron / RB-Theron+
  - RB-Robout / RB-Robout+
+ - RB-Summit
+ - RB-Summit-Steel
+ - RB-Theron / RB-Theron+
  - RB-Vogui / RB-Vogui+
  - RB-Vogui-XL
- - RB-Summit
- - RB-1 
+ - RB-Watcher
 
 
 ## Quick Usage
@@ -19,6 +22,23 @@ ros2 launch robotnik_description robot_description.launch.py robot:=ROBOT [robot
 ```
 
 Launches the description of a ROBOT, specifically ROBOT_MODEL.
+
+## Contributing
+
+All files must be formatted using [Prettier](https://prettier.io/) with the configuration found in [.github/.prettierrc.json](.github/.prettierrc.json).
+
+Install npm, prettier and prettier/plugin-xml:
+
+```bash
+sudo apt install npm
+sudo npm install -g prettier @prettier/plugin-xml
+```
+
+To format the files, run the following command inside the package folder:
+
+```bash
+prettier --plugin=$(npm root -g)/@prettier/plugin-xml/src/plugin.js --config .github/.prettierrc.json --write "urdf/**/*.{xml,xacro,urdf}"
+```
 
 ## Structure
 
@@ -40,13 +60,16 @@ This repository contains three high-level folders:
 
 The `robots` folder contains a folder for each robot type:
 
- - rbkairos
- - rbtheron
- - rbrobout
- - rbvogui
- - rbvogui-xl
- - rbsummit
  - rb1
+ - rbfiqus
+ - rbkairos
+ - rbrobout
+ - rbsummit
+ - rbsummit_steel
+ - rbtheron
+ - rbvogui
+ - rbvogui_xl
+ - rbwatcher
 
 Inside each robot type folder, there may exist several versions.
 
@@ -54,10 +77,11 @@ Inside each robot type folder, there may exist several versions.
 
 The `urdf` folder contains a folder for each main component:
 
-  - **bases**: Body of robots, including wheels, structures, and arms.
-  - **bodies**: Includes chassis.
-  - **structures**: Other structures included in a robot (e.g., columns, protection, elevator, support, etc.).
-  - **wheels**: Contains the different types of wheels.
+- **arms**: Contains the different types of robot arms.
+- **bases**: Body of robots, including wheels, structures, and arms.
+- **bodies**: Includes chassis.
+- **structures**: Other structures included in a robot (e.g., columns, protection, elevator, support, etc.).
+- **wheels**: Contains the different types of wheels.
 
 ## Launch
 

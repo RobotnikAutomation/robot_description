@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbsummit_steel"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbsummit_steel/rbsummit_steel_base.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+
+  <!-- RB-SUMMIT-STEEL -->
+  <xacro:rbsummit_steel
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.1975 0.0 0.1098"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+
+  <!-- LASERS -->
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.2865 -0.20894 0.2973"
+      rpy="0 -${pi} ${3/4*pi}" />
+  </xacro:sensor_sick_s300>
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.2865 0.20894 0.2973"
+      rpy="0 -${pi} -${1/4*pi}" />
+  </xacro:sensor_sick_s300>
+
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.35850 0.0 0.25062"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+</robot>

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbfiqus"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbfiqus/rbfiqus_base.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+
+  <!-- RB-VOGUI -->
+  <xacro:rbfiqus
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.127 -0.729 0.212"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+</robot>

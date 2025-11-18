@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbtheron_top_cover"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro
+    name="solid_cuboid_inertia"
+    params="m h d w">
+    <inertia
+      ixx="${(m*(h*h+d*d))/12}"
+      ixy="0"
+      ixz="0"
+      iyy="${(m*(w*w+d*d))/12}"
+      iyz="0"
+      izz="${(m*(w*w+h*h))/12}" />
+  </xacro:macro>
+
+  <xacro:macro
+    name="rbtheron_plus_top_cover"
+    params="
+      prefix
+      parent
+      *origin
+      ">
+    <joint
+      name="${prefix}top_chassis_joint"
+      type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}top_chassis" />
+    </joint>
+    <link name="${prefix}top_chassis">
+      <visual>
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbtheron/rbtheron_plus_top_chassis.stl" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.2 0.2 0.2 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0.312"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.629 0.544 0.624" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10.0" />
+        <origin
+          xyz="0 0 0.312"
+          rpy="0 0 0" />
+        <xacro:solid_cuboid_inertia
+          w="0.629"
+          h="0.544"
+          d="0.624"
+          m="10.0" />
+      </inertial>
+    </link>
+  </xacro:macro>
+</robot>

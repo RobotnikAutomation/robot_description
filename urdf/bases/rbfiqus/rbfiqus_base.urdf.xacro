@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbfiqus_base"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbfiqus/rbfiqus_body.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/steering_wheel/steering_wheel_rbfiqus.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbfiqus/rbfiqus_control.urdf.xacro" />
+
+  <!-- WHEELS PROPERTIES -->
+  <xacro:property
+    name="wheel_offset_x"
+    value="0.615" />
+  <xacro:property
+    name="wheel_offset_y"
+    value="0.670" />
+  <xacro:property
+    name="wheel_offset_z"
+    value="0.27319" />
+
+  <xacro:macro
+    name="rbfiqus"
+    params="
+      prefix:=robot_
+      gazebo_ignition:=false
+      namespace:=''
+      ">
+    <xacro:property
+      name="hq"
+      value="true" />
+    <xacro:rbfiqus_body
+      prefix="${prefix}"
+      hq="${hq}" />
+
+    <xacro:steering_wheel_rbfiqus
+      prefix="${prefix}front_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:steering_wheel_rbfiqus>
+    <xacro:steering_wheel_rbfiqus
+      prefix="${prefix}front_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:steering_wheel_rbfiqus>
+    <xacro:steering_wheel_rbfiqus
+      prefix="${prefix}back_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:steering_wheel_rbfiqus>
+    <xacro:steering_wheel_rbfiqus
+      prefix="${prefix}back_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:steering_wheel_rbfiqus>
+
+    <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:rbfiqus_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
+    </xacro:if>
+  </xacro:macro>
+</robot>

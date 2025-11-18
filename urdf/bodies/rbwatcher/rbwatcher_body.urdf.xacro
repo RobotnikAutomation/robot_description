@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbwatcher_body"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/inertia.urdf.xacro" />
+
+  <xacro:macro
+    name="rbwatcher_body"
+    params="prefix:=robot_ hq:=true">
+    <!-- Robot mechanical and motor parameters -->
+
+    <xacro:property
+      name="wheel_radius"
+      value="0.11" />
+
+    <!-- BASE FOOTPRINT -->
+    <link name="${prefix}base_footprint">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <joint
+      name="${prefix}base_footprint_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 ${wheel_radius}"
+        rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_footprint" />
+      <child link="${prefix}base_link" />
+    </joint>
+
+    <!-- BASE_LINK -->
+    <link name="${prefix}base_link">
+      <inertial>
+        <mass value="25.0" />
+        <origin xyz="0 0 0" />
+        <xacro:solid_cuboid_inertia
+          m="50.0"
+          h="0.38"
+          d="0.62"
+          w="0.36" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <xacro:if value="${hq}">
+          <geometry>
+            <mesh
+              filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_chassis.dae" />
+          </geometry>
+        </xacro:if>
+        <xacro:unless value="${hq}">
+          <geometry>
+            <mesh
+              filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_chassis.dae" />
+          </geometry>
+        </xacro:unless>
+        <material name="darkgrey">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0 " />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_chassis.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- TOP STRUCTURE -->
+    <joint
+      name="${prefix}top_structure_joint"
+      type="fixed">
+      <axis xyz="0 0 1" />
+ 			<origin
+        xyz="-0.17024 0 0.27609"
+        rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}top_structure_link" />
+    </joint>
+    <link name="${prefix}top_structure_link">
+      <visual>
+        <origin
+          rpy="0 0 0"
+          xyz="0 0 0" />
+        <material name="${prefix}top_structure_color">
+          <color rgba="0.5 0.5 0.5 1" />
+        </material>
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin
+          rpy="0 0 0"
+          xyz="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbwatcher/rbwatcher_top_structure.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- DOCKING CONTACTS -->
+    <joint
+      name="${prefix}base_docking_joint"
+      type="fixed">
+      <origin
+        xyz="0.29378 0 0.07321"
+        rpy="0 0 0 " />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}base_docking_contact_link" />
+    </joint>
+
+    <!-- DOCKING LINK -->
+    <link name="${prefix}base_docking_contact_link" />
+  </xacro:macro>
+</robot>
