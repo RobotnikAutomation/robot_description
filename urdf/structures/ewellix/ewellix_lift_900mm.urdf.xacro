@@ -3,12 +3,11 @@
   name="ewellix_lift_900mm"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- EWELLIX LIFT -->
-
   <xacro:macro
     name="ewellix_lift_900mm"
     params="prefix parent cut_model:=false *origin">
     <!-- Lift base link -->
-    <link name="${prefix}ewellix_lift_base_link">
+    <link name="${prefix}base_link">
       <visual>
         <origin
           xyz="0 0 0"
@@ -51,15 +50,15 @@
 
     <!-- Lift base link joint -->
     <joint
-      name="${prefix}ewellix_lift_base_joint"
+      name="${prefix}base_joint"
       type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
-      <child link="${prefix}ewellix_lift_base_link" />
+      <child link="${prefix}base_link" /> 
     </joint>
 
     <!-- Lift top link -->
-    <link name="${prefix}ewellix_lift_top_link">
+    <link name="${prefix}link">
       <visual>
         <origin
           xyz="0 0 0"
@@ -112,26 +111,26 @@
 
     <!-- Lift top link joint -->
     <joint
-      name="${prefix}ewellix_lift_top_joint"
+      name="${prefix}joint"
       type="prismatic">
-      <parent link="${prefix}ewellix_lift_base_link" />
-      <child link="${prefix}ewellix_lift_top_link" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}link" />
       <origin
-        xyz="0 0 0.730"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <limit
-        effort="1000000"
+        effort="1000"
         lower="0.0"
         upper="0.9"
         velocity="0.088" />
       <axis xyz="0 0 1" />
     </joint>
 
-    <gazebo reference="${prefix}ewellix_lift_base_link">
+    <gazebo reference="${prefix}base_link">
       <material>Gazebo/Grey</material>
     </gazebo>
 
-    <gazebo reference="${prefix}ewellix_lift_top_link">
+    <gazebo reference="${prefix}link">
       <material>Gazebo/Grey</material>
     </gazebo>
 

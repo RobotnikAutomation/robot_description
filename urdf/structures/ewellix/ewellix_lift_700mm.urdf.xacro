@@ -7,14 +7,15 @@
     name="ewellix_lift_700mm"
     params="prefix parent cut_model:=false *origin">
     <!-- Lift base link -->
-    <link name="${prefix}ewellix_lift_base_link">
+    <link name="${prefix}base_link">
       <visual>
         <origin
           xyz="0 0 0"
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_700mm.stl" />
+            filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_700mm.stl"
+            scale="0.95 0.95 1" />
         </geometry>
         <material name="grey">
           <color rgba="0.7 0.7 0.7 1" />
@@ -27,7 +28,8 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_700mm.stl" />
+            filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_base_700mm.stl"
+            scale="0.95 0.95 1" />
         </geometry>
       </collision>
 
@@ -48,15 +50,15 @@
 
     <!-- Lift base link joint -->
     <joint
-      name="${prefix}ewellix_lift_base_joint"
+      name="${prefix}base_joint"
       type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
-      <child link="${prefix}ewellix_lift_base_link" />
+      <child link="${prefix}base_link" />
     </joint>
 
     <!-- Lift top link -->
-    <link name="${prefix}ewellix_lift_top_link">
+    <link name="${prefix}link">
       <visual>
         <origin
           xyz="0 0 0"
@@ -109,12 +111,12 @@
 
     <!-- Lift top link joint -->
     <joint
-      name="${prefix}ewellix_lift_top_joint"
+      name="${prefix}joint"
       type="prismatic">
-      <parent link="${prefix}ewellix_lift_base_link" />
-      <child link="${prefix}ewellix_lift_top_link" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}link" />
       <origin
-        xyz="0 0 0.730"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <limit
         effort="1000"
@@ -124,11 +126,11 @@
       <axis xyz="0 0 1" />
     </joint>
 
-    <gazebo reference="${prefix}ewellix_lift_base_link">
+    <gazebo reference="${prefix}base_link">
       <material>Gazebo/Grey</material>
     </gazebo>
 
-    <gazebo reference="${prefix}ewellix_lift_top_link">
+    <gazebo reference="${prefix}link">
       <material>Gazebo/Grey</material>
     </gazebo>
 
@@ -138,7 +140,7 @@
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
-      <joint name="${prefix}ewellix_lift_top_joint">
+      <joint name="${prefix}joint">
         <command_interface name="position" />
         <command_interface name="velocity" />
         <state_interface name="position">
