@@ -6,7 +6,7 @@ Available robots and models are:
  - RB-1
  - RB-Ficus
  - RB-Kairos / RB-Kairos+
- - RB-Robout / RB-Robout+
+ - RB-Robout / RB-Robout+ / RB-Robout-XXL
  - RB-Summit
  - RB-Summit-Steel
  - RB-Theron / RB-Theron+
