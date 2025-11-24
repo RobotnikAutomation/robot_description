@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbrobout_xxl"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_xxl_base.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+
+  <!-- RB-ROBOUT -->
+  <xacro:rbrobout_xxl
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)chassis_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-0.43542 -0.18588 0.06655"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+
+  <!-- LASERS -->
+  <xacro:sensor_sick_microscan3
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)chassis_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="1.44177 0.69177 0.03304"
+      rpy="0 0 ${1/4*pi}" />
+  </xacro:sensor_sick_microscan3>
+  <xacro:sensor_sick_microscan3
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)chassis_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-1.44177 -0.69177 0.03304"
+      rpy="0 0 ${-3/4*pi}" />
+  </xacro:sensor_sick_microscan3>
+  
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)chassis_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="1.4765 0 0.246"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)rear_rgbd_camera_"
+    parent="$(arg prefix)chassis_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="-1.4765 0 0.246"
+      rpy="0 0 ${pi}" />
+  </xacro:sensor_intel_realsense_d435>
+</robot>

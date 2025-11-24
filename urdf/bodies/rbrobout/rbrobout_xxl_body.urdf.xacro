@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbrobout_xxl"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro
+    name="rbrobout_xxl_body"
+    params="prefix:=robot_">
+    <!-- Robot mechanical and motor parameters -->
+
+    <xacro:property
+      name="wheel_radius"
+      value="0.15243" />
+
+    <!-- BASE FOOTPRINT -->
+    <link name="${prefix}base_footprint">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <joint
+      name="${prefix}base_footprint_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 ${wheel_radius}"
+        rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_footprint" />
+      <child link="${prefix}base_link" />
+    </joint>
+
+    <!-- BASE_LINK -->
+    <link name="${prefix}base_link">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <box size="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <joint
+      name="${prefix}base_link_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 -0.12243"
+        rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}chassis_link" />
+    </joint>
+
+    <!-- CHASSIS LINK -->
+    <link name="${prefix}chassis_link">
+      <inertial>
+        <mass value="600.0" />
+        <origin xyz="0 0 0.10" />
+        <xacro:solid_cuboid_inertia
+          w="3.077"
+          h="1.577"
+          d="0.37"
+          m="600.0" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_xxl_chassis.stl" />
+        </geometry>
+        <material name="darkgrey">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0 " />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbrobout/rbrobout_xxl_chassis.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact" />
+    <joint
+      name="${prefix}base_docking_joint"
+      type="fixed">
+      <origin
+        xyz="1.52 0.0 0.04"
+        rpy="0 0 0 " />
+      <parent link="${prefix}chassis_link" />
+      <child link="${prefix}base_docking_contact" />
+    </joint>
+  </xacro:macro>
+</robot>
