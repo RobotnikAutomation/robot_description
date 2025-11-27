@@ -41,7 +41,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     node_name="front_laser"
-    gazebo_ignition="$(arg gazebo_ignition)">
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="2.3"
+    min_angle="-2.3">
     <origin
       xyz="0.2675 -0.215 0.1613"
       rpy="0 ${-pi} ${3/4*pi}" />
@@ -51,7 +53,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     node_name="rear_laser"
-    gazebo_ignition="$(arg gazebo_ignition)">
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="2.3"
+    min_angle="-2.3">
     <origin
       xyz="-0.2675 0.215 0.1613"
       rpy="0 ${-pi} ${-1/4*pi}" />
