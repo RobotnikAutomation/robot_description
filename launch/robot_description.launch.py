@@ -94,8 +94,8 @@ def generate_launch_description():
 
     arg = ExtendedArgument(
         name='low_performance_simulation',
-        description='Set low performance mode for sensors simulation',
-        default_value='true',
+        description='Set low performance mode for simulation',
+        default_value='false',
         use_env=True,
         environment='LOW_PERFORMANCE_SIMULATION',
     )
@@ -110,7 +110,7 @@ def generate_launch_description():
             params['robot_xacro_path'],
             " namespace:=",params["namespace"],
             " prefix:=",params["frame_prefix"],
-            " gazebo_ignition:=", params["gazebo_ignition"],
+            " gazebo_ignition:=",params["gazebo_ignition"],
             " low_performance:=",params["low_performance_simulation"]
         ]
     )
