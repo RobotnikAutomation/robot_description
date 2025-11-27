@@ -41,7 +41,9 @@
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
     node_name="top_lidar"
-    gazebo_ignition="$(arg gazebo_ignition)">
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="3.14"
+    min_angle="-3.14">
     <origin
       xyz="0 -0.01924 0.27642"
       rpy="0 0 0" />
