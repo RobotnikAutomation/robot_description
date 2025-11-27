@@ -92,6 +92,15 @@ def generate_launch_description():
     )
     add_to_launcher.add_arg(arg)
 
+    arg = ExtendedArgument(
+        name='low_performance_simulation',
+        description='Set low performance mode for sensors simulation',
+        default_value='true',
+        use_env=True,
+        environment='LOW_PERFORMANCE_SIMULATION',
+    )
+    add_to_launcher.add_arg(arg)
+
     params = add_to_launcher.process_arg()
 
     robot_description_content = Command(
@@ -102,6 +111,7 @@ def generate_launch_description():
             " namespace:=",params["namespace"],
             " prefix:=",params["frame_prefix"],
             " gazebo_ignition:=", params["gazebo_ignition"],
+            " low_performance:=",params["low_performance_simulation"]
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
