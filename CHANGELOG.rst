@@ -2,10 +2,13 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Unreleased
+2.2.0 (2025-11-28)
 ----------
 * Add low_performance parameter for sensor simulation
 * Add laser angle parameters to all laser sensors used in the robot models
+* Add ewellix offset
+* Add plugin to get robot position in gz sim
+* Update email support
 
 2.1.0 (2025-09-11)
 ------------------
