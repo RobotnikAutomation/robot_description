@@ -137,6 +137,11 @@ The launch files in this package run the `robot_state_publisher` node, publishin
 
   Boolean to set if simulating in Gazebo Ignition.
 
+- **low_performance_simulation** (boolean, default: `False`)
+
+  Boolean to set low performance mode for simulation.
+
+
 ## Usage
 
 ```
