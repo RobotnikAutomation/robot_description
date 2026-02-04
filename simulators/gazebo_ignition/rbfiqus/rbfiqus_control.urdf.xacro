@@ -51,16 +51,17 @@
         jmin="-2"
         jmax="2"
         name="${prefix}front_right_steering_joint" />
-      <xacro:ros2_joint
-        interface="position"
-        jmin="-2"
-        jmax="2"
-        name="${prefix}back_left_steering_joint" />
+
       <xacro:ros2_joint
         interface="position"
         jmin="-2"
         jmax="2"
         name="${prefix}back_right_steering_joint" />
+      <xacro:ros2_joint
+        interface="position"
+        jmin="-2"
+        jmax="2"
+        name="${prefix}back_left_steering_joint" />
 
       <xacro:ros2_joint
         interface="velocity"
@@ -72,6 +73,7 @@
         jmin="-10"
         jmax="10"
         name="${prefix}front_right_wheel_joint" />
+        
       <xacro:ros2_joint
         interface="velocity"
         jmin="-20"

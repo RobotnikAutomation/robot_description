@@ -3,21 +3,21 @@
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/wheel.gazebo.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel_220.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/fiqus_agrimate_wheel_back.urdf.xacro" />
 
   <xacro:property
-    name="wheel_radius"
-    value="0.193" />
+    name="wheel_big_radius"
+    value="0.29" />
   <xacro:property
     name="wheel_width"
     value="0.1375" />
   <xacro:property
     name="wheel_mass"
-    value="7.5" />
+    value="12.8" />
 
   <xacro:macro
-    name="steering_wheel_rbfiqus"
-    params="prefix parent *origin reflect hq">
+    name="wheel_rbfiqus_agrimate_back"
+    params="prefix parent *origin reflect hq left">
     <xacro:macro
       name="cylinder_inertia"
       params="m r h">
@@ -32,7 +32,7 @@
 
     <xacro:property
       name="steering_support_mass"
-      value="10" />
+      value="37.5" />
     <xacro:property
       name="steering_support_width"
       value="0.1" />
@@ -50,21 +50,13 @@
       name="steer_joint_velocity_limit"
       value="100.0" />
 
-    <joint
-      name="${prefix}steering_joint"
-      type="revolute">
+    <joint name="${prefix}steering_joint" type="prismatic">
       <parent link="${parent}" />
       <child link="${prefix}base_wheel" />
       <xacro:insert_block name="origin" />
       <axis xyz="0 0 1" />
-      <limit
-        effort="${steer_joint_effort_limit}"
-        velocity="${steer_joint_velocity_limit}"
-        lower="-3.00"
-        upper="3.00" />
-      <dynamics
-        damping="${steer_joint_damping}"
-        friction="${steer_joint_friction}" />
+      <limit effort="100.0" lower="-0.05" upper="0.0" velocity="1.0"/>
+      <dynamics damping="100.0" friction="0.0" spring_reference="0.0" spring_stiffness="5000.0"/>
     </joint>
 
     <link name="${prefix}base_wheel">
@@ -81,8 +73,14 @@
               rpy="0 0 ${pi}" />
           </xacro:unless>
           <geometry>
-            <mesh
-              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
+            <xacro:if value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_1.STL" />
+            </xacro:if>
+            <xacro:unless value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_2.STL" />
+            </xacro:unless>
           </geometry>
         </xacro:if>
 
@@ -98,8 +96,14 @@
               rpy="0 0 ${pi}" />
           </xacro:unless>
           <geometry>
-            <mesh
-              filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
+            <xacro:if value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_1.STL" />
+            </xacro:if>
+            <xacro:unless value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_2.STL" />
+            </xacro:unless>
           </geometry>
         </xacro:unless>
 
@@ -120,8 +124,14 @@
             rpy="0 0 ${pi}" />
         </xacro:unless>
         <geometry>
-          <mesh
-            filename="package://robotnik_description/meshes/wheels/steering_wheel/mw_frame_rbfiqus.stl" />
+          <xacro:if value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_1.STL" />
+            </xacro:if>
+            <xacro:unless value="${left}">
+              <mesh
+                filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Brazo_Agrimate_2.STL" />
+            </xacro:unless>
         </geometry>
       </collision>
 
@@ -129,17 +139,17 @@
         <mass value="${steering_support_mass}" />
         <xacro:if value="${reflect}">
           <origin
-            xyz="0 0 ${wheel_radius/1.5}"
+            xyz="0 0 ${wheel_big_radius/1.5}"
             rpy="${pi/2.0} ${pi/2.0} 0" />
         </xacro:if>
         <xacro:unless value="${reflect}">
           <origin
-            xyz="0 0 ${wheel_radius/1.5}"
+            xyz="0 0 ${wheel_big_radius/1.5}"
             rpy="${pi/2.0} ${pi/2.0} ${pi/2.0}" />
         </xacro:unless>
         <xacro:cylinder_inertia
           m="${steering_support_mass}"
-          r="${wheel_radius}"
+          r="${wheel_big_radius}"
           h="${steering_support_width}" />
       </inertial>
     </link>
@@ -147,17 +157,24 @@
     <xacro:gazebo_steering_frame_physics
       name="${prefix}base_wheel" />
 
-    <xacro:rubber_wheel
+    <xacro:fiqus_agrimate_wheel_back
       prefix="${prefix}"
       parent="${prefix}base_wheel"
       reflect="${reflect}"
       hq="${hq}"
-      rubber_wheel_radius="${wheel_radius}"
+      rubber_big_wheel_radius="${wheel_big_radius}"
       rubber_wheel_width="${wheel_width}"
       rubber_wheel_mass="${wheel_mass}">
-      <origin
-        xyz="0 0 -0.27319"
-        rpy="0 0 0" />
-    </xacro:rubber_wheel>
+      <xacro:if value="${left}">
+            <origin
+              xyz="0 0.18044 0"
+              rpy="0 0 0" />
+      </xacro:if>
+      <xacro:unless value="${left}">
+            <origin
+              xyz="0 -0.18044 0"
+              rpy="0 0 0" />
+      </xacro:unless>
+    </xacro:fiqus_agrimate_wheel_back>
   </xacro:macro>
 </robot>

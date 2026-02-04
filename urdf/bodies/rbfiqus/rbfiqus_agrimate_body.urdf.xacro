@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbfiqus/rbfiqus_body.gazebo.xacro" />
+
+  <xacro:macro
+    name="rbfiqus_body"
+    params="prefix:=robot_ hq:=true">
+    <!-- Robot mechanical and motor parameters -->
+
+    <!-- BASE FOOTPRINT -->
+    <link name="${prefix}base_footprint" />
+
+    <joint
+      name="${prefix}base_footprint_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 ${wheel_radius}"
+        rpy="0 0 0" />
+      <!-- ${wheel_radius} property must be defined inside wheel description -->
+      <parent link="${prefix}base_footprint" />
+      <child link="${prefix}base_link" />
+    </joint>
+
+    <!-- BASE_LINK -->
+    <link name="${prefix}base_link" />
+
+    <!-- Chassis -->
+    <joint
+      name="${prefix}chassis_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}chassis_link" />
+    </joint>
+
+    <!-- Chassis -->
+        <link name="${prefix}chassis_link">
+            <visual>
+                <origin xyz="0 -0.65 0.05" rpy="1.5708 0 0" />
+                <geometry>
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Base_Agrimate.STL" />
+                </geometry>
+                <material name="grey">
+                    <color rgba="0.2 0.2 0.2 1" />
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 -0.65 0.05" rpy="1.5708 0 0" /> 
+                <geometry>
+                    <mesh filename="package://robotnik_description/meshes/bases/rbfiqus/agrimate/Base_Agrimate.STL" />
+                </geometry>
+            </collision>
+            
+            <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <mass value="502.0" />
+                <xacro:solid_cuboid_inertia w="1.1" h="0.9" d="0.1" m="502.0" />
+            </inertial>
+        </link>
+
+    <!-- DOCKING CONTACT -->
+    <link name="${prefix}base_docking_contact" />
+    <joint
+      name="${prefix}base_docking_joint"
+      type="fixed">
+      <origin
+        xyz="0.6405 0 0.10264"
+        rpy="0 0 0" />
+      <parent link="${prefix}chassis_link" />
+      <child link="${prefix}base_docking_contact" />
+    </joint>
+  </xacro:macro>
+</robot>
