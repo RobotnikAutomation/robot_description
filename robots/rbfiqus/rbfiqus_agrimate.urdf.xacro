@@ -52,7 +52,7 @@
       rpy="0 0 0" />
   </xacro:arm_ur>
   
-  <!--xacro:arm_ur
+  <xacro:arm_ur
     ur_type="$(arg ur_type)"
     frame_prefix="$(arg prefix)arm2_"
     parent="$(arg prefix)chassis_link"
@@ -60,7 +60,7 @@
     <origin
       xyz="0.005 -0.7 0.542"
       rpy="0 0 0" />
-  </xacro:arm_ur -->
+  </xacro:arm_ur >
 
 
     <!-- LASERS -->

@@ -43,7 +43,7 @@
       <xacro:include
         filename="$(find ur_description)/urdf/ur.ros2_control.xacro" />
       <xacro:ur_ros2_control
-        name="arm"
+        name="${frame_prefix}control"
         sim_ignition="true"
         tf_prefix="${frame_prefix}"
         script_filename=""
