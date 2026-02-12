@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbcar_base"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bodies/rbcar/rbcar_body.urdf.xacro" />
+  <xacro:include 
+    filename="$(find robotnik_description)/urdf/wheels/rbcar/suspension_wheel_v2.urdf.xacro" />
+  <xacro:include 
+    filename="$(find robotnik_description)/urdf/wheels/rbcar/rear_axle.urdf.xacro" />
+
+  <!-- WHEELS PROPERTIES -->
+  <xacro:property 
+    name="wheel_offset_x" 
+    value="1.0" /> 
+  <xacro:property
+    name="wheel_offset_y" 
+    value="0.75" />
+  <xacro:property 
+    name="wheel_offset_z" 
+    value="0.0" />
+
+  <xacro:macro
+    name="rbcar"
+    params="
+      prefix:=robot_
+      gazebo_ignition:=false
+      namespace:=''
+      ">
+    <xacro:property
+      name="hq"
+      value="true" />
+    <xacro:rbcar_body
+      prefix="${prefix}"
+      hq="${hq}" />
+
+    <!-- Wheels -->
+<!-- <xacro:front_wheel lr_prefix="$(arg prefix)left" fr_prefix="front"
+          lr_reflect="1" fr_reflect="1" parent="$(arg prefix)base_link" />
+<xacro:front_wheel lr_prefix="$(arg prefix)right" fr_prefix="front"
+          lr_reflect="-1" fr_reflect="1" parent="$(arg prefix)base_link" />
+<xacro:rear_wheel lr_prefix="$(arg prefix)left" fr_prefix="rear"
+        lr_reflect="1" fr_reflect="-1" parent="$(arg prefix)base_link" />
+<xacro:rear_wheel lr_prefix="$(arg prefix)right" fr_prefix="rear"
+        lr_reflect="-1" fr_reflect="-1" parent="$(arg prefix)base_link" />
+
+  <xacro:rear_axle prefix="$(arg prefix)rear_axle" parent="$(arg prefix)base_link">
+  <origin xyz="0 0.0 0" rpy="1.57079633 0 3.14159265"/>
+  </xacro:rear_axle> -->
+
+
+    <!-- WHEELS -->
+    <!-- <xacro:rubber_wheel
+      prefix="${prefix}front_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
+    <xacro:rubber_wheel
+      prefix="${prefix}front_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
+
+    <xacro:rubber_wheel
+      prefix="${prefix}back_left_"
+      parent="${prefix}base_link"
+      reflect="true"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
+
+    <xacro:rubber_wheel
+      prefix="${prefix}back_right_"
+      parent="${prefix}base_link"
+      reflect="false"
+      hq="${hq}">
+      <origin
+        xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
+        rpy="0 0 0" />
+    </xacro:rubber_wheel>
+
+    <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:rbwatcher_gz_ignition_control
+        namespace="${namespace}"
+        prefix="${prefix}" />
+    </xacro:if> -->
+  </xacro:macro>
+</robot>

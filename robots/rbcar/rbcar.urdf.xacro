@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot 
+  name="rbcar"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include 
+    filename="$(find robotnik_description)/urdf/bases/rbcar/rbcar_base.urdf.xacro" />
+  <xacro:include 
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+<!-- ***************** -->
+<!-- Global parameters -->
+<!-- ***************** -->
+
+<xacro:property name="PI" value="3.1415926535897931"/>
+
+<!-- Flag to select the high or low quality model -->
+<xacro:property name="hq" value="true" />
+<xacro:arg name="prefix" default="robot_"/>
+<xacro:arg name="gpu" default="true"/>
+
+<!-- RB-CAR -->
+<xacro:rbcar
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+<!-- Sensors-->
+<!-- 
+  <xacro:macro name="sensor_rslidar_m1" params="prefix parent prefix_topic:='laser_front' *origin gpu:=false">
+    <sensor_rslidar prefix="${prefix}" parent="${parent}" prefix_topic="${prefix_topic}" range_min="0.4" range_max="250.0" hfov="360.0" hres="0.1" vfov="40.0" vres="0.1" fps="20.0" gpu="${gpu}" >
+      <xacro:insert_block name="origin" />
+    </sensor_rslidar>
+  </xacro:macro>
+
+<xacro:sensor_ublox prefix="$(arg prefix)gps" parent="$(arg prefix)base_link">
+  <origin xyz="-0.58 0 1.503" rpy="0 0 0"/>
+</xacro:sensor_ublox>
+
+<xacro:sensor_imu_hector prefix="$(arg prefix)imu" parent="$(arg prefix)base_link">
+  <origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
+</xacro:sensor_imu_hector> -->
+
+      <!--xacro:sensor_rslidar_16 prefix="$(arg prefix)top_3d_laser" parent="$(arg prefix)base_link"  gpu="$(arg gpu)">
+        <origin xyz="1.32252 0.0 1.20341" rpy="0 0.288 0"/>
+      </xacro:sensor_rslidar_16-->
+
+<!-- <xacro:sensor_rslidar_m1 prefix="$(arg prefix)laser_front" parent="$(arg prefix)base_link"  gpu="$(arg gpu)">
+  <origin xyz="2.14 0.0 0.24" rpy="0 3.015 3.14159"/>
+</xacro:sensor_rslidar_m1>
+
+<xacro:sensor_hokuyo_utm30lx prefix="$(arg prefix)rear_laser" parent="$(arg prefix)base_link" prefix_topic="rear_laser" min_angle="-2.35" max_angle="2.35">
+  <origin xyz="-0.8 0.0 0.20" rpy="0 0 3.14159"/>
+</xacro:sensor_hokuyo_utm30lx> -->
+
+<!--Gazebo plugins-->
+<!-- <gazebo>
+	<plugin name="ground_truth_controller" filename="librobotnik_gazebo_ground_truth_odom.so">
+		<alwaysOn>true</alwaysOn>
+		<updateRate>50.0</updateRate>
+		<bodyName>$(arg prefix)base_link</bodyName>
+		<frameName>base_footprint_gt</frameName>
+		<worldBodyName>world</worldBodyName>
+		<worldFrameName>$(arg prefix)odom</worldFrameName>
+		<topicName>odom_gt</topicName>
+		<gaussianNoise>0.01</gaussianNoise>
+		<xyzOffset>0.0 0 0</xyzOffset>
+		<rpyOffset>0 0 0</rpyOffset>
+		<applyOffset>False</applyOffset>
+		<broadcastTF>True</broadcastTF>
+	</plugin>
+</gazebo> -->
+
+</robot>
