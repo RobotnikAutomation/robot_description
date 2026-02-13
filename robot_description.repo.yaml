@@ -4,3 +4,8 @@ repositories:
     type: git
     url: https://github.com/RobotnikAutomation/robotnik_sensors.git
     version: jazzy-devel
+  
+  src/Universal_Robots_ROS2_Description:
+    type: git
+    url: https://github.com/RobotnikAutomation/Universal_Robots_ROS2_Description.git
+    version: fix/gazebo-control-jazzy
