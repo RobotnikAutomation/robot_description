@@ -10,8 +10,8 @@
     filename="$(find robotnik_description)/urdf/wheels/rbcar/suspension_wheel_v2.urdf.xacro" />
   <xacro:include 
     filename="$(find robotnik_description)/urdf/wheels/rbcar/rear_axle.urdf.xacro" />
-  <!-- <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbcar/rbcar_control.urdf.xacro" /> -->
+  <xacro:include
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbcar/rbcar_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property 
@@ -118,10 +118,10 @@
     </xacro:rear_axle>
 
     <!-- CONTROL -->
-    <!-- <xacro:if value="$(arg gazebo_ignition)">
+    <xacro:if value="$(arg gazebo_ignition)">
       <xacro:rbcar_gz_ignition_control
         namespace="${namespace}"
         prefix="${prefix}" />
-    </xacro:if> -->
+    </xacro:if>
   </xacro:macro>
 </robot>
