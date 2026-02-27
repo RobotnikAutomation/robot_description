@@ -53,16 +53,27 @@
       <xacro:ros2_joint interface="position" jmin="-0.785398163" jmax="0.785398163" name="${prefix}left_steering_joint" />
       <xacro:ros2_joint interface="position" jmin="-0.785398163" jmax="0.785398163" name="${prefix}right_steering_joint" />
       
-      <!-- Front wheel axles (velocity control) -->
-      <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}left_front_axle" />
-      <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}right_front_axle" />
-      
-      <!-- Rear wheel axles (velocity control) -->
+      <!-- Front wheel axles - NOT registered (passive rotation) -->
+      <!-- <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}left_front_axle" /> -->
+      <!-- <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}right_front_axle" /> -->
+      <joint name="${prefix}left_front_axle">
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+      <joint name="${prefix}right_front_axle">
+        <state_interface name="position" />
+        <state_interface name="velocity" />
+        <state_interface name="effort" />
+      </joint>
+
+      <!-- Rear wheel axles (velocity control for traction) -->
       <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}left_rear_axle" />
       <xacro:ros2_joint interface="velocity" jmin="-39.02" jmax="39.02" name="${prefix}right_rear_axle" />
       
       <!-- Rear axle joint (effort control) -->
-      <xacro:ros2_joint interface="effort" jmin="-600" jmax="600" name="${prefix}rear_axle_joint" />
+      <!-- <xacro:ros2_joint interface="effort" jmin="-600" jmax="600" name="${prefix}rear_axle_joint" /> -->
+      <!-- <xacro:ros2_joint interface="velocity" jmin="-1000" jmax="1000" name="${prefix}rear_axle_joint" /> -->
 
     </ros2_control>
   </xacro:macro>

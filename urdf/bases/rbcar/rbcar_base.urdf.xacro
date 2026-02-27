@@ -41,46 +41,6 @@
       hq="${hq}" />
 
     <!-- WHEELS -->
-    <!-- <xacro:rubber_wheel
-      prefix="${prefix}front_right_"
-      parent="${prefix}base_link"
-      reflect="false"
-      hq="${hq}">
-      <origin
-        xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}"
-        rpy="0 0 0" />
-    </xacro:rubber_wheel>
-    <xacro:rubber_wheel
-      prefix="${prefix}front_left_"
-      parent="${prefix}base_link"
-      reflect="true"
-      hq="${hq}">
-      <origin
-        xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
-        rpy="0 0 0" />
-    </xacro:rubber_wheel>
-
-    <xacro:rubber_wheel
-      prefix="${prefix}back_left_"
-      parent="${prefix}base_link"
-      reflect="true"
-      hq="${hq}">
-      <origin
-        xyz="0 ${wheel_offset_y} ${wheel_offset_z}"
-        rpy="0 0 0" />
-    </xacro:rubber_wheel>
-
-    <xacro:rubber_wheel
-      prefix="${prefix}back_right_"
-      parent="${prefix}base_link"
-      reflect="false"
-      hq="${hq}">
-      <origin
-        xyz="0 -${wheel_offset_y} ${wheel_offset_z}"
-        rpy="0 0 0" />
-    </xacro:rubber_wheel> -->
-
-    <!-- Wheels -->
     <xacro:front_wheel 
       lr_prefix="$(arg prefix)left" 
       fr_prefix="front"
@@ -109,13 +69,13 @@
       fr_reflect="-1"
       parent="$(arg prefix)base_link" />
 
-    <xacro:rear_axle 
+    <!-- <xacro:rear_axle 
       prefix="$(arg prefix)rear_axle" 
       parent="$(arg prefix)base_link">
       <origin 
         xyz="0 0.0 0" 
         rpy="1.57079633 0 3.14159265"/>
-    </xacro:rear_axle>
+    </xacro:rear_axle> -->
 
     <!-- CONTROL -->
     <xacro:if value="$(arg gazebo_ignition)">

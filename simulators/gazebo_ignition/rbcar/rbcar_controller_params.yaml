@@ -4,3 +4,5 @@
       update_rate: 50
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
+      ackermann_steering_controller:
+        type: ackermann_steering_controller/AckermannSteeringController
