@@ -175,7 +175,7 @@
           <!--cylinder radius="${tire_dia / 2}" length="${tire_width}"/-->
           <mesh filename="package://robotnik_description/meshes/wheels/rbcar/rbcar_wheel.stl"/>
         </geometry>
-        <material name="tire_mat"/>
+        <!-- <material name="tire_mat"/> -->
       </visual>
 
       <collision>
