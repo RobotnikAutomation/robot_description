@@ -72,14 +72,5 @@
       xyz="0.3045 0 0.1898"
       rpy="0 0 0" />
   </xacro:sensor_intel_realsense_d435>
-  <xacro:sensor_intel_realsense_d435
-    frame_prefix="$(arg prefix)rear_rgbd_camera_"
-    parent="$(arg prefix)base_link"
-    node_namespace="$(arg namespace)"
-    node_name="rear_camera"
-    gazebo_ignition="$(arg gazebo_ignition)">
-    <origin
-      xyz="-0.3045 0 0.1358"
-      rpy="0 0 ${pi}" />
-  </xacro:sensor_intel_realsense_d435>
+
 </robot>
