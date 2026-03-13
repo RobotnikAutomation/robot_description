@@ -168,6 +168,10 @@ Launches the description for the RB-Kairos with a UR arm, under the namespace `r
 
   Repository with sensors descriptions
 
-- **Universal_Robots_ROS2_Description** (branch: `fix/gazebo-control-jazzy`)
+- **Universal_Robots_ROS2_Description** (branch: `jazzy`)
 
-  Robotnik's fork to the official repository with the description of the UR arms and their implementation in Gazebo.
+  Repository with the description of the UR arms.
+
+- **Universal_Robots_ROS2_GZ_Simulation** (branch: `ros2`)
+
+  URDF with the UR implementation in Gazebo.
