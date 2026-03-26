@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<robot
+  name="all_ewellix_lift"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <!-- Import ewellix lift 700mm -->
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/structures/ewellix/ewellix_lift_700mm.urdf.xacro" />
+  <!-- Import ewellix lift 900mm -->
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/structures/ewellix/ewellix_lift_900mm.urdf.xacro" />
+</robot>
