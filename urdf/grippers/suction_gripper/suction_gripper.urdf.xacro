@@ -24,7 +24,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/structures/suction_gripper/gripper.dae" />
+          <mesh filename="package://robotnik_description/meshes/grippers/suction_gripper/gripper.dae" />
         </geometry>
       </visual>
 
@@ -34,7 +34,7 @@
       <collision name="${prefix}body_collision">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robotnik_description/meshes/structures/suction_gripper/my_gripper.stl" />
+          <mesh filename="package://robotnik_description/meshes/grippers/suction_gripper/my_gripper.stl" />
         </geometry>
       </collision>
 
