@@ -161,3 +161,17 @@ ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos rob
 ```
 
 Launches the description for the RB-Kairos with a UR arm, under the namespace `robot_b`.
+
+## Repositories Dependencies
+
+- **robotnik_sensors** (branch: `jazzy-devel`)
+
+  Repository with sensors descriptions
+
+- **Universal_Robots_ROS2_Description** (branch: `jazzy`)
+
+  Repository with the description of the UR arms.
+
+- **Universal_Robots_ROS2_GZ_Simulation** (branch: `ros2`)
+
+  URDF with the UR implementation in Gazebo.
