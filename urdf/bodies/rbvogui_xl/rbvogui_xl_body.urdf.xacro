@@ -207,10 +207,18 @@
         <origin
           xyz="0 0 0"
           rpy="0 0 0" />
-        <geometry>
-          <mesh
-            filename="package://robotnik_description/meshes/bases/rbvogui_xl/rbvogui_xl_contactors.stl" />
-        </geometry>
+        <xacro:if value="${hq}">
+          <geometry>
+            <mesh
+              filename="package://robotnik_description/meshes/bases/rbvogui_xl/rbvogui_xl_contactors.stl" />
+          </geometry>
+        </xacro:if>
+        <xacro:unless value="${hq}">
+          <geometry>
+            <mesh
+              filename="package://robotnik_description/meshes/bases/rbvogui_xl/rbvogui_xl_contactors.stl" />
+          </geometry>
+        </xacro:unless>
         <material name="lighbrown">
           <color rgba="0.7 0.3 0.0 1" />
         </material>
