@@ -62,9 +62,9 @@
   </xacro:macro>
 
   <xacro:macro
-    name="gazebo_color_contactors_link"
+    name="gazebo_color_base_docking_contact"
     params="prefix">
-    <gazebo reference="${prefix}contactors_link">
+    <gazebo reference="${prefix}base_docking_contact">
       <visual>
         <material>
           <ambient>0.7 0.3 0.0 1.0</ambient>

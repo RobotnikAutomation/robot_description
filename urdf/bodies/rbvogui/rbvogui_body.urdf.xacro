@@ -128,41 +128,6 @@
       </collision>
     </link>
 
-    <!-- Contactors -->
-    <joint
-      name="${prefix}contactors_joint"
-      type="fixed">
-      <origin
-        xyz="0.5235 0 0.09265"
-        rpy="0 0 0 " />
-      <parent link="${prefix}chassis_link" />
-      <child link="${prefix}contactors_link" />
-    </joint>
-
-    <!-- Contactors -->
-    <link name="${prefix}contactors_link">
-      <visual>
-        <origin
-          xyz="0 0 0"
-          rpy="0 0 0" />
-        <xacro:if value="${hq}">
-          <geometry>
-            <mesh
-              filename="package://robotnik_description/meshes/bases/rbvogui/rbvogui_contactors.stl" />
-          </geometry>
-        </xacro:if>
-        <xacro:unless value="${hq}">
-          <geometry>
-            <mesh
-              filename="package://robotnik_description/meshes/bases/rbvogui/rbvogui_contactors.stl" />
-          </geometry>
-        </xacro:unless>
-        <material name="lighbrown">
-          <color rgba="0.7 0.3 0.0 1" />
-        </material>
-      </visual>
-    </link>
-
     <!-- Logos -->
     <joint
       name="${prefix}base_logos_joint"
@@ -228,18 +193,31 @@
 
     <xacro:gazebo_color_base_link prefix="${prefix}" />
     <xacro:gazebo_color_battery_link prefix="${prefix}" />
-    <xacro:gazebo_color_contactors_link
+    <xacro:gazebo_color_base_docking_contact
       prefix="${prefix}" />
     <xacro:gazebo_color_logo_link prefix="${prefix}" />
     <xacro:gazebo_color_leds_link prefix="${prefix}" />
 
     <!-- DOCKING CONTACT -->
-    <link name="${prefix}base_docking_contact" />
+    <link name="${prefix}base_docking_contact">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbvogui/rbvogui_contactors.stl" />
+        </geometry>
+        <material name="lighbrown">
+          <color rgba="0.7 0.3 0.0 1" />
+        </material>
+      </visual>
+    </link>
     <joint
       name="${prefix}base_docking_joint"
       type="fixed">
       <origin
-        xyz="0.6405 0 0.10264"
+        xyz="0.5235 0 0.09265"
         rpy="0 0 0" />
       <parent link="${prefix}chassis_link" />
       <child link="${prefix}base_docking_contact" />
