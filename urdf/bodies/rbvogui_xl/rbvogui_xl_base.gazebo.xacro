@@ -32,7 +32,7 @@
   </xacro:macro>
 
   <xacro:macro
-    name="gazebo_color_logo_link"
+    name="gazebo_color_base_logos_link"
     params="prefix">
     <gazebo reference="${prefix}base_logos_link">
       <visual>
