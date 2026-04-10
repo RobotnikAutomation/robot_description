@@ -43,7 +43,7 @@
     node_name="front_laser"
     gazebo_ignition="$(arg gazebo_ignition)"
     max_angle="2.1"
-    min_angle="-2.1"
+    min_angle="-2.1">
     <origin
       xyz="0.66255 0.41295 0.1145"
       rpy="${pi} 0 ${pi/4}" />
