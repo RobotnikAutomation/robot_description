@@ -122,10 +122,10 @@
         xyz="0.29378 0 0.07321"
         rpy="0 0 0 " />
       <parent link="${prefix}base_link" />
-      <child link="${prefix}base_docking_contact_link" />
+      <child link="${prefix}base_docking_contact" />
     </joint>
 
     <!-- DOCKING LINK -->
-    <link name="${prefix}base_docking_contact_link" />
+    <link name="${prefix}base_docking_contact" />
   </xacro:macro>
 </robot>
