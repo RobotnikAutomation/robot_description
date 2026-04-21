@@ -23,7 +23,7 @@
   <xacro:arg name="namespace"      default="robot" />
   <xacro:arg name="prefix"         default="" />
   <xacro:arg name="gazebo_ignition" default="false" />
-  <xacro:arg name="ur_type"        default="ur5e" />
+  <xacro:arg name="ur_type"        default="ur20" />
   <xacro:arg name="world_name" default="room_test_world"/>
 
   <!-- RB-ROBOUT BASE -->
