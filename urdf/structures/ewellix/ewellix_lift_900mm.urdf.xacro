@@ -6,7 +6,18 @@
   <xacro:macro
     name="ewellix_lift_900mm"
     params="prefix parent cut_model:=false *origin">
-    <!-- Lift base link -->
+
+    <!--
+      Offset vertical para alinear:
+      - malla del lift_link (visual/collision)
+      - centro de masas del lift_link (inertial)
+      - frame superior de montaje del brazo (ewellix_lift_top_link)
+
+      Ajusta este valor (por ejemplo 0.9, 1.0, 1.05...) hasta que brazo + eje lineal queden bien.
+    -->
+    <xacro:property name="lift_z_offset" value="0.7"/>
+
+    <!-- Lift base link (fixed part of the linear axis) -->
     <link name="${prefix}base_link">
       <visual>
         <origin
@@ -48,20 +59,20 @@
       </inertial>
     </link>
 
-    <!-- Lift base link joint -->
+    <!-- Mount lift to parent robot link -->
     <joint
       name="${prefix}base_joint"
       type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
-      <child link="${prefix}base_link" /> 
+      <child link="${prefix}base_link" />
     </joint>
 
-    <!-- Lift top link -->
+    <!-- Lift moving link (carriage / upper moving part) -->
     <link name="${prefix}link">
       <visual>
         <origin
-          xyz="0 0 0"
+          xyz="0 0 ${lift_z_offset}"
           rpy="0 0 0" />
         <geometry>
           <xacro:if value="${cut_model}">
@@ -70,7 +81,7 @@
           </xacro:if>
           <xacro:unless value="${cut_model}">
             <mesh
-              filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_top_900mm.stl" />
+              filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_top_900mm_cut.stl" />
           </xacro:unless>
         </geometry>
         <material name="grey">
@@ -80,7 +91,7 @@
 
       <collision>
         <origin
-          xyz="-0.005 0 0.00235"
+          xyz="-0.005 0 ${0.00235 + lift_z_offset}"
           rpy="0 0 0" />
         <geometry>
           <xacro:if value="${cut_model}">
@@ -89,15 +100,16 @@
           </xacro:if>
           <xacro:unless value="${cut_model}">
             <mesh
-              filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_top_900mm.stl" />
+              filename="package://robotnik_description/meshes/structures/ewellix/ewellix_lift_top_900mm_cut.stl" />
           </xacro:unless>
         </geometry>
       </collision>
 
+      <!-- Coherencia física con el desplazamiento visual/collision -->
       <inertial>
         <mass value="2" />
         <origin
-          xyz="0 0 0"
+          xyz="0 0 ${lift_z_offset}"
           rpy="0 0 0" />
         <inertia
           ixx="0.2e-1"
@@ -109,7 +121,7 @@
       </inertial>
     </link>
 
-    <!-- Lift top link joint -->
+    <!-- Actuated prismatic joint (REAL linear axis joint) -->
     <joint
       name="${prefix}joint"
       type="prismatic">
@@ -126,6 +138,24 @@
       <axis xyz="0 0 1" />
     </joint>
 
+    <!-- Extra top mounting frame (3rd frame) for arm/payload attachment -->
+    <link name="${prefix}ewellix_lift_top_link" />
+
+    <!--
+      Este frame es el que usa el brazo como parent.
+      Si quieres que el brazo quede alineado con la geometría desplazada del lift_link,
+      este origin debe llevar el mismo offset (lift_z_offset).
+    -->
+    <joint
+      name="${prefix}ewellix_lift_top_joint"
+      type="fixed">
+      <parent link="${prefix}link" />
+      <child link="${prefix}ewellix_lift_top_link" />
+      <origin
+        xyz="0 0 ${lift_z_offset}"
+        rpy="0 0 0" />
+    </joint>
+
     <gazebo reference="${prefix}base_link">
       <material>Gazebo/Grey</material>
     </gazebo>
@@ -134,17 +164,19 @@
       <material>Gazebo/Grey</material>
     </gazebo>
 
+    <!-- ros2_control MUST control the actuated prismatic joint -->
     <ros2_control
       name="${prefix}ewellix_lift_control"
       type="system">
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
-      <joint name="${prefix}ewellix_lift_top_joint">
+      <joint name="${prefix}joint">
         <command_interface name="position" />
         <command_interface name="velocity" />
         <state_interface name="position">
-          <param name="initial_value">0.2</param>
+          <!-- Replegado al iniciar -->
+          <param name="initial_value">0.0</param>
         </state_interface>
         <state_interface name="velocity" />
         <state_interface name="effort" />
