@@ -127,11 +127,21 @@
     </joint>
 
     <gazebo reference="${prefix}base_link">
-      <material>Gazebo/Grey</material>
+      <!-- Ogre2/HLMS (Gazebo Harmonic): inline RGBA replaces Gazebo/Grey script -->
+      <material>
+        <ambient>0.5 0.5 0.5 1.0</ambient>
+        <diffuse>0.5 0.5 0.5 1.0</diffuse>
+        <specular>0.3 0.3 0.3 1.0</specular>
+      </material>
     </gazebo>
 
     <gazebo reference="${prefix}link">
-      <material>Gazebo/Grey</material>
+      <!-- Ogre2/HLMS (Gazebo Harmonic): inline RGBA replaces Gazebo/Grey script -->
+      <material>
+        <ambient>0.5 0.5 0.5 1.0</ambient>
+        <diffuse>0.5 0.5 0.5 1.0</diffuse>
+        <specular>0.3 0.3 0.3 1.0</specular>
+      </material>
     </gazebo>
 
     <ros2_control
