@@ -5,7 +5,7 @@
   xmlns:gz="http://gazebosim.org/schema">
   <xacro:macro
     name="rbkairos_mecanum_wheel"
-    params="prefix parent xyz reflect hq gazebo_ignition:=false">
+    params="prefix parent xyz reflect hq gazebo_ignition:=true">
     <xacro:property
       name="mecanum_wheel_radius"
       value="0.127" />

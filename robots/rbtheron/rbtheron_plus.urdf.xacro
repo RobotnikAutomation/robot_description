@@ -20,7 +20,7 @@
     default="" />
   <xacro:arg
     name="gazebo_ignition"
-    default="false" />
+    default="true" />
   <xacro:arg
     name="ur_type"
     default="ur5e" />

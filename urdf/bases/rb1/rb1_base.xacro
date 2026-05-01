@@ -26,7 +26,7 @@
     name="rb1"
     params="
       prefix:=robot_
-      gazebo_ignition:=false
+      gazebo_ignition:=true
       namespace:=''
       ">
     <xacro:property

@@ -24,7 +24,7 @@
     name="rbvogui_xl"
     params="
       prefix:=robot_
-      gazebo_ignition:=false
+      gazebo_ignition:=true
       namespace:=''
       ">
     <xacro:property
