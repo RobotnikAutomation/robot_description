@@ -4,7 +4,7 @@
       update_rate: 50
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
-      robotnik_base_control:
+      robotnik_base_controller:
         type: robotnik_controllers/RBSummitController      
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController
