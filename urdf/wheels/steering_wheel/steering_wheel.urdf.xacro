@@ -18,7 +18,7 @@
 
   <xacro:macro
     name="steering_wheel"
-    params="prefix parent *origin reflect hq">
+    params="prefix parent *origin reflect hq joint_prefix:=${prefix}">
     <xacro:macro
       name="cylinder_inertia"
       params="m r h">
@@ -52,7 +52,7 @@
       value="100.0" />
 
     <joint
-      name="${prefix}steering_joint"
+      name="${joint_prefix}steering_joint"
       type="revolute">
       <parent link="${parent}" />
       <child link="${prefix}base_wheel" />
@@ -150,6 +150,7 @@
 
     <xacro:rubber_wheel
       prefix="${prefix}"
+      joint_prefix="${joint_prefix}"
       parent="${prefix}base_wheel"
       reflect="${reflect}"
       hq="${hq}"

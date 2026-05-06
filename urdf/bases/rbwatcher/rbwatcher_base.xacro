@@ -26,6 +26,7 @@
       prefix:=robot_
       gazebo_ignition:=true
       namespace:=''
+      joint_prefix:=robot_
       ">
     <xacro:property
       name="hq"
@@ -37,6 +38,7 @@
     <!-- WHEELS -->
     <xacro:rubber_wheel
       prefix="${prefix}front_right_"
+      joint_prefix="${joint_prefix}front_right_"
       parent="${prefix}base_link"
       reflect="false"
       hq="${hq}">
@@ -46,6 +48,7 @@
     </xacro:rubber_wheel>
     <xacro:rubber_wheel
       prefix="${prefix}front_left_"
+      joint_prefix="${joint_prefix}front_left_"
       parent="${prefix}base_link"
       reflect="true"
       hq="${hq}">
@@ -56,6 +59,7 @@
 
     <xacro:rubber_wheel
       prefix="${prefix}back_left_"
+      joint_prefix="${joint_prefix}back_left_"
       parent="${prefix}base_link"
       reflect="true"
       hq="${hq}">
@@ -66,6 +70,7 @@
 
     <xacro:rubber_wheel
       prefix="${prefix}back_right_"
+      joint_prefix="${joint_prefix}back_right_"
       parent="${prefix}base_link"
       reflect="false"
       hq="${hq}">
@@ -77,7 +82,8 @@
     <xacro:if value="$(arg gazebo_ignition)">
       <xacro:rbwatcher_gz_ignition_control
         namespace="${namespace}"
-        prefix="${prefix}" />
+        prefix="${prefix}"
+        joint_prefix="${joint_prefix}" />
     </xacro:if>
   </xacro:macro>
 </robot>

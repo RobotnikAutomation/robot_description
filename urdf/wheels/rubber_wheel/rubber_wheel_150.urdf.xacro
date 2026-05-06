@@ -33,10 +33,10 @@
 
   <xacro:macro
     name="rubber_wheel"
-    params="prefix parent *origin hq">
+    params="prefix parent *origin hq joint_prefix:=${prefix}">
     <!--WHEEL TIRE -->
     <joint
-      name="${prefix}wheel_joint"
+      name="${joint_prefix}wheel_joint"
       type="continuous">
       <parent link="${parent}" />
       <child link="${prefix}wheel_link" />
