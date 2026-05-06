@@ -13,7 +13,6 @@
         filename="libgz_ros2_control-system.so">
         <robot_param>robot_description</robot_param>
         <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbtheron/rbtheron_controller_params.yaml</parameters>
         <parameters>$(find robotnik_controllers)/config/simulation/rbtheron_controller_params.yaml</parameters>
         <ros>
           <namespace>/${namespace}</namespace>
