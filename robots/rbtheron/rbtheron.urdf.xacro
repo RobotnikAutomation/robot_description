@@ -36,7 +36,7 @@
   </xacro:sensor_vectornav>
 
   <!-- LASERS -->
-  <xacro:sensor_hokuyo_ust20lx
+  <xacro:sensor_sick_picoscan120
     frame_prefix="$(arg prefix)front_laser_"
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
@@ -47,8 +47,8 @@
     <origin
       xyz="0.2675 -0.215 0.1613"
       rpy="0 ${-pi} ${3/4*pi}" />
-  </xacro:sensor_hokuyo_ust20lx>
-  <xacro:sensor_hokuyo_ust20lx
+  </xacro:sensor_sick_picoscan120>
+  <xacro:sensor_sick_picoscan120
     frame_prefix="$(arg prefix)rear_laser_"
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
@@ -59,7 +59,7 @@
     <origin
       xyz="-0.2675 0.215 0.1613"
       rpy="0 ${-pi} ${-1/4*pi}" />
-  </xacro:sensor_hokuyo_ust20lx>
+  </xacro:sensor_sick_picoscan120>
 
   <!-- CAMERAS -->
   <xacro:sensor_intel_realsense_d435
