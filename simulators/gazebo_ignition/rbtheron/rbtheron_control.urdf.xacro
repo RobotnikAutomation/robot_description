@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro
     name="rbtheron_gz_ignition_control"
-    params="namespace prefix">
+    params="namespace prefix joint_prefix:=robot_">
     <gazebo>
       <plugin name="gz::sim::systems::PosePublisher" filename="libgz-sim-pose-publisher-system.so">
         <publish_model_pose>true</publish_model_pose>
@@ -45,12 +45,12 @@
         interface="velocity"
         jmin="-10"
         jmax="10"
-        name="${prefix}left_wheel_joint" />
+        name="${joint_prefix}left_wheel_joint" />
       <xacro:ros2_joint
         interface="velocity"
         jmin="-10"
         jmax="10"
-        name="${prefix}right_wheel_joint" />
+        name="${joint_prefix}right_wheel_joint" />
     </ros2_control>
   </xacro:macro>
 </robot>
