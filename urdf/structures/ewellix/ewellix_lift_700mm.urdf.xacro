@@ -2,7 +2,7 @@
 <robot
   name="ewellix_lift_700mm"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- EWELLIX LIFT  -->
+  <!-- EWELLIX LIFT -->
   <xacro:macro
     name="ewellix_lift_700mm"
     params="prefix parent cut_model:=false *origin">
@@ -34,7 +34,7 @@
       </collision>
 
       <inertial>
-        <mass value="20" />
+        <mass value="0" />
         <origin
           xyz="0 0 0"
           rpy="0 0 0" />
@@ -58,7 +58,7 @@
     </joint>
 
     <!-- Lift top link -->
-    <link name="${prefix}link">
+    <link name="${prefix}top_link">
       <visual>
         <origin
           xyz="0 0 0"
@@ -111,19 +111,20 @@
 
     <!-- Lift top link joint -->
     <joint
-      name="${prefix}joint"
+      name="${prefix}top_joint"
       type="prismatic">
       <parent link="${prefix}base_link" />
-      <child link="${prefix}link" />
+      <child link="${prefix}top_link" />
       <origin
-        xyz="0 0 0"
+        xyz="0 0 0.72"
         rpy="0 0 0" />
       <limit
-        effort="1000"
+        effort="700.0"
         lower="0.0"
-        upper="0.7"
+        upper="0.9"
         velocity="0.088" />
       <axis xyz="0 0 1" />
+      <dynamics damping="0.0" friction="0.0" />
     </joint>
 
     <gazebo reference="${prefix}base_link">
@@ -133,24 +134,26 @@
         <diffuse>0.5 0.5 0.5 1.0</diffuse>
         <specular>0.3 0.3 0.3 1.0</specular>
       </material>
+      <gravity>true</gravity>
     </gazebo>
 
-    <gazebo reference="${prefix}link">
+    <gazebo reference="${prefix}top_link">
       <!-- Ogre2/HLMS (Gazebo Harmonic): inline RGBA replaces Gazebo/Grey script -->
       <material>
         <ambient>0.5 0.5 0.5 1.0</ambient>
         <diffuse>0.5 0.5 0.5 1.0</diffuse>
         <specular>0.3 0.3 0.3 1.0</specular>
       </material>
+      <gravity>true</gravity>
     </gazebo>
 
     <ros2_control
-      name="${prefix}ewellix_lift_control"
+      name="${prefix}lift_control"
       type="system">
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
-      <joint name="${prefix}joint">
+      <joint name="${prefix}top_joint">
         <command_interface name="position" />
         <command_interface name="velocity" />
         <state_interface name="position">

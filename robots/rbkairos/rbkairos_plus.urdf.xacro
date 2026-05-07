@@ -21,7 +21,7 @@
     default="true" />
   <xacro:arg
     name="ur_type"
-    default="ur5e" />
+    default="ur10e" />
 
   <!-- RB-KAIROS -->
   <xacro:rbkairos
