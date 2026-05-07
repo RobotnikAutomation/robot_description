@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<robot
+  name="onrobot_sander_zivid2"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- ONROBOT SANDER ZIVID2 -->
+  <xacro:macro
+    name="onrobot_sander_zivid2"
+    params="prefix parent cut_model:=false *origin">
+    <!-- Lift base link -->
+    <link name="${prefix}tool_link">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/structures/CENTAURO/Onrobot_Sander_ZIVID2_simplified.stl"
+            scale="1 1 1" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.7 0.7 0.7 1" />
+        </material>
+      </visual>
+
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/structures/CENTAURO/Onrobot_Sander_ZIVID2_simplified.stl"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0" />
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <inertia
+          ixx="1e-1"
+          ixy="0"
+          ixz="0"
+          iyy="1e-1"
+          iyz="0"
+          izz="1e-1" />
+      </inertial>
+    </link>
+
+    <!-- tool link joint -->
+    <joint
+      name="${prefix}joint"
+      type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}tool_link" />
+    </joint>
+
+    <!-- sander link joint -->
+    <joint
+      name="${prefix}sander_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0.123"
+        rpy="0 0 0" />
+      <parent link="${prefix}tool_link" />
+      <child link="${prefix}sander_link" />
+    </joint>
+    <link name="${prefix}sander_link" />
+
+    <!-- zivid link joint -->
+
+    <joint
+      name="${prefix}zivid_joint"
+      type="fixed">
+      <origin
+        xyz="0 -0.1155 0.075 "
+        rpy="0.261799 0 0" /><!-- 15 deg 0 0 -->
+      <parent link="${prefix}tool_link" />
+      <child link="${prefix}zivid_link" />
+    </joint>
+    <link name="${prefix}zivid_link" />
+
+
+    <gazebo reference="${prefix}tool_link">
+      <material>Gazebo/Grey</material>
+      <gravity>true</gravity>
+    </gazebo>
+
+  </xacro:macro>
+</robot>
