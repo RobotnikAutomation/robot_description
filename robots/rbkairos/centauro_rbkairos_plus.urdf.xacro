@@ -75,6 +75,9 @@
   <xacro:onrobot_sander_zivid2
     prefix="$(arg prefix)arm_tool_"
     parent="$(arg prefix)arm_tool0"
+    node_namespace="$(arg namespace)"
+    node_name="arm_tool_zivid2"
+    gazebo_ignition="$(arg gazebo_ignition)"
     >
     <origin
       xyz="0 0 0"

@@ -2,10 +2,40 @@
 <robot
   name="onrobot_sander_zivid2"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/depth/depth_camera_plugin.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/camera/camera_plugin.urdf.xacro" />
+
   <!-- ONROBOT SANDER ZIVID2 -->
   <xacro:macro
     name="onrobot_sander_zivid2"
-    params="prefix parent cut_model:=false *origin">
+    params="prefix
+            parent
+            cut_model:=false
+            *origin
+            gazebo_ignition:=false
+            node_name:=zivid2
+            node_namespace:=${None}
+            topic_prefix:=~/">
+    <xacro:if value="${node_namespace == None}">
+      <xacro:property
+        name="node_namespace"
+        value="${node_name}" />
+    </xacro:if>
+
+    <xacro:property
+      name="zivid2_depth_horizontal_fov"
+      value="52.71264861" />
+    <xacro:property
+      name="zivid2_depth_vertical_fov"
+      value="42.24943829" />
+    <xacro:property
+      name="zivid2_color_horizontal_fov"
+      value="52.71264861" />
+    <xacro:property
+      name="zivid2_color_vertical_fov"
+      value="42.24943829" />
     <!-- Lift base link -->
     <link name="${prefix}tool_link">
       <visual>
@@ -34,7 +64,7 @@
       </collision>
 
       <inertial>
-        <mass value="0" />
+        <mass value="0.001" />
         <origin
           xyz="0 0 0"
           rpy="0 0 0" />
@@ -76,11 +106,87 @@
       type="fixed">
       <origin
         xyz="0 -0.1155 0.075 "
-        rpy="0.261799 0 0" /><!-- 15 deg 0 0 -->
+        rpy="0 0 0" />
       <parent link="${prefix}tool_link" />
       <child link="${prefix}zivid_link" />
     </joint>
     <link name="${prefix}zivid_link" />
+
+    <!-- zivid depth joints and links -->
+    <joint
+      name="${prefix}zivid_depth_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}zivid_link" />
+      <child link="${prefix}zivid_depth_frame" />
+    </joint>
+    <link name="${prefix}zivid_depth_frame" />
+
+    <joint
+      name="${prefix}zivid_depth_optical_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}zivid_depth_frame" />
+      <child link="${prefix}zivid_depth_optical_frame" />
+    </joint>
+    <link name="${prefix}zivid_depth_optical_frame" />
+
+    <!-- zivid color joints and links -->
+    <joint
+      name="${prefix}zivid_color_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}zivid_link" />
+      <child link="${prefix}zivid_color_frame" />
+    </joint>
+    <link name="${prefix}zivid_color_frame" />
+
+    <joint
+      name="${prefix}zivid_color_optical_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}zivid_color_frame" />
+      <child link="${prefix}zivid_color_optical_frame" />
+    </joint>
+    <link name="${prefix}zivid_color_optical_frame" />
+
+    <xacro:depth_camera_plugin
+      node_namespace="${node_namespace}"
+      node_name="${node_name}_depth"
+      topic_prefix="${topic_prefix}_depth"
+      gazebo_ignition="${gazebo_ignition}"
+      optical_frame="${prefix}zivid_depth_optical_frame"
+      reference_frame="${prefix}zivid_depth_frame"
+      horizontal_fov="${zivid2_depth_horizontal_fov}"
+      vertical_fov="${zivid2_depth_vertical_fov}"
+      video_width="1280"
+      video_height="720"
+      min_depth="0.700"
+      max_depth="1.700"
+      rate="30" />
+
+    <xacro:camera_plugin
+      node_namespace="${node_namespace}"
+      node_name="${node_name}_color"
+      topic_prefix="${topic_prefix}_color"
+      gazebo_ignition="${gazebo_ignition}"
+      optical_frame="${prefix}zivid_color_optical_frame"
+      reference_frame="${prefix}zivid_color_frame"
+      horizontal_fov="${zivid2_color_horizontal_fov}"
+      vertical_fov="${zivid2_color_vertical_fov}"
+      video_width="2448"
+      video_height="2048"
+      min_depth="0.700"
+      max_depth="1.700"
+      rate="30" />
 
 
     <gazebo reference="${prefix}tool_link">
