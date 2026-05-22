@@ -7,7 +7,7 @@
   <xacro:include
     filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/urdf/structures/tools/onrobot_sander_zivid2.urdf.xacro" />
+    filename="$(find robotnik_description)/urdf/structures/tools/onrobot_sander_photoneo_motioncam.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
@@ -20,7 +20,7 @@
     default="" />
   <xacro:arg
     name="gazebo_ignition"
-    default="false" />
+    default="true" />
   <xacro:arg
     name="ur_type"
     default="ur10e" />
@@ -72,17 +72,17 @@
   </xacro:arm_ur>
 
   <!-- TOOL -->
-  <xacro:onrobot_sander_zivid2
+  <xacro:onrobot_sander_photoneo_motioncam
     prefix="$(arg prefix)arm_tool_"
     parent="$(arg prefix)arm_tool0"
     node_namespace="$(arg namespace)"
-    node_name="arm_tool_zivid2"
+    node_name="arm_tool_photoneo_motioncam"
     gazebo_ignition="$(arg gazebo_ignition)"
     >
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
-  </xacro:onrobot_sander_zivid2>
+  </xacro:onrobot_sander_photoneo_motioncam>
 
   <!-- IMU -->
   <xacro:sensor_vectornav
@@ -122,7 +122,7 @@
   </xacro:sensor_sick_microscan3>
 
   <!-- CAMERAS -->
-  <xacro:sensor_intel_realsense_d435
+  <xacro:sensor_intel_realsense_d435i
     frame_prefix="$(arg prefix)front_rgbd_camera_"
     parent="$(arg prefix)base_link"
     node_namespace="$(arg namespace)"
@@ -131,5 +131,5 @@
     <origin
       xyz="0.35850 0.0 0.25062"
       rpy="0 0 0" />
-  </xacro:sensor_intel_realsense_d435>
+  </xacro:sensor_intel_realsense_d435i>
 </robot>
