@@ -9,8 +9,6 @@
   <xacro:include
     filename="$(find robotnik_description)/urdf/structures/ewellix/all_ewellix_lift.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
-  <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
@@ -26,6 +24,15 @@
   <xacro:arg
     name="ur_type"
     default="ur20" />
+
+  <xacro:unless value="$(arg gazebo_ignition)">
+      <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
+  </xacro:unless>
+  <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro_sim.urdf.xacro" />
+  </xacro:if>
 
   <!-- RB-ROBOUT -->
   <xacro:rbrobout

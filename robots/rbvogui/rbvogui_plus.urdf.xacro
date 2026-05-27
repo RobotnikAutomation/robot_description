@@ -5,8 +5,6 @@
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbvogui/rbvogui_base.urdf.xacro" />
   <xacro:include
-    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
-  <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
   <!-- ARGUMENTS -->
@@ -22,6 +20,15 @@
   <xacro:arg
     name="ur_type"
     default="ur5e" />
+
+  <xacro:unless value="$(arg gazebo_ignition)">
+      <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
+  </xacro:unless>
+  <xacro:if value="$(arg gazebo_ignition)">
+      <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro_sim.urdf.xacro" />
+  </xacro:if>
 
   <!-- RB-VOGUI -->
   <xacro:rbvogui
