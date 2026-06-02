@@ -2,6 +2,10 @@
 Changelog for package robotnik_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Unreleased
+------------------
+* Standardize docking contact link naming across robot bodies.
+
 2.2.0 (2025-11-28)
 ----------
 * Add low_performance parameter for sensor simulation

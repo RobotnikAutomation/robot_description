@@ -18,7 +18,7 @@ Available robots and models are:
 ## Quick Usage
 
 ```
-ros2 launch robotnik_description robot_description.launch.py robot:=ROBOT [robot_model:=ROBOT_MODEL]
+ros2 launch robotnik_description robot_description.launch.py robot:=ROBOT [robot_model:=ROBOT_MODEL] [arm_type:=ur10e]
 ```
 
 Launches the description of a ROBOT, specifically ROBOT_MODEL.
@@ -141,6 +141,10 @@ The launch files in this package run the `robot_state_publisher` node, publishin
 
   Boolean to set low performance mode for simulation.
 
+- **arm_type** (string, default: `ur10e`)
+
+  Arm type forwarded to xacro as `ur_type` for mobile manipulator variants.
+
 
 ## Usage
 
@@ -151,7 +155,7 @@ ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos
 Launches the description for the RB-Kairos mobile base.
 
 ```
-ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_plus
+ros2 launch robotnik_description robot_description.launch.py robot:=rbkairos robot_model:=rbkairos_plus arm_type:=ur5e
 ```
 
 Launches the description for the RB-Kairos with a UR arm.
