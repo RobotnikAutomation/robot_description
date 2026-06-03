@@ -4,24 +4,20 @@
   xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include
     filename="$(find robotnik_description)/urdf/bodies/rbcar/rbcar_body.urdf.xacro" />
-  <!-- <xacro:include
-    filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel.urdf.xacro" /> -->
-  <xacro:include 
-    filename="$(find robotnik_description)/urdf/wheels/rbcar/suspension_wheel_v2.urdf.xacro" />
-  <xacro:include 
-    filename="$(find robotnik_description)/urdf/wheels/rbcar/rear_axle.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/wheels/rbcar/suspension_wheel_v4.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/simulators/gazebo_ignition/rbcar/rbcar_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
-  <xacro:property 
-    name="wheel_offset_x" 
-    value="1.85" /> 
   <xacro:property
-    name="wheel_offset_y" 
+    name="wheel_offset_x"
+    value="0.91131" />
+  <xacro:property
+    name="wheel_offset_y"
     value="0.62124" />
-  <xacro:property 
-    name="wheel_offset_z" 
+  <xacro:property
+    name="wheel_offset_z"
     value="0.0" />
 
   <xacro:macro
@@ -31,51 +27,42 @@
       gazebo_ignition:=false
       namespace:=''
       ">
-
-    <!-- BODY -->
     <xacro:property
       name="hq"
       value="true" />
     <xacro:rbcar_body
       prefix="${prefix}"
-      hq="${hq}" />
+      hq="${hq}"
+      clearance="${wheel_radius}" />
 
     <!-- WHEELS -->
-    <xacro:front_wheel 
-      lr_prefix="$(arg prefix)left" 
+    <xacro:front_wheel
+      lr_prefix="${prefix}left"
       fr_prefix="front"
       lr_reflect="1"
-      fr_reflect="1" 
-      parent="$(arg prefix)base_link" />
+      fr_reflect="1"
+      parent="${prefix}base_link" />
 
-    <xacro:front_wheel 
-      lr_prefix="$(arg prefix)right" 
+    <xacro:front_wheel
+      lr_prefix="${prefix}right"
       fr_prefix="front"
-      lr_reflect="-1" 
-      fr_reflect="1" 
-      parent="$(arg prefix)base_link" />
+      lr_reflect="-1"
+      fr_reflect="1"
+      parent="${prefix}base_link" />
 
-    <xacro:rear_wheel 
-      lr_prefix="$(arg prefix)left" 
+    <xacro:rear_wheel
+      lr_prefix="${prefix}left"
       fr_prefix="rear"
       lr_reflect="1"
       fr_reflect="-1"
-      parent="$(arg prefix)base_link" />
+      parent="${prefix}base_link" />
 
-    <xacro:rear_wheel 
-      lr_prefix="$(arg prefix)right" 
+    <xacro:rear_wheel
+      lr_prefix="${prefix}right"
       fr_prefix="rear"
       lr_reflect="-1"
       fr_reflect="-1"
-      parent="$(arg prefix)base_link" />
-
-    <!-- <xacro:rear_axle 
-      prefix="$(arg prefix)rear_axle" 
-      parent="$(arg prefix)base_link">
-      <origin 
-        xyz="0 0.0 0" 
-        rpy="1.57079633 0 3.14159265"/>
-    </xacro:rear_axle> -->
+      parent="${prefix}base_link" />
 
     <!-- CONTROL -->
     <xacro:if value="$(arg gazebo_ignition)">
