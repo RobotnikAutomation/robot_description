@@ -40,11 +40,11 @@
       <hardware>
         <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
-      
+
       <!-- Front suspension shocks (effort control) -->
       <xacro:ros2_joint interface="effort" jmin="-100" jmax="100" name="${prefix}left_front_shock" />
       <xacro:ros2_joint interface="effort" jmin="-100" jmax="100" name="${prefix}right_front_shock" />
-      
+
       <!-- Rear suspension shocks (effort control) -->
       <xacro:ros2_joint interface="effort" jmin="-100" jmax="100" name="${prefix}left_rear_shock" />
       <xacro:ros2_joint interface="effort" jmin="-100" jmax="100" name="${prefix}right_rear_shock" />
