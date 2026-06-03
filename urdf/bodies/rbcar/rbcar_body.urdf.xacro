@@ -41,9 +41,9 @@
            <mesh filename="package://robotnik_description/meshes/bases/rbcar/rbcar_chassis.stl"/>
          </geometry>
        </xacro:unless>
-       <material name="gray">
+       <!-- <material name="gray">
          <color rgba="0.8 0.8 0.8 1"/>
-       </material>
+       </material> -->
     </visual>
     <collision>
        <origin xyz="0.917 0 0" rpy="0 0 0 " />
