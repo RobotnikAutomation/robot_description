@@ -1,29 +1,23 @@
 <?xml version="1.0"?>
 <robot name="rbcar" xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="rbcar_body" params="prefix:='' hq">
-
-  <!-- Robot mechanical and motor parameters -->
-  <xacro:property 
-    name="wheel_width" 
-    value="0.317" />
-  <xacro:property 
-    name="clearance" 
-    value="${tire_dia/2.0}" />
+  <xacro:macro
+    name="rbcar_body"
+    params="prefix:='' hq:=true clearance:=${wheel_radius}">
 
   <!-- BASE FOOTPRINT -->
   <link name="${prefix}base_footprint">
     <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <box size="0.001 0.001 0.001" />
-        </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.001 0.001 0.001" />
+      </geometry>
     </visual>
-
   </link>
 
   <joint name="${prefix}base_footprint_joint" type="fixed">
-    <origin xyz="0 0 ${clearance}" rpy="0 0 0" />  <!-- height is the clearance -->
+    <origin xyz="0 0 ${clearance}" rpy="0 0 0" />
+    <!-- height is the clearance -->
     <parent link="${prefix}base_footprint"/>
     <child link="${prefix}base_link" />
   </joint>
@@ -38,18 +32,18 @@
     <visual>
        <origin xyz="0.917 0 0" rpy="0 0 0" />
        <xacro:if value="${hq}">
-       <geometry>
-	     <mesh filename="package://robotnik_description/meshes/bases/rbcar/rbcar_chassis_hq.stl"/>
-       </geometry>
+         <geometry>
+           <mesh filename="package://robotnik_description/meshes/bases/rbcar/rbcar_hq.dae"/>
+         </geometry>
        </xacro:if>
        <xacro:unless value="${hq}">
-       <geometry>
-	     <mesh filename="package://robotnik_description/meshes/bases/rbcar/rbcar_chassis.stl"/>
-       </geometry>
+         <geometry>
+           <mesh filename="package://robotnik_description/meshes/bases/rbcar/rbcar_chassis.stl"/>
+         </geometry>
        </xacro:unless>
-       <material name="gray">
+       <!-- <material name="gray">
          <color rgba="0.8 0.8 0.8 1"/>
-       </material>
+       </material> -->
     </visual>
     <collision>
        <origin xyz="0.917 0 0" rpy="0 0 0 " />
@@ -59,6 +53,16 @@
     </collision>
   </link>
 
+  <!-- DOCKING CONTACT -->
+  <!--
+  <link name="${prefix}base_docking_contact" />
+
+  <joint name="${prefix}base_docking_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}base_docking_contact" />
+  </joint>
+  -->
 
   </xacro:macro>
 </robot>

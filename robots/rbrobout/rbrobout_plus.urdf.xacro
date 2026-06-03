@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <robot
-  name="rbrobout"
+  name="rbrobout_plus"
   xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbrobout/rbrobout_base.urdf.xacro" />
@@ -25,7 +25,7 @@
     default="false" />
   <xacro:arg
     name="ur_type"
-    default="ur5e" />
+    default="ur20" />
 
   <!-- RB-ROBOUT -->
   <xacro:rbrobout
@@ -48,10 +48,11 @@
   </xacro:ewellix_lift_900mm>
 
   <!-- ARMS -->
+    <!-- parent="$(arg prefix)lift_link" -->
   <xacro:arm_ur
     ur_type="$(arg ur_type)"
     frame_prefix="$(arg prefix)arm_"
-    parent="$(arg prefix)lift_ewellix_lift_top_link"
+    parent="$(arg prefix)lift_top_link"
     gazebo_ignition="$(arg gazebo_ignition)">
     <origin
       xyz="0 0 0"
