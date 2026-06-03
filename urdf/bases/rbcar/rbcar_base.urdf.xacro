@@ -18,7 +18,7 @@
     value="0.62124" />
   <xacro:property
     name="wheel_offset_z"
-    value="0.0" />
+    value="-0.05" />
 
   <xacro:macro
     name="rbcar"
@@ -37,28 +37,32 @@
 
     <!-- WHEELS -->
     <xacro:front_wheel
-      lr_prefix="${prefix}left"
+      prefix="${prefix}"
+      lr_prefix="left"
       fr_prefix="front"
       lr_reflect="1"
       fr_reflect="1"
       parent="${prefix}base_link" />
 
     <xacro:front_wheel
-      lr_prefix="${prefix}right"
+      prefix="${prefix}"
+      lr_prefix="right"
       fr_prefix="front"
       lr_reflect="-1"
       fr_reflect="1"
       parent="${prefix}base_link" />
 
     <xacro:rear_wheel
-      lr_prefix="${prefix}left"
+      prefix="${prefix}"
+      lr_prefix="left"
       fr_prefix="rear"
       lr_reflect="1"
       fr_reflect="-1"
       parent="${prefix}base_link" />
 
     <xacro:rear_wheel
-      lr_prefix="${prefix}right"
+      prefix="${prefix}"
+      lr_prefix="right"
       fr_prefix="rear"
       lr_reflect="-1"
       fr_reflect="-1"
