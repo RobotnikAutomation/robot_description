@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<robot 
+<robot
   name="rbcar"
   xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:include 
+  <xacro:include
     filename="$(find robotnik_description)/urdf/bases/rbcar/rbcar_base.urdf.xacro" />
-  <xacro:include 
+  <xacro:include
     filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
 
 <!-- ***************** -->
@@ -27,32 +27,62 @@
     namespace="$(arg namespace)" />
 
 <!-- Sensors-->
-<!-- 
-  <xacro:macro name="sensor_rslidar_m1" params="prefix parent prefix_topic:='laser_front' *origin gpu:=false">
-    <sensor_rslidar prefix="${prefix}" parent="${parent}" prefix_topic="${prefix_topic}" range_min="0.4" range_max="250.0" hfov="360.0" hres="0.1" vfov="40.0" vres="0.1" fps="20.0" gpu="${gpu}" >
-      <xacro:insert_block name="origin" />
-    </sensor_rslidar>
-  </xacro:macro>
+<!-- IMU -->
+<xacro:sensor_vectornav
+  frame_prefix="$(arg prefix)imu_"
+  parent="$(arg prefix)base_link"
+  node_namespace="$(arg namespace)"
+  gazebo_ignition="$(arg gazebo_ignition)">
+  <origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
+</xacro:sensor_vectornav>
 
-<xacro:sensor_ublox prefix="$(arg prefix)gps" parent="$(arg prefix)base_link">
-  <origin xyz="-0.58 0 1.503" rpy="0 0 0"/>
+<!-- GPS -->
+<xacro:sensor_ublox
+  frame_prefix="$(arg prefix)gps_"
+  parent="$(arg prefix)base_link"
+  node_namespace="$(arg namespace)"
+  node_name="gps"
+  gazebo_ignition="$(arg gazebo_ignition)">
+  <origin xyz="0.58 0 1.503" rpy="0 0 0"/>
 </xacro:sensor_ublox>
 
-<xacro:sensor_imu_hector prefix="$(arg prefix)imu" parent="$(arg prefix)base_link">
-  <origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
-</xacro:sensor_imu_hector> -->
+<!-- 3D LiDAR -->
+<xacro:sensor_rslidar_16
+  frame_prefix="$(arg prefix)top_3d_laser_"
+  parent="$(arg prefix)base_link"
+  node_namespace="$(arg namespace)"
+  node_name="top_lidar"
+  gazebo_ignition="$(arg gazebo_ignition)"
+  max_angle="3.14159"
+  min_angle="-3.14159"
+  gpu="$(arg gpu)">
+  <origin xyz="1.40252 0.0 1.40341" rpy="0 0.288 0"/>
+</xacro:sensor_rslidar_16>
 
-      <!--xacro:sensor_rslidar_16 prefix="$(arg prefix)top_3d_laser" parent="$(arg prefix)base_link"  gpu="$(arg gpu)">
-        <origin xyz="1.32252 0.0 1.20341" rpy="0 0.288 0"/>
-      </xacro:sensor_rslidar_16-->
-
-<!-- <xacro:sensor_rslidar_m1 prefix="$(arg prefix)laser_front" parent="$(arg prefix)base_link"  gpu="$(arg gpu)">
-  <origin xyz="2.14 0.0 0.24" rpy="0 3.015 3.14159"/>
+<!-- Front 3D LiDAR -->
+<xacro:sensor_rslidar_m1
+  frame_prefix="$(arg prefix)front_laser_"
+  parent="$(arg prefix)base_link"
+  node_namespace="$(arg namespace)"
+  node_name="front_lidar"
+  gazebo_ignition="$(arg gazebo_ignition)"
+  max_angle="1.0472"
+  min_angle="-1.0472"
+  gpu="$(arg gpu)">
+  <origin xyz="2.28 0.0 0.30" rpy="0 3.015 3.14159"/>
 </xacro:sensor_rslidar_m1>
 
-<xacro:sensor_hokuyo_utm30lx prefix="$(arg prefix)rear_laser" parent="$(arg prefix)base_link" prefix_topic="rear_laser" min_angle="-2.35" max_angle="2.35">
-  <origin xyz="-0.8 0.0 0.20" rpy="0 0 3.14159"/>
-</xacro:sensor_hokuyo_utm30lx> -->
+<!-- Rear 2D LiDAR -->
+<xacro:sensor_hokuyo_utm30lx
+  frame_prefix="$(arg prefix)rear_laser_"
+  parent="$(arg prefix)base_link"
+  node_namespace="$(arg namespace)"
+  node_name="rear_laser"
+  gazebo_ignition="$(arg gazebo_ignition)"
+  min_angle="-2.35"
+  max_angle="2.35">
+  <origin xyz="-0.4 0.0 0.20" rpy="0 0 3.14159"/>
+</xacro:sensor_hokuyo_utm30lx>
 
 <!--Gazebo plugins-->
 <!-- <gazebo>

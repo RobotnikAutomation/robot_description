@@ -4,5 +4,5 @@
       update_rate: 50
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
-      ackermann_steering_controller:
+      robotnik_base_control:
         type: ackermann_steering_controller/AckermannSteeringController
