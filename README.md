@@ -4,6 +4,7 @@ This package includes the description for Robotnik robots.
 
 Available robots and models are:
  - RB-1
+ - RB-Car
  - RB-Ficus
  - RB-Kairos / RB-Kairos+
  - RB-Robout / RB-Robout+
@@ -61,6 +62,7 @@ This repository contains three high-level folders:
 The `robots` folder contains a folder for each robot type:
 
  - rb1
+ - rbcar
  - rbfiqus
  - rbkairos
  - rbrobout
