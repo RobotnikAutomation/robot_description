@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<robot name="summit_xl" xmlns:xacro="http://wiki.ros.org/xacro">
+
+
+	<!-- ***************** -->
+	<!-- Imported elements -->
+	<!-- ***************** -->
+
+	<!-- First we import all posible elements defined in the urdf.xacro files. All these elements are defined as macro:xacros -->
+
+	<!-- Import summit XL base elements -->
+	<xacro:include filename="$(find robot_description)/urdf/bases/rbwatcher_base.urdf.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/summit_hm/summit_hm_structure.xacro" />
+	<xacro:include filename="$(find robot_description)/urdf/structures/sensor_support/antena_std.urdf.xacro" />
+
+
+	<!-- Import all available sensors -->
+	<xacro:include filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+
+
+	<!-- Flag to select the high or low quality model -->
+	<xacro:arg name="prefix" default="robot_"/>
+	<xacro:arg name="ros_planar_move_plugin" default="false"/>
+    <xacro:arg name="ros_planar_move_plugin_force_based" default="false"/>
+	<xacro:arg name="kinematics" default="skid"/>
+	<xacro:arg name="gpu" default="false"/>
+	<xacro:arg name="gps_latitude" default="0"/>
+	<xacro:arg name="gps_longitude" default="0"/>
+	<xacro:arg name="sim_control_period" default="0.004"/>
+
+
+    <xacro:macro name="rbwatcher" params="prefix publish_bf hq kinematics:=skid leika:=false">
+		<xacro:property name="top_structure_mesh" value="robot_description/meshes/structures/rbwatcher/rbwatcher_top_structure" />
+		<xacro:property name="top_structure_x" value="-0.17024"/>
+		<xacro:property name="top_structure_y" value="0"/>
+		<xacro:property name="top_structure_z" value="0.27609"/>
+		<xacro:property name="PI" value="3.1415926535897931"/>
+		<xacro:property name="antenna_mesh" value="robot_description/meshes/others/antena_wifi_2J7A747Bc" />
+
+
+		<!-- *************** -->
+		<!-- Robots Elements -->
+		<!-- *************** -->
+
+		<!-- Here we create the robot elements using the xacro:macros imported at the beggining of this file -->
+
+		<!-- Summit XL base -->
+		<xacro:rbwatcher_base prefix="${prefix}" publish_bf="true" hq="${hq}" />
+		
+		<xacro:summit_hm_structure prefix="${prefix}top_structure" parent="${prefix}base_link" mesh_file="${top_structure_mesh}" >
+			<origin xyz="${top_structure_x} ${top_structure_y} ${top_structure_z}" rpy="0 0 0"/>
+		</xacro:summit_hm_structure>
+
+    	<!-- IMU -->
+    	<xacro:sensor_imu prefix="${prefix}imu" parent="${prefix}base_link" topic="imu/data">
+    	  	<origin xyz="-0.03534 0.132 0.16109" rpy="0 0 0"/>
+    	</xacro:sensor_imu>
+    	
+    	<!-- RGBD -->
+    	<xacro:sensor_intel_d435 prefix="${prefix}front_rgbd_camera" parent="${prefix}base_link" prefix_topic="front_rgbd_camera">
+			<origin xyz="0.29943 0.0 0.12683" rpy="0 0 0"/>
+    	</xacro:sensor_intel_d435>
+
+		<!--xacro:sensor_intel_d435 prefix="${prefix}rear_rgbd_camera" parent="${prefix}base_link" prefix_topic="rear_rgbd_camera">
+		<origin xyz="-0.308 0.0 0.18308" rpy="0 ${-PI} 0"/>
+    	</xacro:sensor_intel_d435-->
+
+        <!-- GPS -->
+        <!-- Not used in this platform -->
+        <!--xacro:sensor_ublox prefix="${prefix}gps" parent="${prefix}base_link" use_mast="false">
+            <origin xyz="-0.24824 0.095 0.76359" rpy="0 0 0"/>
+        </xacro:sensor_ublox-->
+
+		<!-- LIDAR - Airy Front -->
+    	<xacro:sensor_rs_airy prefix="${prefix}front_3d_laser" prefix_topic="front_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+    	  	<origin xyz="0.28965 0.0 0.31162" rpy="${PI} -${PI/2} 0"/>
+    	</xacro:sensor_rs_airy>
+    	
+    	<!-- LIDAR - Airy Rear -->
+    	<xacro:sensor_rs_airy prefix="${prefix}rear_3d_laser" prefix_topic="rear_3d_laser" parent="${prefix}base_link" gpu="$(arg gpu)">
+    	  	<origin xyz="-0.305 0.0 0.30862" rpy="-${PI/2} ${PI} ${PI/2}"/>
+    	</xacro:sensor_rs_airy>
+
+		<!-- Antenna Mobile -->
+		<xacro:sensor_antena_std prefix="${prefix}antenna_mobile" parent="${prefix}base_link" mesh_file="${antenna_mesh}">
+			<origin xyz="-0.24002 0.285 0.0" rpy="0 0 0"/>
+		</xacro:sensor_antena_std>
+	
+		<!-- Antenna Wifi -->
+		<xacro:sensor_antena_std prefix="${prefix}antenna_wifi" parent="${prefix}base_link" mesh_file="${antenna_mesh}">
+			<origin xyz="-0.24702 0.0 0.47112" rpy="0 0 0"/>
+		</xacro:sensor_antena_std>
+
+		<!-- PTZ camera -->
+		<xacro:unless value="${leika}">
+			<xacro:sensor_link_750_nh prefix="${prefix}top_ptz_camera" prefix_topic="top_ptz_camera" parent="${prefix}base_link" fps="15.0">
+				<origin xyz="-0.11808 0 0.55429" rpy="0 0 0"/>
+			</xacro:sensor_link_750_nh>
+		</xacro:unless>
+		
+		<!-- Leika Laser -->
+		<xacro:if value="${leika}">
+			<xacro:sensor_blk_arc prefix="${prefix}top_ptz_camera" parent="${prefix}base_link">
+				<origin xyz="-0.11808 0 0.65" rpy="0 0 0"/>
+			</xacro:sensor_blk_arc>
+		</xacro:if>
+
+	<!-- Magnetic Line Guidance Sensors - MLSE 0200 -->
+	<!-- Front sensor -->
+	<xacro:sensor_sick_mlse_0200 prefix="${prefix}front_line_guidance" parent="${prefix}base_link">
+		<origin xyz="0.125 0.0 -0.10327" rpy="0 0 0"/>
+	</xacro:sensor_sick_mlse_0200>
+	
+	<!-- Rear sensor -->
+	<xacro:sensor_sick_mlse_0200 prefix="${prefix}rear_line_guidance" parent="${prefix}base_link">
+		<origin xyz="-0.125 0.0 -0.10327" rpy="0 0 0"/>
+	</xacro:sensor_sick_mlse_0200>
+
+	<!-- Acoustic Camera - Fuke SV600 -->
+	<xacro:sensor_fuke_sv600 prefix="${prefix}acoustic_camera" parent="${prefix}base_link" prefix_topic="acoustic_camera">
+		<origin xyz="0.03941 0.0 0.46813" rpy="0 0.17453 0"/>
+	</xacro:sensor_fuke_sv600>
+
+	<!-- Gazebo ros control pluggins -->
+	<xacro:ros_control control_period="$(arg sim_control_period)"/>
+
+	<xacro:if value="$(arg ros_planar_move_plugin)">
+
+		<xacro:skid_steering prefix="${prefix}" publish_tf="true" force_based="$(arg ros_planar_move_plugin_force_based)"/>
+
+	</xacro:if>
+
+   </xacro:macro>
+
+   <xacro:rbwatcher prefix="$(arg prefix)" publish_bf="true" hq="true" kinematics="$(arg kinematics)"/>
+
+
+</robot>
