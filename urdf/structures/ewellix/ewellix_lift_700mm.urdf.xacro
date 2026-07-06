@@ -128,12 +128,10 @@
     </joint>
 
     <gazebo reference="${prefix}base_link">
-      <material>Gazebo/Grey</material>
       <gravity>true</gravity>
     </gazebo>
 
     <gazebo reference="${prefix}top_link">
-      <material>Gazebo/Grey</material>
       <gravity>true</gravity>
     </gazebo>
 
