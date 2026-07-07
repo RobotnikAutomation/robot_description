@@ -70,7 +70,7 @@
     max_angle="2.3"
     min_angle="-2.3">
     <origin
-      xyz="0.2675 -0.215 0.1613"
+      xyz="0.2675 -0.215 0.1683"
       rpy="0 ${-pi} ${3/4*pi}" />
   </xacro:sensor_sick_picoscan120>
   <xacro:sensor_sick_picoscan120
@@ -82,7 +82,7 @@
     max_angle="2.3"
     min_angle="-2.3">
     <origin
-      xyz="-0.2675 0.215 0.1613"
+      xyz="-0.2675 0.215 0.1683"
       rpy="0 ${-pi} ${-1/4*pi}" />
   </xacro:sensor_sick_picoscan120>
   <xacro:sensor_robosense_bpearl
@@ -115,7 +115,7 @@
     gazebo_ignition="$(arg gazebo_ignition)">
     <!-- rear camera offset_z rb_theron chassis type v3: 0.1598 v4 (default): 0.1158 -->
     <origin
-      xyz="-0.3045 0 0.1158"
+      xyz="-0.3045 0 0.1598"
       rpy="0 0 ${pi}" />
   </xacro:sensor_intel_realsense_d435>
 </robot>

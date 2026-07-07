@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<robot
+  name="robotnik_gazebo_robot"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:arg name="source_robot_xacro_path" default="" />
+  <xacro:arg name="robot" default="" />
+  <xacro:arg name="namespace" default="robot" />
+  <xacro:arg name="prefix" default="robot_" />
+  <xacro:arg name="controller_config" default="" />
+  <xacro:arg name="gazebo_ignition" default="true" />
+  <xacro:arg name="ur_type" default="ur10e" />
+  <xacro:arg name="low_performance" default="false" />
+
+  <!-- Compose the simulator-independent robot with its Gazebo control adapter. -->
+  <xacro:include filename="$(arg source_robot_xacro_path)" />
+  <xacro:include
+    filename="$(find robotnik_description)/simulators/gazebo_ignition/$(arg robot)/$(arg robot)_control.urdf.xacro" />
+
+  <xacro:robotnik_gazebo_control
+    namespace="$(arg namespace)"
+    prefix="$(arg prefix)"
+    controller_config="$(arg controller_config)" />
+</robot>

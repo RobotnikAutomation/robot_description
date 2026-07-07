@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro
-    name="rbkairos_gz_ignition_control"
-    params="namespace prefix">
+    name="robotnik_gazebo_control"
+    params="namespace prefix controller_config">
     <gazebo>
       <plugin name="gz::sim::systems::PosePublisher" filename="libgz-sim-pose-publisher-system.so">
         <publish_model_pose>true</publish_model_pose>
@@ -13,7 +13,7 @@
         filename="gz_ros2_control-system">
         <robot_param>robot_description</robot_param>
         <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_controller_params.yaml</parameters>
+        <parameters>$(find robotnik_simulation_profiles)/rbkairos/control/${controller_config}</parameters>
         <ros>
           <namespace>/${namespace}</namespace>
         </ros>

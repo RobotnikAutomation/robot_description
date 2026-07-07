@@ -139,8 +139,6 @@ As in the previous robot file, first it is included the robot body macro file an
     filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_body.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
-  <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_control.urdf.xacro" />
 ```
 
 Then, it is defined the properties of the position of the wheels.
@@ -154,7 +152,9 @@ Then, it is defined the properties of the position of the wheels.
 
 ```
 
-And finally, the robot macro definition which includes calling the macro body (chassis + logos) and the wheels and control macros.
+And finally, the robot macro definition includes the body (chassis + logos) and
+the wheels. Simulator control is composed externally by the corresponding
+simulation package; it is not part of `robotnik_description`.
 
 ```xml
 
@@ -200,11 +200,6 @@ And finally, the robot macro definition which includes calling the macro body (c
       gazebo_ignition="${gazebo_ignition}"
       xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" />
 
-    <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbkairos_gz_ignition_control
-        namespace="${namespace}"
-        prefix="${prefix}" />
-    </xacro:if>
   </xacro:macro>
 ```
 

@@ -70,10 +70,6 @@
       </collision>
     </link>
 
-    <gazebo reference="${prefix}base_link">
-      <material>Gazebo/Black</material>
-    </gazebo>
-
     <!-- TOP COVER -->
     <link name="${prefix}top_cover">
       <visual>

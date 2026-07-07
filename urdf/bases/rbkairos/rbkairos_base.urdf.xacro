@@ -6,8 +6,6 @@
     filename="$(find robotnik_description)/urdf/bodies/rbkairos/rbkairos_body.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/mecanum_wheel/rbkairos_mecanum_wheel.urdf.xacro" />
-  <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbkairos/rbkairos_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property
@@ -62,10 +60,5 @@
       gazebo_ignition="${gazebo_ignition}"
       xyz="-${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" />
 
-    <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbkairos_gz_ignition_control
-        namespace="${namespace}"
-        prefix="${prefix}" />
-    </xacro:if>
   </xacro:macro>
 </robot>

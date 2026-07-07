@@ -8,8 +8,6 @@
     filename="$(find robotnik_description)/urdf/wheels/rubber_wheel/rubber_wheel_150.urdf.xacro" />
   <xacro:include
     filename="$(find robotnik_description)/urdf/wheels/caster_wheel/rbtheron_caster.urdf.xacro" />
-  <xacro:include
-    filename="$(find robotnik_description)/simulators/gazebo_ignition/rbtheron/rbtheron_control.urdf.xacro" />
 
   <!-- WHEELS PROPERTIES -->
   <xacro:property
@@ -102,10 +100,5 @@
         rpy="0 0 0" />
     </xacro:caster>
 
-    <xacro:if value="$(arg gazebo_ignition)">
-      <xacro:rbtheron_gz_ignition_control
-        namespace="${namespace}"
-        prefix="${prefix}" />
-    </xacro:if>
   </xacro:macro>
 </robot>
