@@ -43,7 +43,7 @@
     gazebo_ignition="$(arg gazebo_ignition)">
     <origin
       xyz="0 0 0"
-      rpy="0 0 0" />
+      rpy="0 0 ${-pi}" />
   </xacro:arm_ur>
 
   <xacro:sensor_intel_realsense_d435i
