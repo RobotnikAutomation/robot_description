@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<robot
+  name="rbkairos_plus"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/bases/rbkairos/rbkairos_base.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/arms/ur_macro.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/all_sensors.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_description)/urdf/grippers/suction_gripper/suction_gripper.urdf.xacro" />
+
+  <!-- ARGUMENTS -->
+  <xacro:arg
+    name="namespace"
+    default="robot" />
+  <xacro:arg
+    name="prefix"
+    default="" />
+  <xacro:arg
+    name="gazebo_ignition"
+    default="false" />
+  <xacro:arg
+    name="ur_type"
+    default="ur10e" />
+  
+  <xacro:arg
+    name="world_name"
+    default="agentic_ai_demo" />
+
+  <!-- RB-KAIROS -->
+  <xacro:rbkairos
+    prefix="$(arg prefix)"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    namespace="$(arg namespace)" />
+
+  <!-- ARMS -->
+  <xacro:arm_ur
+    ur_type="$(arg ur_type)"
+    frame_prefix="$(arg prefix)arm_"
+    parent="$(arg prefix)top_cover"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+  </xacro:arm_ur>
+
+  <xacro:sensor_intel_realsense_d435i
+    frame_prefix="$(arg prefix)wrist_rgbd_camera_"
+    parent="$(arg prefix)arm_tool0"
+    node_namespace="$(arg namespace)"
+    node_name="wrist_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin xyz="0.0 -0.1 -0.040" rpy="0 -1.5708 1.5708" />
+  </xacro:sensor_intel_realsense_d435i>
+
+  <!-- SUCTION GRIPPER -->
+  <xacro:suction_gripper
+    prefix="$(arg prefix)vacuum_"
+    parent="$(arg prefix)arm_tool0"
+    ns="$(arg namespace)">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:suction_gripper>
+
+  <!-- IMU -->
+  <xacro:sensor_vectornav
+    frame_prefix="$(arg prefix)imu_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.127 -0.129 0.212"
+      rpy="0 0 0" />
+  </xacro:sensor_vectornav>
+
+  <!-- LASERS -->
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="2.1"
+    min_angle="-2.1">
+    <origin
+      xyz="0.2865 -0.20894 0.2973"
+      rpy="0 ${-pi} ${3/4*pi}" />
+  </xacro:sensor_sick_s300>
+  <xacro:sensor_sick_s300
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="2.1"
+    min_angle="-2.1">
+    <origin
+      xyz="-0.2865 0.20894 0.2973"
+      rpy="0 ${-pi} ${-1/4*pi}" />
+  </xacro:sensor_sick_s300>
+
+  <!-- CAMERAS -->
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_rgbd_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.35850 0.0 0.25062"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+
+  <!-- VACUUM GRIPPER PLUGIN -->
+  <gazebo>
+    <plugin filename="libVacuumGripper.so"
+            name="vacuum_gripper_plugin::VacuumGripper">
+      <suction_link>$(arg prefix)vacuum_link_suction_gripper</suction_link>
+      <contact_topic>/world/$(arg world_name)/model/$(arg namespace)/link/$(arg prefix)vacuum_link_suction_gripper/sensor/$(arg prefix)vacuum_suction_contact_sensor/contact</contact_topic>
+      <ros_contact_topic>/$(arg namespace)/gripper_contact</ros_contact_topic>
+      <cmd_topic>/$(arg namespace)/vacuum_on</cmd_topic>
+      <max_distance>0.15</max_distance>
+    </plugin>
+  </gazebo>
+
+</robot>

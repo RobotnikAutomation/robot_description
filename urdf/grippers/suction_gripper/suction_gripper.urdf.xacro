@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<robot name="rbrobout" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="suction_gripper" params="prefix parent ns *origin">
+
+    <joint name="${prefix}joint_suction_gripper" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}link_suction_gripper" />
+    </joint>
+
+    <gazebo reference="${prefix}joint_suction_gripper">
+      <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+
+    <link name="${prefix}link_suction_gripper">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.71" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robotnik_description/meshes/grippers/suction_gripper/gripper.dae" />
+        </geometry>
+      </visual>
+
+      <!-- El convertidor URDF->SDF renombra esta colision a:
+           {link}_fixed_joint_lump__{collision}_collision
+           Por eso el sensor usa ese nombre largo. -->
+      <collision name="${prefix}body_collision">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robotnik_description/meshes/grippers/suction_gripper/my_gripper.stl" />
+        </geometry>
+      </collision>
+
+    </link>
+
+    
+    <gazebo reference="${prefix}link_suction_gripper">
+      <sensor name="${prefix}suction_contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <contact>
+          <collision>${prefix}link_suction_gripper_fixed_joint_lump__${prefix}body_collision_collision</collision>
+        </contact>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

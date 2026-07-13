@@ -110,6 +110,15 @@ def generate_launch_description():
     )
     add_to_launcher.add_arg(arg)
 
+    arg = ExtendedArgument(
+        name='world_name',
+        description='Gazebo world name',
+        default_value='demo',
+        use_env=True,
+        environment='WORLD_NAME',
+    )
+    add_to_launcher.add_arg(arg)
+
     params = add_to_launcher.process_arg()
 
     robot_description_content = Command(
@@ -121,7 +130,8 @@ def generate_launch_description():
             " prefix:=",params["frame_prefix"],
             " gazebo_ignition:=",params["gazebo_ignition"],
             " ur_type:=",params["arm_type"],
-            " low_performance:=",params["low_performance_simulation"]
+            " low_performance:=",params["low_performance_simulation"],
+            " world_name:=",params["world_name"]
         ]
     )
     robot_description_param = ParameterValue(robot_description_content, value_type=str)
