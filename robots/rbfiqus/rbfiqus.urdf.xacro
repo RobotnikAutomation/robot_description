@@ -31,7 +31,7 @@
     node_namespace="$(arg namespace)"
     gazebo_ignition="$(arg gazebo_ignition)">
     <origin
-      xyz="0.127 -0.729 0.212"
+      xyz="0.33315 0.694 0.001"
       rpy="0 0 0" />
   </xacro:sensor_vectornav>
 </robot>
