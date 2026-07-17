@@ -24,8 +24,9 @@
     name="rbsummit_steel"
     params="
       prefix:=robot_
-      gazebo_ignition:=false
+      gazebo_ignition:=true
       namespace:=''
+      joint_prefix:=robot_
       ">
     <xacro:property
       name="hq"
@@ -35,6 +36,7 @@
     <!-- WHEELS -->
     <xacro:rbkairos_mecanum_wheel
       prefix="${prefix}front_right_"
+      joint_prefix="${joint_prefix}front_right_"
       parent="${prefix}base_link"
       reflect="false"
       hq="true"
@@ -42,6 +44,7 @@
       xyz="${wheel_offset_x} -${wheel_offset_y} ${wheel_offset_z}" />
     <xacro:rbkairos_mecanum_wheel
       prefix="${prefix}front_left_"
+      joint_prefix="${joint_prefix}front_left_"
       parent="${prefix}base_link"
       reflect="true"
       hq="true"
@@ -49,6 +52,7 @@
       xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" />
     <xacro:rbkairos_mecanum_wheel
       prefix="${prefix}back_left_"
+      joint_prefix="${joint_prefix}back_left_"
       parent="${prefix}base_link"
       reflect="false"
       hq="true"
@@ -56,6 +60,7 @@
       xyz="-${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" />
     <xacro:rbkairos_mecanum_wheel
       prefix="${prefix}back_right_"
+      joint_prefix="${joint_prefix}back_right_"
       parent="${prefix}base_link"
       reflect="true"
       hq="true"
@@ -65,7 +70,8 @@
     <xacro:if value="$(arg gazebo_ignition)">
       <xacro:rbsummit_steel_gz_ignition_control
         namespace="${namespace}"
-        prefix="${prefix}" />
+        prefix="${prefix}"
+        joint_prefix="${joint_prefix}" />
     </xacro:if>
   </xacro:macro>
 </robot>

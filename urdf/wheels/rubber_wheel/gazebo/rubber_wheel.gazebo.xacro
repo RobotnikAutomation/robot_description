@@ -9,7 +9,12 @@
       <fdir1>1 0 0</fdir1>
       <kp>0.0001</kp>
       <kd>1.0</kd> -->
-      <material>Gazebo/Yellow</material>
+      <!-- Ogre2/HLMS (Gazebo Harmonic): inline RGBA replaces Gazebo/Yellow script -->
+      <material>
+        <ambient>1.0 0.85 0.0 1.0</ambient>
+        <diffuse>1.0 0.85 0.0 1.0</diffuse>
+        <specular>0.3 0.3 0.3 1.0</specular>
+      </material>
       <minDepth>0.1</minDepth>
     </gazebo>
     <gazebo reference="${prefix}wheel_tire_link">
@@ -22,7 +27,12 @@
       <minDepth>0.003</minDepth>
       <slip1>0.05</slip1>
       <slip2>0.05</slip2>
-      <material>Gazebo/Gray</material>
+      <!-- Ogre2/HLMS (Gazebo Harmonic): inline RGBA replaces Gazebo/Gray script -->
+      <material>
+        <ambient>0.5 0.5 0.5 1.0</ambient>
+        <diffuse>0.5 0.5 0.5 1.0</diffuse>
+        <specular>0.3 0.3 0.3 1.0</specular>
+      </material>
     </gazebo>
   </xacro:macro>
 </robot>

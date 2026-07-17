@@ -77,7 +77,7 @@ def generate_launch_description():
     arg = ExtendedArgument(
         name='gazebo_ignition',
         description='Simulate robot in Gazebo Ignition',
-        default_value="false",
+        default_value="true",
         use_env=True,
         environment='GAZEBO_IGNITION_SIMULATION',
     )
@@ -142,5 +142,4 @@ def generate_launch_description():
     ))
 
     return ld
-
 

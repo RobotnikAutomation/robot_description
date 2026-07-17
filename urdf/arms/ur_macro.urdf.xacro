@@ -13,7 +13,7 @@
     frame_prefix
     *origin
     parent
-    gazebo_ignition:=false
+    gazebo_ignition:=true
     ">
     <xacro:property
       name="joint_limit_params"

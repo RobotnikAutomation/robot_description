@@ -24,8 +24,9 @@
     name="rbfiqus"
     params="
       prefix:=robot_
-      gazebo_ignition:=false
+      gazebo_ignition:=true
       namespace:=''
+      joint_prefix:=robot_
       ">
     <xacro:property
       name="hq"
@@ -36,6 +37,7 @@
 
     <xacro:steering_wheel_rbfiqus
       prefix="${prefix}front_right_"
+      joint_prefix="${joint_prefix}front_right_"
       parent="${prefix}base_link"
       reflect="false"
       hq="${hq}">
@@ -45,6 +47,7 @@
     </xacro:steering_wheel_rbfiqus>
     <xacro:steering_wheel_rbfiqus
       prefix="${prefix}front_left_"
+      joint_prefix="${joint_prefix}front_left_"
       parent="${prefix}base_link"
       reflect="true"
       hq="${hq}">
@@ -54,6 +57,7 @@
     </xacro:steering_wheel_rbfiqus>
     <xacro:steering_wheel_rbfiqus
       prefix="${prefix}back_left_"
+      joint_prefix="${joint_prefix}back_left_"
       parent="${prefix}base_link"
       reflect="true"
       hq="${hq}">
@@ -63,6 +67,7 @@
     </xacro:steering_wheel_rbfiqus>
     <xacro:steering_wheel_rbfiqus
       prefix="${prefix}back_right_"
+      joint_prefix="${joint_prefix}back_right_"
       parent="${prefix}base_link"
       reflect="false"
       hq="${hq}">
@@ -74,7 +79,8 @@
     <xacro:if value="$(arg gazebo_ignition)">
       <xacro:rbfiqus_gz_ignition_control
         namespace="${namespace}"
-        prefix="${prefix}" />
+        prefix="${prefix}"
+        joint_prefix="${joint_prefix}" />
     </xacro:if>
   </xacro:macro>
 </robot>

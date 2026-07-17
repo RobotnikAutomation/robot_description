@@ -16,7 +16,7 @@
     default="" />
   <xacro:arg
     name="gazebo_ignition"
-    default="false" />
+    default="true" />
 
   <!-- RB-VOGUI -->
   <xacro:rbvogui
