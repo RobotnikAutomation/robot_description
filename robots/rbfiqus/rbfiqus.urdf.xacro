@@ -18,11 +18,12 @@
     name="gazebo_ignition"
     default="false" />
 
-  <!-- RB-VOGUI -->
+  <!-- RB-FIQUS -->
   <xacro:rbfiqus
     prefix="$(arg prefix)"
     gazebo_ignition="$(arg gazebo_ignition)"
-    namespace="$(arg namespace)" />
+    namespace="$(arg namespace)"
+  />
 
   <!-- IMU -->
   <xacro:sensor_vectornav
@@ -34,4 +35,98 @@
       xyz="0.33315 0.694 0.001"
       rpy="0 0 0" />
   </xacro:sensor_vectornav>
+
+    <!-- LIDAR 2D -->
+
+    <!-- front laser support structure -->
+    <joint
+      name="$(arg prefix)front_laser_support_joint"
+      type="fixed">
+      <origin
+        xyz="0.723 0.68473 0.36249"
+        rpy="0 0 0.769" />
+      <parent link="$(arg prefix)base_link" />
+      <child link="$(arg prefix)front_laser_support_link" />
+    </joint>
+
+    <link name="$(arg prefix)front_laser_support_link">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/nanoscan3_support.stl" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.2 0.2 0.2 1" />
+        </material>
+      </visual>
+    </link>
+
+  <xacro:sensor_sick_nanoscan3
+    frame_prefix="$(arg prefix)front_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_laser"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="1.5708"
+    min_angle="-3.14159">
+    <origin
+      xyz="0.90729 0.85894 0.14651"
+	    rpy="${pi} 0 ${pi/4}" />
+  </xacro:sensor_sick_nanoscan3>
+
+    <!-- rear laser support structure -->
+    <joint
+      name="$(arg prefix)rear_laser_support_joint"
+      type="fixed">
+      <origin
+        xyz="-0.8314 -0.74289 0.36249"
+        rpy="0 0 -2.3562" />
+      <parent link="$(arg prefix)base_link" />
+      <child link="$(arg prefix)rear_laser_support_link" />
+    </joint>
+
+    <link name="$(arg prefix)rear_laser_support_link">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/bases/rbfiqus/nanoscan3_support.stl" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.2 0.2 0.2 1" />
+        </material>
+      </visual>
+    </link>
+
+  <xacro:sensor_sick_nanoscan3
+    frame_prefix="$(arg prefix)rear_laser_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="rear_laser"
+    gazebo_ignition="$(arg gazebo_ignition)"
+    max_angle="1.5708"
+    min_angle="-3.14159">
+    <origin
+      xyz="-1.00455 -0.92018 0.14651"
+	    rpy="${pi} 0 ${-3*pi/4}" />
+  </xacro:sensor_sick_nanoscan3>
+
+    <!-- CAMERA -->
+
+  <xacro:sensor_intel_realsense_d435
+    frame_prefix="$(arg prefix)front_camera_"
+    parent="$(arg prefix)base_link"
+    node_namespace="$(arg namespace)"
+    node_name="front_camera"
+    gazebo_ignition="$(arg gazebo_ignition)">
+    <origin
+      xyz="0.77157 0 0.27811"
+      rpy="0 0 0" />
+  </xacro:sensor_intel_realsense_d435>
+
 </robot>
