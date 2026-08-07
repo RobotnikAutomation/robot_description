@@ -2,7 +2,6 @@
 <robot
   name="ur_macro"
   xmlns:xacro="http://wiki.ros.org/xacro">
-  <!-- TODO: Restore simulation functionality, removed jazzy -->
   <xacro:include
     filename="$(find ur_description)/urdf/ur_macro.xacro" />
 
@@ -41,16 +40,9 @@
     </xacro:ur_robot>
 
     <xacro:if value="$(arg gazebo_ignition)">
-      <!-- filename="$(find ur_description)/urdf/ur.ros2_control.xacro"  -->
       <xacro:include
         filename="$(find ur_simulation_gz)/urdf/ur_gz.ros2_control.xacro"
         />
-        <!-- sim_ignition="true" -->
-        <!-- script_filename="" -->
-        <!-- output_recipe_filename="" -->
-        <!-- input_recipe_filename="" -->
-        <!-- hash_kinematics="" -->
-        <!-- robot_ip=""  -->
       <xacro:ur_ros2_control
         name="arm"
         tf_prefix="${frame_prefix}"
