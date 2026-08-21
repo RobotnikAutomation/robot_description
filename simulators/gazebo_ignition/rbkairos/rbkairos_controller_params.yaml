@@ -9,3 +9,5 @@
         type: robotnik_controllers/RBKairosController
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController
+      velocity_controller:
+        type: velocity_controllers/JointGroupVelocityController
