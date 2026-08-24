@@ -1,0 +1,233 @@
+<?xml version="1.0" ?>
+<robot
+  name="pilz_d435f_arduino"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/depth/depth_camera_plugin.urdf.xacro" />
+  <xacro:include
+    filename="$(find robotnik_sensors)/urdf/camera/camera_plugin.urdf.xacro" />
+
+  <!-- PILZ D435F ARDUINO -->
+  <xacro:macro
+    name="pilz_d435f_arduino"
+    params="prefix
+            parent
+            cut_model:=false
+            *origin
+            gazebo_ignition:=false
+            node_name:=photoneo_motioncam
+            node_namespace:=${None}
+            topic_prefix:=~/">
+    <xacro:if value="${node_namespace == None}">
+      <xacro:property
+        name="node_namespace"
+        value="${node_name}" />
+    </xacro:if>
+
+    <xacro:property
+      name="photoneo_motioncam_depth_horizontal_fov"
+      value="52.71264861" />
+    <xacro:property
+      name="photoneo_motioncam_depth_vertical_fov"
+      value="42.24943829" />
+    <xacro:property
+      name="photoneo_motioncam_color_horizontal_fov"
+      value="52.71264861" />
+    <xacro:property
+      name="photoneo_motioncam_color_vertical_fov"
+      value="42.24943829" />
+    <!-- Lift base link -->
+    <link name="${prefix}tool_link">
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/structures/CENTAURO/pilz_d435f_arduino_simplified.STL"
+            scale="1 1 1" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.7 0.7 0.7 1" />
+        </material>
+      </visual>
+
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://robotnik_description/meshes/structures/CENTAURO/pilz_d435f_arduino_simplified.STL"
+            scale="1 1 1" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0.001" />
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <inertia
+          ixx="1e-1"
+          ixy="0"
+          ixz="0"
+          iyy="1e-1"
+          iyz="0"
+          izz="1e-1" />
+      </inertial>
+    </link>
+
+    <!-- tool link joint -->
+    <joint
+      name="${prefix}joint"
+      type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}tool_link" />
+    </joint>
+
+    <!-- sander link joint -->
+    <joint
+      name="${prefix}sander_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0.123"
+        rpy="0 0 0" />
+      <parent link="${prefix}tool_link" />
+      <child link="${prefix}sander_link" />
+    </joint>
+    <link name="${prefix}sander_link" />
+
+    <!-- photoneo_motioncam link joint -->
+
+    <joint
+      name="${prefix}photoneo_motioncam_joint"
+      type="fixed">
+      <origin
+        xyz="0 -0.1155 0.075 "
+        rpy="${radians(15)} 0 0" />
+      <parent link="${prefix}tool_link" />
+      <child link="${prefix}photoneo_motioncam_link" />
+    </joint>
+    <link name="${prefix}photoneo_motioncam_link" />
+
+    <!-- photoneo_motioncam depth joints and links -->
+    <joint
+      name="${prefix}photoneo_motioncam_depth_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}photoneo_motioncam_link" />
+      <child link="${prefix}photoneo_motioncam_depth_frame" />
+    </joint>
+    <link name="${prefix}photoneo_motioncam_depth_frame" />
+
+    <joint
+      name="${prefix}photoneo_motioncam_depth_optical_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}photoneo_motioncam_depth_frame" />
+      <child link="${prefix}photoneo_motioncam_depth_optical_frame" />
+    </joint>
+    <link name="${prefix}photoneo_motioncam_depth_optical_frame" />
+
+    <!-- photoneo_motioncam color joints and links -->
+    <joint
+      name="${prefix}photoneo_motioncam_color_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <parent link="${prefix}photoneo_motioncam_link" />
+      <child link="${prefix}photoneo_motioncam_color_frame" />
+    </joint>
+    <link name="${prefix}photoneo_motioncam_color_frame" />
+
+    <joint
+      name="${prefix}photoneo_motioncam_color_optical_joint"
+      type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="${radians(0)} ${radians(-90)} ${radians(90)}" />
+      <parent link="${prefix}photoneo_motioncam_color_frame" />
+      <child link="${prefix}photoneo_motioncam_color_optical_frame" />
+    </joint>
+    <link name="${prefix}photoneo_motioncam_color_optical_frame" />
+
+    <xacro:depth_camera_plugin
+      node_namespace="${node_namespace}"
+      node_name="${node_name}_depth"
+      topic_prefix="${topic_prefix}_depth"
+      gazebo_ignition="${gazebo_ignition}"
+      optical_frame="${prefix}photoneo_motioncam_depth_optical_frame"
+      reference_frame="${prefix}photoneo_motioncam_depth_optical_frame"
+      horizontal_fov="${photoneo_motioncam_depth_horizontal_fov}"
+      vertical_fov="${photoneo_motioncam_depth_vertical_fov}"
+      video_width="1280"
+      video_height="720"
+      min_depth="0.700"
+      max_depth="201.700"
+      rate="30" />
+
+    <xacro:camera_plugin
+      node_namespace="${node_namespace}"
+      node_name="${node_name}_color"
+      topic_prefix="${topic_prefix}_color"
+      gazebo_ignition="${gazebo_ignition}"
+      optical_frame="${prefix}photoneo_motioncam_color_optical_frame"
+      reference_frame="${prefix}photoneo_motioncam_color_optical_frame"
+      horizontal_fov="${photoneo_motioncam_color_horizontal_fov}"
+      vertical_fov="${photoneo_motioncam_color_vertical_fov}"
+      video_width="2448"
+      video_height="2048"
+      min_depth="0.700"
+      max_depth="201.700"
+      rate="30" />
+
+
+    <xacro:unless value="${gazebo_ignition}">
+      <gazebo reference="${prefix}photoneo_motioncam_color_optical_frame">
+        <sensor name="${prefix}" type="depth">
+            <always_on>true</always_on>
+            <update_rate>15</update_rate>
+            <pose>0 0 0 0 0 0</pose>
+            <camera name="realsense_depth_camera">
+                <horizontal_fov>1.46608</horizontal_fov>
+                <image>
+                    <width>424</width>
+                    <height>240</height>
+                    <format>B8G8R8</format>
+                </image>
+                <clip>
+                    <near>0.05</near>
+                    <far>8</far>
+                </clip>
+            </camera>
+            <!-- https://github.com/mlherd/ros2_turtlebot3_waffle_intel_realsense
+            <plugin name="intel_realsense_d430_depth_driver" filename="libgazebo_ros_camera.so">
+                <ros>
+                    <namespace>d430</namespace>
+                    <remapping>${prefix}/image_raw:=color/image_raw</remapping>
+                    <remapping>${prefix}/depth/image_raw:=depth/image_rect_raw</remapping>
+                    <remapping>${prefix}/camera_info:=camera_info</remapping>
+                    <remapping>${prefix}/depth/camera_info:=depth/camera_info</remapping>
+                    <remapping>${prefix}/points:=depth/points</remapping>
+                </ros>
+                <camera_name>${prefix}</camera_name>
+                <frame_name>${prefix}photoneo_motioncam_color_optical_frame</frame_name>
+                <hack_baseline>0.07</hack_baseline>
+                <min_depth>0.05</min_depth>
+                <max_depth>8.0</max_depth>
+            </plugin> -->
+        </sensor>
+        <material>Gazebo/Grey</material>
+        <gravity>true</gravity>
+      </gazebo>
+    </xacro:unless>
+
+  </xacro:macro>
+</robot>
