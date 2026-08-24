@@ -15,7 +15,7 @@
             cut_model:=false
             *origin
             gazebo_ignition:=false
-            node_name:=photoneo_motioncam
+            node_name:=realsense_d435i
             node_namespace:=${None}
             topic_prefix:=~/">
     <xacro:if value="${node_namespace == None}">
@@ -25,16 +25,16 @@
     </xacro:if>
 
     <xacro:property
-      name="photoneo_motioncam_depth_horizontal_fov"
+      name="realsense_d435i_depth_horizontal_fov"
       value="52.71264861" />
     <xacro:property
-      name="photoneo_motioncam_depth_vertical_fov"
+      name="realsense_d435i_depth_vertical_fov"
       value="42.24943829" />
     <xacro:property
-      name="photoneo_motioncam_color_horizontal_fov"
+      name="realsense_d435i_color_horizontal_fov"
       value="52.71264861" />
     <xacro:property
-      name="photoneo_motioncam_color_vertical_fov"
+      name="realsense_d435i_color_vertical_fov"
       value="42.24943829" />
     <!-- Lift base link -->
     <link name="${prefix}tool_link">
@@ -44,7 +44,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/structures/CENTAURO/pilz_d435f_arduino_simplified.STL"
+            filename="package://robotnik_description/meshes/structures/CENTAURO/Pilz_d435f_arduino_simplified.STL"
             scale="1 1 1" />
         </geometry>
         <material name="grey">
@@ -58,7 +58,7 @@
           rpy="0 0 0" />
         <geometry>
           <mesh
-            filename="package://robotnik_description/meshes/structures/CENTAURO/pilz_d435f_arduino_simplified.STL"
+            filename="package://robotnik_description/meshes/structures/CENTAURO/Pilz_d435f_arduino_simplified.STL"
             scale="1 1 1" />
         </geometry>
       </collision>
@@ -87,86 +87,86 @@
       <child link="${prefix}tool_link" />
     </joint>
 
-    <!-- sander link joint -->
+    <!-- arduino link joint -->
     <joint
-      name="${prefix}sander_joint"
+      name="${prefix}arduino_joint"
       type="fixed">
       <origin
-        xyz="0 0 0.123"
+        xyz="0 0 0.0523"
         rpy="0 0 0" />
       <parent link="${prefix}tool_link" />
-      <child link="${prefix}sander_link" />
+      <child link="${prefix}arduino_link" />
     </joint>
-    <link name="${prefix}sander_link" />
+    <link name="${prefix}arduino_link" />
 
-    <!-- photoneo_motioncam link joint -->
+    <!-- realsense_d435i link joint -->
 
     <joint
-      name="${prefix}photoneo_motioncam_joint"
+      name="${prefix}realsense_d435i_joint"
       type="fixed">
       <origin
-        xyz="0 -0.1155 0.075 "
-        rpy="${radians(15)} 0 0" />
+        xyz="-0.042 0 0.1064 "
+        rpy="0 0 0" />
       <parent link="${prefix}tool_link" />
-      <child link="${prefix}photoneo_motioncam_link" />
+      <child link="${prefix}realsense_d435i_link" />
     </joint>
-    <link name="${prefix}photoneo_motioncam_link" />
+    <link name="${prefix}realsense_d435i_link" />
 
-    <!-- photoneo_motioncam depth joints and links -->
+    <!-- realsense_d435i depth joints and links -->
     <joint
-      name="${prefix}photoneo_motioncam_depth_joint"
+      name="${prefix}realsense_d435i_depth_joint"
       type="fixed">
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
-      <parent link="${prefix}photoneo_motioncam_link" />
-      <child link="${prefix}photoneo_motioncam_depth_frame" />
+      <parent link="${prefix}realsense_d435i_link" />
+      <child link="${prefix}realsense_d435i_depth_frame" />
     </joint>
-    <link name="${prefix}photoneo_motioncam_depth_frame" />
+    <link name="${prefix}realsense_d435i_depth_frame" />
 
     <joint
-      name="${prefix}photoneo_motioncam_depth_optical_joint"
+      name="${prefix}realsense_d435i_depth_optical_joint"
       type="fixed">
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
-      <parent link="${prefix}photoneo_motioncam_depth_frame" />
-      <child link="${prefix}photoneo_motioncam_depth_optical_frame" />
+      <parent link="${prefix}realsense_d435i_depth_frame" />
+      <child link="${prefix}realsense_d435i_depth_optical_frame" />
     </joint>
-    <link name="${prefix}photoneo_motioncam_depth_optical_frame" />
+    <link name="${prefix}realsense_d435i_depth_optical_frame" />
 
-    <!-- photoneo_motioncam color joints and links -->
+    <!-- realsense_d435i color joints and links -->
     <joint
-      name="${prefix}photoneo_motioncam_color_joint"
+      name="${prefix}realsense_d435i_color_joint"
       type="fixed">
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
-      <parent link="${prefix}photoneo_motioncam_link" />
-      <child link="${prefix}photoneo_motioncam_color_frame" />
+      <parent link="${prefix}realsense_d435i_link" />
+      <child link="${prefix}realsense_d435i_color_frame" />
     </joint>
-    <link name="${prefix}photoneo_motioncam_color_frame" />
+    <link name="${prefix}realsense_d435i_color_frame" />
 
     <joint
-      name="${prefix}photoneo_motioncam_color_optical_joint"
+      name="${prefix}realsense_d435i_color_optical_joint"
       type="fixed">
       <origin
         xyz="0 0 0"
         rpy="${radians(0)} ${radians(-90)} ${radians(90)}" />
-      <parent link="${prefix}photoneo_motioncam_color_frame" />
-      <child link="${prefix}photoneo_motioncam_color_optical_frame" />
+      <parent link="${prefix}realsense_d435i_color_frame" />
+      <child link="${prefix}realsense_d435i_color_optical_frame" />
     </joint>
-    <link name="${prefix}photoneo_motioncam_color_optical_frame" />
+    <link name="${prefix}realsense_d435i_color_optical_frame" />
 
     <xacro:depth_camera_plugin
       node_namespace="${node_namespace}"
       node_name="${node_name}_depth"
       topic_prefix="${topic_prefix}_depth"
       gazebo_ignition="${gazebo_ignition}"
-      optical_frame="${prefix}photoneo_motioncam_depth_optical_frame"
-      reference_frame="${prefix}photoneo_motioncam_depth_optical_frame"
-      horizontal_fov="${photoneo_motioncam_depth_horizontal_fov}"
-      vertical_fov="${photoneo_motioncam_depth_vertical_fov}"
+      optical_frame="${prefix}realsense_d435i_depth_optical_frame"
+      reference_frame="${prefix}realsense_d435i_depth_optical_frame"
+      horizontal_fov="${realsense_d435i_depth_horizontal_fov}"
+      vertical_fov="${realsense_d435i_depth_vertical_fov}"
       video_width="1280"
       video_height="720"
       min_depth="0.700"
@@ -178,10 +178,10 @@
       node_name="${node_name}_color"
       topic_prefix="${topic_prefix}_color"
       gazebo_ignition="${gazebo_ignition}"
-      optical_frame="${prefix}photoneo_motioncam_color_optical_frame"
-      reference_frame="${prefix}photoneo_motioncam_color_optical_frame"
-      horizontal_fov="${photoneo_motioncam_color_horizontal_fov}"
-      vertical_fov="${photoneo_motioncam_color_vertical_fov}"
+      optical_frame="${prefix}realsense_d435i_color_optical_frame"
+      reference_frame="${prefix}realsense_d435i_color_optical_frame"
+      horizontal_fov="${realsense_d435i_color_horizontal_fov}"
+      vertical_fov="${realsense_d435i_color_vertical_fov}"
       video_width="2448"
       video_height="2048"
       min_depth="0.700"
@@ -190,7 +190,7 @@
 
 
     <xacro:unless value="${gazebo_ignition}">
-      <gazebo reference="${prefix}photoneo_motioncam_color_optical_frame">
+      <gazebo reference="${prefix}realsense_d435i_color_optical_frame">
         <sensor name="${prefix}" type="depth">
             <always_on>true</always_on>
             <update_rate>15</update_rate>
@@ -218,7 +218,7 @@
                     <remapping>${prefix}/points:=depth/points</remapping>
                 </ros>
                 <camera_name>${prefix}</camera_name>
-                <frame_name>${prefix}photoneo_motioncam_color_optical_frame</frame_name>
+                <frame_name>${prefix}realsense_d435i_color_optical_frame</frame_name>
                 <hack_baseline>0.07</hack_baseline>
                 <min_depth>0.05</min_depth>
                 <max_depth>8.0</max_depth>
