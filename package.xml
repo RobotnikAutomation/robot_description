@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>robot_description</name>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <description>URDF description for Robotnik</description>
 
   <url type="website">http://ros.org/wiki/robot_description</url>
@@ -10,9 +10,6 @@
 
   <author email="rguzman@robotnik.es">Roberto Guzmán</author>
   <author email="rnavarro@robotnik.es">Román Navarro</author>
-  <maintainer email="aarnal@robotnik.es">Álex Arnal</maintainer>
-  <maintainer email="mmillet@robotnik.es">Marta Millet</maintainer>
-  <maintainer email="afont@robotnik.es">Andres Font</maintainer>
 
   <license>BSD</license>
 
