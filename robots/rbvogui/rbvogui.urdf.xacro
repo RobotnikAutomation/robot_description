@@ -17,12 +17,16 @@
   <xacro:arg
     name="gazebo_ignition"
     default="false" />
+  <xacro:arg
+    name="kinematics"
+    default="swerve" />
 
   <!-- RB-VOGUI -->
   <xacro:rbvogui
     prefix="$(arg prefix)"
     gazebo_ignition="$(arg gazebo_ignition)"
-    namespace="$(arg namespace)" />
+    namespace="$(arg namespace)"
+    kinematics="$(arg kinematics)" />
 
   <!-- IMU -->
   <xacro:sensor_vectornav
